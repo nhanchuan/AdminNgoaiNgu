@@ -63,13 +63,14 @@
                         <div class="input-group">
                             <input id="txtsearch" type="text" class="form-control input-circle-left" placeholder="search..." title="Tìm Mã hoặc Tên khóa học" runat="server" />
                             <span class="input-group-btn">
-                                <button id="btnSearchKhoaHoc" class="btn btn-circle-right btn-default" type="submit" runat="server">Go!</button>
+                                <button id="btnSearchKhoaHoc" class="btn btn-circle-right btn-default" type="submit" onserverclick="btnSearchKhoaHoc_ServerClick" runat="server">Go!</button>
                             </span>
                         </div>
                     </div>
                 </div>
                 <div class="actions">
                     <a id="btnDangKyKhoaHoc" onserverclick="btnDangKyKhoaHoc_ServerClick" runat="server"><i class="fa fa-edit"></i> Đăng ký khóa học</a>
+                    <a id="btnLenlichhoc" onserverclick="btnLenlichhoc_ServerClick" runat="server"><i class="glyphicon glyphicon-calendar"></i> Lên lịch học</a>
                     <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
                         <i class="fa fa-file-excel-o"></i>
                     </a>
@@ -89,7 +90,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                                 <asp:Label ID="lblID" CssClass="display-none" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
-                                <asp:Label ID="lblSLGhiDanh" CssClass="display-none" runat="server" Text='<%# Eval("SLGhiDanh") %>'></asp:Label>
+                                
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã khóa học">
@@ -104,6 +105,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Số lượng học viên">
                             <ItemTemplate>
+                                <asp:Label ID="lblSLGhiDanh" runat="server" Text='<%# Eval("SLGhiDanh") %>'></asp:Label> /
                                 <asp:Label ID="lblSoLuong" runat="server" Text='<%# Eval("SoLuong") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
@@ -173,13 +175,13 @@
                                             OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:Repeater>
-                               <%-- <asp:Repeater ID="rptSearch" runat="server">
+                                <asp:Repeater ID="rptSearch" runat="server">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkSearch" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
                                             CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
                                             OnClick="Search_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
                                     </ItemTemplate>
-                                </asp:Repeater>--%>
+                                </asp:Repeater>
                             </div>
                         </div>
                     </div>

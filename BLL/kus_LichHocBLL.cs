@@ -26,74 +26,74 @@ namespace BLL
             {
                 kus_LichHoc lh = new kus_LichHoc();
                 lh.LichHocID = (int)r[0];
-                lh.LopHocID = (string.IsNullOrEmpty(r[1].ToString())) ? 0 : (int)r[1];
-                lh.DayID= (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
-                lh.GioHocID= (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-                lh.PhongHocID= (string.IsNullOrEmpty(r[4].ToString())) ? 0 : (int)r[4];
-                lh.SoTiet = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
-                lh.GVTT = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                lh.GVHD = (string.IsNullOrEmpty(r[7].ToString())) ? 0 : (int)r[7];
+                lh.KhoaHoc = (string.IsNullOrEmpty(r["KhoaHoc"].ToString())) ? 0 : (int)r["KhoaHoc"];
+                lh.DayID= (string.IsNullOrEmpty(r["DayID"].ToString())) ? 0 : (int)r["DayID"];
+                lh.GioHocID= (string.IsNullOrEmpty(r["GioHocID"].ToString())) ? 0 : (int)r["GioHocID"];
+                lh.PhongHocID= (string.IsNullOrEmpty(r["PhongHocID"].ToString())) ? 0 : (int)r["PhongHocID"];
+                lh.SoTiet = (string.IsNullOrEmpty(r["SoTiet"].ToString())) ? 0 : (int)r["SoTiet"];
+                lh.GVTT = (string.IsNullOrEmpty(r["GVTT"].ToString())) ? 0 : (int)r["GVTT"];
+                lh.GVHD = (string.IsNullOrEmpty(r["GVHD"].ToString())) ? 0 : (int)r["GVHD"];
                 lst.Add(lh);
             }
             this.DB.CloseConnection();
             return lst;
         }
-        public List<kus_LichHoc> getListLichHocWithLophocID(int LopHocID)
+        public List<kus_LichHoc> getListLichHocWithKhoaHoc(int KhoaHoc)
         {
-            string sql = "select * from kus_LichHoc where LopHocID=@LopHocID";
+            string sql = "select * from kus_LichHoc where KhoaHoc=@KhoaHoc";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
-            DataTable tb = DB.DAtable(sql, pLopHocID);
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            DataTable tb = DB.DAtable(sql, pKhoaHoc);
             List<kus_LichHoc> lst = new List<kus_LichHoc>();
             foreach (DataRow r in tb.Rows)
             {
                 kus_LichHoc lh = new kus_LichHoc();
                 lh.LichHocID = (int)r[0];
-                lh.LopHocID = (string.IsNullOrEmpty(r[1].ToString())) ? 0 : (int)r[1];
-                lh.DayID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
-                lh.GioHocID = (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-                lh.PhongHocID = (string.IsNullOrEmpty(r[4].ToString())) ? 0 : (int)r[4];
-                lh.SoTiet = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
-                lh.GVTT = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                lh.GVHD = (string.IsNullOrEmpty(r[7].ToString())) ? 0 : (int)r[7];
+                lh.KhoaHoc = (string.IsNullOrEmpty(r["KhoaHoc"].ToString())) ? 0 : (int)r["KhoaHoc"];
+                lh.DayID = (string.IsNullOrEmpty(r["DayID"].ToString())) ? 0 : (int)r["DayID"];
+                lh.GioHocID = (string.IsNullOrEmpty(r["GioHocID"].ToString())) ? 0 : (int)r["GioHocID"];
+                lh.PhongHocID = (string.IsNullOrEmpty(r["PhongHocID"].ToString())) ? 0 : (int)r["PhongHocID"];
+                lh.SoTiet = (string.IsNullOrEmpty(r["SoTiet"].ToString())) ? 0 : (int)r["SoTiet"];
+                lh.GVTT = (string.IsNullOrEmpty(r["GVTT"].ToString())) ? 0 : (int)r["GVTT"];
+                lh.GVHD = (string.IsNullOrEmpty(r["GVHD"].ToString())) ? 0 : (int)r["GVHD"];
                 lst.Add(lh);
             }
             this.DB.CloseConnection();
             return lst;
         }
 
-        public DataTable getkus_LichHocWithLopHocandDayandBuoi(int lophocID, int daysID, int buoihocID)
+        public DataTable getkus_LichHocWith_KhoaHoc_Day_Buoi(int KhoaHoc, int daysID, int buoihocID)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec getkus_LichHocWithLopHocandDayandBuoi @lophocID,@daysID,@buoihocID";
-            SqlParameter plophocID = new SqlParameter("@lophocID", lophocID);
+            string sql = "Exec getkus_LichHocWith_KhoaHoc_Day_Buoi @KhoaHoc,@daysID,@buoihocID";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
             SqlParameter pdaysID = new SqlParameter("@daysID", daysID);
             SqlParameter pbuoihocID = new SqlParameter("@buoihocID", buoihocID);
-            DataTable tb = DB.DAtable(sql, plophocID, pdaysID, pbuoihocID);
+            DataTable tb = DB.DAtable(sql, pKhoaHoc, pdaysID, pbuoihocID);
             this.DB.CloseConnection();
             return tb;
         }
        
         //Create Lich Hoc
-        public Boolean kus_AddNewLichHoc(int LopHocID, int DayID, int GioHocID, int PhongHocID, int SoTiet)
+        public Boolean kus_AddNewLichHoc(int KhoaHoc, int DayID, int GioHocID, int PhongHocID, int SoTiet)
         {
-            string sql = "Exec kus_AddNewLichHoc @LopHocID,@DayID,@GioHocID,@PhongHocID,@SoTiet";
+            string sql = "Exec kus_AddNewLichHoc @KhoaHoc,@DayID,@GioHocID,@PhongHocID,@SoTiet";
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
-            SqlParameter pDayID = new SqlParameter("DayID", DayID);
-            SqlParameter pGioHocID = new SqlParameter("GioHocID", GioHocID);
-            SqlParameter pPhongHocID = new SqlParameter("PhongHocID", PhongHocID);
-            SqlParameter pSoTiet = new SqlParameter("SoTiet", SoTiet);
-            this.DB.Updatedata(sql, pLopHocID, pDayID, pGioHocID, pPhongHocID, pSoTiet);
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            SqlParameter pDayID = new SqlParameter("@DayID", DayID);
+            SqlParameter pGioHocID = new SqlParameter("@GioHocID", GioHocID);
+            SqlParameter pPhongHocID = new SqlParameter("@PhongHocID", PhongHocID);
+            SqlParameter pSoTiet = new SqlParameter("@SoTiet", SoTiet);
+            this.DB.Updatedata(sql, pKhoaHoc, pDayID, pGioHocID, pPhongHocID, pSoTiet);
             this.DB.CloseConnection();
             return true;
         }
@@ -115,41 +115,43 @@ namespace BLL
             {
                 kus_LichHoc lh = new kus_LichHoc();
                 lh.LichHocID = (int)r[0];
-                lh.LopHocID = (string.IsNullOrEmpty(r[1].ToString())) ? 0 : (int)r[1];
-                lh.DayID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
-                lh.GioHocID = (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-                lh.PhongHocID = (string.IsNullOrEmpty(r[4].ToString())) ? 0 : (int)r[4];
-                lh.SoTiet = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
+                lh.KhoaHoc = (string.IsNullOrEmpty(r["KhoaHoc"].ToString())) ? 0 : (int)r["KhoaHoc"];
+                lh.DayID = (string.IsNullOrEmpty(r["DayID"].ToString())) ? 0 : (int)r["DayID"];
+                lh.GioHocID = (string.IsNullOrEmpty(r["GioHocID"].ToString())) ? 0 : (int)r["GioHocID"];
+                lh.PhongHocID = (string.IsNullOrEmpty(r["PhongHocID"].ToString())) ? 0 : (int)r["PhongHocID"];
+                lh.SoTiet = (string.IsNullOrEmpty(r["SoTiet"].ToString())) ? 0 : (int)r["SoTiet"];
+                lh.GVTT = (string.IsNullOrEmpty(r["GVTT"].ToString())) ? 0 : (int)r["GVTT"];
+                lh.GVHD = (string.IsNullOrEmpty(r["GVHD"].ToString())) ? 0 : (int)r["GVHD"];
                 lst.Add(lh);
             }
             this.DB.CloseConnection();
             return lst;
         }
-        //list check Add Lich hoc with LopHoc
-        public List<kus_LichHoc> kus_CheckAddLichHocWithLopHoc(int DayID, int LopHocID, int TietHoc, int SoTiet)
+        //list check Add Lich hoc with @KhoaHoc
+        public List<kus_LichHoc> kus_CheckAddLichHocWithKhoaHoc(int DayID, int KhoaHoc, int TietHoc, int SoTiet)
         {
-            string sql = "Exec kus_CheckAddLichHocWithLopHoc @DayID,@LopHocID,@TietHoc,@SoTiet";
+            string sql = "Exec kus_CheckAddLichHocWithKhoaHoc @DayID,@KhoaHoc,@TietHoc,@SoTiet";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
             SqlParameter pDayID = new SqlParameter("@DayID", DayID);
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
             SqlParameter pTietHoc = new SqlParameter("@TietHoc", TietHoc);
             SqlParameter pSoTiet = new SqlParameter("@SoTiet", SoTiet);
-            DataTable tb = DB.DAtable(sql, pDayID, pLopHocID, pTietHoc, pSoTiet);
+            DataTable tb = DB.DAtable(sql, pDayID, pKhoaHoc, pTietHoc, pSoTiet);
             List<kus_LichHoc> lst = new List<kus_LichHoc>();
             foreach (DataRow r in tb.Rows)
             {
                 kus_LichHoc lh = new kus_LichHoc();
                 lh.LichHocID = (int)r[0];
-                lh.LopHocID = (string.IsNullOrEmpty(r[1].ToString())) ? 0 : (int)r[1];
-                lh.DayID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
-                lh.GioHocID = (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-                lh.PhongHocID = (string.IsNullOrEmpty(r[4].ToString())) ? 0 : (int)r[4];
-                lh.SoTiet = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
-                lh.GVTT = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                lh.GVHD = (string.IsNullOrEmpty(r[7].ToString())) ? 0 : (int)r[7];
+                lh.KhoaHoc = (string.IsNullOrEmpty(r["KhoaHoc"].ToString())) ? 0 : (int)r["KhoaHoc"];
+                lh.DayID = (string.IsNullOrEmpty(r["DayID"].ToString())) ? 0 : (int)r["DayID"];
+                lh.GioHocID = (string.IsNullOrEmpty(r["GioHocID"].ToString())) ? 0 : (int)r["GioHocID"];
+                lh.PhongHocID = (string.IsNullOrEmpty(r["PhongHocID"].ToString())) ? 0 : (int)r["PhongHocID"];
+                lh.SoTiet = (string.IsNullOrEmpty(r["SoTiet"].ToString())) ? 0 : (int)r["SoTiet"];
+                lh.GVTT = (string.IsNullOrEmpty(r["GVTT"].ToString())) ? 0 : (int)r["GVTT"];
+                lh.GVHD = (string.IsNullOrEmpty(r["GVHD"].ToString())) ? 0 : (int)r["GVHD"];
                 lst.Add(lh);
             }
             this.DB.CloseConnection();
@@ -168,49 +170,49 @@ namespace BLL
             this.DB.CloseConnection();
             return true;
         }
-        //Delete lich hoc with LichHocID
-        public Boolean DeleteLichHocWithLopHoc(int LopHocID)
+        //Delete lich hoc with @KhoaHoc
+        public Boolean DeleteLichHocWithKhoaHoc(int KhoaHoc)
         {
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
-            string sql = "delete from kus_LichHoc where LopHocID=@LopHocID";
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
-            this.DB.Updatedata(sql, pLopHocID);
+            string sql = "delete from kus_LichHoc where KhoaHoc=@KhoaHoc";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            this.DB.Updatedata(sql, pKhoaHoc);
             this.DB.CloseConnection();
             return true;
         }
         //Add Lich Hoc
-        public Boolean AddNewLichHoc(int LopHocID, int DayID, int GioHocID, int PhongHocID, int SoTiet, int GVTT, int GVHD)
+        public Boolean AddNewLichHoc(int KhoaHoc, int DayID, int GioHocID, int PhongHocID, int SoTiet, int GVTT, int GVHD)
         {
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
-            string sql = "insert into kus_LichHoc(LopHocID,DayID,GioHocID,PhongHocID,SoTiet,GVTT,GVHD) values (@LopHocID,@DayID,@GioHocID,@PhongHocID,@SoTiet,@GVTT,@GVHD)";
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
+            string sql = "insert into kus_LichHoc(KhoaHoc,DayID,GioHocID,PhongHocID,SoTiet,GVTT,GVHD) values (@KhoaHoc,@DayID,@GioHocID,@PhongHocID,@SoTiet,@GVTT,@GVHD)";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
             SqlParameter pDayID = new SqlParameter("@DayID", DayID);
             SqlParameter pGioHocID = new SqlParameter("@GioHocID", GioHocID);
             SqlParameter pPhongHocID = new SqlParameter("@PhongHocID", PhongHocID);
             SqlParameter pSoTiet = new SqlParameter("@SoTiet", SoTiet);
             SqlParameter pGVTT = (GVTT == 0) ? new SqlParameter("@GVTT", DBNull.Value) : new SqlParameter("@GVTT", GVTT);
             SqlParameter pGVHD = (GVHD == 0) ? new SqlParameter("@GVHD", DBNull.Value) : new SqlParameter("@GVHD", GVHD);
-            this.DB.Updatedata(sql,pLopHocID, pDayID, pGioHocID, pPhongHocID, pSoTiet, pGVTT, pGVHD);
+            this.DB.Updatedata(sql, pKhoaHoc, pDayID, pGioHocID, pPhongHocID, pSoTiet, pGVTT, pGVHD);
             this.DB.CloseConnection();
             return true;
         }
 
-        public int SumSoTietWithLopHocID(int LopHocID)
+        public int SumSoTietWithKhoaHoc(int KhoaHoc)
         {
             int sum = 0;
             if(!this.DB.OpenConnection())
             {
                 return 0;
             }
-            string sql = "select SUM(SoTiet) from kus_LichHoc where LopHocID=@LopHocID";
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
-            sum = DB.GetValues(sql, pLopHocID);
+            string sql = "select SUM(SoTiet) from kus_LichHoc where KhoaHoc=@KhoaHoc";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            sum = DB.GetValues(sql, pKhoaHoc);
             this.DB.CloseConnection();
             return sum;
         }

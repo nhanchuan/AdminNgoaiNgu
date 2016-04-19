@@ -131,8 +131,8 @@ public partial class kus_admin_PhieuGhiDanh : BasePage
     private void load_LichHoc(int lophocID, int daysID, int buoiID, GridView gwLichHoc)
     {
         kus_lichhoc = new kus_LichHocBLL();
-        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWithLopHocandDayandBuoi(lophocID, daysID, buoiID);
-        gwLichHoc.DataBind();
+        //gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWithLopHocandDayandBuoi(lophocID, daysID, buoiID);
+        //gwLichHoc.DataBind();
     }
     private void load_LichHoc(int LopHocID)
     {

@@ -48,7 +48,7 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
                     }
                     else
                     {
-                        lblKhoaHocChose.Text = LopDangChon(MaKhoaHoc);
+                        lblKhoaHocChose.Text = KhoaHocDangChon(MaKhoaHoc);
                         panelGhiDanhMoi.Visible = true;
                         panelDaGhiDanh.Visible = false;
                     }
@@ -76,7 +76,7 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
         }
         return true;
     }
-    private string LopDangChon(string code)
+    private string KhoaHocDangChon(string code)
     {
         nc_khoahoc = new nc_KhoaHocBLL();
         List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(code);

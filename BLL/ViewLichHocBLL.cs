@@ -253,7 +253,7 @@ namespace BLL
             this.DB.CloseConnection();
             return lvents;
         }
-        public int CountSoTieted(int LID)
+        public int CountSoTieted(int khoahoc)
         {
             int dem = 0;
 
@@ -261,48 +261,43 @@ namespace BLL
             {
                 return 0;
             }
-            string sql = "Exec kus_LichHocWithLopEvent @LID";
-            SqlParameter pLID = new SqlParameter("@LID", LID);
-            DataTable tb = DB.DAtable(sql, pLID);
+            string sql = "Exec kus_LichHocWithKhoaHocEvent @khoahoc";
+            SqlParameter pkhoahoc = new SqlParameter("@khoahoc", khoahoc);
+            DataTable tb = DB.DAtable(sql, pkhoahoc);
 
             foreach (DataRow r in tb.Rows)
             {
-                DateTime tostart = Convert.ToDateTime(r[8]);
-                DateTime toend = Convert.ToDateTime(r[9]);
-
-                List<kus_GioHoc> lststart = getkus_GioHocWithTietHoc((int)r[19]);
-                kus_GioHoc giostart = lststart.FirstOrDefault();
-                List<kus_GioHoc> lstend = getkus_GioHocWithTietHoc((int)r[19] + (int)r[5] - 1);
-                kus_GioHoc gioend = lstend.FirstOrDefault();
+                DateTime tostart = Convert.ToDateTime(r["NgayKhaiGiang"]);
+                DateTime toend = Convert.ToDateTime(r["NgayKetThuc"]);
                 while (tostart <= toend)
                 {
-                    if (tostart.DayOfWeek.ToString() == "Monday" && (int)r[2] == 1)
+                    if (tostart.DayOfWeek.ToString() == "Monday" && (int)r["DayID"] == 1)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Tuesday" && (int)r[2] == 2)
+                    if (tostart.DayOfWeek.ToString() == "Tuesday" && (int)r["DayID"] == 2)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Wednesday" && (int)r[2] == 3)
+                    if (tostart.DayOfWeek.ToString() == "Wednesday" && (int)r["DayID"] == 3)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Thursday" && (int)r[2] == 4)
+                    if (tostart.DayOfWeek.ToString() == "Thursday" && (int)r["DayID"] == 4)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Friday" && (int)r[2] == 5)
+                    if (tostart.DayOfWeek.ToString() == "Friday" && (int)r["DayID"] == 5)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Saturday" && (int)r[2] == 6)
+                    if (tostart.DayOfWeek.ToString() == "Saturday" && (int)r["DayID"] == 6)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
-                    if (tostart.DayOfWeek.ToString() == "Sunday" && (int)r[2] == 7)
+                    if (tostart.DayOfWeek.ToString() == "Sunday" && (int)r["DayID"] == 7)
                     {
-                        dem = dem + Convert.ToInt32(r[5]);
+                        dem = dem + Convert.ToInt32(r["SoTiet"]);
                     }
                     tostart = tostart.AddDays(1);
                 }
@@ -311,7 +306,7 @@ namespace BLL
             return dem;
         }
 
-        public int CountSoTietPhatSinh(int LopHocID, string dayofweek, int sotiet)
+        public int CountSoTietPhatSinh(int ID, string dayofweek, int sotiet)
         {
             int phatsinh = 0;
             
@@ -319,13 +314,13 @@ namespace BLL
             {
                 return 0;
             }
-            string sql = "select * from kus_LopHoc where LopHocID=@LopHocID";
-            SqlParameter pLID = new SqlParameter("@LopHocID", LopHocID);
-            DataTable tb = DB.DAtable(sql, pLID);
+            string sql = "select * from nc_KhoaHoc where ID=@ID";
+            SqlParameter pID = new SqlParameter("@ID", ID);
+            DataTable tb = DB.DAtable(sql, pID);
             foreach (DataRow r in tb.Rows)
             {
-                DateTime tostart = Convert.ToDateTime(r[3]);
-                DateTime toend = Convert.ToDateTime(r[5]);
+                DateTime tostart = Convert.ToDateTime(r["NgayKhaiGiang"]);
+                DateTime toend = Convert.ToDateTime(r["NgayKetThuc"]);
                 while (tostart <= toend)
                 {
                     if (dayofweek == tostart.DayOfWeek.ToString())

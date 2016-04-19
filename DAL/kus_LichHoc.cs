@@ -9,7 +9,7 @@ namespace DAL
     public class kus_LichHoc
     {
         private int lichHocID;
-        private int lopHocID;
+        private int khoaHoc;
         private int dayID;
         private int gioHocID;
         private int phongHocID;
@@ -29,19 +29,18 @@ namespace DAL
             }
         }
 
-        public int LopHocID
+        public int KhoaHoc
         {
             get
             {
-                return lopHocID;
+                return khoaHoc;
             }
 
             set
             {
-                lopHocID = value;
+                khoaHoc = value;
             }
         }
-
         public int DayID
         {
             get
@@ -119,5 +118,7 @@ namespace DAL
                 gVHD = value;
             }
         }
+
+        
     }
 }
