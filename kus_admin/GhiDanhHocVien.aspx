@@ -7,7 +7,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <link href="../App_Themes/admin/StylePortlet.css" rel="stylesheet" />
     <!-- BEGIN PAGE HEADER-->
-    <h1 class="page-title">Ghi Danh Học Viên - Lớp đang chọn <asp:Label ID="lblLopChose" CssClass="bold" runat="server"></asp:Label>
+    <h1 class="page-title">Ghi Danh Học Viên - Khóa học đang chọn <asp:Label ID="lblKhoaHocChose" CssClass="bold" runat="server"></asp:Label>
     </h1>
     <div class="page-bar">
         <ul class="page-breadcrumb">

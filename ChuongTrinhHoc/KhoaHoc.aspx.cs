@@ -19,7 +19,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
     nc_KhoaHocBLL nc_khoahoc;
     kus_HTChiNhanhBLL kus_htchinhanh;
     kus_CoSoBLL kus_coso;
-    public int PageSize = 1;
+    public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -43,7 +43,15 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
                     dlChuongTrinh.Items.Insert(0, new ListItem("-- Chọn chương trình --", "0"));
                     dlLopHoc.Items.Insert(0, new ListItem("-- Chọn lớp học --", "0"));
                     dlCoSo.Items.Insert(0, new ListItem("------ Chọn Cơ Sở thuộc Hệ Thống Chi Nhánh -------", "0"));
-                    this.Getnc_KhoaHocPageWise(1);
+                    if(Session["pageIndexnc_lophoc"]==null)
+                    {
+                        this.Getnc_KhoaHocPageWise(1);
+                    }
+                    else
+                    {
+                        int pageIndex = Convert.ToInt32(Session["pageIndexnc_lophoc"].ToString());
+                        this.Getnc_KhoaHocPageWise(pageIndex);
+                    }
                     btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                     rptPager.Visible = true;
                     rptSearch.Visible = false;
@@ -396,8 +404,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
             int coso = Convert.ToInt32(dlECoSo.SelectedValue);
             if (nc_khoahoc.Update_nc_KhoaHoc(khoahocID, tenkhoahoc, soluong, NgayKG, thoiluong, NgayKT, loaichuongtrinh, chuongtrinh, lophoc, coso))
             {
-                int pageIndex = Convert.ToInt32(Session["pageIndexnc_lophoc"].ToString());
-                this.Getnc_KhoaHocPageWise(pageIndex);
+                Response.Redirect(Request.Url.AbsoluteUri);
             }
             else
             {

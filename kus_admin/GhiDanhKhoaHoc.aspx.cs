@@ -11,7 +11,7 @@ using BLL;
 
 public partial class kus_admin_GhiDanhKhoaHoc : BasePage
 {
-    private int PageSize = 10;
+    private int PageSize = 20;
     //kus_LopHocBLL kus_lophoc;
     //kus_LopHoc_BooksBLL kus_lophoc_books;
     nc_KhoaHocBLL nc_khoahoc;
@@ -40,7 +40,7 @@ public partial class kus_admin_GhiDanhKhoaHoc : BasePage
                 {
                     this.load_dlHTChiNhanh();
                     dlCoSo.Items.Insert(0, new ListItem("--- Chọn Cơ Sở ---", "0"));
-                    btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
+                    btnDangKyKhoaHoc.Attributes.Add("class", "btn btn-default disabled");
                 }
             }
         }
@@ -71,6 +71,7 @@ public partial class kus_admin_GhiDanhKhoaHoc : BasePage
         recordCount = nc_khoahoc.Count_khoahocCS(SoSoID);
         gwKhoaHoc.DataBind();
         this.PopulatePager(recordCount, pageIndex);
+        lblCountKhoaHoc.Text = recordCount.ToString();
     }
     private void PopulatePager(int recordCount, int currentPage)
     {
@@ -162,16 +163,52 @@ public partial class kus_admin_GhiDanhKhoaHoc : BasePage
 
     protected void gwKhoaHoc_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
 
+        }
     }
 
     protected void gwKhoaHoc_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-
+        Response.Write("<script>alert('This Process is Building ! !')</script>");
     }
 
     protected void gwKhoaHoc_SelectedIndexChanged(object sender, EventArgs e)
     {
-        btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+        btnDangKyKhoaHoc.Attributes.Add("class", "btn btn-default");
+    }
+
+    protected void btnDangKyKhoaHoc_ServerClick(object sender, EventArgs e)
+    {
+        nc_khoahoc = new nc_KhoaHocBLL();
+        if (gwKhoaHoc.SelectedRow == null)
+        {
+            Response.Write("<script>alert('Chưa chọn khóa học ! Vui lòng chọn 1 khóa học trong danh sách !')</script>");
+        }
+        else
+        {
+            int soluong = Convert.ToInt32((gwKhoaHoc.SelectedRow.FindControl("lblSoLuong") as Label).Text);
+            int soluongGD = Convert.ToInt32((gwKhoaHoc.SelectedRow.FindControl("lblSLGhiDanh") as Label).Text);
+            if (soluongGD >= soluong)
+            {
+                //lblWarningDKLop.Text = "Lớp đã đầy, không thể ghi danh lớp này được nữa. Vui lòng chọn lớp khác !";
+                Response.Write("<script>alert('Khóa học đã đủ số lượng học viên, không thể ghi danh khóa học này được nữa. Vui lòng chọn khóa học khác !')</script>");
+            }
+            else
+            {
+                string makhoahoc = (gwKhoaHoc.SelectedRow.FindControl("lblMaKhoaHoc") as Label).Text;
+                Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/GhiDanhHocVien.aspx?makhoahoc=" + makhoahoc);
+            }
+
+        }
     }
 }

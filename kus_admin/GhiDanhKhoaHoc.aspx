@@ -69,14 +69,12 @@
                     </div>
                 </div>
                 <div class="actions">
+                    <a id="btnDangKyKhoaHoc" onserverclick="btnDangKyKhoaHoc_ServerClick" runat="server"><i class="fa fa-edit"></i> Đăng ký khóa học</a>
                     <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
                         <i class="fa fa-file-excel-o"></i>
                     </a>
                     <a id="btnRefreshLstKhoaHoc" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" onserverclick="btnRefreshLstKhoaHoc_ServerClick" runat="server" href="#">
                         <i class="fa fa-refresh"></i>
-                    </a>
-                    <a href="#modalEditKhoa" data-toggle="modal" id="btnEditKhoaHoc" title="Chỉnh sửa thông tin khóa học" runat="server">
-                        <i class="icon-wrench"></i>
                     </a>
                     <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
                 </div>
@@ -91,6 +89,7 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                                 <asp:Label ID="lblID" CssClass="display-none" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                                <asp:Label ID="lblSLGhiDanh" CssClass="display-none" runat="server" Text='<%# Eval("SLGhiDanh") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã khóa học">
@@ -108,14 +107,14 @@
                                 <asp:Label ID="lblSoLuong" runat="server" Text='<%# Eval("SoLuong") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Ngày bắt khai giảng">
+                        <asp:TemplateField HeaderText="Ngày khai giảng">
                             <ItemTemplate>
-                                <asp:Label ID="lblNgayKhaiGiang" runat="server" Text='<%# Eval("NgayKhaiGiang") %>'></asp:Label>
+                                <asp:Label ID="lblNgayKhaiGiang" runat="server" Text='<%# Eval("NgayKhaiGiang","{0:dd/MM/yyyy}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Ngày kết thúc">
                             <ItemTemplate>
-                                <asp:Label ID="lblNgayKetThuc" runat="server" Text='<%# Eval("NgayKetThuc") %>'></asp:Label>
+                                <asp:Label ID="lblNgayKetThuc" runat="server" Text='<%# Eval("NgayKetThuc","{0:dd/MM/yyyy}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Thời lượng">
@@ -145,7 +144,7 @@
                         </asp:TemplateField>
                         <asp:TemplateField>
                             <ItemTemplate>
-                                <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="fa fa-trash-o"></i></asp:LinkButton>
+                                <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
                             </ItemTemplate>
                             <ItemStyle Width="30px" />
                         </asp:TemplateField>

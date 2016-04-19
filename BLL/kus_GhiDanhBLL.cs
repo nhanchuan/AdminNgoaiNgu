@@ -12,33 +12,33 @@ namespace BLL
     public class kus_GhiDanhBLL
     {
         DataServices DB = new DataServices();
-        //public List<kus_GhiDanh> getListGDWithHocVienandLopHoc(int HocVienID, int LopHocID)
-        //{
-        //    if (!this.DB.OpenConnection())
-        //    {
-        //        return null;
-        //    }
-        //    string sql = "select * from kus_GhiDanh where HocVienID=@HocVienID and LopHocID=@LopHocID";
-        //    SqlParameter pHocVienID = new SqlParameter("HocVienID", HocVienID);
-        //    SqlParameter pLopHocID = new SqlParameter("LopHocID", LopHocID);
-        //    DataTable tb = DB.DAtable(sql, pHocVienID, pLopHocID);
-        //    List<kus_GhiDanh> lst = new List<kus_GhiDanh>();
-        //    foreach (DataRow r in tb.Rows)
-        //    {
-        //        kus_GhiDanh gd = new kus_GhiDanh();
-        //        gd.GhiDanhID = (int)r[0];
-        //        gd.HocVienID = (string.IsNullOrEmpty(r[1].ToString())) ? 0 : (int)r[1];
-        //        gd.LopHocID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
-        //        gd.NhanVienTuID = (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-        //        gd.GhiChu = (string.IsNullOrEmpty(r[4].ToString())) ? "" : (string)r[4];
-        //        gd.NgayDangKy = (DateTime)r[5];
-        //        gd.DatCoc = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-        //        gd.GhiDanhCode = (string)r[7];
-        //        lst.Add(gd);
-        //    }
-        //    this.DB.CloseConnection();
-        //    return lst;
-        //}
+        public List<kus_GhiDanh> LstCheckHV_GhiDanh(int HocVienID, int KhoaHoc)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select * from kus_GhiDanh where HocVienID=@HocVienID and KhoaHoc=@KhoaHoc";
+            SqlParameter pHocVienID = new SqlParameter("HocVienID", HocVienID);
+            SqlParameter pKhoaHoc = new SqlParameter("KhoaHoc", KhoaHoc);
+            DataTable tb = DB.DAtable(sql, pHocVienID, pKhoaHoc);
+            List<kus_GhiDanh> lst = new List<kus_GhiDanh>();
+            foreach (DataRow r in tb.Rows)
+            {
+                kus_GhiDanh gd = new kus_GhiDanh();
+                gd.GhiDanhID = (int)r["GhiDanhID"];
+                gd.HocVienID = (string.IsNullOrEmpty(r["HocVienID"].ToString())) ? 0 : (int)r["HocVienID"];
+                gd.KhoaHoc = (string.IsNullOrEmpty(r["KhoaHoc"].ToString())) ? 0 : (int)r["KhoaHoc"];
+                gd.NVGhiDanh = (string.IsNullOrEmpty(r["NVGhiDanh"].ToString())) ? 0 : (int)r["NVGhiDanh"];
+                gd.GhiChu = (string.IsNullOrEmpty(r["GhiChu"].ToString())) ? "" : (string)r["GhiChu"];
+                gd.NgayDangKy = (DateTime)r["NgayDangKy"];
+                gd.DatCoc = (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? 0 : (int)r["DatCoc"];
+                gd.GhiDanhCode = (string)r["GhiDanhCode"];
+                lst.Add(gd);
+            }
+            this.DB.CloseConnection();
+            return lst;
+        }
         public List<kus_GhiDanh> getListGDWithHocVien(int HocVienID)
         {
             if (!this.DB.OpenConnection())
@@ -91,19 +91,19 @@ namespace BLL
             this.DB.CloseConnection();
             return lst;
         }
-        public Boolean GhiDanhMoi(int HocVienID, int LopHocID, int NVTuVanID, string GhiChu, int DatCoc)
+        public Boolean GhiDanhMoi(int HocVienID, int KhoaHoc, int NVGhiDanh, string GhiChu, int DatCoc)
         {
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
-            string sql = "Exec kus_GhiDanhMoi @HocVienID,@LopHocID,@NVTuVanID,@GhiChu,@DatCoc";
-            SqlParameter pHocVienID = (HocVienID == 0) ? new SqlParameter("HocVienID", DBNull.Value) : new SqlParameter("HocVienID", HocVienID);
-            SqlParameter pLopHocID = (LopHocID == 0) ? new SqlParameter("LaopHocID", DBNull.Value) : new SqlParameter("LopHocID", LopHocID);
-            SqlParameter pNVTuVanID = (NVTuVanID == 0) ? new SqlParameter("NVTuVanID", DBNull.Value) : new SqlParameter("NVTuVanID", NVTuVanID);
-            SqlParameter pGhiChu = new SqlParameter("GhiChu", GhiChu);
-            SqlParameter pDatCoc = (DatCoc == 0) ? new SqlParameter("DatCoc", DBNull.Value) : new SqlParameter("DatCoc", DatCoc);
-            this.DB.Updatedata(sql, pHocVienID, pLopHocID, pNVTuVanID, pGhiChu, pDatCoc);
+            string sql = "Exec kus_GhiDanhMoi @HocVienID,@KhoaHoc,@NVGhiDanh,@GhiChu,@DatCoc";
+            SqlParameter pHocVienID = (HocVienID == 0) ? new SqlParameter("@HocVienID", DBNull.Value) : new SqlParameter("@HocVienID", HocVienID);
+            SqlParameter pKhoaHoc = (KhoaHoc == 0) ? new SqlParameter("@KhoaHoc", DBNull.Value) : new SqlParameter("@KhoaHoc", KhoaHoc);
+            SqlParameter pNVGhiDanh = (NVGhiDanh == 0) ? new SqlParameter("@NVGhiDanh", DBNull.Value) : new SqlParameter("@NVGhiDanh", NVGhiDanh);
+            SqlParameter pGhiChu = new SqlParameter("@GhiChu", GhiChu);
+            SqlParameter pDatCoc = (DatCoc == 0) ? new SqlParameter("@DatCoc", DBNull.Value) : new SqlParameter("@DatCoc", DatCoc);
+            this.DB.Updatedata(sql, pHocVienID, pKhoaHoc, pNVGhiDanh, pGhiChu, pDatCoc);
             this.DB.CloseConnection();
             return true;
         }

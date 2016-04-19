@@ -19,7 +19,8 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
     kus_HocVienMoreInFoBLL hocvienmoreinfo;
     UserProfileBLL userprofile;
     EmployeesBLL employees;
-    kus_LopHocBLL kus_lophoc;
+    //kus_LopHocBLL kus_lophoc;
+    nc_KhoaHocBLL nc_khoahoc;
     kus_GhiDanhBLL kus_ghidanh;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -40,14 +41,14 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
                 }
                 else
                 {
-                    string LHCode = Request.QueryString["GDlophoc"];
-                    if (!CheckQuerystring(LHCode))
+                    string MaKhoaHoc = Request.QueryString["makhoahoc"];
+                    if (!CheckQuerystring(MaKhoaHoc))
                     {
-                        Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/GhiDanhLopMoi.aspx");
+                        Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/GhiDanhKhoaHoc.aspx");
                     }
                     else
                     {
-                        lblLopChose.Text = LopDangChon(LHCode);
+                        lblKhoaHocChose.Text = LopDangChon(MaKhoaHoc);
                         panelGhiDanhMoi.Visible = true;
                         panelDaGhiDanh.Visible = false;
                     }
@@ -58,7 +59,7 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
 
     private Boolean CheckQuerystring(string code)
     {
-        kus_lophoc = new kus_LopHocBLL();
+        nc_khoahoc = new nc_KhoaHocBLL();
         
         if(string.IsNullOrWhiteSpace(code)||string.IsNullOrEmpty(code))
         {
@@ -66,9 +67,9 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
         }
         else
         {
-            List<kus_LopHoc> lstLop = kus_lophoc.GetListLopHocWithCode(code);
-            kus_LopHoc lophoc = lstLop.FirstOrDefault();
-            if(lophoc == null)
+            List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(code);
+            nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
+            if(khoahoc == null)
             {
                 return false;
             }
@@ -77,9 +78,10 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
     }
     private string LopDangChon(string code)
     {
-        List<kus_LopHoc> lstLop = kus_lophoc.GetListLopHocWithCode(code);
-        kus_LopHoc lophoc = lstLop.FirstOrDefault();
-        return lophoc.LopHocCode + " - " + lophoc.TenLopHoc;
+        nc_khoahoc = new nc_KhoaHocBLL();
+        List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(code);
+        nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
+        return khoahoc.MaKhoaHoc + " - " + khoahoc.TenKhoaHoc;
     }
     public bool IsNumber(string pText)
     {
@@ -139,7 +141,8 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
         userprofile = new UserProfileBLL();
         employees = new EmployeesBLL();
         kus_ghidanh = new kus_GhiDanhBLL();
-        kus_lophoc = new kus_LopHocBLL();
+        nc_khoahoc = new nc_KhoaHocBLL();
+        //kus_lophoc = new kus_LopHocBLL();
         string FileCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
 
         string firstname = txtFirstNameHV.Text;
@@ -198,29 +201,29 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
         UserProfile userpro = lstprofile.FirstOrDefault();
         List<Employees> lstemployee = employees.getEmpWithProfileId(userpro.ProfileID);
         Employees emp = lstemployee.FirstOrDefault();
-        int NVGoiThieu = emp.EmployeesID;
+        int NVGhiDanh = emp.EmployeesID;
         List<kus_HocVien> lstHV = kus_hocvien.getHVWithCode(HocvienCode);
         kus_HocVien hocvien = lstHV.FirstOrDefault();
         if(this.kus_hocvien.kus_UpdateHocVen(hocvien.HocVienID, basicinfo.InfoID, diachithuongtru, diachitamtru, email, dienthoai, hotenPH, nghenghiep, phonePH, 1))
         {
             if (NewHocVienMore(hocvien.HocVienID))
             {
-                
-                string LHCode = Request.QueryString["GDlophoc"];
-                List<kus_LopHoc> lstLop = kus_lophoc.GetListLopHocWithCode(LHCode);
-                kus_LopHoc lophoc = lstLop.FirstOrDefault();
+
+                string MaKhoaHoc = Request.QueryString["makhoahoc"];
+                List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(MaKhoaHoc);
+                nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
                 //Kiem tra ghi danh
-                List<kus_GhiDanh> lstCheckGD = kus_ghidanh.getListGDWithHocVienandLopHoc(hocvien.HocVienID, lophoc.LopHocID);
+                List<kus_GhiDanh> lstCheckGD = kus_ghidanh.LstCheckHV_GhiDanh(hocvien.HocVienID, khoahoc.ID);
                 kus_GhiDanh check_ghidanh = lstCheckGD.FirstOrDefault();
                 if (check_ghidanh != null)
                 {
-                    Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh lớp " + lophoc.LopHocCode + " !')</script>");
+                    Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh khóa " + MaKhoaHoc + " - " + khoahoc.TenKhoaHoc + " !')</script>");
                 }
                 else
                 {
                     string ghichu = txtGhiChu.Text;
                     int datcoc = (string.IsNullOrEmpty(txtDatCoc.Text) || string.IsNullOrWhiteSpace(txtDatCoc.Text)) ? 0 : Convert.ToInt32(txtDatCoc.Text);
-                    if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID,lophoc.LopHocID, NVGoiThieu, ghichu, datcoc))
+                    if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID,khoahoc.ID, NVGhiDanh, ghichu, datcoc))
                     {
                         Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/QLGhiDanh.aspx");
                     }
@@ -327,14 +330,15 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
 
     protected void btnGhiDanhAvailalble_Click(object sender, EventArgs e)
     {
-        kus_lophoc = new kus_LopHocBLL();
+        //kus_lophoc = new kus_LopHocBLL();
+        nc_khoahoc = new nc_KhoaHocBLL();
         kus_hocvien = new kus_HocVienBLL();
         userprofile = new UserProfileBLL();
         employees = new EmployeesBLL();
         kus_ghidanh = new kus_GhiDanhBLL();
-        string LHCode = Request.QueryString["GDlophoc"];
-        List<kus_LopHoc> lstLop = kus_lophoc.GetListLopHocWithCode(LHCode);
-        kus_LopHoc lophoc = lstLop.FirstOrDefault();
+        string MaKhoaHoc = Request.QueryString["makhoahoc"];
+        List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(MaKhoaHoc);
+        nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
         List<kus_HocVien> lstHV = kus_hocvien.getHocVienWithMaHV(txtHocVienCode.Text);
         kus_HocVien hocvien = lstHV.FirstOrDefault();
         if(hocvien==null)
@@ -344,11 +348,11 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
         else
         {
             //Kiem tra ghi danh
-            List<kus_GhiDanh> lstCheckGD = kus_ghidanh.getListGDWithHocVienandLopHoc(hocvien.HocVienID, lophoc.LopHocID);
+            List<kus_GhiDanh> lstCheckGD = kus_ghidanh.LstCheckHV_GhiDanh(hocvien.HocVienID, khoahoc.ID);
             kus_GhiDanh check_ghidanh = lstCheckGD.FirstOrDefault();
             if (check_ghidanh != null)
             {
-                Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh lớp " + lophoc.LopHocCode + " !')</script>");
+                Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh lớp " + MaKhoaHoc + " - " + khoahoc.TenKhoaHoc + " !')</script>");
                 return;
             }
             else
@@ -357,10 +361,10 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
                 UserProfile userpro = lstprofile.FirstOrDefault();
                 List<Employees> lstemployee = employees.getEmpWithProfileId(userpro.ProfileID);
                 Employees emp = lstemployee.FirstOrDefault();
-                int NVGoiThieu = emp.EmployeesID;
+                int NVGhiDanh = emp.EmployeesID;
                 string ghichu = txtGhiChuAvailable.Text;
                 int datcoc = (string.IsNullOrEmpty(txtDatCocAvailable.Text) || string.IsNullOrWhiteSpace(txtDatCocAvailable.Text)) ? 0 : Convert.ToInt32(txtDatCocAvailable.Text);
-                if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID, lophoc.LopHocID, NVGoiThieu, ghichu, datcoc))
+                if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID, khoahoc.ID, NVGhiDanh, ghichu, datcoc))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/QLGhiDanh.aspx");
                 }
