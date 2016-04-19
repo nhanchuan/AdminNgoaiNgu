@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{58256049-413A-4044-99C6-4730B71568C4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AuthenticationGroupsBLL.cs" />
+    <Compile Include="BagAttachmentsBLL.cs" />
+    <Compile Include="BagFileTranslateBLL.cs" />
+    <Compile Include="BagProfileBLL.cs" />
+    <Compile Include="BagProfileTypeBLL.cs" />
+    <Compile Include="BloodGroupBLL.cs" />
+    <Compile Include="CalendarEventBLL.cs" />
+    <Compile Include="CategoryBLL.cs" />
+    <Compile Include="CountryAdvisoryBLL.cs" />
+    <Compile Include="CountryBLL.cs" />
+    <Compile Include="CustomerBasicInfoBLL.cs" />
+    <Compile Include="CustomerProfilePrivateBLL.cs" />
+    <Compile Include="DepartmentsBLL.cs" />
+    <Compile Include="DistrictBLL.cs" />
+    <Compile Include="EducationLVBLL.cs" />
+    <Compile Include="EmployeesBLL.cs" />
+    <Compile Include="Enums.cs" />
+    <Compile Include="EthnicListBLL.cs" />
+    <Compile Include="ImagesBLL.cs" />
+    <Compile Include="ImagesTypeBLL.cs" />
+    <Compile Include="InternationalSchoolBLL.cs" />
+    <Compile Include="kus_BienLaiBLL.cs" />
+    <Compile Include="kus_BooksBLL.cs" />
+    <Compile Include="kus_CapDoBLL.cs" />
+    <Compile Include="kus_CoSoBLL.cs" />
+    <Compile Include="kus_GhiDanhBLL.cs" />
+    <Compile Include="kus_GioHocBLL.cs" />
+    <Compile Include="kus_GioThiBLL.cs" />
+    <Compile Include="kus_GVHopDongBLL.cs" />
+    <Compile Include="kus_HocVienBLL.cs" />
+    <Compile Include="kus_HocVienMoreInFoBLL.cs" />
+    <Compile Include="kus_HopDongGVBLL.cs" />
+    <Compile Include="kus_HTChiNhanhBLL.cs" />
+    <Compile Include="kus_KhoiLopBLL.cs" />
+    <Compile Include="kus_LichHocBLL.cs" />
+    <Compile Include="kus_LopHocBLL.cs" />
+    <Compile Include="kus_LopHoc_BooksBLL.cs" />
+    <Compile Include="kus_PhongHocBLL.cs" />
+    <Compile Include="ListOfMIMETypesBLL.cs" />
+    <Compile Include="ListOfNationalitiesBLL.cs" />
+    <Compile Include="ListOfReligionBLL.cs" />
+    <Compile Include="MainMenuBLL.cs" />
+    <Compile Include="Menu_CategoryBLL.cs" />
+    <Compile Include="nc_ChuongTrinhDaoTaoBLL.cs" />
+    <Compile Include="nc_KhoaHocBLL.cs" />
+    <Compile Include="nc_LoaiCTDaoTaoBLL.cs" />
+    <Compile Include="nc_LoaiHinhDaoTaoBLL.cs" />
+    <Compile Include="nc_LopHocBLL.cs" />
+    <Compile Include="PermissFuncBLL.cs" />
+    <Compile Include="PostBLL.cs" />
+    <Compile Include="Post_Category_relationshipsBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvinceBLL.cs" />
+    <Compile Include="REGISTRATION_FORM_ADVISORY_BLL.cs" />
+    <Compile Include="Registration_TypeBLL.cs" />
+    <Compile Include="SecuriryServices.cs" />
+    <Compile Include="TagsBLL.cs" />
+    <Compile Include="Tags_relationshipsBLL.cs" />
+    <Compile Include="UserAccountsBLL.cs" />
+    <Compile Include="UserPermissBLL.cs" />
+    <Compile Include="UserProfileBLL.cs" />
+    <Compile Include="VideosBLL.cs" />
+    <Compile Include="VideoTypeBLL.cs" />
+    <Compile Include="ViewLichHocBLL.cs" />
+    <Compile Include="WeekdaysBLL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{95bb6df1-3edf-432f-bf30-0bcf9fb0edf5}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

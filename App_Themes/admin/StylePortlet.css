@@ -1,0 +1,25 @@
+﻿.background {
+            background: url('../../images/backgrounds/noise_light-grey.jpg');
+            font-family: 'Helvetica Neue', arial, sans-serif;
+            font-weight: 200;
+        }
+        .pagination_lst {
+            border-radius: 0;
+            margin: 0;
+        }
+            .pagination_lst > a {
+                font-size: 18px;
+                display: inline-block;
+                margin-left: 5px;
+                border-radius: 1px !important;
+                border: none;
+            }
+                .pagination_lst > a:active {
+                    background: #fb2712;
+                }
+                .pagination_lst > a:hover {
+                    background: #555;
+                }
+        .page_disabled {
+            background: #E85507;
+        }
