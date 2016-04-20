@@ -19,6 +19,8 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
     nc_KhoaHocBLL nc_khoahoc;
     kus_HTChiNhanhBLL kus_htchinhanh;
     kus_CoSoBLL kus_coso;
+    kus_BooksBLL kus_books;
+    nc_KhoaHoc_BooksBLL nc_khoahoc_books;
     public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -364,6 +366,10 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
             List<kus_CoSo> lstCoSo = kus_coso.getLSTCoSoWithID(khoahoc.CoSoID);
             kus_CoSo coso = lstCoSo.FirstOrDefault();
             dlEHTChiNhanh.Items.FindByValue((coso == null) ? 0.ToString() : coso.HTChiNhanhID.ToString()).Selected = true;
+
+            //books
+            this.load_dlAddBooks();
+            this.load_gwkus_KhoaHoc_Books(khoahocID);
         }
         else
         {
@@ -562,5 +568,98 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
     protected void btnRefreshLstKhoaHoc_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect(Request.Url.AbsoluteUri);
+    }
+
+    // Books
+    private void load_gwkus_KhoaHoc_Books(int khoahoc)
+    {
+        nc_khoahoc_books = new nc_KhoaHoc_BooksBLL();
+        gwkus_KhoaHoc_Books.DataSource = nc_khoahoc_books.getTBnc_KhoaHoc_Books(khoahoc);
+        gwkus_KhoaHoc_Books.DataBind();
+    }
+    private void load_dlAddBooks()
+    {
+        kus_books = new kus_BooksBLL();
+        dlAddBooks.DataSource = kus_books.GetTBBoook();
+        dlAddBooks.DataTextField = "BookNames";
+        dlAddBooks.DataValueField = "BookID";
+        dlAddBooks.DataBind();
+        dlAddBooks.Items.Insert(0, new ListItem("--> Chọn Sách - Giáo Trình <--", "0"));
+    }
+
+    private Boolean CheckAvailableBook(int khoahoc, int bookid)
+    {
+        nc_khoahoc_books = new nc_KhoaHoc_BooksBLL();
+        int khoahocID = Convert.ToInt32((gwKhoaHoc.SelectedRow.FindControl("lblID") as Label).Text);
+        List<nc_KhoaHoc_Books> lst = nc_khoahoc_books.ListAvailableBook(khoahoc, bookid);
+        nc_KhoaHoc_Books kb = lst.FirstOrDefault();
+        return (kb != null) ? false : true;
+    }
+    protected void btnAddBook_ServerClick(object sender, EventArgs e)
+    {
+        nc_khoahoc_books = new nc_KhoaHoc_BooksBLL();
+        if (gwKhoaHoc.SelectedRow == null)
+        {
+            lblvalidAddSach.Text = "Chưa chọn Lớp Học !";
+        }
+        else
+        {
+            if (dlAddBooks.SelectedValue == "0")
+            {
+                lblvalidAddSach.Text = "Chưa chọn Sách - Giáo trình !";
+            }
+            else
+            {
+                int khoahocID = Convert.ToInt32((gwKhoaHoc.SelectedRow.FindControl("lblID") as Label).Text);
+                if (!CheckAvailableBook(khoahocID, Convert.ToInt32(dlAddBooks.SelectedValue)))
+                {
+                    lblvalidAddSach.Text = "Lớp Học hiện đã có sách - giáo trình này !";
+                }
+                else
+                {
+                    if (!this.nc_khoahoc_books.InsertBook(khoahocID, Convert.ToInt32(dlAddBooks.SelectedValue)))
+                    {
+                        lblvalidAddSach.Text = "Thêm sách - giáo trình False ! Lỗi kết nối DB";
+                    }
+                    else
+                    {
+                        lblvalidAddSach.Text = "";
+                        this.load_gwkus_KhoaHoc_Books(khoahocID);
+                    }
+                }
+            }
+
+        }
+    }
+
+    protected void gwkus_KhoaHoc_Books_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("btnDelBook") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception ex)
+        {
+            lblvalidAddSach.Text = ex.ToString();
+        }
+    }
+
+    protected void gwkus_KhoaHoc_Books_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        nc_khoahoc_books = new nc_KhoaHoc_BooksBLL();
+        int khoahocID = Convert.ToInt32((gwKhoaHoc.SelectedRow.FindControl("lblID") as Label).Text);
+        int bookid = Convert.ToInt32((gwkus_KhoaHoc_Books.Rows[e.RowIndex].FindControl("lblBookID") as Label).Text);
+        if (this.nc_khoahoc_books.DeletetBook(khoahocID, bookid))
+        {
+            this.load_gwkus_KhoaHoc_Books(khoahocID);
+        }
+        else
+        {
+            Response.Write("<script>alert('Xóa Sách thất bại. Lỗi kết nối csdl !')</script>");
+        }
     }
 }

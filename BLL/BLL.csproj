@@ -85,6 +85,7 @@
     <Compile Include="Menu_CategoryBLL.cs" />
     <Compile Include="nc_ChuongTrinhDaoTaoBLL.cs" />
     <Compile Include="nc_KhoaHocBLL.cs" />
+    <Compile Include="nc_KhoaHoc_BooksBLL.cs" />
     <Compile Include="nc_LoaiCTDaoTaoBLL.cs" />
     <Compile Include="nc_LoaiHinhDaoTaoBLL.cs" />
     <Compile Include="nc_LopHocBLL.cs" />

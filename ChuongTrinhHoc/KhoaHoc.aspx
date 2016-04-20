@@ -473,7 +473,7 @@
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
                             <asp:GridView ID="gwkus_KhoaHoc_Books" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwkus_KhoaHoc_Books_RowDataBound" OnRowDeleting="gwkus_KhoaHoc_Books_RowDeleting">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Mã Sách - Giáo Trình">
                                         <ItemTemplate>
@@ -522,7 +522,7 @@
                                             <asp:DropDownList ID="dlAddBooks" class="form-control" runat="server"></asp:DropDownList>
                                         </div>
                                         <span class="input-group-btn">
-                                            <button id="btnAddBook" class="btn btn-success" type="button" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Add</button>
+                                            <button id="btnAddBook" class="btn btn-success" type="button" onserverclick="btnAddBook_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Add</button>
                                         </span>
                                     </div>
                                 </div>

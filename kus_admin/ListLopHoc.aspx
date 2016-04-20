@@ -1040,7 +1040,8 @@
                 <div class="modal-body background">
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-                            <asp:GridView ID="gwkus_LopHoc_Books" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt" OnRowDataBound="gwkus_LopHoc_Books_RowDataBound" OnRowDeleting="gwkus_LopHoc_Books_RowDeleting"
+                            <asp:GridView ID="gwkus_LopHoc_Books" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt" 
+                                OnRowDataBound="gwkus_LopHoc_Books_RowDataBound" OnRowDeleting="gwkus_LopHoc_Books_RowDeleting"
                                 HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Mã Sách - Giáo Trình">
