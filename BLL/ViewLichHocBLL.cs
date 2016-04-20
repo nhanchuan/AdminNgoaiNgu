@@ -168,21 +168,21 @@ namespace BLL
 
             foreach (DataRow r in tb.Rows)
             {
-                DateTime tostart = Convert.ToDateTime(r[8]);
-                DateTime toend = Convert.ToDateTime(r[9]);
+                DateTime tostart = Convert.ToDateTime(r["NgayKhaiGiang"]);
+                DateTime toend = Convert.ToDateTime(r["NgayKetThuc"]);
 
-                List<kus_GioHoc> lststart = getkus_GioHocWithTietHoc((int)r[19]);
+                List<kus_GioHoc> lststart = getkus_GioHocWithTietHoc((int)r["TietHoc"]);
                 kus_GioHoc giostart = lststart.FirstOrDefault();
-                List<kus_GioHoc> lstend = getkus_GioHocWithTietHoc((int)r[19] + (int)r[5] - 1);
+                List<kus_GioHoc> lstend = getkus_GioHocWithTietHoc((int)r["TietHoc"] + (int)r["SoTiet"] - 1);
                 kus_GioHoc gioend = lstend.FirstOrDefault();
                 while (tostart <= toend)
                 {
-                    if (tostart.DayOfWeek.ToString() == "Monday" && (int)r[2] == 1)
+                    if (tostart.DayOfWeek.ToString() == "Monday" && (int)r["DayID"] == 1)
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -191,8 +191,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -201,8 +201,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -211,8 +211,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -221,8 +221,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -231,8 +231,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);
@@ -241,8 +241,8 @@ namespace BLL
                     {
                         LichHocEvent lv = new LichHocEvent();
                         //lv.id = (int)r[0];
-                        lv.title = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1);
-                        lv.description = " Tiết " + r[19].ToString() + " - " + Convert.ToString(Convert.ToInt32(r[19]) + Convert.ToInt32(r[5]) - 1) + " | Room: " + Convert.ToString(r[23]) + Convert.ToString(r[24]) + "." + Convert.ToString(r[25]) + " | Class: " + Convert.ToString(r[6]) + "-" + Convert.ToString(r[7]) + " | " + (string.IsNullOrEmpty(r[26].ToString()) ? "" : "gv." + (string)r[30] + " " + (string)r[31]) + " | " + (string.IsNullOrEmpty(r[27].ToString()) ? "" : "gv." + (string)r[32] + " " + (string)r[33]);
+                        lv.title = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1);
+                        lv.description = " Tiết " + r["TietHoc"].ToString() + " - " + Convert.ToString(Convert.ToInt32(r["TietHoc"]) + Convert.ToInt32(r["SoTiet"]) - 1) + " | Room: " + Convert.ToString(r["DayPhong"]) + Convert.ToString(r["Tang"]) + "." + Convert.ToString(r["SoPhong"]) + " | " + (string.IsNullOrEmpty(r["TTLname"].ToString()) ? "" : "gv." + (string)r["TTLname"] + " " + (string)r["TTFname"]) + " | " + (string.IsNullOrEmpty(r["HDLname"].ToString()) ? "" : "gv." + (string)r["HDLname"] + " " + (string)r["HDFname"]);
                         lv.start = new DateTime(tostart.Year, tostart.Month, tostart.Day, giostart.StartTime.Hour, giostart.StartTime.Minute, giostart.StartTime.Second);
                         lv.end = new DateTime(tostart.Year, tostart.Month, tostart.Day, gioend.EndTime.Hour, gioend.EndTime.Minute, gioend.EndTime.Second);
                         lvents.Add(lv);

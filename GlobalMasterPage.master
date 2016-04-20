@@ -5,9 +5,6 @@
 <%@ Register Src="~/Controls/ctrMyCalendar.ascx" TagPrefix="uc1" TagName="ctrMyCalendar" %>
 <%@ Register Src="~/Controls/AdvisoryTicker.ascx" TagPrefix="uc1" TagName="AdvisoryTicker" %>
 
-
-
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -540,46 +537,15 @@
                                 <span class="arrow "></span>
                             </a>
                             <ul class="sub-menu">
-                                <%--<li>
-                                    <a href="../kus_admin/GhiDanhLopMoi.aspx">
-                                        <i class=""></i>
-                                        Ghi danh lớp mới
-                                    </a>
-                                </li>--%>
                                 <li>
                                     <a href="../kus_admin/GhiDanhKhoaHoc.aspx">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                         Ghi danh khóa học
                                     </a>
                                 </li>
-                                <%--<li>
-                                    <a href="#">
-                                        <i></i>
-                                        Tư vấn Online
-                                    </a>
-                                </li>--%>
-                            </ul>
-                        </li>
-                        <li>
-                            <a>
-                                <i class="fa fa-credit-card"></i>
-                                <span class="title">Học phí</span>
-                                <span class="arrow "></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <%--<li>
-                                    <a href="../kus_admin/GhiDanhHocVien.aspx">
-                                        Ghi danh Học viên
-                                    </a>
-                                </li>--%>
                                 <li>
-                                    <a href="../kus_admin/QLGhiDanh.aspx">Quản lý Ghi danh
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="../kus_admin/QLHocPhi.aspx">
-                                        <i></i>
-                                        Quản lý Học phí
+                                    <a href="../kus_admin/QLGhiDanh.aspx">
+                                        Quản lý Ghi danh
                                     </a>
                                 </li>
                             </ul>

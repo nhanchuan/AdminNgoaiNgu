@@ -63,7 +63,6 @@
     <Compile Include="InternationalSchool.cs" />
     <Compile Include="kus_BienLai.cs" />
     <Compile Include="kus_Books.cs" />
-    <Compile Include="kus_CapDo.cs" />
     <Compile Include="kus_CoSo.cs" />
     <Compile Include="kus_GhiDanh.cs" />
     <Compile Include="kus_GioHoc.cs" />
@@ -73,10 +72,7 @@
     <Compile Include="kus_HocVienMoreInFo.cs" />
     <Compile Include="kus_HopDongGV.cs" />
     <Compile Include="kus_HTChiNhanh.cs" />
-    <Compile Include="kus_KhoiLop.cs" />
     <Compile Include="kus_LichHoc.cs" />
-    <Compile Include="kus_LopHoc.cs" />
-    <Compile Include="kus_LopHoc_Books.cs" />
     <Compile Include="kus_PhongHoc.cs" />
     <Compile Include="LichHocEvent.cs" />
     <Compile Include="ListOfMIMETypes.cs" />

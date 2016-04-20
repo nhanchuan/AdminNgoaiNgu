@@ -22,7 +22,6 @@ public partial class kus_admin_ChiTietHocVien : BasePage
     UserProfileBLL userprofile;
     EmployeesBLL employees;
     kus_GhiDanhBLL kus_ghidanh;
-    kus_LopHocBLL kus_lophoc;
     ImagesBLL images;
     UserAccountsBLL useraccount;
     protected void Page_Load(object sender, EventArgs e)
@@ -323,7 +322,6 @@ public partial class kus_admin_ChiTietHocVien : BasePage
         userprofile = new UserProfileBLL();
         employees = new EmployeesBLL();
         kus_ghidanh = new kus_GhiDanhBLL();
-        kus_lophoc = new kus_LopHocBLL();
         //string FileCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
 
         string HVCode = Request.QueryString["MaHocVien"];

@@ -475,13 +475,13 @@ public partial class kus_admin_QLHocVien : BasePage
 
                 foreach (DataRow r in tb.Rows)
                 {
-                    xlWorkSheetToExport.Cells[iRowCnt, 1] = (string.IsNullOrEmpty(r[0].ToString())) ? "" : ((int)r[0]).ToString();
-                    xlWorkSheetToExport.Cells[iRowCnt, 2] = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-                    xlWorkSheetToExport.Cells[iRowCnt, 3] = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                    xlWorkSheetToExport.Cells[iRowCnt, 4] = (string.IsNullOrEmpty(r[6].ToString())) ? "" : (string)r[6];
-                    xlWorkSheetToExport.Cells[iRowCnt, 5] = (string.IsNullOrEmpty(r[7].ToString())) ? "" : ((int)r[7]).ToString();
-                    xlWorkSheetToExport.Cells[iRowCnt, 6] = (string.IsNullOrEmpty(r[8].ToString())) ? "" : ((DateTime)r[8]).ToString("dd/MM/yyyy");
-                    xlWorkSheetToExport.Cells[iRowCnt, 7] = (string.IsNullOrEmpty(r[9].ToString())) ? "" : ((int)r[9]).ToString();
+                    xlWorkSheetToExport.Cells[iRowCnt, 1] = (string.IsNullOrEmpty(r["ThuTu"].ToString())) ? "" : ((int)r["ThuTu"]).ToString();
+                    xlWorkSheetToExport.Cells[iRowCnt, 2] = (string.IsNullOrEmpty(r["HocVienCode"].ToString())) ? "" : (string)r["HocVienCode"];
+                    xlWorkSheetToExport.Cells[iRowCnt, 3] = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+                    xlWorkSheetToExport.Cells[iRowCnt, 4] = (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : (string)r["FirstName"];
+                    xlWorkSheetToExport.Cells[iRowCnt, 5] = (string.IsNullOrEmpty(r["Sex"].ToString())) ? "" : (string)r["Sex"];
+                    xlWorkSheetToExport.Cells[iRowCnt, 6] = (string.IsNullOrEmpty(r["Birthday"].ToString())) ? "" : ((DateTime)r["Birthday"]).ToString("dd/MM/yyyy");
+                    xlWorkSheetToExport.Cells[iRowCnt, 7] = (string.IsNullOrEmpty(r[9].ToString())) ? "" : ((int)r[9] == 0) ? "Chưa đóng" : "Đã đóng";
                     iRowCnt = iRowCnt + 1;
                 }
                 // FINALLY, FORMAT THE EXCEL SHEET USING EXCEL'S AUTOFORMAT FUNCTION.
