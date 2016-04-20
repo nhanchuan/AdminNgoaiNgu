@@ -82,7 +82,7 @@
                     <td style="width:15%;" class="bold">Mã Ghi Danh : </td>
                     <td><asp:Label ID="lblMaGhiDanh" runat="server" Text="Label"></asp:Label></td>
                     <td style="width:15%;" class="bold">Lớp Học : </td>
-                    <td><asp:Label ID="lblLopHoc" runat="server" Text="Label"></asp:Label></td>
+                    <td><asp:Label ID="lblKhoaHoc" runat="server" Text="Label"></asp:Label></td>
                 </tr>
                 <tr>
                     <td class="bold">Họ và Tên : </td>

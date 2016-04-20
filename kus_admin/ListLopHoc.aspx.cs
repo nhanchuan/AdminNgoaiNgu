@@ -273,10 +273,10 @@ public partial class kus_admin_ListLopHoc : BasePage
             Response.Write("<script>alert('Xóa Sách thất bại. Lỗi kết nối csdl !')</script>");
         }
     }
-    private void load_LichHoc(int lophocID, int daysID, int buoiID, GridView gwLichHoc)
+    private void load_LichHoc(int khoahoc, int daysID, int buoiID, GridView gwLichHoc)
     {
         kus_lichhoc = new kus_LichHocBLL();
-        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWithLopHocandDayandBuoi(lophocID, daysID, buoiID);
+        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWith_KhoaHoc_Day_Buoi(khoahoc, daysID, buoiID);
         gwLichHoc.DataBind();
     }
     private void load_LichHoc(int LopHocID)

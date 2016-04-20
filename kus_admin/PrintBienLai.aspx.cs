@@ -33,35 +33,35 @@ public partial class kus_admin_PrintBienLai : System.Web.UI.Page
         DataTable tbBienLai = kus_bienlai.kus_getBienLaiInfor(BLCode);
         foreach (DataRow r in tbBienLai.Rows)
         {
-            lblBienLaicodeLien1.Text = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-            lblMaGhiDanhLien1.Text= (string.IsNullOrEmpty(r[14].ToString())) ? "" : (string)r[14];
-            lblLopHocLien1.Text = (string.IsNullOrEmpty(r[30].ToString())) ? "" : (string)r[30];
-            lblLopHocLien1.Text += (string.IsNullOrEmpty(r[31].ToString())) ? "" : " - " + (string)r[31];
-            lblHoTenHVLien1.Text = (string.IsNullOrEmpty(r[27].ToString())) ? "" : (string)r[27];
-            lblHoTenHVLien1.Text += (string.IsNullOrEmpty(r[28].ToString())) ? "" : " " + (string)r[28];
-            lblLyDoThuLien1.Text = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-            lblthoiluongLien1.Text = (string.IsNullOrEmpty(r[32].ToString())) ? "0" : ((int)r[32]).ToString() + " tiết";
-            lblThanhTienLien1.Text = (string.IsNullOrEmpty(r[4].ToString())) ? "0" : ((int)r[4]).ToString("C", new CultureInfo("vi-VN"));
-            lblThanhTienChuLien1.Text= (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-            lblDiaChiLien1.Text= (string.IsNullOrEmpty(r[17].ToString())) ? "" : (string)r[17];
-            lblDienthoaiLien1.Text= (string.IsNullOrEmpty(r[19].ToString())) ? "" : (string)r[19];
-            NVGhiDanhLien1.Text= (string.IsNullOrEmpty(r[58].ToString())) ? "" : (string)r[58];
-            NVGhiDanhLien1.Text += (string.IsNullOrEmpty(r[57].ToString())) ? "" : " " + (string)r[57];
+            lblBienLaicodeLien1.Text = (string.IsNullOrEmpty(r["BienLaiCode"].ToString())) ? "" : (string)r["BienLaiCode"];
+            lblMaGhiDanhLien1.Text= (string.IsNullOrEmpty(r["GhiDanhCode"].ToString())) ? "" : (string)r["GhiDanhCode"];
+            lblKhoaHocLien1.Text = (string.IsNullOrEmpty(r["MaKhoaHoc"].ToString())) ? "" : (string)r["MaKhoaHoc"];
+            lblKhoaHocLien1.Text += (string.IsNullOrEmpty(r["TenKhoaHoc"].ToString())) ? "" : " - " + (string)r["TenKhoaHoc"];
+            lblHoTenHVLien1.Text = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+            lblHoTenHVLien1.Text += (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : " " + (string)r["FirstName"];
+            lblLyDoThuLien1.Text = (string.IsNullOrEmpty(r["LyDoThu"].ToString())) ? "" : (string)r["LyDoThu"];
+            lblthoiluongLien1.Text = (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? "0" : ((int)r["ThoiLuong"]).ToString() + " tiết";
+            lblThanhTienLien1.Text = (string.IsNullOrEmpty(r["SoTien"].ToString())) ? "0" : ((int)r["SoTien"]).ToString("C", new CultureInfo("vi-VN"));
+            lblThanhTienChuLien1.Text= (string.IsNullOrEmpty(r["SoTienBangChu"].ToString())) ? "" : (string)r["SoTienBangChu"];
+            lblDiaChiLien1.Text= (string.IsNullOrEmpty(r["DCThuongTru"].ToString())) ? "" : (string)r["DCThuongTru"];
+            lblDienthoaiLien1.Text= (string.IsNullOrEmpty(r["DienThoai"].ToString())) ? "" : (string)r["DienThoai"];
+            NVGhiDanhLien1.Text= (string.IsNullOrEmpty(r["LastNameNV"].ToString())) ? "" : (string)r["LastNameNV"];
+            NVGhiDanhLien1.Text += (string.IsNullOrEmpty(r["FirstNameNV"].ToString())) ? "" : " " + (string)r["FirstNameNV"];
 
-            lblBienLaicodeLien2.Text = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-            lblMaGhiDanhLien2.Text = (string.IsNullOrEmpty(r[14].ToString())) ? "" : (string)r[14];
-            lblLopHocLien2.Text = (string.IsNullOrEmpty(r[30].ToString())) ? "" : (string)r[30];
-            lblLopHocLien2.Text += (string.IsNullOrEmpty(r[31].ToString())) ? "" : " - " + (string)r[31];
-            lblHoTenHVLien2.Text = (string.IsNullOrEmpty(r[27].ToString())) ? "" : (string)r[27];
-            lblHoTenHVLien2.Text += (string.IsNullOrEmpty(r[28].ToString())) ? "" : " " + (string)r[28];
-            lblLyDoThuLien2.Text = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-            lblthoiluongLien2.Text = (string.IsNullOrEmpty(r[32].ToString())) ? "0" : ((int)r[32]).ToString() + " tiết";
-            lblThanhTienLien2.Text = (string.IsNullOrEmpty(r[4].ToString())) ? "0" : ((int)r[4]).ToString("C", new CultureInfo("vi-VN"));
-            lblThanhTienChuLien2.Text = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-            lblDiaChiLien2.Text = (string.IsNullOrEmpty(r[17].ToString())) ? "" : (string)r[17];
-            lblDienthoaiLien2.Text = (string.IsNullOrEmpty(r[19].ToString())) ? "" : (string)r[19];
-            NVGhiDanhLien2.Text = (string.IsNullOrEmpty(r[58].ToString())) ? "" : (string)r[58];
-            NVGhiDanhLien2.Text += (string.IsNullOrEmpty(r[57].ToString())) ? "" : " " + (string)r[57];
+            lblBienLaicodeLien2.Text = (string.IsNullOrEmpty(r["BienLaiCode"].ToString())) ? "" : (string)r["BienLaiCode"];
+            lblMaGhiDanhLien2.Text = (string.IsNullOrEmpty(r["GhiDanhCode"].ToString())) ? "" : (string)r["GhiDanhCode"];
+            lblKhoaHocLien2.Text = (string.IsNullOrEmpty(r["MaKhoaHoc"].ToString())) ? "" : (string)r["MaKhoaHoc"];
+            lblKhoaHocLien2.Text += (string.IsNullOrEmpty(r["TenKhoaHoc"].ToString())) ? "" : " - " + (string)r["TenKhoaHoc"];
+            lblHoTenHVLien2.Text = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+            lblHoTenHVLien2.Text += (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : " " + (string)r["FirstName"];
+            lblLyDoThuLien2.Text = (string.IsNullOrEmpty(r["LyDoThu"].ToString())) ? "" : (string)r["LyDoThu"];
+            lblthoiluongLien2.Text = (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? "0" : ((int)r["ThoiLuong"]).ToString() + " tiết";
+            lblThanhTienLien2.Text = (string.IsNullOrEmpty(r["SoTien"].ToString())) ? "0" : ((int)r["SoTien"]).ToString("C", new CultureInfo("vi-VN"));
+            lblThanhTienChuLien2.Text = (string.IsNullOrEmpty(r["SoTienBangChu"].ToString())) ? "" : (string)r["SoTienBangChu"];
+            lblDiaChiLien2.Text = (string.IsNullOrEmpty(r["DCThuongTru"].ToString())) ? "" : (string)r["DCThuongTru"];
+            lblDienthoaiLien2.Text = (string.IsNullOrEmpty(r["DienThoai"].ToString())) ? "" : (string)r["DienThoai"];
+            NVGhiDanhLien2.Text = (string.IsNullOrEmpty(r["LastNameNV"].ToString())) ? "" : (string)r["LastNameNV"];
+            NVGhiDanhLien2.Text += (string.IsNullOrEmpty(r["FirstNameNV"].ToString())) ? "" : " " + (string)r["FirstNameNV"];
 
         }
 

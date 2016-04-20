@@ -87,9 +87,9 @@
                 </td>
             </tr>
             <tr>
-                <td>Lớp học: </td>
+                <td>Khóa học: </td>
                 <td>
-                    <strong><asp:Label ID="lblLopHocLien1" runat="server" Text="Label"></asp:Label></strong>
+                    <strong><asp:Label ID="lblKhoaHocLien1" runat="server" Text="Label"></asp:Label></strong>
                 </td>
                 <td>Thời lượng đăng ký :</td>
                 <td>
@@ -187,9 +187,9 @@
                 </td>
             </tr>
             <tr>
-                <td>Lớp học: </td>
+                <td>Khóa học: </td>
                 <td><strong>
-                    <asp:Label ID="lblLopHocLien2" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblKhoaHocLien2" runat="server" Text="Label"></asp:Label>
                     </strong></td>
                 <td>Thời lượng đăng ký</td>
                 <td>

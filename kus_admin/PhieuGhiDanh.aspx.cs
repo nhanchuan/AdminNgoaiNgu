@@ -86,35 +86,35 @@ public partial class kus_admin_PhieuGhiDanh : BasePage
         DataTable tb = kus_ghidanh.kus_getTTPhieuGhiDanh(code);
         foreach (DataRow r in tb.Rows)
         {
-            lblPhieuGhiDanh.Text= (string.IsNullOrEmpty(r[10].ToString())) ? "" : (string)r[10];
-            lblMaGhiDanh.Text = (string.IsNullOrEmpty(r[10].ToString())) ? "" : (string)r[10];
-            lblLopHoc.Text = (string.IsNullOrEmpty(r[13].ToString())) ? "" : (string)r[13];
-            lblLopHoc.Text += (string.IsNullOrEmpty(r[14].ToString())) ? "" : " - " + (string)r[14];
-            lblHoTenHV.Text = (string.IsNullOrEmpty(r[4].ToString())) ? "" : (string)r[4];
-            lblHoTenHV.Text += (string.IsNullOrEmpty(r[3].ToString())) ? "" : " " + (string)r[3];
-            lblDienThoaiHV.Text= (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-            lblHocPhi.Text = (string.IsNullOrEmpty(r[17].ToString())) ? "" : ((int)r[17]).ToString("C", new CultureInfo("vi-VN"));
-            lblThoiLuong.Text= (string.IsNullOrEmpty(r[18].ToString())) ? "" : ((int)r[18]).ToString();
+            lblPhieuGhiDanh.Text= (string.IsNullOrEmpty(r["GhiDanhCode"].ToString())) ? "" : (string)r["GhiDanhCode"];
+            lblMaGhiDanh.Text = (string.IsNullOrEmpty(r["GhiDanhCode"].ToString())) ? "" : (string)r["GhiDanhCode"];
+            lblKhoaHoc.Text = (string.IsNullOrEmpty(r["MaKhoaHoc"].ToString())) ? "" : (string)r["MaKhoaHoc"];
+            lblKhoaHoc.Text += (string.IsNullOrEmpty(r["TenKhoaHoc"].ToString())) ? "" : " - " + (string)r["TenKhoaHoc"];
+            lblHoTenHV.Text = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+            lblHoTenHV.Text += (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : " " + (string)r["FirstName"];
+            lblDienThoaiHV.Text= (string.IsNullOrEmpty(r["DienThoai"].ToString())) ? "" : (string)r["DienThoai"];
+            lblHocPhi.Text = (string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? "" : ((int)r["MucHocPhi"]).ToString("C", new CultureInfo("vi-VN"));
+            lblThoiLuong.Text= (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? "" : ((int)r["ThoiLuong"]).ToString();
 
             
-            lblDatCoc.Text= (string.IsNullOrEmpty(r[9].ToString())) ? "0" : ((int)r[9]).ToString("C", new CultureInfo("vi-VN"));
+            lblDatCoc.Text= (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? "0" : ((int)r["DatCoc"]).ToString("C", new CultureInfo("vi-VN"));
 
-            this.load_LichHoc(string.IsNullOrEmpty(r[5].ToString()) ? 0 : (int)r[5]);
+            this.load_LichHoc(string.IsNullOrEmpty(r["KhoaHoc"].ToString()) ? 0 : (int)r["KhoaHoc"]);
 
 
-            if((int)r[26]==0)
+            if((int)r["SLBL"] ==0)
             {
                 lblTinhTrangHP.Text = "chưa đóng";
                 btnmodalDongHP.Visible = true;
                 btnXemBienLai.Visible = false;
-                lbltitleMaHV.Text= (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                lbltitleTenHV.Text= (string.IsNullOrEmpty(r[4].ToString())) ? "" : (string)r[4];
-                lbltitleTenHV.Text += (string.IsNullOrEmpty(r[3].ToString())) ? "" : " " + (string)r[3];
-                txtHPThoiLuong.Text= (string.IsNullOrEmpty(r[18].ToString())) ? "" : ((int)r[18]).ToString();
-                txtHPNgayKG.Text = (string.IsNullOrEmpty(r[27].ToString())) ? "" : ((DateTime)r[27]).ToString("dd/MM/yyyy");
-                txtHPNgayKT.Text = (string.IsNullOrEmpty(r[28].ToString())) ? "" : ((DateTime)r[28]).ToString("dd/MM/yyyy");
-                txtDongHP.Text= (string.IsNullOrEmpty(r[17].ToString())) ? "" : ((int)r[17]).ToString("C", new CultureInfo("vi-VN"));
-                txtHPDatCoc.Text= (string.IsNullOrEmpty(r[9].ToString())) ? "0" : ((int)r[9]).ToString("C", new CultureInfo("vi-VN"));
+                lbltitleMaHV.Text= (string.IsNullOrEmpty(r["HocVienCode"].ToString())) ? "" : (string)r["HocVienCode"];
+                lbltitleTenHV.Text= (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+                lbltitleTenHV.Text += (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : " " + (string)r["FirstName"];
+                txtHPThoiLuong.Text= (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? "" : ((int)r["ThoiLuong"]).ToString();
+                txtHPNgayKG.Text = (string.IsNullOrEmpty(r["NgayKhaiGiang"].ToString())) ? "" : ((DateTime)r["NgayKhaiGiang"]).ToString("dd/MM/yyyy");
+                txtHPNgayKT.Text = (string.IsNullOrEmpty(r["NgayKetThuc"].ToString())) ? "" : ((DateTime)r["NgayKetThuc"]).ToString("dd/MM/yyyy");
+                txtDongHP.Text= (string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? "" : ((int)r["MucHocPhi"]).ToString("C", new CultureInfo("vi-VN"));
+                txtHPDatCoc.Text= (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? "0" : ((int)r["DatCoc"]).ToString("C", new CultureInfo("vi-VN"));
             }
             else
             {
@@ -128,11 +128,11 @@ public partial class kus_admin_PhieuGhiDanh : BasePage
         }
         this.load_ImgHocVien(code);
     }
-    private void load_LichHoc(int lophocID, int daysID, int buoiID, GridView gwLichHoc)
+    private void load_LichHoc(int khoahoc, int daysID, int buoiID, GridView gwLichHoc)
     {
         kus_lichhoc = new kus_LichHocBLL();
-        //gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWithLopHocandDayandBuoi(lophocID, daysID, buoiID);
-        //gwLichHoc.DataBind();
+        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWith_KhoaHoc_Day_Buoi(khoahoc, daysID, buoiID);
+        gwLichHoc.DataBind();
     }
     private void load_LichHoc(int LopHocID)
     {
@@ -170,8 +170,8 @@ public partial class kus_admin_PhieuGhiDanh : BasePage
         int tlg =(txtTLGiamHP.Text=="")? 0: Convert.ToInt32(txtTLGiamHP.Text);
         foreach (DataRow r in tb.Rows)
         {
-            HP = (string.IsNullOrEmpty(r[17].ToString())) ? 0 : ((int)r[17]);
-            DatCoc = (string.IsNullOrEmpty(r[9].ToString())) ? 0 : ((int)r[9]);
+            HP = (string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? 0 : ((int)r["MucHocPhi"]);
+            DatCoc = (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? 0 : ((int)r["DatCoc"]);
         }
         if(txtTLGiamHP.Text=="")
         {

@@ -53,9 +53,9 @@
                             <td>
                                 <asp:Label ID="lblMaHocVien" runat="server" Text="Label"></asp:Label>
                             </td>
-                            <td style="width: 15%;" class="bold">Lớp Học : </td>
+                            <td style="width: 15%;" class="bold">Khóa Học : </td>
                             <td>
-                                <asp:Label ID="lblLopHoc" runat="server" Text="Label"></asp:Label>
+                                <asp:Label ID="lblKhoaHoc" runat="server" Text="Label"></asp:Label>
                             </td>
                         </tr>
                         <tr>

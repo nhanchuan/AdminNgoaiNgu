@@ -77,33 +77,33 @@ public partial class kus_admin_BienLaiHocPhi : BasePage
         DataTable tbBienLai = kus_bienlai.kus_getBienLaiInfor(BLCode);
         foreach (DataRow r in tbBienLai.Rows)
         {
-            lblBienLaicode.Text = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-            lblMaBienLai.Text= (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-            lblMaHocVien.Text= (string.IsNullOrEmpty(r[15].ToString())) ? "" : (string)r[15];
-            lblLopHoc.Text = (string.IsNullOrEmpty(r[30].ToString())) ? "" : (string)r[30];
-            lblLopHoc.Text += (string.IsNullOrEmpty(r[31].ToString())) ? "" : " - " + (string)r[31];
-            lblLopHoc.Text += (string.IsNullOrEmpty(r[41].ToString())) ? "" : " | Cơ sở : " + (string)r[41];
-            lblHoTenHV.Text = (string.IsNullOrEmpty(r[27].ToString())) ? "" : (string)r[27];
-            lblHoTenHV.Text += (string.IsNullOrEmpty(r[28].ToString())) ? "" : " " + (string)r[28];
-            lblBirthday.Text= (string.IsNullOrEmpty(r[29].ToString())) ? "" : ((DateTime)r[29]).ToString("dd/MM/yyyy");
-            lblLyDoThu.Text= (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
+            lblBienLaicode.Text = (string.IsNullOrEmpty(r["BienLaiCode"].ToString())) ? "" : (string)r["BienLaiCode"];
+            lblMaBienLai.Text= (string.IsNullOrEmpty(r["BienLaiCode"].ToString())) ? "" : (string)r["BienLaiCode"];
+            lblMaHocVien.Text= (string.IsNullOrEmpty(r["HocVienCode"].ToString())) ? "" : (string)r["HocVienCode"];
+            lblKhoaHoc.Text = (string.IsNullOrEmpty(r["MaKhoaHoc"].ToString())) ? "" : (string)r["MaKhoaHoc"];
+            lblKhoaHoc.Text += (string.IsNullOrEmpty(r["TenKhoaHoc"].ToString())) ? "" : " - " + (string)r["TenKhoaHoc"];
+            lblKhoaHoc.Text += (string.IsNullOrEmpty(r["TenCoSo"].ToString())) ? "" : " | Cơ sở : " + (string)r["TenCoSo"];
+            lblHoTenHV.Text = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+            lblHoTenHV.Text += (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : " " + (string)r["FirstName"];
+            lblBirthday.Text= (string.IsNullOrEmpty(r["Birthday"].ToString())) ? "" : ((DateTime)r["Birthday"]).ToString("dd/MM/yyyy");
+            lblLyDoThu.Text= (string.IsNullOrEmpty(r["LyDoThu"].ToString())) ? "" : (string)r["LyDoThu"];
 
-            txtHPNgayKG.Text = (string.IsNullOrEmpty(r[33].ToString())) ? "" : ((DateTime)r[33]).ToString("dd/MM/yyyy");
-            txtHPNgayKT.Text = (string.IsNullOrEmpty(r[34].ToString())) ? "" : ((DateTime)r[34]).ToString("dd/MM/yyyy");
-            lblMucHocPhi.Text= (string.IsNullOrEmpty(r[38].ToString())) ? "0" : ((int)r[38]).ToString("C", new CultureInfo("vi-VN"));
-            lblMienGiam.Text= (string.IsNullOrEmpty(r[3].ToString())) ? "0" : ((int)r[3]).ToString()+"% ( số tiền giảm: " +(Convert.ToUInt32((string.IsNullOrEmpty(r[38].ToString())) ? "0" : ((int)r[38]).ToString())*(int)r[3]/100).ToString("C", new CultureInfo("vi-VN"))+" )";
-            lblthoiluong.Text= (string.IsNullOrEmpty(r[32].ToString())) ? "0" : ((int)r[32]).ToString()+" tiết";
-            lblthanhtien.Text= (string.IsNullOrEmpty(r[4].ToString())) ? "0" : ((int)r[4]).ToString("C", new CultureInfo("vi-VN"));
-            lblDatCoc.Text= (string.IsNullOrEmpty(r[13].ToString())) ? "0" : ((int)r[13]).ToString("C", new CultureInfo("vi-VN"));
+            txtHPNgayKG.Text = (string.IsNullOrEmpty(r["NgayKhaiGiang"].ToString())) ? "" : ((DateTime)r["NgayKhaiGiang"]).ToString("dd/MM/yyyy");
+            txtHPNgayKT.Text = (string.IsNullOrEmpty(r["NgayKetThuc"].ToString())) ? "" : ((DateTime)r["NgayKetThuc"]).ToString("dd/MM/yyyy");
+            lblMucHocPhi.Text= (string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? "0" : ((int)r["MucHocPhi"]).ToString("C", new CultureInfo("vi-VN"));
+            lblMienGiam.Text= (string.IsNullOrEmpty(r["MienGiam"].ToString())) ? "0" : ((int)r["MienGiam"]).ToString()+"% ( số tiền giảm: " +(Convert.ToUInt32((string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? "0" : ((int)r["MucHocPhi"]).ToString())*(int)r["MienGiam"] /100).ToString("C", new CultureInfo("vi-VN"))+" )";
+            lblthoiluong.Text= (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? "0" : ((int)r["ThoiLuong"]).ToString()+" tiết";
+            lblthanhtien.Text= (string.IsNullOrEmpty(r["SoTien"].ToString())) ? "0" : ((int)r["SoTien"]).ToString("C", new CultureInfo("vi-VN"));
+            lblDatCoc.Text= (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? "0" : ((int)r["DatCoc"]).ToString("C", new CultureInfo("vi-VN"));
 
-            this.load_LichHoc(string.IsNullOrEmpty(r[9].ToString()) ? 0 : (int)r[9]);
-            this.load_ImgHocVien((string.IsNullOrEmpty(r[14].ToString())) ? "" : (string)r[14]);
+            this.load_LichHoc(string.IsNullOrEmpty(r["KhoaHoc"].ToString()) ? 0 : (int)r["KhoaHoc"]);
+            this.load_ImgHocVien((string.IsNullOrEmpty(r["GhiDanhCode"].ToString())) ? "" : (string)r["GhiDanhCode"]);
         }
     }
-    private void load_LichHoc(int lophocID, int daysID, int buoiID, GridView gwLichHoc)
+    private void load_LichHoc(int khoahoc, int daysID, int buoiID, GridView gwLichHoc)
     {
         kus_lichhoc = new kus_LichHocBLL();
-        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWithLopHocandDayandBuoi(lophocID, daysID, buoiID);
+        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWith_KhoaHoc_Day_Buoi(khoahoc, daysID, buoiID);
         gwLichHoc.DataBind();
     }
     private void load_LichHoc(int LopHocID)

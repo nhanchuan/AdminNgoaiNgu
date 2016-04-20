@@ -188,14 +188,15 @@
                     </div>
                 </div>
                 <div class="actions">
+                    <a id="btnAddBooks" href="#modalGiaoTrinhHoc" runat="server" data-toggle="modal"><i class="fa fa-book"></i> Sách - Giáo trình học</a>
                     <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
                         <i class="fa fa-file-excel-o"></i>
                     </a>
-                    <a id="btnRefreshLstKhoaHoc" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" onserverclick="btnRefreshLstKhoaHoc_ServerClick" runat="server" href="#">
-                        <i class="fa fa-refresh"></i>
-                    </a>
                     <a href="#modalEditKhoa" data-toggle="modal" id="btnEditKhoaHoc" title="Chỉnh sửa thông tin khóa học" runat="server">
                         <i class="icon-wrench"></i>
+                    </a>
+                    <a id="btnRefreshLstKhoaHoc" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" onserverclick="btnRefreshLstKhoaHoc_ServerClick" runat="server" href="#">
+                        <i class="fa fa-refresh"></i>
                     </a>
                     <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
                 </div>
@@ -457,5 +458,84 @@
         </div>
     </div>
     <%--End Modal --%>
+    <%-- Modal Giáo Trinh Học --%>
+    <div class="modal fade" id="modalGiaoTrinhHoc" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title uppercase">
+                        <img src="../images/icon/Books-1-icon.png" width="35" height="35" />
+                        Sách - Giáo Trình Học
+                    </h4>
+                </div>
+                <div class="modal-body background">
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:GridView ID="gwkus_KhoaHoc_Books" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
+                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                                <Columns>
+                                    <asp:TemplateField HeaderText="Mã Sách - Giáo Trình">
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblBookID" CssClass="display-none" runat="server" Text='<%# Eval("BookID") %>'></asp:Label>
+                                            <asp:Label ID="Label10" runat="server" Text='<%# Eval("BookCode") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Tên Sách - Giáo Trình">
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("BookName") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Tác Giả">
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label11" runat="server" Text='<%# Eval("Author") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Nhà XB">
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label12" runat="server" Text='<%# Eval("Publisher") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField HeaderText="Ngôn Ngữ">
+                                        <ItemTemplate>
+                                            <asp:Label ID="Label13" runat="server" Text='<%# Eval("Languages") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="btnDelBook" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"></asp:LinkButton>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                </Columns>
+                                <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                                <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
+                                <RowStyle BackColor="#FAF3DF"></RowStyle>
+                            </asp:GridView>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <asp:Label ID="lblvalidAddSach" ForeColor="Red" runat="server"></asp:Label><br />
+                                    <label class="control-label">Thêm Sách</label>
+                                    <div class="input-group">
+                                        <div class="input-icon">
+                                            <i class="fa fa-book"></i>
+                                            <asp:DropDownList ID="dlAddBooks" class="form-control" runat="server"></asp:DropDownList>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button id="btnAddBook" class="btn btn-success" type="button" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Add</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal">Đóng</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-- End Modal Giao Trinh hoc --%>
 </asp:Content>
 

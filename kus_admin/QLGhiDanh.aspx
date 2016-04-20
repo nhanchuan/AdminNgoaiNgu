@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="QLGhiDanh.aspx.cs" Inherits="kus_admin_QLGhiDanh" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href="../App_Themes/admin/StylePortlet.css" rel="stylesheet" />
     <!-- BEGIN PAGE HEADER-->
     <h1 class="page-title">Quản Lý Học Viên Ghi Danh
@@ -15,6 +15,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>Quản lý Học phí
+               
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -28,7 +29,7 @@
             <div class="form-group">
                 <asp:DropDownList ID="dlLoaiThongKe" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlLoaiThongKe_SelectedIndexChanged" runat="server">
                     <asp:ListItem Value="0">Thống Kê Theo Học Viên</asp:ListItem>
-                    <asp:ListItem Value="1">Thống Kê Theo Lớp</asp:ListItem>
+                    <asp:ListItem Value="1">Thống Kê Theo Khóa Học</asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
@@ -53,6 +54,7 @@
         <div class="col-lg-3">
             <div class="form-group">
                 Từ ngày : 
+               
                 <%-- Date picker --%>
                 <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
                     <asp:TextBox ID="txtStartdate" CssClass="form-control" runat="server"></asp:TextBox>
@@ -68,6 +70,7 @@
         <div class="col-lg-3">
             <div class="form-group">
                 Đến ngày : 
+               
                 <%-- Date picker --%>
                 <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
                     <asp:TextBox ID="txtEnddate" CssClass="form-control" runat="server"></asp:TextBox>
@@ -88,9 +91,9 @@
         </div>
         <div class="col-lg-4 text-right">
             <div class="form-group">
-                <h2>
-                    TỔNG SỐ:
-                        <asp:Label ID="lblSumHocVien" CssClass="bold" runat="server" Text="0"></asp:Label>
+                <h2>TỔNG SỐ:
+                       
+                    <asp:Label ID="lblSumHocVien" CssClass="bold" runat="server" Text="0"></asp:Label>
                     HỌC VIÊN
                 </h2>
             </div>
@@ -99,19 +102,23 @@
     <div class="clearfix"></div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="portlet box blue">
+            <div class="portlet light">
                 <div class="portlet-title">
                     <div class="caption">
-                        <i class="fa fa-edit"></i>Danh sách học viên ghi danh
+                        <i class="fa fa-list font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách học viên ghi danh </span>
                     </div>
+                    
                     <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
                         <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                        <asp:Button ID="btnreload" CssClass="btn green" runat="server" Text="refresh" />
+                        <a id="btnRefreshLstKhoaHoc" title="Làm mới danh sách" runat="server" href="#">
+                            <i class="fa fa-refresh"></i>
+                        </a>
                         <a href="javascript:;" class="remove"></a>
                     </div>
                 </div>
-                <div class="portlet-body background">
+                <div class="portlet-body">
                     <div class="row">
                         <div class="col-lg-12">
                             <a id="btnPhieuGD" class="btn btn-default" onserverclick="btnPhieuGD_ServerClick" runat="server"><i class="fa fa-ticket"></i> Phiếu Ghi Danh Học Viên</a>
@@ -133,9 +140,10 @@
                                             <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Eval("HocVienCode")+ " - "+ Eval("LastName")+ " "+ Eval("FirstName") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Lớp Đăng Ký">
+                                    <asp:TemplateField HeaderText="Khóa Học Đăng Ký">
                                         <ItemTemplate>
-                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("LopHocCode")+" - "+ Eval("TenLopHoc") +" | " + Eval("TenCapDo") + " | " + Eval("TenKhoiLop")%>'></asp:Label>
+                                            <%--<asp:Label ID="Label2" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") +" | " + Eval("TenLopHoc") + " | " + Eval("TenChuongTrinh")%>'></asp:Label>--%>
+                                            <asp:Label ID="lblMaKhoaHoc" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") %>'></asp:Label> <i class="fa fa-chevron-left"></i> <asp:Label ID="lblTenLopHoc" runat="server" Text='<%# Eval("TenLopHoc") %>'></asp:Label> <i class="fa fa-chevron-left"></i> <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Ngày Đăng Ký">
@@ -162,7 +170,8 @@
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Tình trạng học phí">
                                         <ItemTemplate>
-                                            <i><asp:Label ID="Label8" CssClass="bold" runat="server" Text='<%# (Eval("BLNum").ToString()=="0")?"chưa đóng":"đã đóng" %>'></asp:Label></i>
+                                            <i>
+                                                <asp:Label ID="Label8" CssClass="bold" runat="server" Text='<%# (Eval("BLNum").ToString()=="0")?"chưa đóng":"đã đóng" %>'></asp:Label></i>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Tư Vấn">

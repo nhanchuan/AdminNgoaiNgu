@@ -53,6 +53,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
                         this.Getnc_KhoaHocPageWise(pageIndex);
                     }
                     btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
+                    btnAddBooks.Attributes.Add("class", "btn btn-default disabled");
                     rptPager.Visible = true;
                     rptSearch.Visible = false;
                 }
@@ -338,6 +339,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
     {
         nc_khoahoc = new nc_KhoaHocBLL();
         kus_coso = new kus_CoSoBLL();
+        btnAddBooks.Attributes.Add("class", "btn btn-default");
         btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
         this.load_dlELoaiChuongTrinh();
         this.load_dlEHTChiNhanh();

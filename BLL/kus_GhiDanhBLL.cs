@@ -161,7 +161,7 @@ namespace BLL
             {
                 return 0;
             }
-            string sql = "select COUNT(hocvien.HocVienID) from kus_HocVien hocvien full outer join kus_GhiDanh ghidanh on hocvien.HocVienID=ghidanh.HocVienID full outer join kus_LopHoc lophoc on ghidanh.LopHocID=lophoc.LopHocID full outer join kus_CoSo coso on lophoc.CoSoID=coso.CoSoID where hocvien.HocVienID is not null and ghidanh.NgayDangKy between @Startdate and @Enddate and coso.CoSoID=@CoSoID";
+            string sql = "select COUNT(hocvien.HocVienID) from kus_HocVien hocvien full outer join kus_GhiDanh ghidanh on hocvien.HocVienID=ghidanh.HocVienID full outer join nc_KhoaHoc khoahoc on ghidanh.KhoaHoc=khoahoc.ID where hocvien.HocVienID is not null and ghidanh.NgayDangKy between @Startdate and @Enddate and khoahoc.CoSoID=@CoSoID";
             SqlParameter pStartdate = new SqlParameter("Startdate", Startdate);
             SqlParameter pEnddate = new SqlParameter("Enddate", Enddate);
             SqlParameter pCoSoID = new SqlParameter("CoSoID", CoSoID);
