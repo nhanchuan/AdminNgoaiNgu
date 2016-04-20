@@ -204,5 +204,19 @@ namespace BLL
             this.dt.CloseConnection();
             return count;
         }
+        //=================================
+        public DataTable DropdownKhoaHocWithCS(int CoSoID)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select ID, (MaKhoaHoc+' - '+TenKhoaHoc) as TenKhoaHoc from nc_KhoaHoc where CoSoID=@CoSoID and NgayKetThuc>=GETDATE()";
+            SqlParameter pCoSoID = new SqlParameter("CoSoID", CoSoID);
+            DataTable tb = dt.DAtable(sql, pCoSoID);
+            this.dt.CloseConnection();
+            return tb;
+        }
+
     }
 }

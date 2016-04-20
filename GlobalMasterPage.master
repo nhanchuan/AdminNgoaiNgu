@@ -658,37 +658,6 @@
                                 <li>
                                     <a href="#">
                                         <i></i>
-                                        Quản lý học tập
-                                       
-                                        <span class="arrow "></span>
-                                    </a>
-                                    <ul class="sub-menu">
-                                        <li>
-                                            <a href="../kus_admin/KhoiLop.aspx">
-                                                <i class="fa fa-bookmark-o"></i>
-                                                Khối lớp
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="../kus_admin/CapDo.aspx">
-                                                <i class="fa fa-bookmark-o"></i>
-                                                Cấp độ
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="../kus_admin/ListLopHoc.aspx">
-                                                <i class="fa fa-bookmark-o"></i>
-                                                Lớp học
-                                            </a>
-                                        </li>
-
-
-
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <i></i>
                                         Quản lý giảng dạy
                                        
                                         <span class="arrow "></span>

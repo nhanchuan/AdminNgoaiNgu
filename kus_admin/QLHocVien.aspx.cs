@@ -19,9 +19,9 @@ public partial class kus_admin_QLHocVien : BasePage
     kus_HTChiNhanhBLL kus_htchinhanh;
     kus_CoSoBLL kus_coso;
     kus_GhiDanhBLL kus_ghidanh;
-    kus_LopHocBLL kus_lophoc;
+    nc_KhoaHocBLL nc_khoahoc;
     kus_HocVienBLL kus_hocvien;
-    public int PageSize = 30;
+    public int PageSize = 1;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -44,7 +44,7 @@ public partial class kus_admin_QLHocVien : BasePage
                     formHT_CoSO.Visible = false;
                     dlLoaiThongKe.Items.FindByValue("0").Selected = true;
                     dlCoSo.Items.Insert(0, new ListItem("------ Chọn Cơ Sở thuộc Hệ Thống Chi Nhánh -------", "0"));
-                    dlChonlop.Items.Insert(0, new ListItem("------ Chọn Lớp Học thuộc cơ sở -------", "0"));
+                    dlKhoaHoc.Items.Insert(0, new ListItem("------ Chọn Khóa Học thuộc cơ sở -------", "0"));
                     btnSunmitGhiDanhLop.Visible = false;
                     btnSunmitGhiDanhHV.Visible = true;
                     btnExporttoExcel.Visible = false;
@@ -255,12 +255,12 @@ public partial class kus_admin_QLHocVien : BasePage
         rptPager.Visible = true;
         rptcoso.Visible = false;
     }
-    private void Getkus_HVGhiDanhLopHocPageWise(int pageIndex, int LopHocID)
+    private void Getkus_HVGhiDanhKhoaHocPageWise(int pageIndex, int khoahoc)
     {
         kus_ghidanh = new kus_GhiDanhBLL();
         int recordCount = 0;
-        gwGhiDanhHocVien.DataSource = kus_ghidanh.kus_getHVGhiDanhInLopHoc(pageIndex, PageSize, LopHocID);
-        recordCount = kus_ghidanh.CountgetHVGhiDanhInLopHoc(LopHocID);
+        gwGhiDanhHocVien.DataSource = kus_ghidanh.kus_getHVGhiDanhInKhoaHoc(pageIndex, PageSize, khoahoc);
+        recordCount = kus_ghidanh.CountgetHVGhiDanhInKhoaHoc(khoahoc);
         gwGhiDanhHocVien.DataBind();
         this.PopulateCSPager(recordCount, pageIndex);
     }
@@ -335,7 +335,7 @@ public partial class kus_admin_QLHocVien : BasePage
     protected void CSPage_Changed(object sender, EventArgs e)
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
-        this.Getkus_HVGhiDanhLopHocPageWise(pageIndex, Convert.ToInt32(dlChonlop.SelectedValue));
+        this.Getkus_HVGhiDanhKhoaHocPageWise(pageIndex, Convert.ToInt32(dlKhoaHoc.SelectedValue));
         rptPager.Visible = false;
         rptcoso.Visible = true;
 
@@ -356,19 +356,19 @@ public partial class kus_admin_QLHocVien : BasePage
     //}
     protected void dlCoSo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        kus_lophoc = new kus_LopHocBLL();
-        dlChonlop.DataSource = kus_lophoc.DropdownLopHocWithCS(Convert.ToInt32(dlCoSo.SelectedValue));
-        dlChonlop.DataTextField = "TenLopHoc";
-        dlChonlop.DataValueField = "LopHocID";
-        dlChonlop.DataBind();
-        dlChonlop.Items.Insert(0, new ListItem("------ Chọn Lớp Học thuộc cơ sở -------", "0"));
+        nc_khoahoc = new nc_KhoaHocBLL();
+        dlKhoaHoc.DataSource = nc_khoahoc.DropdownKhoaHocWithCS(Convert.ToInt32(dlCoSo.SelectedValue));
+        dlKhoaHoc.DataTextField = "TenKhoaHoc";
+        dlKhoaHoc.DataValueField = "ID";
+        dlKhoaHoc.DataBind();
+        dlKhoaHoc.Items.Insert(0, new ListItem("----- Chọn Khóa Học thuộc cơ sở -----", "0"));
     }
 
     protected void btnSunmitGhiDanhLop_Click(object sender, EventArgs e)
     {
         kus_ghidanh = new kus_GhiDanhBLL();
-        this.Getkus_HVGhiDanhLopHocPageWise(1, Convert.ToInt32(dlChonlop.SelectedValue));
-        lblSumHocVien.Text = kus_ghidanh.CountgetHVGhiDanhInLopHoc(Convert.ToInt32(dlChonlop.SelectedValue)).ToString();
+        this.Getkus_HVGhiDanhKhoaHocPageWise(1, Convert.ToInt32(dlKhoaHoc.SelectedValue));
+        lblSumHocVien.Text = kus_ghidanh.CountgetHVGhiDanhInKhoaHoc(Convert.ToInt32(dlKhoaHoc.SelectedValue)).ToString();
         rptPager.Visible = false;
         rptcoso.Visible = true;
     }
@@ -412,23 +412,23 @@ public partial class kus_admin_QLHocVien : BasePage
         }
         else
         {
-            int lophocID = Convert.ToInt32(dlChonlop.SelectedValue);
+            int lophocID = Convert.ToInt32(dlKhoaHoc.SelectedValue);
             if (lophocID == 0)
             {
                 Response.Write("<script>alert('Chưa chọn lớp học !')</script>");
             }
             else
             {
-                this.ExportToExcel(Convert.ToInt32(dlChonlop.SelectedValue));
+                this.ExportToExcel(Convert.ToInt32(dlKhoaHoc.SelectedValue));
             }
         }
     }
     // FUNCTION EXPORT TO EXCEL
-    protected void ExportToExcel(int lopid)
+    protected void ExportToExcel(int khoahoc)
     {
         kus_hocvien = new kus_HocVienBLL();
-        kus_lophoc = new kus_LopHocBLL();
-        DataTable tb = kus_hocvien.ExprotHVtoExcel(lopid);
+        nc_khoahoc = new nc_KhoaHocBLL();
+        DataTable tb = kus_hocvien.ExprotHVtoExcel(khoahoc);
         try
         {
             if (tb.Rows.Count > 0)
@@ -453,9 +453,9 @@ public partial class kus_admin_QLHocVien : BasePage
                 int iRowCnt = 4;
 
                 // SHOW THE HEADER.
-                List<kus_LopHoc> lstLopHoc = kus_lophoc.GetListLopHocWithID(lopid);
-                kus_LopHoc lophoc = lstLopHoc.FirstOrDefault();
-                xlWorkSheetToExport.Cells[1, 1] = "DANH SÁCH HỌC VIÊN LỚP " + ((lophoc == null) ? "" : lophoc.TenLopHoc + " - " + lophoc.LopHocCode);
+                List<nc_KhoaHoc> lstKhoaHoc = nc_khoahoc.getListKhoaHocWithID(khoahoc);
+                nc_KhoaHoc khoh = lstKhoaHoc.FirstOrDefault();
+                xlWorkSheetToExport.Cells[1, 1] = "DANH SÁCH HỌC VIÊN KHÓA " + ((khoh == null) ? "" : khoh.TenKhoaHoc + " - " + khoh.MaKhoaHoc);
 
                 Excel.Range range = xlWorkSheetToExport.Cells[1, 1] as Excel.Range;
                 range.EntireRow.Font.Name = "Calibri";

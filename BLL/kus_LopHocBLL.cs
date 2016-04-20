@@ -128,19 +128,7 @@ namespace BLL
             return RC;
         }
 
-        //=================================
-        public DataTable DropdownLopHocWithCS(int CoSoID)
-        {
-            if (!this.DB.OpenConnection())
-            {
-                return null;
-            }
-            string sql = "select LopHocID, (LopHocCode+' - '+TenLopHoc) as TenLopHoc from kus_LopHoc where CoSoID=@CoSoID and TrangThai=1";
-            SqlParameter pCoSoID = new SqlParameter("CoSoID", CoSoID);
-            DataTable tb = DB.DAtable(sql, pCoSoID);
-            this.DB.CloseConnection();
-            return tb;
-        }
+        
 
         //Create
         public Boolean NewLopHoc(string tenLH, DateTime ngayKG, int thoiluong, DateTime ngayKT, int siso, int capdoID, int mucHP, int trangthai, int cosoID)

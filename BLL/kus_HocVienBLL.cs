@@ -230,15 +230,15 @@ namespace BLL
             return true;
         }
         //=============GET HOC VIEN TO EXPROT to Excel=======================================================================================================================
-        public DataTable ExprotHVtoExcel(int LopHocID)
+        public DataTable ExprotHVtoExcel(int KhoaHoc)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec ExprotHVtoExcel @LopHocID";
-            SqlParameter pLopHocID = new SqlParameter("@LopHocID", LopHocID);
-            DataTable tb = DB.DAtable(sql, pLopHocID);
+            string sql = "Exec ExprotHVtoExcel @KhoaHoc";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            DataTable tb = DB.DAtable(sql, pKhoaHoc);
             this.DB.CloseConnection();
             return tb;
         }

@@ -171,30 +171,30 @@ namespace BLL
         }
         //=====================================================================================================================
         //====================kus_getHVGhiDanhInLopHoc==============================================================================================
-        public DataTable kus_getHVGhiDanhInLopHoc(int PageIndex, int PageSize, int LopHocID)
+        public DataTable kus_getHVGhiDanhInKhoaHoc(int PageIndex, int PageSize, int KhoaHoc)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec kus_getHVGhiDanhInLopHoc @PageIndex,@PageSize,@LopHocID";
+            string sql = "Exec kus_getHVGhiDanhInKhoaHoc @PageIndex,@PageSize,@KhoaHoc";
             SqlParameter pPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter pPageSize = new SqlParameter("PageSize", PageSize);
-            SqlParameter pLopHocID = new SqlParameter("LopHocID", LopHocID);
-            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pLopHocID);
+            SqlParameter pKhoaHoc = new SqlParameter("KhoaHoc", KhoaHoc);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pKhoaHoc);
             this.DB.CloseConnection();
             return tb;
         }
-        public int CountgetHVGhiDanhInLopHoc(int LopHocID)
+        public int CountgetHVGhiDanhInKhoaHoc(int KhoaHoc)
         {
             int dem = 0;
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
-            string sql = "select COUNT(hocvien.HocVienID) from kus_HocVien hocvien full outer join kus_GhiDanh ghidanh on hocvien.HocVienID=ghidanh.HocVienID full outer join kus_LopHoc lophoc on ghidanh.LopHocID=lophoc.LopHocID full outer join kus_CoSo coso on lophoc.CoSoID=coso.CoSoID where hocvien.HocVienID is not null and lophoc.LopHocID=@LopHocID";
-            SqlParameter pLopHocID = new SqlParameter("LopHocID", LopHocID);
-            dem = DB.GetValues(sql, pLopHocID);
+            string sql = "select COUNT(hocvien.HocVienID) from kus_HocVien hocvien full outer join kus_GhiDanh ghidanh on hocvien.HocVienID=ghidanh.HocVienID full outer join nc_KhoaHoc khoahoc on ghidanh.KhoaHoc=khoahoc.ID where hocvien.HocVienID is not null and khoahoc.ID=@KhoaHoc";
+            SqlParameter pKhoaHoc = new SqlParameter("@KhoaHoc", KhoaHoc);
+            dem = DB.GetValues(sql, pKhoaHoc);
             this.DB.CloseConnection();
             return dem;
         }

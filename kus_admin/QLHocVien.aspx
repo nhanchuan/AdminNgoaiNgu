@@ -28,7 +28,7 @@
             <div class="form-group">
                 <asp:DropDownList ID="dlLoaiThongKe" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlLoaiThongKe_SelectedIndexChanged" runat="server">
                     <asp:ListItem Value="0">Thống Kê Theo Học Viên</asp:ListItem>
-                    <asp:ListItem Value="1">Thống Kê Theo Lớp</asp:ListItem>
+                    <asp:ListItem Value="1">Thống Kê Theo Khóa Học</asp:ListItem>
                 </asp:DropDownList>
             </div>
         </div>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label class="control-label">Chọn Lớp (Các lớp đang mở): </label>
-                        <asp:DropDownList ID="dlChonlop" CssClass="form-control" runat="server"></asp:DropDownList>
+                        <label class="control-label">Chọn Lớp (Các Khóa học đang mở): </label>
+                        <asp:DropDownList ID="dlKhoaHoc" CssClass="form-control" runat="server"></asp:DropDownList>
                     </div>
                 </div>
             </ContentTemplate>
@@ -160,9 +160,9 @@
                                             <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Eval("HocVienCode")+ " - "+ Eval("LastName")+ " "+ Eval("FirstName") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="Lớp Đăng Ký">
+                                    <asp:TemplateField HeaderText="Khóa Học Đăng Ký">
                                         <ItemTemplate>
-                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("LopHocCode")+" - "+ Eval("TenLopHoc") +" | " + Eval("TenCapDo") + " | " + Eval("TenKhoiLop")%>'></asp:Label>
+                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") +" | " + Eval("TenLopHoc") + " | " + Eval("TenChuongTrinh")%>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Ngày Đăng Ký">
