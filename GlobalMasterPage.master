@@ -522,6 +522,12 @@
                                 <li>
                                     <a href="../QuanLyHoSo/TuVanVien.aspx">Tư Vấn Viên</a>
                                 </li>
+                                <li>
+                                    <a href="../kus_admin/QuanLyHocVien.aspx">
+                                        <i class="fa fa-maxcdn"></i>
+                                        Quản Lý Học Viên
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

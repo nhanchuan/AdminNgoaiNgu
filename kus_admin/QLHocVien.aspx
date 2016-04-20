@@ -51,7 +51,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <label class="control-label">Chọn Lớp (Các Khóa học đang mở): </label>
+                        <label class="control-label">Khóa học (Các Khóa học đang mở): </label>
                         <asp:DropDownList ID="dlKhoaHoc" CssClass="form-control" runat="server"></asp:DropDownList>
                     </div>
                 </div>
