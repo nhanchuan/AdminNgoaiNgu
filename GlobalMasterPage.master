@@ -855,31 +855,6 @@
                         </li>
                         <%-- Beta Center --%>
 
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-android"></i>
-                                <span class="tile">Alpha test</span>
-                                <span class="arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <li>
-                                    <a href="../ChuongTrinhHoc/LoaiHinhDaoTao.aspx">Loại hình đào tạo</a>
-                                </li>
-                                <li>
-                                    <a href="../ChuongTrinhHoc/LoaiChuongTrinhDaoTao.aspx">Loại chương trình đào tạo</a>
-                                </li>
-                                <li>
-                                    <a href="../ChuongTrinhHoc/ChuongTrinhDaoTao.aspx">Chương trình đào tạo</a>
-                                </li>
-                                <li>
-                                    <a href="../ChuongTrinhHoc/LopHoc.aspx">Lớp học</a>
-                                </li>
-                                <li>
-                                    <a href="../ChuongTrinhHoc/KhoaHoc.aspx">Khóa học</a>
-                                </li>
-                            </ul>
-                        </li>
-
                         <%--<li>
                             <a href="javascript:;">
                                 <i class="icon-envelope-open"></i>

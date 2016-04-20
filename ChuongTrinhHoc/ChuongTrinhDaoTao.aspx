@@ -14,6 +14,10 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
+                <a href="#">Trung tâm anh ngữ</a>
+                <i class="fa fa-angle-right"></i>
+            </li>
+            <li>
                 <a href="../ChuongTrinhHoc/ChuongTrinhDaoTao.aspx">Chương trình đào tạo</a>
             </li>
         </ul>
