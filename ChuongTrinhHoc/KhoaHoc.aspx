@@ -93,7 +93,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="control-label bold col-md-4">Thời lượng</label>
+                                    <label class="control-label bold col-md-4">Thời lượng <i>(tiết)</i></label>
                                     <div class="col-md-8">
                                         <asp:TextBox ID="txtThoiLuong" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
                                     </div>
@@ -381,7 +381,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="control-label bold col-md-4">Thời lượng</label>
+                                        <label class="control-label bold col-md-4">Thời lượng <i>(tiết)</i></label>
                                         <div class="col-md-8">
                                             <asp:TextBox ID="txtEThoiLuong" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
