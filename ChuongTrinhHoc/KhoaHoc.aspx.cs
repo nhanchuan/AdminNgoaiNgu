@@ -21,6 +21,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
     kus_CoSoBLL kus_coso;
     kus_BooksBLL kus_books;
     nc_KhoaHoc_BooksBLL nc_khoahoc_books;
+    kus_LichHocBLL kus_lichhoc;
     public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -56,6 +57,8 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
                     }
                     btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                     btnAddBooks.Attributes.Add("class", "btn btn-default disabled");
+                    btnLenlichhoc.Attributes.Add("class", "btn btn-default disabled");
+                    btnXemLichHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                     rptPager.Visible = true;
                     rptSearch.Visible = false;
                 }
@@ -343,6 +346,8 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
         kus_coso = new kus_CoSoBLL();
         btnAddBooks.Attributes.Add("class", "btn btn-default");
         btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+        btnLenlichhoc.Attributes.Add("class", "btn btn-default");
+        btnXemLichHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn btn-default");
         this.load_dlELoaiChuongTrinh();
         this.load_dlEHTChiNhanh();
         this.load_dlECoSo();
@@ -370,6 +375,14 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
             //books
             this.load_dlAddBooks();
             this.load_gwkus_KhoaHoc_Books(khoahocID);
+            //modal lich hoc
+            lblchoseMaKhoa.Text = khoahoc.MaKhoaHoc;
+            lblchoseTenKhoa.Text = khoahoc.TenKhoaHoc;
+            lblchoseNgayKG.Text= (khoahoc.NgayKhaiGiang.Year <= 1900) ? "" : khoahoc.NgayKhaiGiang.ToString("dd-MM-yyyy");
+            lblchoseNgayKT.Text= (khoahoc.NgayKetThuc.Year <= 1900) ? "" : khoahoc.NgayKetThuc.ToString("dd-MM-yyyy");
+            this.load_LichHoc(khoahocID);
+            //click create lich hoc 
+            Session.SetCurrentCoSoID(khoahoc.CoSoID.ToString());
         }
         else
         {
@@ -660,6 +673,50 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
         else
         {
             Response.Write("<script>alert('Xóa Sách thất bại. Lỗi kết nối csdl !')</script>");
+        }
+    }
+    // Load Modal Lịch Học
+    private void load_LichHoc(int khoahoc, int daysID, int buoiID, GridView gwLichHoc)
+    {
+        kus_lichhoc = new kus_LichHocBLL();
+        gwLichHoc.DataSource = kus_lichhoc.getkus_LichHocWith_KhoaHoc_Day_Buoi(khoahoc, daysID, buoiID);
+        gwLichHoc.DataBind();
+    }
+    private void load_LichHoc(int khoahocid)
+    {
+        this.load_LichHoc(khoahocid, 1, 1, gwThu2Sang);
+        this.load_LichHoc(khoahocid, 1, 2, gwThu2Chieu);
+        this.load_LichHoc(khoahocid, 1, 3, gwThu2Toi);
+        this.load_LichHoc(khoahocid, 2, 1, gwThu3Sang);
+        this.load_LichHoc(khoahocid, 2, 2, gwThu3Chieu);
+        this.load_LichHoc(khoahocid, 2, 3, gwThu3Toi);
+        this.load_LichHoc(khoahocid, 3, 1, gwThu4Sang);
+        this.load_LichHoc(khoahocid, 3, 2, gwThu4Chieu);
+        this.load_LichHoc(khoahocid, 3, 3, gwThu4Toi);
+        this.load_LichHoc(khoahocid, 4, 1, gwThu5Sang);
+        this.load_LichHoc(khoahocid, 4, 2, gwThu5Chieu);
+        this.load_LichHoc(khoahocid, 4, 3, gwThu5Toi);
+        this.load_LichHoc(khoahocid, 5, 1, gwThu6Sang);
+        this.load_LichHoc(khoahocid, 5, 2, gwThu6Chieu);
+        this.load_LichHoc(khoahocid, 5, 3, gwThu6Toi);
+        this.load_LichHoc(khoahocid, 6, 1, gwThu7Sang);
+        this.load_LichHoc(khoahocid, 6, 2, gwThu7Chieu);
+        this.load_LichHoc(khoahocid, 6, 3, gwThu7Toi);
+        this.load_LichHoc(khoahocid, 7, 1, gwChuNhatSang);
+        this.load_LichHoc(khoahocid, 7, 2, gwChuNhatChieu);
+        this.load_LichHoc(khoahocid, 7, 3, gwChuNhatToi);
+    }
+    protected void btnLenlichhoc_ServerClick(object sender, EventArgs e)
+    {
+        nc_khoahoc = new nc_KhoaHocBLL();
+        if (gwKhoaHoc.SelectedRow == null)
+        {
+            Response.Write("<script>alert('Chưa chọn khóa học ! Vui lòng chọn 1 khóa học trong danh sách !')</script>");
+        }
+        else
+        {
+            string makhoahoc = (gwKhoaHoc.SelectedRow.FindControl("lblMaKhoaHoc") as Label).Text;
+            Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/CreateSchedule.aspx?makhoahoc=" + makhoahoc);
         }
     }
 }

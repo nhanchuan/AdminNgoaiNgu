@@ -389,7 +389,7 @@
                             <div class="form-group">
                                 <label class="control-label">Điện thoại</label>
                                 <asp:TextBox ID="txtEPhone" CssClass="form-control" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="txtEPhone" ValidationGroup="validHopDongIn" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Điện thoại không được để trống !"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" ControlToValidate="txtEPhone" ValidationGroup="validEditHopDongIn" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Điện thoại không được để trống !"></asp:RequiredFieldValidator>
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
                                     ControlToValidate="txtEPhone"
                                     ValidationGroup="validEditHopDongIn"

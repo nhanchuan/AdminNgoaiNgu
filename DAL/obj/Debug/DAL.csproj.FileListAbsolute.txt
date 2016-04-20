@@ -33,3 +33,8 @@ E:\DEVELOPER\Website\ManagerCenter_v2\GitHub\DAL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\ManagerCenter_v2\GitHub\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 E:\DEVELOPER\Website\ManagerCenter_v2\GitHub\DAL\obj\Debug\DAL.dll
 E:\DEVELOPER\Website\ManagerCenter_v2\GitHub\DAL\obj\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitHub\Manager\DAL\bin\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitHub\Manager\DAL\bin\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitHub\Manager\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\DEVELOPER\WEBSITE\GitHub\Manager\DAL\obj\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitHub\Manager\DAL\obj\Debug\DAL.pdb
