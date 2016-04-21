@@ -168,7 +168,7 @@
                     <div class="row">
                         <div class="col-md-12 text-right">
                             <a class="btn btn-default"><i class="fa fa-bar-chart"></i>&nbsp Thống kê đóng học phí</a>
-                            <a class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp Refresh</a>
+                            <a id="btnRefreshSearch" class="btn btn-default" onserverclick="btnRefreshSearch_ServerClick" runat="server"><i class="fa fa-refresh"></i>&nbsp Refresh</a>
                             <a class="btn btn-default"><i class="fa fa-file-excel-o"></i>&nbsp Excel</a>
                             <a id="btnSearchHocVien" class="btn btn-default" onserverclick="btnSearchHocVien_ServerClick" runat="server"><i class="fa fa-search"></i>&nbsp Tìm</a>
                         </div>
@@ -184,10 +184,13 @@
                 <div class="caption">
                     <i class="icon-list font-yellow-casablanca"></i>
                     <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách học viên </span>
-                    <%--<span class="caption-helper">more samples...</span>--%>
+                    <span class="caption-helper"> ( Có <asp:Label ID="lblsumketqua" runat="server" Text="0"></asp:Label> kết quả tìm thấy...)</span>
                 </div>
                 <div class="actions">
-                    <a id="btnRefreshLstKhoaHoc" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" runat="server" href="#">
+                    <a href="#" id="btnEditHocVienInfor" title="Chỉnh sửa thông tin học viên" onserverclick="btnEditHocVienInfor_ServerClick" runat="server">
+                        <i class="icon-wrench"></i>
+                    </a>
+                    <a id="btnRefreshListHocVien" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" onserverclick="btnRefreshListHocVien_ServerClick" runat="server">
                         <i class="fa fa-refresh"></i>
                     </a>
                     <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
@@ -196,13 +199,11 @@
             <div class="portlet-body">
                 <asp:GridView ID="gwListHocVien" CssClass="table table-condensed" runat="server"
                     AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwListHocVien_SelectedIndexChanged">
                     <Columns>
                         <asp:TemplateField HeaderText="No.">
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
-                                ,
-                                <asp:Label ID="HocVienID" runat="server" Text='<%# Eval("HocVienID") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã học viên">
@@ -210,14 +211,9 @@
                                 <asp:Label ID="lblHocVienCode" runat="server" Text='<%# Eval("HocVienCode") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Họ học viên">
+                        <asp:TemplateField HeaderText="Họ Tên học viên">
                             <ItemTemplate>
-                                <asp:Label ID="lblLastName" runat="server" Text='<%# Eval("LastName") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Tên học viên">
-                            <ItemTemplate>
-                                <asp:Label ID="lblFirstName" runat="server" Text='<%# Eval("FirstName") %>'></asp:Label>
+                                <i class='<%# Eval("SumHocVien").ToString()=="1"?"fa fa-tag font-yellow-casablanca":"fa fa-tags font-yellow-casablanca" %>'></i> <asp:Label ID="lblHocVienName" runat="server" Text='<%# Eval("LastName")+" "+ Eval("FirstName") %>'></asp:Label> 
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Giới tính">
@@ -230,11 +226,11 @@
                                 <asp:Label ID="lblBirthday" runat="server" Text='<%# Eval("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Email">
+                        <%--<asp:TemplateField HeaderText="Email">
                             <ItemTemplate>
                                 <asp:Label ID="lblEmail" runat="server" Text='<%# Eval("Email") %>'></asp:Label>
                             </ItemTemplate>
-                        </asp:TemplateField>
+                        </asp:TemplateField>--%>
                         <asp:TemplateField HeaderText="Điện thoại">
                             <ItemTemplate>
                                 <asp:Label ID="lblDienThoai" runat="server" Text='<%# Eval("DienThoai") %>'></asp:Label>
@@ -258,6 +254,16 @@
                         <asp:TemplateField HeaderText="Thuộc Chương trình">
                             <ItemTemplate>
                                 <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Học phí">
+                            <ItemTemplate>
+                                <i>
+                                    <asp:Label ID="Label8" CssClass="bold" runat="server" Text='<%# (Eval("NumBLGhiDanh").ToString()=="0")?"chưa đóng":"đã đóng" %>'></asp:Label></i><br />
+                                <a class="label label-success pull-right <%# Eval("NumBLGhiDanh").ToString() == "0" ? "display-none":"" %>"
+                                    href='<%# "../kus_admin/BienLaiHocPhi.aspx?BienLaiCode="+ Eval("BienLaiCode") %>'>
+                                    <i class="fa fa-credit-card">Xem biên lai</i>
+                                </a>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField ShowHeader="False">

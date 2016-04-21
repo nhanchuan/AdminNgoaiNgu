@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h2>Danh sách giáo viên hợp đồng</h2>
-            <a href="#modalAddGiaoVienHD" class="btn green" data-toggle="modal"><i class="fa fa-file"></i> Thêm Giáo Viên Hợp Đồng</a>
+            <a href="#modalAddGiaoVienHD" class="btn green" data-toggle="modal"><i class="fa fa-plus-square"></i> Thêm Giáo Viên Hợp Đồng</a>
             <a id="btlichsunhopdonggv" href="#modalHistoryHD" data-toggle="modal" class="btn btn-warning" runat="server"><i class="fa fa-history"></i>Lịch Sử Hợp đồng</a>
             <a id="btnnhapHD" href="#modalnhapHD" class="btn btn-primary" data-toggle="modal" runat="server">Nhập Hợp đồng</a>
             <a id="btnEditInfor" href="#modalEditGVInfor" data-toggle="modal" class="btn btn-info" runat="server"><i class="fa fa-pencil-square"></i> Chỉnh sửa thông tin</a>

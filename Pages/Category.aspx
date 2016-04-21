@@ -96,7 +96,7 @@
                     <div class="portlet-body background">
                         <div class="row">
                             <div class="col-lg-3">
-                                <a class="btn yellow" href="#modaleditPCinfor" data-toggle="modal" title="Chỉnh sửa thông tin Post Category" id="btnshowPanelfix" runat="server"><i class="fa fa-wrench"></i> Chỉnh sửa Danh Mục</a>
+                                <a href="#modaleditPCinfor" data-toggle="modal" title="Chỉnh sửa thông tin Post Category" id="btnshowPanelfix" runat="server"><i class="fa fa-wrench"></i> Chỉnh sửa Danh Mục</a>
                             </div>
                             <div class="col-lg-6">
                                 <div class="input-group">

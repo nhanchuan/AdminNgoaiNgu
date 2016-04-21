@@ -21,7 +21,7 @@ public partial class kus_admin_QLHocVien : BasePage
     kus_GhiDanhBLL kus_ghidanh;
     nc_KhoaHocBLL nc_khoahoc;
     kus_HocVienBLL kus_hocvien;
-    public int PageSize = 1;
+    public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();

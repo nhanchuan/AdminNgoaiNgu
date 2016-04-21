@@ -43,6 +43,7 @@ public partial class kus_admin_QuanLyHocVien : BasePage
                     dlChuongTrinh.Items.Insert(0, new ListItem("-- Chọn chương trình đào tạo --", "0"));
                     dlLopHoc.Items.Insert(0, new ListItem("-- Chọn lớp học thuộc chương trình --", "0"));
                     dlKhoaHoc.Items.Insert(0, new ListItem("-- Chọn khóa thuộc lớp học --", "0"));
+                    btnEditHocVienInfor.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                 }
             }
         }
@@ -203,5 +204,34 @@ public partial class kus_admin_QuanLyHocVien : BasePage
         string IdentityCard = txtCMND.Text;
         string HoTenPH = txtHoTenPhuHuynh.Text;
         this.SearchHocVienPageWise(1, CoSoID, LoaiChuongTrinh, ChuongTrinh, LopHoc, khoahoc, HocVienCode, TenHocVien, Email, DienThoai, IdentityCard, HoTenPH);
+        lblsumketqua.Text = kus_hocvien.CounthHocVienPageWise(CoSoID, LoaiChuongTrinh, ChuongTrinh, LopHoc, khoahoc, HocVienCode, TenHocVien, Email, DienThoai, IdentityCard, HoTenPH).ToString();
+    }
+
+    protected void gwListHocVien_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        btnEditHocVienInfor.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+    }
+
+    protected void btnEditHocVienInfor_ServerClick(object sender, EventArgs e)
+    {
+        if (gwListHocVien.SelectedRow == null)
+        {
+            Response.Write("<script>alert('No Row selected!')</script>");
+        }
+        else
+        {
+            string HocVienCode = (gwListHocVien.SelectedRow.FindControl("lblHocVienCode") as Label).Text;
+            Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/ChiTietHocVien.aspx?MaHocVien=" + HocVienCode);
+        }
+    }
+
+    protected void btnRefreshListHocVien_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect(Request.Url.AbsoluteUri);
+    }
+
+    protected void btnRefreshSearch_ServerClick(object sender, EventArgs e)
+    {
+        Response.Redirect(Request.Url.AbsoluteUri);
     }
 }

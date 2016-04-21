@@ -37,11 +37,31 @@ public partial class Pages_Category : BasePage
                 }
                 else
                 {
+                    btnshowPanelfix.Attributes.Add("class", "btn yellow disabled");
                     this.load_dlPCategory();
                     this.load_dlimgtype();
                     this.load_dlEditSelectImgtype();
                     this.load_dlDanhMucCha();
-                    this.GetPostCategoryPageWise(1);
+
+                    if (Session["pageIndexadmin_Category"] == null)
+                    {
+                        this.GetPostCategoryPageWise(1);
+                    }
+                    else
+                    {
+                        int pageIndex = Convert.ToInt32(Session["pageIndexadmin_Category"].ToString());
+                        this.GetPostCategoryPageWise(pageIndex);
+                        if(Session["SelectedIndex_Category"] == null)
+                        {
+                            gwCategory.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            gwCategory.SelectedIndex = Convert.ToInt32(Session["SelectedIndex_Category"].ToString());
+                        }
+                    }
+
+                    
                     lblstartindex.Text = ((1 - 1) * PageSize + 1).ToString();
                     lblendindex.Text = ((((1 - 1) * PageSize + 1) + PageSize) - 1).ToString();
                     this.load_rpLstImg(user.UserID);
@@ -54,6 +74,7 @@ public partial class Pages_Category : BasePage
 
                     rptPager.Visible = true;
                     rptSearchPage.Visible = false;
+                    
                 }
             }
         }
@@ -254,6 +275,7 @@ public partial class Pages_Category : BasePage
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
         this.GetPostCategoryPageWise(pageIndex);
+        Session["pageIndexadmin_Category"] = pageIndex.ToString();
         lblstartindex.Text = ((pageIndex - 1) * PageSize + 1).ToString();
         lblendindex.Text = ((((pageIndex - 1) * PageSize + 1) + PageSize) - 1).ToString();
         rptPager.Visible = true;
@@ -293,12 +315,14 @@ public partial class Pages_Category : BasePage
     {
         category = new CategoryBLL();
         images = new ImagesBLL();
+        btnshowPanelfix.Attributes.Add("class", "btn yellow");
         this.load_dlEditParent();
         dlEditParent.Items.Insert(0, new ListItem("--Trống--", "0"));
         string ctId = (gwCategory.SelectedRow.FindControl("lblCategoryID") as Label).Text;
         List<Category> lst = category.getCategorWithId(int.Parse(ctId));
         Category ct = lst.FirstOrDefault();
 
+        Session["SelectedIndex_Category"] = gwCategory.SelectedIndex.ToString();
 
         int imgID = 0;
 

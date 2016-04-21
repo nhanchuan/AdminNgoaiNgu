@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="Default.aspx.cs" Inherits="_Default" %>
 
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <!-- BEGIN PAGE HEADER-->
@@ -32,14 +32,14 @@
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
             <div class="dashboard-stat blue-madison">
                 <div class="visual">
-                    <i class="fa fa-comments"></i>
+                    <i class="glyphicon glyphicon-briefcase"></i>
                 </div>
                 <div class="details">
                     <div class="number">
-                        1349
+                        3000
                     </div>
                     <div class="desc">
-                        New Feedbacks
+                        Bộ Hồ Sơ
                     </div>
                 </div>
                 <a class="more" href="#">View more <i class="m-icon-swapright m-icon-white"></i>
