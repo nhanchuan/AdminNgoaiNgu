@@ -86,7 +86,18 @@ namespace BLL
             this.dt.CloseConnection();
             return tb;
         }
-        
+        public DataTable get_Tabel_DL_KhoaHoc(int LopHoc)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select ID,(TenKhoaHoc+' - '+MaKhoaHoc) as TenKhoaHoc from nc_KhoaHoc where LopHoc=@LopHoc order by NgayKhaiGiang desc";
+            SqlParameter pLopHoc = new SqlParameter("@LopHoc", LopHoc);
+            DataTable tb = dt.DAtable(sql, pLopHoc);
+            this.dt.CloseConnection();
+            return tb;
+        }
         public int Count_khoahoc()
         {
             int count = 0;

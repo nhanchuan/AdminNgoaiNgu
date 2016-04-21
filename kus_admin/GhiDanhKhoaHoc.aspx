@@ -94,7 +94,6 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                                 <asp:Label ID="lblID" CssClass="display-none" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
-                                
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã khóa học">

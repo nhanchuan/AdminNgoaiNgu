@@ -11,6 +11,7 @@ using BLL;
 using System.Drawing.Imaging;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 /// <summary>
 /// Summary description for BasePage
@@ -96,5 +97,13 @@ public class BasePage : System.Web.UI.Page
         services = new SecuriryServices();
         bool checkp = services.Check_PermissionFunct(uid, FCode);
         return checkp;
+    }
+    // LOAD DROPDOWNLIST()
+    public void load_DropdownList(DropDownList dl, Object obj, string textfield, string valuefield)
+    {
+        dl.DataSource = obj;
+        dl.DataTextField = textfield;
+        dl.DataValueField = valuefield;
+        dl.DataBind();
     }
 }
