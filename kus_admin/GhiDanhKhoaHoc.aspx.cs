@@ -66,12 +66,12 @@ public partial class kus_admin_GhiDanhKhoaHoc : BasePage
         dlCoSo.DataBind();
         dlCoSo.Items.Insert(0, new ListItem("--- Chọn Cơ Sở thuộc H.t Chi Nhánh ---", "0"));
     }
-    private void Getnc_KhoaHocPageWise(int pageIndex, int SoSoID)
+    private void Getnc_KhoaHocPageWise(int pageIndex, int CoSoID)
     {
         nc_khoahoc = new nc_KhoaHocBLL();
         int recordCount = 0;
-        gwKhoaHoc.DataSource = nc_khoahoc.get_nc_KhoaHoc_CoSoID(pageIndex, PageSize, SoSoID);
-        recordCount = nc_khoahoc.Count_khoahocCS(SoSoID);
+        gwKhoaHoc.DataSource = nc_khoahoc.get_nc_KhoaHoc_CoSoID(pageIndex, PageSize, CoSoID);
+        recordCount = nc_khoahoc.Count_khoahocCS(CoSoID);
         gwKhoaHoc.DataBind();
         this.PopulatePager(recordCount, pageIndex);
         lblCountKhoaHoc.Text = recordCount.ToString();

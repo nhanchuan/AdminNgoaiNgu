@@ -255,5 +255,53 @@ namespace BLL
             this.DB.CloseConnection();
             return tb;
         }
+        // Search
+        public DataTable SearchHocVienPageWise(int PageIndex, int PageSize, int CoSoID, int LoaiChuongTrinh, int ChuongTrinh, int LopHoc, int khoahoc, string HocVienCode, string TenHocVien, string Email, string DienThoai, string IdentityCard, string HoTenPH)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "Exec SearchHocVienPageWise @PageIndex,@PageSize,@CoSoID,@LoaiChuongTrinh,@ChuongTrinh,@LopHoc,@khoahoc,@HocVienCode,@TenHocVien,@Email,@DienThoai,@IdentityCard,@HoTenPH";
+            SqlParameter p1 = new SqlParameter("@PageIndex", PageIndex);
+            SqlParameter p2= new SqlParameter("@PageSize", PageSize);
+            SqlParameter p3 = (CoSoID == 0) ? new SqlParameter("@CoSoID", DBNull.Value) : new SqlParameter("@CoSoID", CoSoID);
+            SqlParameter p4 = (LoaiChuongTrinh == 0) ? new SqlParameter("@LoaiChuongTrinh", DBNull.Value) : new SqlParameter("@LoaiChuongTrinh", LoaiChuongTrinh);
+            SqlParameter p5 = (ChuongTrinh == 0) ? new SqlParameter("@ChuongTrinh", DBNull.Value) : new SqlParameter("@ChuongTrinh", ChuongTrinh);
+            SqlParameter p6 = (LopHoc == 0) ? new SqlParameter("@LopHoc", DBNull.Value) : new SqlParameter("@LopHoc", LopHoc);
+            SqlParameter p7 = (khoahoc == 0) ? new SqlParameter("@khoahoc", DBNull.Value) : new SqlParameter("@khoahoc", khoahoc);
+            SqlParameter p8 = (HocVienCode == "") ? new SqlParameter("@HocVienCode", DBNull.Value) : new SqlParameter("@HocVienCode", HocVienCode);
+            SqlParameter p9 = (TenHocVien == "") ? new SqlParameter("@TenHocVien", DBNull.Value) : new SqlParameter("@TenHocVien", TenHocVien);
+            SqlParameter p10 = (Email == "") ? new SqlParameter("@Email", DBNull.Value) : new SqlParameter("@Email", Email);
+            SqlParameter p11 = (DienThoai == "") ? new SqlParameter("@DienThoai", DBNull.Value) : new SqlParameter("@DienThoai", DienThoai);
+            SqlParameter p12 = (IdentityCard == "") ? new SqlParameter("@IdentityCard", DBNull.Value) : new SqlParameter("@IdentityCard", IdentityCard);
+            SqlParameter p13 = (HoTenPH == "") ? new SqlParameter("@HoTenPH", DBNull.Value) : new SqlParameter("@HoTenPH", HoTenPH);
+            DataTable tb = DB.DAtable(sql, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13);
+            this.DB.CloseConnection();
+            return tb;
+        }
+        public int CounthHocVienPageWise(int CoSoID, int LoaiChuongTrinh, int ChuongTrinh, int LopHoc, int khoahoc, string HocVienCode, string TenHocVien, string Email, string DienThoai, string IdentityCard, string HoTenPH)
+        {
+            int countHV = 0;
+            if (!this.DB.OpenConnection())
+            {
+                return 0;
+            }
+            string sql = "Exec CounthHocVienPageWise @CoSoID,@LoaiChuongTrinh,@ChuongTrinh,@LopHoc,@khoahoc,@HocVienCode,@TenHocVien,@Email,@DienThoai,@IdentityCard,@HoTenPH";
+            SqlParameter p3 = (CoSoID == 0) ? new SqlParameter("@CoSoID", DBNull.Value) : new SqlParameter("@CoSoID", CoSoID);
+            SqlParameter p4 = (LoaiChuongTrinh == 0) ? new SqlParameter("@LoaiChuongTrinh", DBNull.Value) : new SqlParameter("@LoaiChuongTrinh", LoaiChuongTrinh);
+            SqlParameter p5 = (ChuongTrinh == 0) ? new SqlParameter("@ChuongTrinh", DBNull.Value) : new SqlParameter("@ChuongTrinh", ChuongTrinh);
+            SqlParameter p6 = (LopHoc == 0) ? new SqlParameter("@LopHoc", DBNull.Value) : new SqlParameter("@LopHoc", LopHoc);
+            SqlParameter p7 = (khoahoc == 0) ? new SqlParameter("@khoahoc", DBNull.Value) : new SqlParameter("@khoahoc", khoahoc);
+            SqlParameter p8 = (HocVienCode == "") ? new SqlParameter("@HocVienCode", DBNull.Value) : new SqlParameter("@HocVienCode", HocVienCode);
+            SqlParameter p9 = (TenHocVien == "") ? new SqlParameter("@TenHocVien", DBNull.Value) : new SqlParameter("@TenHocVien", TenHocVien);
+            SqlParameter p10 = (Email == "") ? new SqlParameter("@Email", DBNull.Value) : new SqlParameter("@Email", Email);
+            SqlParameter p11 = (DienThoai == "") ? new SqlParameter("@DienThoai", DBNull.Value) : new SqlParameter("@DienThoai", DienThoai);
+            SqlParameter p12 = (IdentityCard == "") ? new SqlParameter("@IdentityCard", DBNull.Value) : new SqlParameter("@IdentityCard", IdentityCard);
+            SqlParameter p13 = (HoTenPH == "") ? new SqlParameter("@HoTenPH", DBNull.Value) : new SqlParameter("@HoTenPH", HoTenPH);
+            countHV = DB.GetValues(sql, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13);
+            this.DB.CloseConnection();
+            return countHV;
+        }
     }
 }
