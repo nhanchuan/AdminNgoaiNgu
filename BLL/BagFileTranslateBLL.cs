@@ -12,6 +12,30 @@ namespace BLL
     public class BagFileTranslateBLL
     {
         DataServices DB = new DataServices();
+        public List<BagFileTranslate> getListWithBagProfileID(int BagProfileID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select * from BagFileTranslate where BagProfileID=@BagProfileID";
+            SqlParameter pBagProfileID = new SqlParameter("@BagProfileID", BagProfileID);
+            DataTable tb = DB.DAtable(sql, pBagProfileID);
+            List<BagFileTranslate> lst = new List<BagFileTranslate>();
+            foreach (DataRow r in tb.Rows)
+            {
+                BagFileTranslate bt = new BagFileTranslate();
+                bt.FileTranslateID = (int)r["FileTranslateID"];
+                bt.FileTranslateName = (string.IsNullOrEmpty(r["FileTranslateName"].ToString())) ? "" : (string)r["FileTranslateName"];
+                bt.FileTranslateURL = (string.IsNullOrEmpty(r["FileTranslateURL"].ToString())) ? "" : (string)r["FileTranslateURL"];
+                bt.BagProfileID = (string.IsNullOrEmpty(r["BagProfileID"].ToString())) ? 0 : (int)r["BagProfileID"];
+                bt.UserUpload = (string.IsNullOrEmpty(r["UserUpload"].ToString())) ? 0 : (int)r["UserUpload"];
+                bt.DateOfCreate = (DateTime)r["DateOfCreate"];
+                lst.Add(bt);
+            }
+            this.DB.CloseConnection();
+            return lst;
+        }
         public Boolean UploadBagFileTranslate(string filename, string fileUrl, int bagproId, int UserID)
         {
             string sql = "insert into BagFileTranslate(FileTranslateName,FileTranslateURL,BagProfileID,UserUpload) values(@filename,@fileUrl,@bagproId,@UserID)";

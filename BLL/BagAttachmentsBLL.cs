@@ -12,6 +12,30 @@ namespace BLL
     public class BagAttachmentsBLL
     {
         DataServices DB = new DataServices();
+        public List<BagAttachments> getListWithBagProfileID(int BagProfileID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select * from BagAttachments where BagProfileID=@BagProfileID";
+            SqlParameter pBagProfileID = new SqlParameter("@BagProfileID", BagProfileID);
+            DataTable tb = DB.DAtable(sql, pBagProfileID);
+            List<BagAttachments> lst = new List<BagAttachments>();
+            foreach (DataRow r in tb.Rows)
+            {
+                BagAttachments bt = new BagAttachments();
+                bt.AttachmentID = (int)r["AttachmentID"];
+                bt.AttachmentName = (string.IsNullOrEmpty(r["AttachmentName"].ToString())) ? "" : (string)r["AttachmentName"];
+                bt.AttachmentURL = (string.IsNullOrEmpty(r["AttachmentURL"].ToString())) ? "" : (string)r["AttachmentURL"];
+                bt.BagProfileID = (string.IsNullOrEmpty(r["BagProfileID"].ToString())) ? 0 : (int)r["BagProfileID"];
+                bt.UserUpload = (string.IsNullOrEmpty(r["UserUpload"].ToString())) ? 0 : (int)r["UserUpload"];
+                bt.DateOfCreate = (DateTime)r["DateOfCreate"];
+                lst.Add(bt);
+            }
+            this.DB.CloseConnection();
+            return lst;
+        }
         public Boolean UploadBagAttachments(string AtName, string AtURL, int bagproId, int userUpload)
         {
             string sql = "insert into BagAttachments(AttachmentName,AttachmentURL,BagProfileID,UserUpload) values(@AtName,@AtURL,@bagproId,@userUpload)";
@@ -90,13 +114,14 @@ namespace BLL
             this.DB.CloseConnection();
             return tb;
         }
+        //Delete
         public Boolean DeleteBagAttachments(int attachId)
         {
-            string sql = "delete from BagAttachments where AttachmentID=@attachId";
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
+            string sql = "delete from BagAttachments where AttachmentID=@attachId";
             SqlParameter pattachId = new SqlParameter("attachId", attachId);
             this.DB.Updatedata(sql, pattachId);
             this.DB.CloseConnection();

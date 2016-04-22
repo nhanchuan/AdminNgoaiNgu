@@ -60,7 +60,8 @@
                     </div>
                     <div class="col-md-8 blog-article">
                         <li class="list-group-item bg-blue" id="liTypeStyle" runat="server">
-                            <label class="bold uppercase">Hồ Sơ
+                            <label class="bold uppercase">
+                                Hồ Sơ
                                 <asp:Label ID="lblBagProfileType" runat="server" Text="Label"></asp:Label></label></li>
                         <br />
                         <div class="form-group">
@@ -201,13 +202,16 @@
     <asp:Label ID="lblSuccess" CssClass="label label-success" runat="server" Text="Label"></asp:Label>
     <%-- Danh sach ho so --%>
     <div class="row">
-        <h3>Tổng số : <asp:Label ID="lblSumHoSo" runat="server" Text="Label"></asp:Label> hồ sơ</h3>
+        <h3>Tổng số :
+            <asp:Label ID="lblSumHoSo" runat="server" Text="Label"></asp:Label>
+            hồ sơ</h3>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
                             <i class="fa fa-edit"></i>Danh sách giấy tờ hồ sơ
+                       
                         </div>
                         <div class="tools">
                             <a href="javascript:;" class="collapse"></a>
@@ -222,7 +226,7 @@
                             <div class="col-lg-3">
                                 <a class="btn btn-default" href="#collapBagAttachments" data-toggle="collapse"><i class="fa fa-paperclip"></i>File đính kèm</a>
                                 <a class="btn btn-default" href="#collapBagFileTranslate" data-toggle="collapse"><i class="fa fa-language"></i>Bản dịch hồ sơ</a>
-                                <a class="btn btn-info" href="#modalViewFilel" data-toggle="modal"><i class="fa fa-database">View File</i></a>
+                                <a class="btn btn-info" href="#modalViewFilel" data-toggle="modal"><i class="fa fa-database">&nbsp View File</i></a>
                             </div>
                             <div class="col-lg-5">
                                 <div class="input-group">
@@ -253,7 +257,7 @@
                         <br />
                         <%-- Gridview --%>
                         <asp:GridView ID="gwBagProfileManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                            HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                            HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
                             OnSelectedIndexChanged="gwBagProfileManager_SelectedIndexChanged" OnRowDataBound="gwBagProfileManager_RowDataBound" OnRowDeleting="gwBagProfileManager_RowDeleting">
                             <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                             <Columns>
@@ -355,7 +359,6 @@
                         <asp:Label ID="txtlistfile" CssClass="bold" runat="server" Text="Label"></asp:Label></h4>
                 </div>
                 <div class="modal-body background">
-
                     <div class="tabbable-custom">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#tabFileAttachment" data-toggle="tab">File đính kèm</a></li>
@@ -365,11 +368,12 @@
                             <div class="tab-pane active" id="tabFileAttachment">
                                 <%-- Gw File Attachment --%>
                                 <asp:GridView ID="gwFileAttachment" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileAttachment_RowDataBound" OnRowDeleting="gwFileAttachment_RowDeleting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Tên Giấy Tờ">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
+                                                <asp:Label ID="lblAttachmentID" CssClass="display-none" runat="server" Text='<%# Eval("AttachmentID") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Tên File Uplopad">
@@ -384,13 +388,15 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btbDeleteAtt" runat="server" CssClass="text-danger" CausesValidation="False" CommandArgument='<%# Eval("AttachmentID") %>' OnClick="btbDeleteAtt_Click" Text="Delete"></asp:LinkButton>
+                                                <asp:LinkButton ID="btbDeleteAtt" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
                                             </ItemTemplate>
+                                            <ItemStyle Width="30px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField ShowHeader="false">
                                             <ItemTemplate>
-                                                <a class="text-primary" href='<%# "../Handler/DownloadAttachment.ashx?attachmentId="+Eval("AttachmentID") %>'><i class="fa fa-download"></i>Download</a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadAttachment.ashx?attachmentId="+Eval("AttachmentID") %>'><i class="fa fa-download"></i></a>
                                             </ItemTemplate>
+                                            <ItemStyle Width="30px" />
                                         </asp:TemplateField>
                                     </Columns>
                                     <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
@@ -402,11 +408,12 @@
                             <div class="tab-pane" id="tabFileTranlater">
                                 <%-- Gw File Attachment --%>
                                 <asp:GridView ID="gwFileTranslate" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileTranslate_RowDataBound" OnRowDeleting="gwFileTranslate_RowDeleting">
                                     <Columns>
                                         <asp:TemplateField HeaderText="Tên Giấy Tờ">
                                             <ItemTemplate>
                                                 <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
+                                                <asp:Label ID="lblFileTranslateID" CssClass="display-none" runat="server" Text='<%# Eval("FileTranslateID") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField HeaderText="Tên File Uplopad">
@@ -421,13 +428,15 @@
                                         </asp:TemplateField>
                                         <asp:TemplateField ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:LinkButton ID="btnDeleteTrans" runat="server" CssClass="text-danger" CausesValidation="False" CommandArgument='<%# Eval("FileTranslateID") %>' OnClick="btnDeleteTrans_Click" Text="Delete"></asp:LinkButton>
+                                                <asp:LinkButton ID="btnDeleteTrans" runat="server" CssClass="btn btn-circle btn-icon-only btn-default" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
                                             </ItemTemplate>
+                                            <ItemStyle Width="30px" />
                                         </asp:TemplateField>
                                         <asp:TemplateField ShowHeader="false">
                                             <ItemTemplate>
-                                                <a class="text-primary" href='<%# "../Handler/DownloadFileTrans.ashx?TranslateId="+Eval("FileTranslateID") %>'><i class="fa fa-download"></i>Download</a>
+                                                <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadFileTrans.ashx?TranslateId="+Eval("FileTranslateID") %>'><i class="fa fa-download"></i></a>
                                             </ItemTemplate>
+                                            <ItemStyle Width="30px" />
                                         </asp:TemplateField>
                                     </Columns>
                                     <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
@@ -438,6 +447,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-close"></i> Close</a>
                 </div>
             </div>
         </div>

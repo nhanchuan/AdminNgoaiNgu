@@ -22,7 +22,7 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
-       if(!IsPostBack)
+        if (!IsPostBack)
         {
             UserAccounts ac = Session.GetCurrentUser();
             if (ac == null)
@@ -61,7 +61,6 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
             Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/ThuLyHoSo.aspx");
         }
     }
-    
     public Boolean CheckQueryStr(string query)
     {
         customerbasicinfo = new CustomerBasicInfoBLL();
@@ -104,7 +103,7 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
             lblPermanentAddress.Text = paddress + ", " + district + ", " + province + ", " + country;
             lblCellPhone.Text = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[11];
             lblEmail.Text = (string.IsNullOrEmpty(r[14].ToString())) ? "" : (string)r[14];
-            txtlistfile.Text= (string.IsNullOrEmpty(r[6].ToString())) ? "" : (string)r[6];
+            txtlistfile.Text = (string.IsNullOrEmpty(r[6].ToString())) ? "" : (string)r[6];
 
             List<BagProfileType> lstbptype = bagprofiletype.getBagProfileTypeWithId((string.IsNullOrEmpty(r[17].ToString())) ? 0 : (int)r[17]);
             BagProfileType bgtype = lstbptype.FirstOrDefault();
@@ -255,7 +254,8 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
                     int profileId = Convert.ToInt32((gwBagProfileManager.SelectedRow.FindControl("lblBagProfileID") as Label).Text);
                     string fileName = Path.GetFileName(postedFile.FileName);
                     string fileExtension = Path.GetExtension(postedFile.FileName).ToLower();
-                    string RandomFileName = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                    string RandomFileName = "Anh-van-hoi-anh-my-" + RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                    string filePath = "FileManager/BagFileTranslate/" + RandomFileName + fileExtension;
                     List<BagFileTranslate> lstBT = bagtranslate.GetBagFileTranslateName(fileName, profileId);
                     BagFileTranslate btl = lstBT.FirstOrDefault();
                     if (btl != null)
@@ -264,12 +264,12 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
                     }
                     else
                     {
-                        this.bagtranslate.UploadBagFileTranslate(fileName, "FileManager/BagFileTranslate/" + RandomFileName + fileExtension, profileId, ad.UserID);
-                        postedFile.SaveAs(Server.MapPath("../FileManager/BagFileTranslate/" + RandomFileName + fileExtension));
+                        this.bagtranslate.UploadBagFileTranslate(fileName, filePath, profileId, ad.UserID);
+                        postedFile.SaveAs(Server.MapPath("../" + filePath));
                     }
                 }
                 lblSuccess.Visible = true;
-                lblSuccess.Text= string.Format("Upload thành công {0} files dịch hồ sơ \n! <br />", fileBagFileTranslate.PostedFiles.Count);
+                lblSuccess.Text = string.Format("Upload thành công {0} files dịch hồ sơ \n! <br />", fileBagFileTranslate.PostedFiles.Count);
                 this.load_gwFileTranslate();
                 break;
             case true:
@@ -283,7 +283,7 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
         bagattachments = new BagAttachmentsBLL();
         UserAccounts ad = Session.GetCurrentUser();
         bool swit = (gwBagProfileManager.SelectedRow == null) ? true : false;
-        switch(swit)
+        switch (swit)
         {
             case false:
                 foreach (HttpPostedFile postedFile in fileUploadBagAttachments.PostedFiles)
@@ -291,17 +291,18 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
                     int profileId = Convert.ToInt32((gwBagProfileManager.SelectedRow.FindControl("lblBagProfileID") as Label).Text);
                     string fileName = Path.GetFileName(postedFile.FileName);
                     string fileExtension = Path.GetExtension(postedFile.FileName).ToLower();
-                    string RandomFileName = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                    string RandomFileName = "Anh-van-hoi-anh-my-" + RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+                    string filePath = "FileManager/BagAttachments/" + RandomFileName + fileExtension;
                     List<BagAttachments> lstBg = bagattachments.GetbagattWihname(fileName, profileId);
                     BagAttachments bg = lstBg.FirstOrDefault();
-                    if(bg!=null)
+                    if (bg != null)
                     {
                         return;
                     }
                     else
                     {
-                        this.bagattachments.UploadBagAttachments(fileName, "FileManager/BagAttachments/" + RandomFileName + fileExtension, profileId, ad.UserID);
-                        postedFile.SaveAs(Server.MapPath("../FileManager/BagAttachments/" + RandomFileName + fileExtension));
+                        this.bagattachments.UploadBagAttachments(fileName, filePath, profileId, ad.UserID);
+                        postedFile.SaveAs(Server.MapPath("../" + filePath));
                     }
                 }
                 lblSuccess.Visible = true;
@@ -538,8 +539,8 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
         string BaseCode = Request.QueryString["FileCode"];
         List<CustomerBasicInfo> lstcus = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
         CustomerBasicInfo cb = lstcus.FirstOrDefault();
-        
-        gwFileAttachment.DataSource = bagattachments.GetBagAttWihUidInfoId(ac.UserID,cb.InfoID);
+
+        gwFileAttachment.DataSource = bagattachments.GetBagAttWihUidInfoId(ac.UserID, cb.InfoID);
         gwFileAttachment.DataBind();
     }
     //=======View Bag File Translate============================================================================================
@@ -556,24 +557,33 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
         gwFileTranslate.DataSource = bagtranslate.GetFileTranslatWihUidInfoId(ac.UserID, cb.InfoID);
         gwFileTranslate.DataBind();
     }
-    protected void gwBagProfileManager_SelectedIndexChanged(object sender, EventArgs e)
+    
+    protected void gwFileAttachment_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("btbDeleteAtt") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
 
+        }
     }
-    protected void btbDeleteAtt_Click(object sender, EventArgs e)
+
+    protected void gwFileAttachment_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         bagattachments = new BagAttachmentsBLL();
-        LinkButton button = (sender as LinkButton);
-        //Get the command argument
-        string commandArgument = button.CommandArgument;
-        //ProductId
-        int AttachId = int.Parse(commandArgument);
-        List<BagAttachments> lst = bagattachments.GetbagattWihAttId(AttachId);
+        int AttachmentID = Convert.ToInt32((gwFileAttachment.Rows[e.RowIndex].FindControl("lblAttachmentID") as Label).Text);
+        List<BagAttachments> lst = bagattachments.GetbagattWihAttId(AttachmentID);
         BagAttachments bag = lst.FirstOrDefault();
         string filename = Server.MapPath("../" + bag.AttachmentURL);
-        if (this.bagattachments.DeleteBagAttachments(AttachId))
+        if (this.bagattachments.DeleteBagAttachments(AttachmentID))
         {
-            
+
             if (filename != null || filename != string.Empty)
             {
                 if ((System.IO.File.Exists(filename)))
@@ -592,19 +602,33 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
             Response.Write("<script>alert('Delete false! Connect database error !')</script>");
             return;
         }
+
     }
-    protected void btnDeleteTrans_Click(object sender, EventArgs e)
+
+    protected void gwFileTranslate_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("btnDeleteTrans") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwFileTranslate_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         bagtranslate = new BagFileTranslateBLL();
-        LinkButton button = (sender as LinkButton);
-        //Get the command argument
-        string commandArgument = button.CommandArgument;
-        //ProductId
-        int TransId = int.Parse(commandArgument);
-        List<BagFileTranslate> lst = bagtranslate.GetBagFileTranslateId(TransId);
+        int FileTranslateID = Convert.ToInt32((gwFileTranslate.Rows[e.RowIndex].FindControl("lblFileTranslateID") as Label).Text);
+        List<BagFileTranslate> lst = bagtranslate.GetBagFileTranslateId(FileTranslateID);
         BagFileTranslate tran = lst.FirstOrDefault();
         string filename = Server.MapPath("../" + tran.FileTranslateURL);
-        if (this.bagtranslate.DeleteBagFileTranslate(TransId))
+        if (this.bagtranslate.DeleteBagFileTranslate(FileTranslateID))
         {
             if (filename != null || filename != string.Empty)
             {
@@ -626,6 +650,11 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
         }
     }
 
+    protected void gwBagProfileManager_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
     protected void gwBagProfileManager_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         try
@@ -644,6 +673,44 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
 
     protected void gwBagProfileManager_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        Response.Write("<script>alert('This Process is Building ! !')</script>");
+        bagprofile = new BagProfileBLL();
+        customerbasicinfo = new CustomerBasicInfoBLL();
+        try
+        {
+            int BagProfileID = Convert.ToInt32((gwBagProfileManager.Rows[e.RowIndex].FindControl("lblBagProfileID") as Label).Text);
+            this.DeleteBagAttachment(BagProfileID);
+            this.DeleteBagFileTranslate(BagProfileID);
+            this.bagprofile.DeleteBagProfile(BagProfileID);
+
+            string BaseCode = Request.QueryString["FileCode"];
+            List<CustomerBasicInfo> lstcus = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+            CustomerBasicInfo cb = lstcus.FirstOrDefault();
+            this.GetBagProfilePageWise(1, cb.InfoID);
+
+        }
+        catch(Exception ex)
+        {
+            lblSuccess.Text = ex.ToString(); 
+        }
+    }
+    private void DeleteBagAttachment(int bagprofileID)
+    {
+        bagattachments = new BagAttachmentsBLL();
+        List<BagAttachments> lst = bagattachments.getListWithBagProfileID(bagprofileID);
+        foreach(BagAttachments itm in lst)
+        {
+            this.bagattachments.DeleteBagAttachments(itm.AttachmentID);
+            System.IO.File.Delete(Server.MapPath("../" + itm.AttachmentURL));
+        }
+    }
+    private void DeleteBagFileTranslate(int bagprofileID)
+    {
+        bagtranslate = new BagFileTranslateBLL();
+        List<BagFileTranslate> lst = bagtranslate.getListWithBagProfileID(bagprofileID);
+        foreach(BagFileTranslate itm in lst)
+        {
+            this.bagtranslate.DeleteBagFileTranslate(itm.FileTranslateID);
+            System.IO.File.Delete(Server.MapPath("../" + itm.FileTranslateURL));
+        }
     }
 }
