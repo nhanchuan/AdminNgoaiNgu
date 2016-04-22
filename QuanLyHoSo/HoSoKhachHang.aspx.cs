@@ -162,6 +162,7 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
         recordCount = bagprofile.CountGetBagProfilePageWise(InfoID);
         gwBagProfileManager.DataBind();
         this.PopulatePager(recordCount, pageIndex);
+        lblSumHoSo.Text = recordCount.ToString();
     }
     private void PopulatePager(int recordCount, int currentPage)
     {
@@ -623,5 +624,26 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
             Response.Write("<script>alert('Delete false! Connect database error !')</script>");
             return;
         }
+    }
+
+    protected void gwBagProfileManager_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwBagProfileManager_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        Response.Write("<script>alert('This Process is Building ! !')</script>");
     }
 }

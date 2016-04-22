@@ -122,10 +122,7 @@
                 </div>
                 <div class="portlet-body background">
                     <div class="row">
-                        <div class="col-lg-1">
-                            <a class="btn red" data-toggle="modal" href="#modalDelete"><i class="fa fa-remove"></i> Hủy Hồ Sơ</a>
-                        </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <div class="input-group">
                                 <div class="input-icon">
                                     <i class="fa fa-tasks"></i>
@@ -133,7 +130,6 @@
                                         <asp:ListItem Value="0">-- Chọn hành động --</asp:ListItem>
                                         <asp:ListItem Value="1">LÀM HỒ SƠ KHÁCH HÀNG</asp:ListItem>
                                         <asp:ListItem Value="2">XEM HỒ SƠ KHÁCH HÀNG</asp:ListItem>
-                                        <%--<asp:ListItem Value="3">Chọn trường (HS Du học & Thực tập)</asp:ListItem>--%>
                                     </asp:DropDownList>
                                 </div>
                                 <span class="input-group-btn">
@@ -164,13 +160,19 @@
                     <br />
                     <%-- Begin content --%>
                     <asp:GridView ID="gwThuLyHSManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged">
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged" OnRowDataBound="gwThuLyHSManager_RowDataBound" OnRowDeleting="gwThuLyHSManager_RowDeleting">
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
                                 </ItemTemplate>
                                 <ItemStyle Width="50px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="30px" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Mã Hồ Sơ">
                                 <ItemTemplate>
@@ -297,7 +299,7 @@
         </div>
         <!-- END PAGINATOR -->
     </div>
-    <a class="btn btn-success" href="#modalChangeSchool" data-toggle="modal" runat="server"><img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" /> CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
+    <a id="btnHSChonTruong" class="btn btn-success disabled" href="#modalChangeSchool" data-toggle="modal" runat="server"><img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" /> CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
     <div class="clearfix"></div>
     <br />
     <div class="col-lg-12 text-right">
@@ -435,7 +437,6 @@
                     <br />
                     <a id="btnSaveSchool" class="btn btn-primary" onserverclick="btnSaveSchool_ServerClick" runat="server"><img src="../images/icon/Save-icon.png"  width="35" height="35"/>Chọn Trường</a>
                     <a id="A1" class="btn btn-warning" data-dismiss="modal" aria-hidden="true"><img src="../images/icon/Actions-application-exit-icon.png"  width="35" height="35"/>Hủy Chọn Trường</a>
-                    <%--<asp:Button ID="btnSaveSchool" CssClass="btn btn-primary" runat="server" Text="Chọn Trường" />--%>
                 </div>
             </div>
         </div>
@@ -445,7 +446,7 @@
         function reloadclick() {
             window.location.reload();
         }
-       
+
     </script>
     <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
@@ -477,19 +478,19 @@
     <asp:HiddenField ID="HiddenField17" runat="server" />
 
     <script type="text/javascript">
-            var chart = AmCharts.makeChart("chart_5at", {
-                "theme": "light",
-                "type": "serial",
-                "startDuration": 2,
-                "fontFamily": 'Open Sans',
-                "color": '#888',
-                "dataProvider": [{
-                    "country": "USA",
-                    "visits": document.getElementById('<%=HiddenField1.ClientID %>').value,
-                    "color": "#FF0F00"
-                }, {
-                    "country": "Australia",
-                    "visits": document.getElementById('<%=HiddenField2.ClientID %>').value,
+        var chart = AmCharts.makeChart("chart_5at", {
+            "theme": "light",
+            "type": "serial",
+            "startDuration": 2,
+            "fontFamily": 'Open Sans',
+            "color": '#888',
+            "dataProvider": [{
+                "country": "USA",
+                "visits": document.getElementById('<%=HiddenField1.ClientID %>').value,
+                "color": "#FF0F00"
+            }, {
+                "country": "Australia",
+                "visits": document.getElementById('<%=HiddenField2.ClientID %>').value,
                     "color": "#999999"
                 }, {
                     "country": "Canada",
@@ -552,43 +553,43 @@
                     "visits": document.getElementById('<%=HiddenField17.ClientID %>').value,
                     "color": "#000000"
                 }],
-                "valueAxes": [{
-                    "position": "left",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0
-                }],
-                "graphs": [{
-                    "balloonText": "[[category]]: <b>[[value]]</b>",
-                    "colorField": "color",
-                    "fillAlphas": 0.85,
-                    "lineAlpha": 0.1,
-                    "type": "column",
-                    "topRadius": 1,
-                    "valueField": "visits"
-                }],
-                "depth3D": 40,
-                "angle": 30,
-                "chartCursor": {
-                    "categoryBalloonEnabled": false,
-                    "cursorAlpha": 0,
-                    "zoomable": false
-                },
-                "categoryField": "country",
-                "categoryAxis": {
-                    "gridPosition": "start",
-                    "axisAlpha": 0,
-                    "gridAlpha": 0
+            "valueAxes": [{
+                "position": "left",
+                "axisAlpha": 0,
+                "gridAlpha": 0
+            }],
+            "graphs": [{
+                "balloonText": "[[category]]: <b>[[value]]</b>",
+                "colorField": "color",
+                "fillAlphas": 0.85,
+                "lineAlpha": 0.1,
+                "type": "column",
+                "topRadius": 1,
+                "valueField": "visits"
+            }],
+            "depth3D": 40,
+            "angle": 30,
+            "chartCursor": {
+                "categoryBalloonEnabled": false,
+                "cursorAlpha": 0,
+                "zoomable": false
+            },
+            "categoryField": "country",
+            "categoryAxis": {
+                "gridPosition": "start",
+                "axisAlpha": 0,
+                "gridAlpha": 0
 
-                },
-                "exportConfig": {
-                    "menuTop": "20px",
-                    "menuRight": "20px",
-                    "menuItems": [{
-                        "icon": '../images/export.png',
-                        "format": 'png'
-                    }]
-                }
-            }, 0);
+            },
+            "exportConfig": {
+                "menuTop": "20px",
+                "menuRight": "20px",
+                "menuItems": [{
+                    "icon": '../images/export.png',
+                    "format": 'png'
+                }]
+            }
+        }, 0);
 
             $('#chart_5at').closest('.portlet').find('.fullscreen').click(function () {
                 chart.invalidateSize();

@@ -48,7 +48,6 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                     RepeaterBagType.Visible = false;
                     RepeaterKeySearch.Visible = false;
                     this.load_gwInternationalSchool();
-                    btnSaveSchool.Visible = false;
                     this.load_dlFilterCountry();
                     //DropDownList dllcountry = (DropDownList)gwInternationalSchool.HeaderRow.FindControl("dlFilterCountry");
                     //dllcountry.Items.Insert(0, new ListItem("--Filter Country--", "0"));
@@ -392,7 +391,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         int profileId = Convert.ToInt32((gwThuLyHSManager.SelectedRow.FindControl("lblProfileID") as Label).Text);
         List<CustomerProfilePrivate> lstPr = customerProPri.GetCustomerProfilePrivateWithProfileID(profileId);
         CustomerProfilePrivate cuspro = lstPr.FirstOrDefault();
-        btnSaveSchool.Visible =(cuspro.BagProfileTypeID==1)? true:false;
+        btnHSChonTruong.Attributes.Add("class", (cuspro.BagProfileTypeID == 1) ? "btn btn-success": "btn btn-success disabled");
     }
     protected void btnAction_ServerClick(object sender, EventArgs e)
     {
@@ -575,5 +574,26 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         HiddenField15.Value = customerProPri.countProfileinCountry(15).ToString();
         HiddenField16.Value = customerProPri.countProfileinCountry(16).ToString();
         HiddenField17.Value = customerProPri.countProfileinCountry(17).ToString();
+    }
+
+    protected void gwThuLyHSManager_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwThuLyHSManager_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        Response.Write("<script>alert('This Process is Building ! !')</script>");
     }
 }

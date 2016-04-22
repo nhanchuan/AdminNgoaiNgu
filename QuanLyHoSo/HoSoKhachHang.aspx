@@ -2,12 +2,12 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href="../App_Themes/admin/StylePortlet.css" rel="stylesheet" />
-    <link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css"/>
-    <link href="../assets/admin/pages/css/news.css" rel="stylesheet" type="text/css"/>
+    <link href="../../assets/admin/pages/css/blog.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/admin/pages/css/news.css" rel="stylesheet" type="text/css" />
     <link href="../assets/admin/pages/css/profile-old.css" rel="stylesheet" />
     <h1 class="page-title">Hồ Sơ Khách Hàng <small>Customer Profile</small>
     </h1>
@@ -49,7 +49,6 @@
                         </div>
                     </div>
                     <div class="tab-pane" id="tabHoatDong">
-
                     </div>
                 </div>
             </div>
@@ -60,7 +59,9 @@
                         <img id="imgavatarCus" src="../images/default_images.jpg" alt="" class="img-responsive" runat="server" />
                     </div>
                     <div class="col-md-8 blog-article">
-                        <li class="list-group-item bg-blue" id="liTypeStyle" runat="server"><label class="bold uppercase">Hồ Sơ <asp:Label ID="lblBagProfileType" runat="server" Text="Label"></asp:Label></label></li>
+                        <li class="list-group-item bg-blue" id="liTypeStyle" runat="server">
+                            <label class="bold uppercase">Hồ Sơ
+                                <asp:Label ID="lblBagProfileType" runat="server" Text="Label"></asp:Label></label></li>
                         <br />
                         <div class="form-group">
                             <label class="control-label">Mã Hồ Sơ : </label>
@@ -70,16 +71,16 @@
                             <label class="control-label">Đơn vị : </label>
                             <asp:Label ID="lblUnitCopyright" CssClass="bold" runat="server" Text="Label"></asp:Label>
                         </div>
-                        
-                        <hr style="border:1px solid black;" />
+
+                        <hr style="border: 1px solid black;" />
                         <h3>
                             <asp:Label ID="lblFullName" runat="server" Text="Nguyễn Van A"></asp:Label>
                         </h3>
                         <div class="form-group">
-                             <%--<span class="label label-primary"><i class="fa fa-pencil-square-o"></i>
+                            <%--<span class="label label-primary"><i class="fa fa-pencil-square-o"></i>
                             <label>Hồ Sơ Du Học</label></span>--%>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="control-label">Địa chỉ : </label>
                             <asp:Label ID="lblPermanentAddress" runat="server" Text="Label"></asp:Label>
@@ -93,7 +94,7 @@
                             <asp:Label ID="lblEmail" runat="server" Text="Label"></asp:Label>
                         </div>
                         <div class="form-group text-right">
-                            <a class="btn green" href="#" id="btnreadmore" onclick="readmore_click()" >View more <i class="m-icon-swapright m-icon-white"></i></a>
+                            <a class="btn green" href="#" id="btnreadmore" onclick="readmore_click()">View more <i class="m-icon-swapright m-icon-white"></i></a>
                         </div>
                     </div>
                 </div>
@@ -115,7 +116,7 @@
                         </div>
                     </div>
                     <%-- End row 1 --%>
-                   
+
                     <%-- Row --%>
                     <div class="row">
                         <div class="col-lg-12">
@@ -128,7 +129,9 @@
                     <%-- End row --%>
                     <div class="row">
                         <div class="col-lg-12 text-right">
-                            <a class="btn btn-default" id="btnaddnewDoc" onserverclick="btnaddnewDoc_ServerClick" runat="server"><img src="../images/icon/add-icon.png" width="35" height="35" /> Add New</a>
+                            <a class="btn btn-default" id="btnaddnewDoc" onserverclick="btnaddnewDoc_ServerClick" runat="server">
+                                <img src="../images/icon/add-icon.png" width="35" height="35" />
+                                Add New</a>
                         </div>
                     </div>
                 </div>
@@ -136,7 +139,8 @@
         </div>
     </div>
 
-    <div class="clearfix"></div><br />
+    <div class="clearfix"></div>
+    <br />
     <%-- Collapse Upload BagAttachments --%>
     <div class="col-lg-4 panel-collapse collapse" id="collapBagAttachments">
         <div class="row">
@@ -164,8 +168,8 @@
             <label>* File đính kèm ( file Pdf | Word | Images )</label>
         </div>
     </div>
-   <%-- End Collapse Upload BagAttachments --%>
-     <%-- Collapse Upload BagFileTranslate --%>
+    <%-- End Collapse Upload BagAttachments --%>
+    <%-- Collapse Upload BagFileTranslate --%>
     <div class="col-lg-4 panel-collapse collapse" id="collapBagFileTranslate">
         <div class="row">
 
@@ -197,9 +201,9 @@
     <asp:Label ID="lblSuccess" CssClass="label label-success" runat="server" Text="Label"></asp:Label>
     <%-- Danh sach ho so --%>
     <div class="row">
+        <h3>Tổng số : <asp:Label ID="lblSumHoSo" runat="server" Text="Label"></asp:Label> hồ sơ</h3>
         <asp:UpdatePanel runat="server">
             <ContentTemplate>
-
                 <div class="portlet box blue">
                     <div class="portlet-title">
                         <div class="caption">
@@ -215,13 +219,10 @@
                     <div class="portlet-body background">
                         <%-- Control --%>
                         <div class="row">
-                            <div class="col-lg-1">
-                                <a class="btn red"><i class="fa fa-remove"></i> Remove</a>
-                            </div>
                             <div class="col-lg-3">
-                                <a class="btn btn-default" href="#collapBagAttachments" data-toggle="collapse"><i class="fa fa-paperclip"></i> File đính kèm</a>
-                                <a class="btn btn-default" href="#collapBagFileTranslate" data-toggle="collapse"><i class="fa fa-language"></i> Bản dịch hồ sơ</a>
-                                <a class="btn btn-info" href="#modalViewFilel" data-toggle="modal"><i class="fa fa-database"> View File</i></a>
+                                <a class="btn btn-default" href="#collapBagAttachments" data-toggle="collapse"><i class="fa fa-paperclip"></i>File đính kèm</a>
+                                <a class="btn btn-default" href="#collapBagFileTranslate" data-toggle="collapse"><i class="fa fa-language"></i>Bản dịch hồ sơ</a>
+                                <a class="btn btn-info" href="#modalViewFilel" data-toggle="modal"><i class="fa fa-database">View File</i></a>
                             </div>
                             <div class="col-lg-5">
                                 <div class="input-group">
@@ -230,7 +231,7 @@
                                         <input id="txtsearchbagfile" class="form-control" type="text" placeholder="Tìm kiếm hồ sơ" runat="server" />
                                     </div>
                                     <span class="input-group-btn">
-                                        <button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i> Search</button>
+                                        <button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Search</button>
                                     </span>
                                 </div>
                             </div>
@@ -246,14 +247,14 @@
                             </div>
                         </div>
                         <%-- End control --%>
-                        
-                        
+
+
                         <div class="clearfix"></div>
                         <br />
                         <%-- Gridview --%>
                         <asp:GridView ID="gwBagProfileManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                            HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwBagProfileManager_SelectedIndexChanged">
-
+                            HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                            OnSelectedIndexChanged="gwBagProfileManager_SelectedIndexChanged" OnRowDataBound="gwBagProfileManager_RowDataBound" OnRowDeleting="gwBagProfileManager_RowDeleting">
                             <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                             <Columns>
                                 <asp:TemplateField ShowHeader="False">
@@ -261,6 +262,12 @@
                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
                                     </ItemTemplate>
                                     <ItemStyle Width="50px" />
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                    </ItemTemplate>
+                                    <ItemStyle Width="30px" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Tên giấy tờ / Hồ sơ">
                                     <EditItemTemplate>
@@ -287,7 +294,7 @@
                                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                
+
                             </Columns>
                             <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
                             <RowStyle BackColor="#A1DCF2"></RowStyle>
@@ -344,6 +351,7 @@
                     <h4 class="modal-title uppercase">
                         <img src="../images/icon/folder-documents-icon.png" width="35" height="35" />
                         Danh sách file thuộc bộ hồ sơ
+                       
                         <asp:Label ID="txtlistfile" CssClass="bold" runat="server" Text="Label"></asp:Label></h4>
                 </div>
                 <div class="modal-body background">
@@ -436,34 +444,33 @@
     </div>
     <%-- End Modal View file --%>
 
-<script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
-<script src="../assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/pie.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/radar.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/themes/light.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/themes/patterns.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amcharts/themes/chalk.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/ammap/ammap.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/ammap/maps/js/worldLow.js" type="text/javascript"></script>
+    <script src="../assets/global/plugins/amcharts/amstockcharts/amstock.js" type="text/javascript"></script>
     <script>
-    function readmore_click()
-    {
-        var urlParams;
-        (window.onpopstate = function () {
-            var match,
-                pl = /\+/g,  // Regex for replacing addition symbol with a space
-                search = /([^&=]+)=?([^&]*)/g,
-                decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
-                query = window.location.search.substring(1);
+        function readmore_click() {
+            var urlParams;
+            (window.onpopstate = function () {
+                var match,
+                    pl = /\+/g,  // Regex for replacing addition symbol with a space
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+                    query = window.location.search.substring(1);
 
-            urlParams = {};
-            while (match = search.exec(query))
-                urlParams[decode(match[1])] = decode(match[2]);
-        })();
-        var url = "../QuanLyHoSo/ThongTinKhachHang.aspx?FileCode=" + urlParams["FileCode"];
-        window.open(url, "myWindow", "width=1366, height=768,resizable=yes");
-    }
+                urlParams = {};
+                while (match = search.exec(query))
+                    urlParams[decode(match[1])] = decode(match[2]);
+            })();
+            var url = "../QuanLyHoSo/ThongTinKhachHang.aspx?FileCode=" + urlParams["FileCode"];
+            window.open(url, "myWindow", "width=1366, height=768,resizable=yes");
+        }
 </script>
 </asp:Content>
 
