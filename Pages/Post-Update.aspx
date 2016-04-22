@@ -350,15 +350,6 @@
                             <div class="col-lg-9">
                         <asp:UpdatePanel runat="server">
                                     <ContentTemplate>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4">
-                                            <div class="panel-default">
-                                                <div class="panel">
-                                                    <asp:DropDownList ID="dlimgtype" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlimgtype_SelectedIndexChanged" runat="server"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
                                             <div style="height: 700px; overflow: auto;">
                                                 <div class="grid-container">
@@ -368,8 +359,8 @@
                                                                 <li>
                                                                     <a href='<%#"../"+Eval("ImagesUrl") %>' onclick="return showanh(this.href)"">
                                                                         <img src='<%#"../"+Eval("ImagesUrl") %>' />
-                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserUpload") %></i></h4>
-                                                                        <p><%# Eval("ImagesName") %></p>
+                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserName") %></i></h4>
+                                                                        <p><i class="fa fa-clock-o"></i><%# Eval("DateOfStart") %></p>
                                                                     </a>
                                                                 </li>
                                                             </ItemTemplate>

@@ -43,9 +43,6 @@ public partial class Pages_Post_New : BasePage
                 {
                     this.PopulateRootLevel();
                     this.load_cbltags();
-                    this.load_dlimgtype();
-                    dlimgtype.Items.Insert(0, new ListItem("--All Images--", "0"));
-                    dlimgtype.Items.FindByValue("5").Selected = true;
                     this.load_rpLstImg(admin.UserID);
                     lblExeption.Visible = false;
                 }
@@ -188,25 +185,10 @@ public partial class Pages_Post_New : BasePage
         string script = "window.onload = function() { callImagesPanelClickEvent(); };";
         ClientScript.RegisterStartupScript(this.GetType(), "callImagesPanelClickEvent", script, true);
     }
-    protected void load_dlimgtype()
-    {
-        imagestype = new ImagesTypeBLL();
-        dlimgtype.DataSource = imagestype.getallImagesType();
-        dlimgtype.DataValueField = "ImagesTypeID";
-        dlimgtype.DataTextField = "ImagesTypeName";
-        dlimgtype.DataBind();
-    }
     protected void load_rpLstImg(int UserUpload)
     {
         images = new ImagesBLL();
-        rpLstImg.DataSource = images.getImagesWithType(5, UserUpload);
-        rpLstImg.DataBind();
-    }
-    protected void dlimgtype_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        images = new ImagesBLL();
-        rpLstImg.DataSource = new ObjectDataSource();
-        rpLstImg.DataSource = (dlimgtype.SelectedValue == "0") ? images.getAllImagesWithUserUpload(Session.GetCurrentUser().UserID) : images.getImagesWithType(int.Parse(dlimgtype.SelectedValue), Session.GetCurrentUser().UserID);
+        rpLstImg.DataSource = images.getImagesWithType(5);
         rpLstImg.DataBind();
     }
     protected void btnchangeImgPost_Click(object sender, EventArgs e)

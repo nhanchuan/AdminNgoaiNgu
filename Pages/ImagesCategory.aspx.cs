@@ -117,18 +117,7 @@ public partial class Pages_ImagesCategory : BasePage
             }
         }
     }
-    public static string RemoveSpecialCharacters(string str)
-    {
-       System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        foreach (char c in str)
-        {
-            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
-            {
-                sb.Append(c);
-            }
-        }
-        return sb.ToString();
-    }
+    
     protected void btnUploadImages_Click(object sender, EventArgs e)
     {
         //ImgEditPC.Src = txtuploadImgTemp.Text;
@@ -152,7 +141,7 @@ public partial class Pages_ImagesCategory : BasePage
                 str_image = "Anh-Van-Hoi-Anh-My-" + dateString + "-" + RandomName + fileExtension;
                 //string pathToSave = Server.MapPath("../images/Upload/ImagesForCustomerProfile/") + str_image;
 
-                string path = Server.MapPath("../images/Upload/" + RemoveSpecialCharacters(imt.ImagesTypeName) + "/");
+                string path = Server.MapPath("../images/Upload/" + XoaKyTuDacBiet(imt.ImagesTypeName) + "/");
                 if (!Directory.Exists(path))   // CHECK IF THE FOLDER EXISTS. IF NOT, CREATE A NEW FOLDER.
                 {
                     Directory.CreateDirectory(path);
@@ -178,7 +167,7 @@ public partial class Pages_ImagesCategory : BasePage
                 EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 10L);
                 myEncoderParameters.Param[0] = myEncoderParameter;
                 bmp1.Save(path + str_image, jgpEncoder, myEncoderParameters);
-                this.images.InsertImages(str_image, "images/Upload/" + RemoveSpecialCharacters(imt.ImagesTypeName) + "/" + str_image, Convert.ToInt32(ImgTypeID), ac.UserID);
+                this.images.InsertImages(str_image, "images/Upload/" + XoaKyTuDacBiet(imt.ImagesTypeName) + "/" + str_image, Convert.ToInt32(ImgTypeID), ac.UserID);
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
             else

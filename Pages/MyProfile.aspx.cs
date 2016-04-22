@@ -37,7 +37,7 @@ public partial class Pages_MyProfile : BasePage
                 this.load_dlcountry();
                 dlCountry.Items.Insert(0, new ListItem("-- Select Country --", "0"));
                 this.load_userprofile(user.UserID);
-                this.load_rpchangeAvatar(user.UserID);
+                this.load_rpchangeAvatar();
             }
         }
     }
@@ -255,10 +255,10 @@ public partial class Pages_MyProfile : BasePage
             return;
         }
     }
-    public void load_rpchangeAvatar(int UserUpload)
+    public void load_rpchangeAvatar()
     {
         images = new ImagesBLL();
-        rpchangeAvatar.DataSource = images.getImagesWithType(2, UserUpload);
+        rpchangeAvatar.DataSource = images.getImagesWithType(2);
         rpchangeAvatar.DataBind();
     }
     protected void btnchangeAvatar_Click(object sender, EventArgs e)
@@ -284,7 +284,7 @@ public partial class Pages_MyProfile : BasePage
         rpchangeAvatar.DataSource = new ObjectDataSource();
         if (dlImgCategory.SelectedValue == "1")
         {
-            rpchangeAvatar.DataSource = images.getImagesWithType(2,Session.GetCurrentUser().UserID);
+            rpchangeAvatar.DataSource = images.getImagesWithType(2);
             rpchangeAvatar.DataBind();
         }
         else

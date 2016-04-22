@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Web.SessionState;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using DAL;
 using BLL;
 
@@ -28,7 +29,7 @@ public class hn_UploadImagesType : IHttpHandler, IReadOnlySessionState
 
         context.Response.ContentType = "text/plain";
         //string dirFullPath = HttpContext.Current.Server.MapPath("../images/Upload/ImageGallery/");
-        string dirFullPath = HttpContext.Current.Server.MapPath("../images/Upload/" + RemoveSpecialCharacters(imt.ImagesTypeName) + "/");
+        string dirFullPath = HttpContext.Current.Server.MapPath("../images/Upload/" + XoaKyTuDacBiet(imt.ImagesTypeName) + "/");
         if (!Directory.Exists(dirFullPath))   // CHECK IF THE FOLDER EXISTS. IF NOT, CREATE A NEW FOLDER.
         {
             Directory.CreateDirectory(dirFullPath);
@@ -70,7 +71,7 @@ public class hn_UploadImagesType : IHttpHandler, IReadOnlySessionState
                 EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
                 myEncoderParameters.Param[0] = myEncoderParameter;
                 bmp1.Save(dirFullPath + str_image, jgpEncoder, myEncoderParameters);
-                this.images.InsertImages(str_image, "images/Upload/" + RemoveSpecialCharacters(imt.ImagesTypeName) + "/" + str_image, Convert.ToInt32(context.Session.GetCurrentImagesTypeID()), ac.UserID);
+                this.images.InsertImages(str_image, "images/Upload/" + XoaKyTuDacBiet(imt.ImagesTypeName) + "/" + str_image, Convert.ToInt32(context.Session.GetCurrentImagesTypeID()), ac.UserID);
             }
         }
         context.Response.Write(str_image);
@@ -110,16 +111,14 @@ public class hn_UploadImagesType : IHttpHandler, IReadOnlySessionState
         }
         return null;
     }
-    public static string RemoveSpecialCharacters(string str)
+    public string XoaKyTuDacBiet(string str)
     {
-        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-        foreach (char c in str)
-        {
-            if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || c == '.' || c == '_')
-            {
-                sb.Append(c);
-            }
-        }
-        return sb.ToString();
+        string title_url = "";
+        str = str.Replace(" ", "-");
+        Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+        string temp = str.Normalize(System.Text.NormalizationForm.FormD);
+        title_url = regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        return title_url;
     }
+
 }

@@ -274,62 +274,50 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">
-                        <img src="../images/icon/add-icon.png" width="30" height="30" />
+                        <img src="../images/icon/add-icon.png" width="28" height="28" />
                         Ảnh chức năng cho chuyên mục</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="panel-default">
-                        <div class="panel-body">
-                            <div class="col-lg-9">
-                                <asp:UpdatePanel runat="server">
-                                    <ContentTemplate>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4">
-                                            <div class="panel-default">
-                                                <div class="panel">
-                                                    <asp:DropDownList ID="dlimgtype" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlimgtype_SelectedIndexChanged" runat="server"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div style="height: 700px; overflow: auto;">
-                                                <div class="grid-container">
-                                                    <ul class="rig columns-5">
-                                                        <asp:Repeater ID="rpLstImg" runat="server">
-                                                            <ItemTemplate>
-                                                                <li>
-                                                                    <a href='<%#"../"+Eval("ImagesUrl") %>' onclick="return showanh(this.href)"">
+        <div class="panel-default">
+            <div class="panel-body">
+                <div class="col-lg-9">
+                    <div class="col-lg-12">
+                        <div style="height: 700px; overflow: auto;">
+                            <div class="grid-container">
+                                <ul class="rig columns-5">
+                                    <asp:Repeater ID="rpLstImg" runat="server">
+                                        <ItemTemplate>
+                                            <li>
+                                                <a href='<%#"../"+Eval("ImagesUrl") %>' onclick="return showanh(this.href)"">
                                                                         <img src='<%#"../"+Eval("ImagesUrl") %>' />
-                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserUpload") %></i></h4>
-                                                                        <p><%# Eval("ImagesName") %></p>
-                                                                    </a>
-                                                                </li>
-                                                            </ItemTemplate>
-                                                        </asp:Repeater>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <div class="col-lg-3">
-                                <%-- info --%>
-                                <asp:ValidationSummary ID="ValidationSummary2" ValidationGroup="vlidSelectImage" DisplayMode="BulletList" ShowSummary="true" ForeColor="Red" runat="server" />
-                                <asp:Image ID="ImagesSelect" CssClass="img-responsive" runat="server" />
-                                <br />
-                                <asp:HiddenField ID="HiddenimgSelect" runat="server" />
-                                <label>Url Image:</label>
-                                <asp:TextBox ID="txtImgUrl" CssClass="form-control" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtImgUrl" ValidationGroup="vlidSelectImage" ErrorMessage="No Image Selected !" Display="None"></asp:RequiredFieldValidator>
-                                <%-- end info --%>
+                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserName") %></i></h4>
+                                                                        <p><i class="fa fa-clock-o"></i><%# Eval("DateOfStart") %></p>
+                                                  </a>
+                                              </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
+                <div class="col-lg-3">
+                    <%-- info --%>
+                    <asp:ValidationSummary ID="ValidationSummary2" ValidationGroup="vlidSelectImage" DisplayMode="BulletList" ShowSummary="true" ForeColor="Red" runat="server" />
+                    <asp:Image ID="ImagesSelect" CssClass="img-responsive" runat="server" />
+                    <br />
+                    <asp:HiddenField ID="HiddenimgSelect" runat="server" />
+                    <label>Url Image:</label>
+                    <asp:TextBox ID="txtImgUrl" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtImgUrl" ValidationGroup="vlidSelectImage" ErrorMessage="No Image Selected !" Display="None"></asp:RequiredFieldValidator>
+                    <%-- end info --%>
+                </div>
+            </div>
+        </div>
+
+    </div>
                 <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal"> Cancel</a>
                     <asp:Button ID="btnselectimages" CssClass="btn btn-primary pull-right" ValidationGroup="vlidSelectImage" OnClick="btnselectimages_Click"  runat="server" Text="Chọn ảnh tiêu biểu" />
                 </div>
             </div>
@@ -441,24 +429,13 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">
-                        <img src="../images/icon/Images-icon.png" width="30" height="30" />
+                        <img src="../images/icon/add-icon.png" width="28" height="28" />
                         Ảnh chức năng cho chuyên mục</h4>
                 </div>
                 <div class="modal-body">
                     <div class="panel-default">
                         <div class="panel-body">
                             <div class="col-lg-9">
-                                <asp:UpdatePanel runat="server">
-                                    <ContentTemplate>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4">
-                                            <div class="panel-default">
-                                                <div class="panel">
-                                                    <asp:DropDownList ID="dlEditSelectImgtype" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlEditSelectImgtype_SelectedIndexChanged1" runat="server"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
                                             <div style="height: 700px; overflow: auto;">
                                                 <div class="grid-container">
@@ -468,8 +445,8 @@
                                                                 <li>
                                                                     <a href='<%#"../"+Eval("ImagesUrl") %>' onclick="return showanhedit(this.href)"">
                                                                         <img src='<%#"../"+Eval("ImagesUrl") %>' />
-                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserUpload") %></i></h4>
-                                                                        <p><%# Eval("ImagesName") %></p>
+                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserName") %></i></h4>
+                                                                        <p><i class="fa fa-clock-o"></i><%# Eval("DateOfStart") %></p>
                                                                     </a>
                                                                 </li>
                                                             </ItemTemplate>
@@ -478,8 +455,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
                             </div>
                             <div class="col-lg-3">
                                 <%-- info --%>
@@ -497,6 +472,7 @@
 
                 </div>
                 <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal"> Cancel</a>
                     <asp:Button ID="btnselectEditImg" CssClass="btn btn-primary pull-right" ValidationGroup="vlidEditSelectImage" OnClick="btnselectEditImg_Click" runat="server" Text="Chọn ảnh tiêu biểu" />
                 </div>
             </div>

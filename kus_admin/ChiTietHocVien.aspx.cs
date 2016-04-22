@@ -427,13 +427,13 @@ public partial class kus_admin_ChiTietHocVien : BasePage
     {
         images = new ImagesBLL();
         rpLstImg.DataSource = new ObjectDataSource();
-        rpLstImg.DataSource = (dlimgtype.SelectedValue == "0") ? images.GetImagesTypeUpload(6) : images.GetImagesTypeAndUserUpload(6, int.Parse(dlimgtype.SelectedValue));
+        rpLstImg.DataSource = (dlimgtype.SelectedValue == "0") ? images.getImagesWithType(1009) : images.GetImagesTypeAndUserUpload(1009, int.Parse(dlimgtype.SelectedValue));
         rpLstImg.DataBind();
     }
     protected void load_rpLstImg()
     {
         images = new ImagesBLL();
-        rpLstImg.DataSource = images.GetImagesTypeAndUserUpload(6, Session.GetCurrentUser().UserID);
+        rpLstImg.DataSource = images.getImagesWithType(1009);
         rpLstImg.DataBind();
     }
     protected int ImagesID(string filename)
@@ -496,8 +496,8 @@ public partial class kus_admin_ChiTietHocVien : BasePage
         if (!string.IsNullOrEmpty(fileName))
         {
             fileExtension = Path.GetExtension(fileName);
-            str_image = "Anh-Van-Hoi-Anh-My-" + dateString + "-" + RandomName + fileExtension;
-            string pathToSave = Server.MapPath("../images/Upload/ImagesForCustomerProfile/") + str_image;
+            str_image = "Anh-Van-Hoi-Anh-My-" + dateString + "-" + hocvien.HocVienCode + RandomName + fileExtension;
+            string pathToSave = Server.MapPath("../images/Upload/Anh-Hoc-Vien/") + str_image;
             //file.SaveAs(pathToSave);
             System.Drawing.Image image = System.Drawing.Image.FromStream(fileUploadImgPost.FileContent);
             if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid)
@@ -516,9 +516,9 @@ public partial class kus_admin_ChiTietHocVien : BasePage
             EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
             myEncoderParameters.Param[0] = myEncoderParameter;
             bmp1.Save(pathToSave, jgpEncoder, myEncoderParameters);
-            this.images.InsertImages(str_image, "images/Upload/ImagesForCustomerProfile/" + str_image, 6, ac.UserID);
-            txtPostImgTemp.Text = "images/Upload/ImagesForCustomerProfile/" + str_image;
-            imgCusprofile.Src = "../images/Upload/ImagesForCustomerProfile/" + str_image;
+            this.images.InsertImages(str_image, "images/Upload/Anh-Hoc-Vien/" + str_image, 1009, ac.UserID);
+            txtPostImgTemp.Text = "images/Upload/Anh-Hoc-Vien/" + str_image;
+            imgCusprofile.Src = "../images/Upload/Anh-Hoc-Vien/" + str_image;
             this.load_rpLstImg();
             this.UpdateImages(hocvien.HocVienID, ImagesID(txtPostImgTemp.Text));
         }

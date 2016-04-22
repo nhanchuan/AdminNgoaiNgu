@@ -14,9 +14,9 @@ public partial class Controls_AdvisoryTicker : System.Web.UI.UserControl
     {
 
     }
-    protected void Timer1_Tick(object sender, EventArgs e)
-    {
-        registrationForm = new REGISTRATION_FORM_ADVISORY_BLL();
-        lblcountNewAdvisory.Text = registrationForm.CountNew().ToString();
-    }
+    //protected void Timer1_Tick(object sender, EventArgs e)
+    //{
+    //    registrationForm = new REGISTRATION_FORM_ADVISORY_BLL();
+    //    lblcountNewAdvisory.Text = registrationForm.CountNew().ToString();
+    //}
 }

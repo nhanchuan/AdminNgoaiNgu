@@ -561,15 +561,6 @@
                             <div class="col-lg-9">
                         <asp:UpdatePanel runat="server">
                                     <ContentTemplate>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4"></div>
-                                        <div class="col-lg-4">
-                                            <div class="panel-default">
-                                                <div class="panel">
-                                                    <asp:DropDownList ID="dlimgtype" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlimgtype_SelectedIndexChanged" runat="server"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div class="col-lg-12">
                                             <div style="height: 700px; overflow: auto;">
                                                 <div class="grid-container">

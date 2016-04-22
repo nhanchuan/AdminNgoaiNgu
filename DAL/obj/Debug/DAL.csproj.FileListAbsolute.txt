@@ -47,3 +47,7 @@ D:\DEVELOPER\WEBSITE\GitHub\git\DAL\bin\Debug\DAL.pdb
 D:\DEVELOPER\WEBSITE\GitHub\git\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
 D:\DEVELOPER\WEBSITE\GitHub\git\DAL\obj\Debug\DAL.dll
 D:\DEVELOPER\WEBSITE\GitHub\git\DAL\obj\Debug\DAL.pdb
+E:\DEVELOPER\Website\GitHub\ManagerCenter\DAL\bin\Debug\DAL.dll
+E:\DEVELOPER\Website\GitHub\ManagerCenter\DAL\bin\Debug\DAL.pdb
+E:\DEVELOPER\Website\GitHub\ManagerCenter\DAL\obj\Debug\DAL.dll
+E:\DEVELOPER\Website\GitHub\ManagerCenter\DAL\obj\Debug\DAL.pdb

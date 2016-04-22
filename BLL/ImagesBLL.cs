@@ -83,30 +83,17 @@ namespace BLL
             this.DB.CloseConnection();
             return lst;
         }
-        public List<Images> getImagesWithType(int typeId, int UserUpload)
+        public DataTable getImagesWithType(int typeId)
         {
-            string sql = "select * from Images where ImagesTypeID=@typeId and UserUpload=@UserUpload";
+            string sql = "select img.ImagesID,img.ImagesName,img.ImagesUrl,img.ImagesTypeID,img.DateOfStart,img.UserUpload,ac.UserName from Images img full outer join UserAccounts ac on img.UserUpload=ac.UserID where ImagesTypeID=@typeId";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
             SqlParameter ptypeId = new SqlParameter("@typeId", typeId);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            DataTable tb = DB.DAtable(sql, ptypeId, pUserUpload);
-            List<Images> lst = new List<Images>();
-            foreach (DataRow r in tb.Rows)
-            {
-                Images im = new Images();
-                im.ImagesID = (int)r[0];
-                im.ImagesName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                im.ImagesUrl = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-                im.ImagesTypeID = (string.IsNullOrEmpty(r[3].ToString())) ? 0 : (int)r[3];
-                im.DateOfStart = (DateTime)r[4];
-                im.UserUpload = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
-                lst.Add(im);
-            }
+            DataTable tb = DB.DAtable(sql, ptypeId);
             this.DB.CloseConnection();
-            return lst;
+            return tb;
         }
         public List<Images> getImagesWithUserUpload(int userid)
         {
@@ -223,7 +210,7 @@ namespace BLL
             this.DB.CloseConnection();
             return url;
         }
-        public int RecordCountImages(int UserUpload) //COUNT ROW IN TABLE IMAGES
+        public int RecordCountImages() //COUNT ROW IN TABLE IMAGES
         {
             int RC = 0;
             
@@ -231,81 +218,77 @@ namespace BLL
             {
                 return 0;
             }
-            string sql = "select COUNT(*) from Images where UserUpload=@UserUpload";
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            RC = DB.GetValues(sql, pUserUpload);
+            string sql = "select COUNT(*) from Images";
+            RC = DB.GetValues(sql);
             this.DB.CloseConnection();
             return RC;
         }
-        public int RecordCountImagesType(int ImagesTypeID, int UserUpload) //COUNT ROW IN TABLE IMAGES WITH TYPE ID
+        public int RecordCountImagesType(int ImagesTypeID) //COUNT ROW IN TABLE IMAGES WITH TYPE ID
         {
             int RC = 0;
-            string sql = "select COUNT(*) from Images where ImagesTypeID=@ImagesTypeID and UserUpload=@UserUpload";
+            string sql = "select COUNT(*) from Images where ImagesTypeID=@ImagesTypeID";
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
             SqlParameter pImagesTypeID = new SqlParameter("ImagesTypeID", ImagesTypeID);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            RC = DB.GetValues(sql, pImagesTypeID, pUserUpload);
+            RC = DB.GetValues(sql, pImagesTypeID);
             this.DB.CloseConnection();
             return RC;
         }
-        public int RecordCountSearchImages(string keysearch, int UserUpload) //COUNT ROW IN TABLE IMAGES WITH SEARCH  
+        public int RecordCountSearchImages(string keysearch) //COUNT ROW IN TABLE IMAGES WITH SEARCH  
         {
             int RC = 0;
-            string sql = "select COUNT(*) from Images WHERE (ImagesName like '%'+@keysearch+'%' or ImagesUrl like '%'+@keysearch+'%') and UserUpload=@UserUpload";
+            string sql = "select COUNT(*) from Images WHERE (ImagesName like '%'+@keysearch+'%' or ImagesUrl like '%'+@keysearch+'%')";
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
             SqlParameter pkeysearch = new SqlParameter("@keysearch", keysearch);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            RC = DB.GetValues(sql, pkeysearch, pUserUpload);
+            RC = DB.GetValues(sql, pkeysearch);
             this.DB.CloseConnection();
             return RC;
         }
-        public DataTable GetImagesPageWise(int PageIndex, int PageSize, int UserUpload)
+        // THU VIEN HINH ANH ==================================================================
+        public DataTable GetImagesPageWise(int PageIndex, int PageSize)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec GetImagesPageWise @PageIndex,@PageSize,@UserUpload";
+            string sql = "Exec GetImagesPageWise @PageIndex,@PageSize";
             SqlParameter paramPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter paramPageSize = new SqlParameter("PageSize", PageSize);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize, pUserUpload);
+            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize);
             this.DB.CloseConnection();
             return tb;
         }
-        public DataTable GetImagesTypePageWise(int PageIndex, int PageSize, int ImagesTypeID, int UserUpload)
+        public DataTable GetImagesTypePageWise(int PageIndex, int PageSize, int ImagesTypeID)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec GetImagesTypePageWise @PageIndex,@PageSize,@ImagesTypeID,@UserUpload";
+            string sql = "Exec GetImagesTypePageWise @PageIndex,@PageSize,@ImagesTypeID";
             SqlParameter paramPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter paramPageSize = new SqlParameter("PageSize", PageSize);
             SqlParameter paramImagesTypeID = new SqlParameter("ImagesTypeID", ImagesTypeID);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize, paramImagesTypeID, pUserUpload);
+            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize, paramImagesTypeID);
             this.DB.CloseConnection();
             return tb;
         }
-        public DataTable GetImagesSearchPageWise(int PageIndex, int PageSize, string keysearch, int UserUpload)
+        // THU VIEN HINH ANH ==================================================================
+        public DataTable GetImagesSearchPageWise(int PageIndex, int PageSize, string keysearch)
         {
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            string sql = "Exec GetImagesSearchPageWise @PageIndex,@PageSize,@keysearch,@UserUpload";
+            string sql = "Exec GetImagesSearchPageWise @PageIndex,@PageSize,@keysearch";
             SqlParameter paramPageIndex = new SqlParameter("@PageIndex", PageIndex);
             SqlParameter paramPageSize = new SqlParameter("@PageSize", PageSize);
             SqlParameter paramkeysearch = new SqlParameter("@keysearch", keysearch);
-            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
-            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize, paramkeysearch, pUserUpload);
+            DataTable tb = DB.DAtable(sql, paramPageIndex, paramPageSize, paramkeysearch);
             this.DB.CloseConnection();
             return tb;
         }

@@ -34,7 +34,7 @@ public partial class Pages_ImagesManager : BasePage
                 {
                     this.load_dlImagestype();
                     dlImagestype.Items.Insert(0, new ListItem("-- Hiển thị tất cả --", "0"));
-                    this.GetImagesTypePageWise(1, 0, user.UserID);
+                    this.GetImagesTypePageWise(1, 0);
                     rptPager.Visible = true;
                     //divrownumber.Visible = true;
                     //lblstartindex.Text = ((1 - 1) * PageSize + 1).ToString();
@@ -55,8 +55,7 @@ public partial class Pages_ImagesManager : BasePage
     }
     protected void btnsearchimg_ServerClick(object sender, EventArgs e)
     {
-        UserAccounts user = Session.GetCurrentUser();
-        this.GetImagesSearchPageWise(1, txtsearchImages.Value, user.UserID);
+        this.GetImagesSearchPageWise(1, txtsearchImages.Value);
         rptPager.Visible = false;
         //divrownumber.Visible = false;
         Repeatersearch.Visible = true;
@@ -64,20 +63,20 @@ public partial class Pages_ImagesManager : BasePage
         //lblsearchstart.Text = ((1 - 1) * PageSize + 1).ToString();
         //lblsearchend.Text = ((((1 - 1) * PageSize + 1) + PageSize) - 1).ToString();
     }
-    private void GetImagesTypePageWise(int pageIndex, int ImgType, int UserUpload)
+    private void GetImagesTypePageWise(int pageIndex, int ImgType)
     {
         images = new ImagesBLL();
         rpLstImg.DataSource = new ObjectDataSource();
         int recordCount = 0;
         if (ImgType <= 0)
         {
-            rpLstImg.DataSource = images.GetImagesPageWise(pageIndex, PageSize, UserUpload);
-            recordCount = images.RecordCountImages(UserUpload);
+            rpLstImg.DataSource = images.GetImagesPageWise(pageIndex, PageSize);
+            recordCount = images.RecordCountImages();
         }
         else
         {
-            rpLstImg.DataSource = images.GetImagesTypePageWise(pageIndex, PageSize, ImgType, UserUpload);
-            recordCount = images.RecordCountImagesType(ImgType, UserUpload);
+            rpLstImg.DataSource = images.GetImagesTypePageWise(pageIndex, PageSize, ImgType);
+            recordCount = images.RecordCountImagesType(ImgType);
         }
         rpLstImg.DataBind();
         this.PopulatePager(recordCount, pageIndex);
@@ -154,13 +153,12 @@ public partial class Pages_ImagesManager : BasePage
     }
     protected void Page_Changed(object sender, EventArgs e)
     {
-        UserAccounts user = Session.GetCurrentUser();
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
-        this.GetImagesTypePageWise(pageIndex, int.Parse(dlImagestype.SelectedValue), user.UserID);
+        this.GetImagesTypePageWise(pageIndex, int.Parse(dlImagestype.SelectedValue));
         //lblstartindex.Text = ((pageIndex - 1) * PageSize + 1).ToString();
         //lblendindex.Text = ((((pageIndex - 1) * PageSize + 1) + PageSize) - 1).ToString();
     }
-    private void GetImagesSearchPageWise(int pageIndex, string keysearch, int UserID)
+    private void GetImagesSearchPageWise(int pageIndex, string keysearch)
     {
         images = new ImagesBLL();
         
@@ -168,13 +166,13 @@ public partial class Pages_ImagesManager : BasePage
         int recordCount = 0;
         if (string.IsNullOrEmpty(keysearch) || string.IsNullOrWhiteSpace(keysearch))
         {
-            rpLstImg.DataSource = images.GetImagesPageWise(pageIndex, PageSize, UserID);
-            recordCount = images.RecordCountImages(UserID);
+            rpLstImg.DataSource = images.GetImagesPageWise(pageIndex, PageSize);
+            recordCount = images.RecordCountImages();
         }
         else
         {
-            rpLstImg.DataSource = images.GetImagesSearchPageWise(pageIndex, PageSize, keysearch, UserID);
-            recordCount = images.RecordCountSearchImages(keysearch, UserID);
+            rpLstImg.DataSource = images.GetImagesSearchPageWise(pageIndex, PageSize, keysearch);
+            recordCount = images.RecordCountSearchImages(keysearch);
         }
         rpLstImg.DataBind();
         this.PopulateSearchPager(recordCount, pageIndex);
@@ -253,7 +251,7 @@ public partial class Pages_ImagesManager : BasePage
     protected void Page_SearchChanged(object sender, EventArgs e)
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
-        this.GetImagesSearchPageWise(pageIndex, txtsearchImages.Value.ToString(), Session.GetCurrentUser().UserID);
+        this.GetImagesSearchPageWise(pageIndex, txtsearchImages.Value.ToString());
         //lblsearchstart.Text = ((pageIndex - 1) * PageSize + 1).ToString();
         //lblsearchend.Text = ((((pageIndex - 1) * PageSize + 1) + PageSize) - 1).ToString();
     }
@@ -262,7 +260,7 @@ public partial class Pages_ImagesManager : BasePage
 
     protected void dlImagestype_SelectedIndexChanged(object sender, EventArgs e)
     {
-        this.GetImagesTypePageWise(1, int.Parse(dlImagestype.SelectedValue), Session.GetCurrentUser().UserID);
+        this.GetImagesTypePageWise(1, int.Parse(dlImagestype.SelectedValue));
         txtsearchImages.Value = "";
         rptPager.Visible = true;
         //divrownumber.Visible = true;

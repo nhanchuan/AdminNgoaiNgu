@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="ImagesManager.aspx.cs" Inherits="Pages_ImagesManager" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
@@ -26,8 +26,10 @@
         <div class="page-toolbar">
             <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height grey-salt" data-placement="top" data-original-title="Change dashboard date range">
                 <i class="icon-calendar"></i>&nbsp;
-						<span class="thin uppercase visible-lg-inline-block">&nbsp;</span>&nbsp;
-						<i class="fa fa-angle-down"></i>
+					
+                <span class="thin uppercase visible-lg-inline-block">&nbsp;</span>&nbsp;
+					
+                <i class="fa fa-angle-down"></i>
             </div>
         </div>
     </div>
@@ -54,6 +56,7 @@
                         <div class="portlet-title">
                             <div class="caption">
                                 <i class="fa fa-edit"></i>Thư viện hình ảnh
+                           
                             </div>
                             <div class="tools">
                                 <a href="javascript:;" class="collapse"></a>
@@ -92,7 +95,7 @@
                                                         <span href="#modalviewImages" data-toggle="modal">
                                                             <img src='<%#"../"+Eval("ImagesUrl") %>' />
                                                             <h4>Upload by <i style="color: red;"><%# Eval("UserName") %></i></h4>
-                                                            <p><%# Eval("ImagesName") %></p>
+                                                            <p><i class="fa fa-clock-o"></i><%# Eval("DateOfStart") %></p>
                                                         </span>
                                                     </a>
                                                 </li>
@@ -159,7 +162,7 @@
             </asp:UpdatePanel>
 
         </div>
-        </div>
+    </div>
     <!-- /.modal view Images -->
     <div class="modal fade" id="modalviewImages" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -184,7 +187,7 @@
                                             <asp:TextBox ID="txtImgurl" CssClass="form-control" runat="server"></asp:TextBox>
                                             <%--<input id="txtImgurl" class="form-control" type="text" runat="server" />--%>
                                             <%--<asp:Button ID="btncopylink" runat="server" onclick="btnCopyClicked" Text="Copy link" />--%>
-                                            <a id="markup-copy" ><i class="fa fa-copy"></i> Copy link</a>
+                                            <a id="markup-copy"><i class="fa fa-copy"></i>Copy link</a>
                                         </div>
                                         <asp:HiddenField ID="HiddenImages" runat="server" />
                                         <a href="#" runat="server"><i class="fa fa-remove">Delete Images</i></a>
@@ -211,8 +214,8 @@
         document.getElementById('markup-copy').addEventListener('click', function () {
             clipboard.copy({
                 'text/plain': document.getElementById('<%=txtImgurl.ClientID %>').value,
-            //'text/html': '<i>here</i> is some <b>rich text</b>'
-        }).then(
+                //'text/html': '<i>here</i> is some <b>rich text</b>'
+            }).then(
             function () { console.log('success'); },
             function (err) {
                 console.log('failure', err);

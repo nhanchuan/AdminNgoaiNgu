@@ -39,8 +39,7 @@ public partial class Pages_Category : BasePage
                 {
                     btnshowPanelfix.Attributes.Add("class", "btn yellow disabled");
                     this.load_dlPCategory();
-                    this.load_dlimgtype();
-                    this.load_dlEditSelectImgtype();
+                    
                     this.load_dlDanhMucCha();
 
                     if (Session["pageIndexadmin_Category"] == null)
@@ -64,12 +63,10 @@ public partial class Pages_Category : BasePage
                     
                     lblstartindex.Text = ((1 - 1) * PageSize + 1).ToString();
                     lblendindex.Text = ((((1 - 1) * PageSize + 1) + PageSize) - 1).ToString();
-                    this.load_rpLstImg(user.UserID);
-                    this.load_rpSelectEditImg(user.UserID);
+                    this.load_rpLstImg();
+                    this.load_rpSelectEditImg();
                     btnUpdatePCInfo.Visible = false;
                     dlEditParent.Visible = false;
-                    dlimgtype.Items.FindByValue("4").Selected = true;
-                    dlEditSelectImgtype.Items.FindByValue("4").Selected = true;
                     this.PopulateRootLevel();
 
                     rptPager.Visible = true;
@@ -169,20 +166,11 @@ public partial class Pages_Category : BasePage
         bool update = this.category.newCategory(txtPostCategoryName.Text, txtDescription.Text, txtPCUrl.Text, parent, imgid, (Convert.ToInt32(dlDanhMucCha.SelectedValue) == 0) ? category.MaxItemindexWithParentNull() + 1 : category.MaxItemindexWithParent(Convert.ToInt32(dlDanhMucCha.SelectedValue)) + 1);
         return update;
     }
-    public void load_rpLstImg(int UserUpload)
+    public void load_rpLstImg()
     {
         images = new ImagesBLL();
-        rpLstImg.DataSource = images.getImagesWithType(4, UserUpload);
+        rpLstImg.DataSource = images.getImagesWithType(4);
         rpLstImg.DataBind();
-    }
-    protected void load_dlimgtype()
-    {
-        imagestype = new ImagesTypeBLL();
-        dlimgtype.DataSource = imagestype.getallImagesType();
-        dlimgtype.DataValueField = "ImagesTypeID";
-        dlimgtype.DataTextField = "ImagesTypeName";
-        dlimgtype.DataBind();
-        dlimgtype.Items.Insert(0, new ListItem("--All Images--", "0"));
     }
     protected void btnselectimages_Click(object sender, EventArgs e)
     {
@@ -295,13 +283,6 @@ public partial class Pages_Category : BasePage
         }
     }
 
-    protected void dlimgtype_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        images = new ImagesBLL();
-        rpLstImg.DataSource = new ObjectDataSource();
-        rpLstImg.DataSource = (dlimgtype.SelectedValue == "0") ? images.getAllImagesWithUserUpload(Session.GetCurrentUser().UserID) : images.getImagesWithType(int.Parse(dlimgtype.SelectedValue), Session.GetCurrentUser().UserID);
-        rpLstImg.DataBind();
-    }
     protected void load_dlEditParent()
     {
         category = new CategoryBLL();
@@ -422,19 +403,10 @@ public partial class Pages_Category : BasePage
         }
         //Response.Write("<script>alert('"+ int.Parse(ctId)+" - "+txtEditName.Text+" - "+ txtEditDescription.Text+" - "+ txtEditPermalink.Text+" - "+ int.Parse(dlEditParent.SelectedValue)+" - "+ ImagesID(txtuploadImgTemp.Text) + "')</script>");
     }
-    protected void load_dlEditSelectImgtype()
-    {
-        imagestype = new ImagesTypeBLL();
-        dlEditSelectImgtype.DataSource = imagestype.getallImagesType();
-        dlEditSelectImgtype.DataValueField = "ImagesTypeID";
-        dlEditSelectImgtype.DataTextField = "ImagesTypeName";
-        dlEditSelectImgtype.DataBind();
-        dlEditSelectImgtype.Items.Insert(0, new ListItem("--All Images--", "0"));
-    }
-    public void load_rpSelectEditImg(int UserUpload)
+    public void load_rpSelectEditImg()
     {
         images = new ImagesBLL();
-        rpSelectEditImg.DataSource = images.getImagesWithType(4, UserUpload);
+        rpSelectEditImg.DataSource = images.getImagesWithType(4);
         rpSelectEditImg.DataBind();
     }
     protected void btnselectEditImg_Click(object sender, EventArgs e)
@@ -444,14 +416,6 @@ public partial class Pages_Category : BasePage
         ImgEditPC.Src = "../" + HiddenFieldEditImgesSelect.Value.Remove(0, http.Length);
         string script = "window.onload = function() { callButtonClickEvent(); };";
         ClientScript.RegisterStartupScript(this.GetType(), "callButtonClickEvent", script, true);
-    }
-
-    protected void dlEditSelectImgtype_SelectedIndexChanged1(object sender, EventArgs e)
-    {
-        images = new ImagesBLL();
-        rpSelectEditImg.DataSource = new ObjectDataSource();
-        rpSelectEditImg.DataSource = (dlEditSelectImgtype.SelectedValue == "0") ? images.getAllImagesWithUserUpload(Session.GetCurrentUser().UserID) : images.getImagesWithType(int.Parse(dlEditSelectImgtype.SelectedValue), Session.GetCurrentUser().UserID);
-        rpSelectEditImg.DataBind();
     }
     private void PopulateRootLevel()
     {

@@ -57,9 +57,6 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
                     {
                         //do something
                         this.getFormInfor(BaseCode);
-                        this.load_dlUserUploadImg();
-                        dlimgtype.Items.Insert(0, new ListItem("-- Hình ảnh tải lên bởi thành viên --", "0"));
-                        dlimgtype.Items.FindByValue(user.UserID.ToString()).Selected = true;
                         this.load_rpLstImg();
 
                         this.load_FormAdvisory(BaseCode);
@@ -345,22 +342,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
     protected void load_rpLstImg()
     {
         images = new ImagesBLL();
-        rpLstImg.DataSource = images.GetImagesTypeAndUserUpload(6,Session.GetCurrentUser().UserID);
-        rpLstImg.DataBind();
-    }
-    protected void load_dlUserUploadImg()
-    {
-        useraccount = new UserAccountsBLL();
-        dlimgtype.DataSource = useraccount.getAllUseraccount();
-        dlimgtype.DataValueField = "UserID";
-        dlimgtype.DataTextField = "UserName";
-        dlimgtype.DataBind();
-    }
-    protected void dlimgtype_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        images = new ImagesBLL();
-        rpLstImg.DataSource = new ObjectDataSource();
-        rpLstImg.DataSource = (dlimgtype.SelectedValue == "0") ? images.GetImagesTypeUpload(6) : images.GetImagesTypeAndUserUpload(6,int.Parse(dlimgtype.SelectedValue));
+        rpLstImg.DataSource = images.getImagesWithType(6);
         rpLstImg.DataBind();
     }
     private void UpdateImages(int proId, int ImgId)
@@ -424,8 +406,9 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         string fileExtension = "";
         if (!string.IsNullOrEmpty(fileName))
         {
+
             fileExtension = Path.GetExtension(fileName);
-            str_image = "Hollywood-" + dateString + "-" + RandomName + fileExtension;
+            str_image = XoaKyTuDacBiet(bsInfo.LastName+" "+ bsInfo.FirstName)+"-" + dateString + "-" + RandomName + fileExtension;
             string pathToSave = Server.MapPath("../images/Upload/ImagesForCustomerProfile/") + str_image;
             //file.SaveAs(pathToSave);
             System.Drawing.Image image = System.Drawing.Image.FromStream(fileUploadImgPost.FileContent);

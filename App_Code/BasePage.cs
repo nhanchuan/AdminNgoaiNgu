@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
+using System.Text;
 
 /// <summary>
 /// Summary description for BasePage
@@ -105,5 +106,15 @@ public class BasePage : System.Web.UI.Page
         dl.DataTextField = textfield;
         dl.DataValueField = valuefield;
         dl.DataBind();
+    }
+    //Chuyển tiêu đề tiếng việt có dấu sang không dấu dạng URL abc-def-ghi
+    public string XoaKyTuDacBiet(string str)
+    {
+        string title_url = "";
+        str = str.Replace(" ", "-");
+        Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+        string temp = str.Normalize(NormalizationForm.FormD);
+        title_url = regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        return title_url;
     }
 }

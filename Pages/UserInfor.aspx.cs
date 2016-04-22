@@ -326,7 +326,7 @@ public partial class Pages_UserInfor : BasePage
     public void load_rpchangeAvatar(int UserUpload)
     {
         images = new ImagesBLL();
-        rpchangeAvatar.DataSource = images.getImagesWithType(2, UserUpload);
+        rpchangeAvatar.DataSource = images.getImagesWithType(2);
         rpchangeAvatar.DataBind();
     }
     protected void btnchangeAvatar_Click(object sender, EventArgs e)
@@ -352,7 +352,7 @@ public partial class Pages_UserInfor : BasePage
         rpchangeAvatar.DataSource = new ObjectDataSource();
         if (dlImgCategory.SelectedValue == "1")
         {
-            rpchangeAvatar.DataSource = images.getImagesWithType(2, Session.GetCurrentUser().UserID);
+            rpchangeAvatar.DataSource = images.getImagesWithType(2);
             rpchangeAvatar.DataBind();
         }
         else
