@@ -340,121 +340,122 @@
                     </div>
                     <!-- END PAGINATOR -->
                 </div>
+                <%-- Modal View file --%>
+                <div class="modal fade" id="modalViewFilel" data-keyboard="false" tabindex="-1" role="dialog" data-backdrop="static" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                                <h4 class="modal-title uppercase">
+                                    <img src="../images/icon/folder-documents-icon.png" width="35" height="35" />
+                                    Danh sách file thuộc bộ hồ sơ
+                       
+                        <asp:Label ID="txtlistfile" CssClass="bold" runat="server" Text="Label"></asp:Label></h4>
+                            </div>
+                            <div class="modal-body background">
+                                <div class="tabbable-custom">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#tabFileAttachment" data-toggle="tab">File đính kèm</a></li>
+                                        <li><a href="#tabFileTranlater" data-toggle="tab">File dịch hồ sơ</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tabFileAttachment">
+                                            <%-- Gw File Attachment --%>
+                                            <asp:GridView ID="gwFileAttachment" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
+                                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileAttachment_RowDataBound" OnRowDeleting="gwFileAttachment_RowDeleting">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Tên Giấy Tờ">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
+                                                            <asp:Label ID="lblAttachmentID" CssClass="display-none" runat="server" Text='<%# Eval("AttachmentID") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Tên File Uplopad">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("AttachmentName") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Thời gian Upload">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ShowHeader="False">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btbDeleteAtt" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="30px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ShowHeader="false">
+                                                        <ItemTemplate>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadAttachment.ashx?attachmentId="+Eval("AttachmentID") %>'><i class="fa fa-download"></i></a>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="30px" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                                                <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
+                                                <RowStyle BackColor="#FAF3DF"></RowStyle>
+                                            </asp:GridView>
+                                            <%-- End Gw File Attachment --%>
+                                        </div>
+                                        <div class="tab-pane" id="tabFileTranlater">
+                                            <%-- Gw File Attachment --%>
+                                            <asp:GridView ID="gwFileTranslate" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
+                                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileTranslate_RowDataBound" OnRowDeleting="gwFileTranslate_RowDeleting">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Tên Giấy Tờ">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
+                                                            <asp:Label ID="lblFileTranslateID" CssClass="display-none" runat="server" Text='<%# Eval("FileTranslateID") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Tên File Uplopad">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("FileTranslateName") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Thời gian Upload">
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ShowHeader="False">
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="btnDeleteTrans" runat="server" CssClass="btn btn-circle btn-icon-only btn-default" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="30px" />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField ShowHeader="false">
+                                                        <ItemTemplate>
+                                                            <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadFileTrans.ashx?TranslateId="+Eval("FileTranslateID") %>'><i class="fa fa-download"></i></a>
+                                                        </ItemTemplate>
+                                                        <ItemStyle Width="30px" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                                                <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
+                                                <RowStyle BackColor="#FAF3DF"></RowStyle>
+                                            </asp:GridView>
+                                            <%-- End Gw File Attachment --%>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-close"></i>Close</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%-- End Modal View file --%>
             </ContentTemplate>
         </asp:UpdatePanel>
 
     </div>
     <%-- End Danh sach ho so --%>
 
-    <%-- Modal View file --%>
-    <div class="modal fade" id="modalViewFilel" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title uppercase">
-                        <img src="../images/icon/folder-documents-icon.png" width="35" height="35" />
-                        Danh sách file thuộc bộ hồ sơ
-                       
-                        <asp:Label ID="txtlistfile" CssClass="bold" runat="server" Text="Label"></asp:Label></h4>
-                </div>
-                <div class="modal-body background">
-                    <div class="tabbable-custom">
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tabFileAttachment" data-toggle="tab">File đính kèm</a></li>
-                            <li><a href="#tabFileTranlater" data-toggle="tab">File dịch hồ sơ</a></li>
-                        </ul>
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabFileAttachment">
-                                <%-- Gw File Attachment --%>
-                                <asp:GridView ID="gwFileAttachment" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileAttachment_RowDataBound" OnRowDeleting="gwFileAttachment_RowDeleting">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Tên Giấy Tờ">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
-                                                <asp:Label ID="lblAttachmentID" CssClass="display-none" runat="server" Text='<%# Eval("AttachmentID") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Tên File Uplopad">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label5" runat="server" Text='<%# Eval("AttachmentName") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Thời gian Upload">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="False">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btbDeleteAtt" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <ItemStyle Width="30px" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="false">
-                                            <ItemTemplate>
-                                                <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadAttachment.ashx?attachmentId="+Eval("AttachmentID") %>'><i class="fa fa-download"></i></a>
-                                            </ItemTemplate>
-                                            <ItemStyle Width="30px" />
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
-                                    <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
-                                    <RowStyle BackColor="#FAF3DF"></RowStyle>
-                                </asp:GridView>
-                                <%-- End Gw File Attachment --%>
-                            </div>
-                            <div class="tab-pane" id="tabFileTranlater">
-                                <%-- Gw File Attachment --%>
-                                <asp:GridView ID="gwFileTranslate" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwFileTranslate_RowDataBound" OnRowDeleting="gwFileTranslate_RowDeleting">
-                                    <Columns>
-                                        <asp:TemplateField HeaderText="Tên Giấy Tờ">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label4" runat="server" Text='<%# Eval("DocName") %>'></asp:Label>
-                                                <asp:Label ID="lblFileTranslateID" CssClass="display-none" runat="server" Text='<%# Eval("FileTranslateID") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Tên File Uplopad">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label5" runat="server" Text='<%# Eval("FileTranslateName") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField HeaderText="Thời gian Upload">
-                                            <ItemTemplate>
-                                                <asp:Label ID="Label6" runat="server" Text='<%# Eval("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="False">
-                                            <ItemTemplate>
-                                                <asp:LinkButton ID="btnDeleteTrans" runat="server" CssClass="btn btn-circle btn-icon-only btn-default" CausesValidation="False" CommandName="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
-                                            </ItemTemplate>
-                                            <ItemStyle Width="30px" />
-                                        </asp:TemplateField>
-                                        <asp:TemplateField ShowHeader="false">
-                                            <ItemTemplate>
-                                                <a class="btn btn-circle btn-icon-only btn-default" href='<%# "../Handler/DownloadFileTrans.ashx?TranslateId="+Eval("FileTranslateID") %>'><i class="fa fa-download"></i></a>
-                                            </ItemTemplate>
-                                            <ItemStyle Width="30px" />
-                                        </asp:TemplateField>
-                                    </Columns>
-                                    <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
-                                    <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
-                                    <RowStyle BackColor="#FAF3DF"></RowStyle>
-                                </asp:GridView>
-                                <%-- End Gw File Attachment --%>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a class="btn btn-warning" data-dismiss="modal"><i class="fa fa-close"></i> Close</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <%-- End Modal View file --%>
+
 
     <script src="../assets/global/plugins/amcharts/amcharts/amcharts.js" type="text/javascript"></script>
     <script src="../assets/global/plugins/amcharts/amcharts/serial.js" type="text/javascript"></script>

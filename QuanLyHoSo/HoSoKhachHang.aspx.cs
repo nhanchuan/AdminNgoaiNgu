@@ -589,7 +589,8 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
                 if ((System.IO.File.Exists(filename)))
                 {
                     System.IO.File.Delete(filename);
-                    this.load_bagattachment();
+                    //this.load_bagattachment();
+                    Response.Redirect(Request.Url.AbsoluteUri);
                 }
                 else
                 {
@@ -635,7 +636,8 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
                 if ((System.IO.File.Exists(filename)))
                 {
                     System.IO.File.Delete(filename);
-                    this.load_gwFileTranslate();
+                    //this.load_gwFileTranslate();
+                    Response.Redirect(Request.Url.AbsoluteUri);
                 }
                 else
                 {
@@ -687,8 +689,10 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
             CustomerBasicInfo cb = lstcus.FirstOrDefault();
             this.GetBagProfilePageWise(1, cb.InfoID);
 
+            this.load_bagattachment();
+            this.load_gwFileTranslate();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             lblSuccess.Text = ex.ToString(); 
         }
