@@ -35,7 +35,7 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
             }
             else
             {
-                if (!check_permiss(ac.UserID, FunctionName.QLCapDo))
+                if (!check_permiss(ac.UserID, FunctionName.KhoaHoc))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/Extra/access_denied.aspx");
                 }

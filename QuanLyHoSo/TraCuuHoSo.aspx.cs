@@ -23,7 +23,7 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
             }
             else
             {
-                if (!check_permiss(ac.UserID, FunctionName.QLHocVien))
+                if (!check_permiss(ac.UserID, FunctionName.TraCuuHoSo))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/Extra/access_denied.aspx");
                 }

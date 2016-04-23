@@ -138,6 +138,7 @@
                                     <a href="#" id="btnAction" class="btn btn-primary" onserverclick="btnAction_ServerClick" runat="server"><i class="fa fa-terminal"></i>Áp dụng</a>
                                 </span>
                             </div>
+                            <asp:Label ID="lblActionsMessage" ForeColor="Red" runat="server"></asp:Label>
                         </div>
                         <div class="col-lg-5">
                             <div class="input-group">
@@ -303,8 +304,11 @@
         <!-- END PAGINATOR -->
     </div>
     <a id="btnHSChonTruong" class="btn btn-success disabled" href="#modalChangeSchool" data-toggle="modal" runat="server">
-        <img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" />
+        <img src="../images/icon/Categories-applications-education-university-icon.png" width="30" height="30" />
         CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
+   <%-- <a class="btn btn-success disabled">
+        <img src="../images/icon/Other-Power-Switch-User-Metro-icon.png" width="30" height="30" />
+        CHUYỂN TRƯỜNG CHO HỒ SƠ DU HỌC</a>--%>
     <div class="clearfix"></div>
     <br />
     <div class="col-lg-12 text-right">

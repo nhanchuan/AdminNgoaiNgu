@@ -28,13 +28,13 @@ public static class FunctionName
     public static string TuVanVien= "FC018";
     public static string HoSoTongHop= "FC019";
     public static string ThuLyHoSo= "FC020";
-    public static string GhiDanhLopMoi= "FC021";
+    //public static string GhiDanhLopMoi= "FC021";
     public static string QLGhiDanh= "FC022";
-    public static string QLHocPhi= "FC023";
+    //public static string QLHocPhi= "FC023";
     public static string DiemDanh= "FC024";
-    public static string QLKhoiLop= "FC025";
-    public static string QLCapDo= "FC026";
-    public static string QLLopHoc= "FC027";
+    //public static string QLKhoiLop= "FC025";
+    //public static string QLCapDo= "FC026";
+    //public static string QLLopHoc= "FC027";
     public static string QLHocVien= "FC028";
     public static string QLGioHoc= "FC029";
     public static string QLGiaoTrinh= "FC030";
@@ -47,8 +47,8 @@ public static class FunctionName
     public static string VideoEdit= "FC037";
     public static string ThongTinHocVien= "FC038";
     public static string GhiDanhHocVien= "FC039";
-    public static string SuaThongTinLop= "FC040";
-    public static string ThemLopHoc= "FC041";
+    //public static string SuaThongTinLop= "FC040";
+    //public static string ThemLopHoc= "FC041";
     public static string PhieuGhiDanh= "FC042";
     public static string ThongTinHoSoKhachHang= "FC043";
     public static string UpdateThongTinHoSoKhachHang = "FC044";
@@ -60,4 +60,13 @@ public static class FunctionName
     public static string QLDangKyTuVan= "FC050";
     public static string ThongTinKhachHang= "FC051";
     public static string ThongTinThanhVien = "FC052";
+
+    public static string TraCuuHoSo = "FC053";
+    public static string QuanLyHocVien = "FC054";
+    public static string LoaiHinhDaoTao = "FC055";
+    public static string LoaiChuongTrinhDaoTao = "FC056";
+    public static string ChuongTrinhDaoTao = "FC057";
+    public static string LopHoc = "FC058";
+    public static string KhoaHoc = "FC059";
+    public static string GhiDanhKhoaHoc = "FC060";
 }

@@ -32,7 +32,7 @@ public partial class kus_admin_GhiDanhKhoaHoc : BasePage
             }
             else
             {
-                if (!check_permiss(ac.UserID, FunctionName.GhiDanhLopMoi))
+                if (!check_permiss(ac.UserID, FunctionName.GhiDanhKhoaHoc))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/Extra/access_denied.aspx");
                 }

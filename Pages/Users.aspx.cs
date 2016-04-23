@@ -16,7 +16,7 @@ public partial class Pages_Users : BasePage
     PermissFuncBLL permissfunction;
     UserPermissBLL userpermiss;
     AuthenticationGroupsBLL authenticationgroup;
-    public int PageSize = 5;
+    public int PageSize = 30;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();

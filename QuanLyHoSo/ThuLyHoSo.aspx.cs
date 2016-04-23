@@ -405,18 +405,22 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         CustomerBasicInfo cubs = lstbs.FirstOrDefault();
         List<BagProfile> lstbag = bagprofile.GetBagProfileWithInfoID(cuspri.InfoID);
         BagProfile bag = lstbag.FirstOrDefault();
-        if (gwThuLyHSManager.SelectedRow == null || dlEmployeesAdvisory.SelectedValue == "0")
+        if (gwThuLyHSManager.SelectedRow == null)
         {
-            return;
+            lblActionsMessage.Text = "Chưa chọn hồ sơ !";
         }
         else
         {
             int key = Convert.ToInt32(dlEmployeesAdvisory.SelectedValue);
             switch (key)
             {
+                case 0:
+                    lblActionsMessage.Text = "Chưa chọn hành động !";
+                    break;
                 case 1:
                     if (bag != null)
                     {
+                        lblActionsMessage.Text = "Hồ Sơ Khách Hàng đã được làm, hoặc đang làm. Vui lòng chọn xem hồ sơ !";
                         return;
                     }
                     else
@@ -427,6 +431,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                 case 2:
                     if (bag == null)
                     {
+                        lblActionsMessage.Text = "Hồ Sơ Khách Hàng chưa có trên hệ thống. Vui lòng chọn làm hồ sơ !";
                         return;
                     }
                     else

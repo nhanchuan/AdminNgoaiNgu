@@ -25,7 +25,7 @@ public partial class ChuongTrinhHoc_ChuongTrinhDaoTao : BasePage
             }
             else
             {
-                if (!check_permiss(ac.UserID, FunctionName.QLCapDo))
+                if (!check_permiss(ac.UserID, FunctionName.ChuongTrinhDaoTao))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/Extra/access_denied.aspx");
                 }

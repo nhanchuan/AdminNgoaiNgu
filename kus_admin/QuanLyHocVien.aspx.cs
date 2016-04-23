@@ -31,7 +31,7 @@ public partial class kus_admin_QuanLyHocVien : BasePage
             }
             else
             {
-                if (!check_permiss(ac.UserID, FunctionName.QLCapDo))
+                if (!check_permiss(ac.UserID, FunctionName.QuanLyHocVien))
                 {
                     Response.Redirect("http://" + Request.Url.Authority + "/Extra/access_denied.aspx");
                 }
