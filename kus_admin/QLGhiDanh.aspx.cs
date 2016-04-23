@@ -16,7 +16,7 @@ public partial class kus_admin_QLGhiDanh : BasePage
     kus_HTChiNhanhBLL kus_htchinhanh;
     kus_CoSoBLL kus_coso;
     kus_GhiDanhBLL kus_ghidanh;
-    public int PageSize = 1;
+    public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();

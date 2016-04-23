@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="ThuLyHoSo.aspx.cs" Inherits="QuanLyHoSo_ThuLyHoSo" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <link href="../App_Themes/admin/StylePortlet.css" rel="stylesheet" />
@@ -65,6 +65,7 @@
                         <div class="portlet-title">
                             <div class="caption bold">
                                 Thống kê hồ sơ
+                           
                             </div>
                             <div class="tools">
                                 <a class="reload" href="javascript:;" onclick="reloadclick()"></a>
@@ -103,7 +104,7 @@
         <!--end col-md-4-->
     </div>
     <%-- END ROW --%>
-    
+
     <div class="clearfix"></div>
     <asp:UpdatePanel runat="server">
         <ContentTemplate>
@@ -111,6 +112,7 @@
                 <div class="portlet-title">
                     <div class="caption">
                         <i class="fa fa-edit"></i>Danh Sách Hồ sơ thụ lý
+                   
                     </div>
                     <div class="tools">
                         <a href="javascript:;" class="collapse"></a>
@@ -216,7 +218,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
-                                    <i class="fa fa-graduation-cap"></i> School
+                                    <i class="fa fa-graduation-cap"></i>School
+                               
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>
@@ -232,7 +235,7 @@
                                             <asp:Label ID="Label5" runat="server" Text='<%# Bind("TypeName") %>'></asp:Label></strong></span>
                                     <br />
                                     <div class="form-inline  pull-right">
-                                        <i style="color: #d64d25;" class="icon-user-female"></i><i> <%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
+                                        <i style="color: #d64d25;" class="icon-user-female"></i><i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
@@ -299,25 +302,29 @@
         </div>
         <!-- END PAGINATOR -->
     </div>
-    <a id="btnHSChonTruong" class="btn btn-success disabled" href="#modalChangeSchool" data-toggle="modal" runat="server"><img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" /> CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
+    <a id="btnHSChonTruong" class="btn btn-success disabled" href="#modalChangeSchool" data-toggle="modal" runat="server">
+        <img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" />
+        CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
     <div class="clearfix"></div>
     <br />
     <div class="col-lg-12 text-right">
         <span class="label label-primary"><strong><i class="fa fa-pencil-square-o"></i>
-        <label>Tư Vấn Du Học</label></strong></span>
-    <span class="label label-default"><strong><i class="fa fa-pencil-square-o"></i>
-        <label>Tư Vấn Thực Tập</label></strong></span>
-    <span class="label label-success"><strong><i class="fa fa-pencil-square-o"></i>
-        <label>Tư Vấn Du Lịch</label></strong></span>
-    <span class="label label-warning"><strong><i class="fa fa-pencil-square-o"></i>
-        <label>Tư Vấn Định Cư</label></strong></span>
+            <label>Tư Vấn Du Học</label></strong></span>
+        <span class="label label-default"><strong><i class="fa fa-pencil-square-o"></i>
+            <label>Tư Vấn Thực Tập</label></strong></span>
+        <span class="label label-success"><strong><i class="fa fa-pencil-square-o"></i>
+            <label>Tư Vấn Du Lịch</label></strong></span>
+        <span class="label label-warning"><strong><i class="fa fa-pencil-square-o"></i>
+            <label>Tư Vấn Định Cư</label></strong></span>
     </div>
-    <div class="row"></div><br />
+    <div class="row"></div>
+    <br />
     <%-- Begin chart --%>
     <div class="portlet box yellow">
         <div class="portlet-title">
             <div class="caption">
                 <i class="fa fa-edit"></i>Biểu đồ thống kê số lượng hồ sơ du học các quốc gia
+           
             </div>
             <div class="tools">
                 <a href="javascript:;" class="collapse"></a>
@@ -328,11 +335,11 @@
         </div>
         <div class="portlet-body background">
             <%-- Begin chart --%>
-                <div class="panel panel-info">
-                    <div class="panel-body">
-                        <div id="chart_5at" class="chart" style="height: 400px;">
-                        </div>
-                        <%--<div class="well margin-top-20">
+            <div class="panel panel-info">
+                <div class="panel-body">
+                    <div id="chart_5at" class="chart" style="height: 400px;">
+                    </div>
+                    <%--<div class="well margin-top-20">
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label class="text-left">Top Radius:</label>
@@ -348,13 +355,13 @@
                                 </div>
                             </div>
                         </div>--%>
-                    </div>
                 </div>
+            </div>
             <%-- End chart --%>
         </div>
     </div>
     <%-- End chart --%>
-    
+
     <%-- Modal Search --%>
     <div class="modal fade" id="modalChangeSchool" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-full">
@@ -363,7 +370,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">
                         <img src="../images/icon/Categories-applications-education-university-icon.png" width="35" height="35" />
-                        CHỌN TRƯỜNG CHO <span class="bold"> HỒ SƠ DU HỌC</span></h4>
+                        CHỌN TRƯỜNG CHO <span class="bold">HỒ SƠ DU HỌC</span></h4>
                 </div>
                 <div class="modal-body background">
                     <div class="row">
@@ -382,6 +389,7 @@
                                             <asp:TemplateField HeaderText="Tên Trường">
                                                 <HeaderTemplate>
                                                     Tên Trường: 
+                                                   
                                                     <asp:DropDownList ID="dlSchoolName" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlSchoolName_SelectedIndexChanged" runat="server"></asp:DropDownList>
                                                 </HeaderTemplate>
                                                 <ItemTemplate>
@@ -392,6 +400,7 @@
                                             <asp:TemplateField HeaderText="Cấp bậc">
                                                 <HeaderTemplate>
                                                     Cấp bậc:
+                                                   
                                                     <asp:DropDownList ID="dlSchoolLvl" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlSchoolLvl_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
@@ -407,6 +416,7 @@
                                             <asp:TemplateField HeaderText="Quốc Gia">
                                                 <HeaderTemplate>
                                                     Quốc Gia:
+                                                   
                                                     <asp:DropDownList ID="dlFilterCountry" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlFilterCountry_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
@@ -420,10 +430,10 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField>
                                             <asp:TemplateField>
-                                            <ItemTemplate>
-                                                <a href='<%# Eval("WebSite") %>'' target="_blank"><i class="fa fa-globe"></i> WebSite</a>
-                                            </ItemTemplate>
-                                        </asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <a href='<%# Eval("WebSite") %>' target="_blank"><i class="fa fa-globe"></i>WebSite</a>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
                                         </Columns>
                                         <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                                         <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
@@ -433,10 +443,14 @@
                             </asp:UpdatePanel>
                         </div>
                     </div>
-                    <div class="clearfix"></div>
-                    <br />
-                    <a id="btnSaveSchool" class="btn btn-primary" onserverclick="btnSaveSchool_ServerClick" runat="server"><img src="../images/icon/Save-icon.png"  width="35" height="35"/>Chọn Trường</a>
-                    <a id="A1" class="btn btn-warning" data-dismiss="modal" aria-hidden="true"><img src="../images/icon/Actions-application-exit-icon.png"  width="35" height="35"/>Hủy Chọn Trường</a>
+                </div>
+                <div class="modal-footer">
+                    <a id="btnSaveSchool" class="btn btn-primary" onserverclick="btnSaveSchool_ServerClick" runat="server">
+                        <img src="../images/icon/Save-icon.png" width="30" height="30" />
+                        Chọn Trường</a>
+                    <a id="A1" class="btn btn-warning" data-dismiss="modal" aria-hidden="true">
+                        <img src="../images/icon/Actions-application-exit-icon.png" width="30" height="30" />
+                        Hủy Chọn Trường</a>
                 </div>
             </div>
         </div>
@@ -474,7 +488,7 @@
     <asp:HiddenField ID="HiddenField13" runat="server" />
     <asp:HiddenField ID="HiddenField14" runat="server" />
     <asp:HiddenField ID="HiddenField15" runat="server" />
-    <asp:HiddenField ID="HiddenField16" runat="server" />   
+    <asp:HiddenField ID="HiddenField16" runat="server" />
     <asp:HiddenField ID="HiddenField17" runat="server" />
 
     <script type="text/javascript">
@@ -491,18 +505,18 @@
             }, {
                 "country": "Australia",
                 "visits": document.getElementById('<%=HiddenField2.ClientID %>').value,
-                    "color": "#999999"
-                }, {
-                    "country": "Canada",
-                    "visits": document.getElementById('<%=HiddenField3.ClientID %>').value,
-                    "color": "#CD0D74"
-                }, {
-                    "country": "UK",
-                    "visits": document.getElementById('<%=HiddenField4.ClientID %>').value,
-                    "color": "#F8FF01"
-                }, {
-                    "country": "Thụy Sỹ",
-                    "visits": document.getElementById('<%=HiddenField5.ClientID %>').value,
+                "color": "#999999"
+            }, {
+                "country": "Canada",
+                "visits": document.getElementById('<%=HiddenField3.ClientID %>').value,
+                "color": "#CD0D74"
+            }, {
+                "country": "UK",
+                "visits": document.getElementById('<%=HiddenField4.ClientID %>').value,
+                "color": "#F8FF01"
+            }, {
+                "country": "Thụy Sỹ",
+                "visits": document.getElementById('<%=HiddenField5.ClientID %>').value,
                     "color": "#FF6600"
                 }, {
                     "country": "Singapore",

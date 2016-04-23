@@ -528,6 +528,12 @@
                                         Quản Lý Học Viên
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="../QuanLyHoSo/TraCuuHoSo.aspx">
+                                        <i class="glyphicon glyphicon-folder-open"></i>&nbsp
+                                        Tra Cứu Hồ Sơ
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 

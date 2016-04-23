@@ -541,17 +541,20 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         {
             List<CustomerProfilePrivate> lstPr = customerProPri.GetCustomerProfilePrivateWithProfileID(profileId);
             CustomerProfilePrivate cuspro = lstPr.FirstOrDefault();
-            if(cuspro.InternationalSchool!=0)
-            {
-                Response.Write("<script>alert('Hồ Sơ mã :"+cuspro.ProfileCode+" đã chọn trường !')</script>");
-                return;
-            }
-            else
-            {
-                int SchoolID = Convert.ToInt32((gwInternationalSchool.SelectedRow.FindControl("lblSchoolID") as Label).Text);
-                this.customerProPri.UpdateInternationalSchool(SchoolID, profileId);
-                Response.Redirect(Request.Url.AbsoluteUri);
-            }
+            //if(cuspro.InternationalSchool!=0)
+            //{
+            //    Response.Write("<script>alert('Hồ Sơ mã :"+cuspro.ProfileCode+" đã chọn trường !')</script>");
+            //    return;
+            //}
+            //else
+            //{
+            //    int SchoolID = Convert.ToInt32((gwInternationalSchool.SelectedRow.FindControl("lblSchoolID") as Label).Text);
+            //    this.customerProPri.UpdateInternationalSchool(SchoolID, profileId);
+            //    Response.Redirect(Request.Url.AbsoluteUri);
+            //}
+            int SchoolID = Convert.ToInt32((gwInternationalSchool.SelectedRow.FindControl("lblSchoolID") as Label).Text);
+            this.customerProPri.UpdateInternationalSchool(SchoolID, profileId);
+            Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
     private void loadHidden()

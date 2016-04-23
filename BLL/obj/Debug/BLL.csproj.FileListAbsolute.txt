@@ -82,3 +82,10 @@ D:\DEVELOPER\WEBSITE\GitHub\ManagerCenter_v1\BLL\bin\Debug\DAL.pdb
 D:\DEVELOPER\WEBSITE\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 D:\DEVELOPER\WEBSITE\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.dll
 D:\DEVELOPER\WEBSITE\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.pdb
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\bin\Debug\BLL.dll
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\bin\Debug\BLL.pdb
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\bin\Debug\DAL.dll
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\bin\Debug\DAL.pdb
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.dll
+E:\DEVELOPER\Website\GitHub\ManagerCenter_v1\BLL\obj\Debug\BLL.pdb

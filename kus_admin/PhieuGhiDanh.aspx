@@ -16,7 +16,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="../kus_admin/QLHocPhi.aspx">Quản lý Học phí</a>
+                <a href="../kus_admin/QLGhiDanh.aspx">Quản lý Ghi danh</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
