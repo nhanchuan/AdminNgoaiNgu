@@ -28,7 +28,7 @@ public static class FunctionName
     public static string TuVanVien= "FC018";
     public static string HoSoTongHop= "FC019";
     public static string ThuLyHoSo= "FC020";
-    //public static string GhiDanhLopMoi= "FC021";
+    public static string CacTruongLienKet= "FC021";
     public static string QLGhiDanh= "FC022";
     //public static string QLHocPhi= "FC023";
     public static string DiemDanh= "FC024";

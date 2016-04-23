@@ -15,9 +15,17 @@ namespace DAL
         private string schoolLvl;
         private string aboutLink;
         private int countryID;
+        private int provinceID;
+        private int districtID;
         private string googleMap;
         private string phone;
         private DateTime establish;
+        private string hocPhi;
+        private string phiKhac;
+        private string datCoc;
+        private string dieuKienNhapHoc;
+        private string hocBong;
+        private int images;
         public int SchoolID
         {
             get
@@ -108,7 +116,31 @@ namespace DAL
                 countryID = value;
             }
         }
+        public int ProvinceID
+        {
+            get
+            {
+                return provinceID;
+            }
 
+            set
+            {
+                provinceID = value;
+            }
+        }
+
+        public int DistrictID
+        {
+            get
+            {
+                return districtID;
+            }
+
+            set
+            {
+                districtID = value;
+            }
+        }
         public string GoogleMap
         {
             get
@@ -145,6 +177,84 @@ namespace DAL
             set
             {
                 establish = value;
+            }
+        }
+
+        public string HocPhi
+        {
+            get
+            {
+                return hocPhi;
+            }
+
+            set
+            {
+                hocPhi = value;
+            }
+        }
+
+        public string PhiKhac
+        {
+            get
+            {
+                return phiKhac;
+            }
+
+            set
+            {
+                phiKhac = value;
+            }
+        }
+
+        public string DatCoc
+        {
+            get
+            {
+                return datCoc;
+            }
+
+            set
+            {
+                datCoc = value;
+            }
+        }
+
+        public string DieuKienNhapHoc
+        {
+            get
+            {
+                return dieuKienNhapHoc;
+            }
+
+            set
+            {
+                dieuKienNhapHoc = value;
+            }
+        }
+
+        public string HocBong
+        {
+            get
+            {
+                return hocBong;
+            }
+
+            set
+            {
+                hocBong = value;
+            }
+        }
+
+        public int Images
+        {
+            get
+            {
+                return images;
+            }
+
+            set
+            {
+                images = value;
             }
         }
     }

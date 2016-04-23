@@ -26,16 +26,24 @@ namespace BLL
             foreach(DataRow r in tb.Rows)
             {
                 InternationalSchool InS = new InternationalSchool();
-                InS.SchoolID = (int)r[0];
-                InS.SchoolName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                InS.SchoolAddress= (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-                InS.WebSite= (string.IsNullOrEmpty(r[3].ToString())) ? "" : (string)r[3];
-                InS.SchoolLvl= (string.IsNullOrEmpty(r[4].ToString())) ? "" : (string)r[4];
-                InS.AboutLink= (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                InS.CountryID= (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                InS.GoogleMap= (string.IsNullOrEmpty(r[7].ToString())) ? "" : (string)r[7];
-                InS.Phone= (string.IsNullOrEmpty(r[8].ToString())) ? "" : (string)r[8];
-                InS.Establish= (string.IsNullOrEmpty(r[9].ToString())) ? DefaultBirthday : (DateTime)r[9];
+                InS.SchoolID = (int)r["SchoolID"];
+                InS.SchoolName = (string.IsNullOrEmpty(r["SchoolName"].ToString())) ? "" : (string)r["SchoolName"];
+                InS.SchoolAddress= (string.IsNullOrEmpty(r["SchoolAddress"].ToString())) ? "" : (string)r["SchoolAddress"];
+                InS.WebSite= (string.IsNullOrEmpty(r["WebSite"].ToString())) ? "" : (string)r["WebSite"];
+                InS.SchoolLvl= (string.IsNullOrEmpty(r["SchoolLvl"].ToString())) ? "" : (string)r["SchoolLvl"];
+                InS.AboutLink= (string.IsNullOrEmpty(r["AboutLink"].ToString())) ? "" : (string)r["AboutLink"];
+                InS.CountryID= (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
+                InS.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
+                InS.DistrictID = (string.IsNullOrEmpty(r["DistrictID"].ToString())) ? 0 : (int)r["DistrictID"];
+                InS.GoogleMap= (string.IsNullOrEmpty(r["GoogleMap"].ToString())) ? "" : (string)r["GoogleMap"];
+                InS.Phone= (string.IsNullOrEmpty(r["Phone"].ToString())) ? "" : (string)r["Phone"];
+                InS.Establish= (string.IsNullOrEmpty(r["Establish"].ToString())) ? DefaultBirthday : (DateTime)r["Establish"];
+                InS.HocPhi = (string.IsNullOrEmpty(r["HocPhi"].ToString())) ? "" : (string)r["HocPhi"];
+                InS.PhiKhac= (string.IsNullOrEmpty(r["PhiKhac"].ToString())) ? "" : (string)r["PhiKhac"];
+                InS.DatCoc = (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? "" : (string)r["DatCoc"];
+                InS.DieuKienNhapHoc = (string.IsNullOrEmpty(r["DieuKienNhapHoc"].ToString())) ? "" : (string)r["DieuKienNhapHoc"];
+                InS.HocBong = (string.IsNullOrEmpty(r["HocBong"].ToString())) ? "" : (string)r["HocBong"];
+                InS.Images = (string.IsNullOrEmpty(r["Images"].ToString())) ? 0 : (int)r["Images"];
                 lst.Add(InS);
             }
             this.DB.CloseConnection();
