@@ -404,7 +404,6 @@
                                             <asp:TemplateField HeaderText="Cấp bậc">
                                                 <HeaderTemplate>
                                                     Cấp bậc:
-                                                   
                                                     <asp:DropDownList ID="dlSchoolLvl" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlSchoolLvl_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
@@ -420,7 +419,6 @@
                                             <asp:TemplateField HeaderText="Quốc Gia">
                                                 <HeaderTemplate>
                                                     Quốc Gia:
-                                                   
                                                     <asp:DropDownList ID="dlFilterCountry" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlFilterCountry_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
