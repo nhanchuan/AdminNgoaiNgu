@@ -132,7 +132,7 @@
                                         <div class="form-group">
                                             <label class="control-label bold col-md-4">About Link</label>
                                             <div class="col-md-8">
-                                                <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtAboutLink" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
