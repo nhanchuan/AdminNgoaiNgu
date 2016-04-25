@@ -40,80 +40,21 @@
             <div class="portlet-body form">
                 <div class="form-horizontal">
                     <div class="form-body">
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Tên Trường</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="txtSchoolName" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="txtSchoolName" ValidationGroup="validNewtxtSchool" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="Tên trường không được để trống !"></asp:RequiredFieldValidator>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Năm thành lập</label>
-                                    <div class="col-md-8">
-                                        <%-- Date picker --%>
-                                        <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                            <asp:TextBox ID="txtEstablish" CssClass="form-control" runat="server"></asp:TextBox>
-                                            <span class="input-group-btn">
-                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                            </span>
-                                        </div>
-                                        <%-- Date picker --%>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">WebSite Trường</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="txtWebSite" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Địa Chỉ</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="txtAddress" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Số Điện Thoại</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="txtPhone" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <%-- /Update panel --%>
+
                         <asp:UpdatePanel runat="server">
                             <ContentTemplate>
+
+
+
                                 <%-- /Row --%>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">Quốc Gia</label>
+                                            <label class="control-label bold col-md-4">Tên Trường</label>
                                             <div class="col-md-8">
-                                                <asp:DropDownList ID="dlLoaiChuongTrinh" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label bold col-md-4">Cấp Độ Trường</label>
-                                            <div class="col-md-8">
-                                                <asp:DropDownList ID="dlHTChiNhanh" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                <asp:TextBox ID="txtSchoolName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="txtSchoolName" ValidationGroup="validNewtxtSchool" Display="Dynamic" ForeColor="Red" runat="server" ErrorMessage="Tên trường không được để trống !"></asp:RequiredFieldValidator>
                                             </div>
                                         </div>
                                     </div>
@@ -122,94 +63,163 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">Tỉnh / Thành  - Tểu Bang</label>
+                                            <label class="control-label bold col-md-4">Năm thành lập</label>
                                             <div class="col-md-8">
-                                                <asp:DropDownList ID="dlChuongTrinh" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                <%-- Date picker --%>
+                                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                    <asp:TextBox ID="txtEstablish" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <span class="input-group-btn">
+                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                    </span>
+                                                </div>
+                                                <%-- Date picker --%>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">About Link</label>
+                                            <label class="control-label bold col-md-4">WebSite Trường</label>
                                             <div class="col-md-8">
-                                                <asp:TextBox ID="txtAboutLink" CssClass="form-control" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtWebSite" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <%-- /Row --%>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">Quận  - Huyện</label>
+                                            <label class="control-label bold col-md-4">Địa Chỉ</label>
                                             <div class="col-md-8">
-                                                <asp:DropDownList ID="dlLopHoc" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                <asp:TextBox ID="txtAddress" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">Google Map Link(API)</label>
+                                            <label class="control-label bold col-md-4">Số Điện Thoại</label>
                                             <div class="col-md-8">
-                                                <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtPhone" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <asp:UpdatePanel runat="server">
+                                    <ContentTemplate>
+                                        <%-- /Row --%>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">Quốc Gia</label>
+                                                    <div class="col-md-8">
+                                                        <asp:DropDownList ID="dlCountry" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlCountry_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">Cấp Độ Trường</label>
+                                                    <div class="col-md-8">
+                                                        <asp:DropDownList ID="dlSchoollvl" AutoPostBack="true" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <%-- /Row --%>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">Tỉnh / Thành  - Tểu Bang</label>
+                                                    <div class="col-md-8">
+                                                        <asp:DropDownList ID="dlProvinces" AutoPostBack="true" OnSelectedIndexChanged="dlProvinces_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">About Link</label>
+                                                    <div class="col-md-8">
+                                                        <asp:TextBox ID="txtAboutLink" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">Quận  - Huyện</label>
+                                                    <div class="col-md-8">
+                                                        <asp:DropDownList ID="dlDistrict" CssClass="form-control" runat="server"></asp:DropDownList>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label bold col-md-4">Google Map Link(API)</label>
+                                                    <div class="col-md-8">
+                                                        <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                                <h4><i>More Information</i></h4>
+                                <hr />
+                                <%-- /Row --%>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Học Phí (USD/Năm)</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Phí Khác (USD/Năm)</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%-- /Row --%>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Đặt Cọc (USD/Năm)</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="TextBox5" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Học Bổng</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="TextBox6" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%-- /Row --%>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Điều nhập học</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="TextBox7" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
                                     </div>
                                 </div>
                             </ContentTemplate>
                         </asp:UpdatePanel>
-                        <h4><i>More Information</i></h4>
-                        <hr />
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Học Phí (USD/Năm)</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Phí Khác (USD/Năm)</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Đặt Cọc (USD/Năm)</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="TextBox5" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Học Bổng</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="TextBox6" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <%-- /Row --%>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label bold col-md-4">Điều nhập học</label>
-                                    <div class="col-md-8">
-                                        <asp:TextBox ID="TextBox7" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                            </div>
-                        </div>
+                        <%-- End update panel --%>
                     </div>
                     <div class="form-actions right">
                         <a class="btn btn-default">Cancel</a>
@@ -226,7 +236,9 @@
                 <div class="caption">
                     <i class="icon-list font-yellow-casablanca"></i>
                     <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách trường liên kết </span>
-                    <span class="caption-helper">Có <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label> trường...</span>
+                    <span class="caption-helper">Có
+                        <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                        trường...</span>
                 </div>
                 <div class="inputs">
                     <div class="portlet-input input-inline input-medium">

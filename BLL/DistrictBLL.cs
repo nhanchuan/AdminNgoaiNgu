@@ -24,9 +24,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 District d = new District();
-                d.DistrictID = (int)r[0];
-                d.DistrictName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                d.ProvinceID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                d.DistrictID = (int)r["DistrictID"];
+                d.DistrictName = (string.IsNullOrEmpty(r["DistrictName"].ToString())) ? "" : (string)r["DistrictName"];
+                d.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
                 lst.Add(d);
             }
             this.DB.CloseConnection();
@@ -45,9 +45,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 District d = new District();
-                d.DistrictID = (int)r[0];
-                d.DistrictName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                d.ProvinceID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                d.DistrictID = (int)r["DistrictID"];
+                d.DistrictName = (string.IsNullOrEmpty(r["DistrictName"].ToString())) ? "" : (string)r["DistrictName"];
+                d.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
                 lst.Add(d);
             }
             this.DB.CloseConnection();
@@ -66,9 +66,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 District d = new District();
-                d.DistrictID = (int)r[0];
-                d.DistrictName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                d.ProvinceID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                d.DistrictID = (int)r["DistrictID"];
+                d.DistrictName = (string.IsNullOrEmpty(r["DistrictName"].ToString())) ? "" : (string)r["DistrictName"];
+                d.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
                 lst.Add(d);
             }
             this.DB.CloseConnection();

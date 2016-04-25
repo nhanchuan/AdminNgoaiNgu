@@ -24,8 +24,8 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 Country ct = new Country();
-                ct.CountryID = (int)r[0];
-                ct.CountryName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
+                ct.CountryID = (int)r["CountryID"];
+                ct.CountryName = (string.IsNullOrEmpty(r["CountryName"].ToString())) ? "" : (string)r["CountryName"];
                 lst.Add(ct);
             }
             this.DB.CloseConnection();
@@ -44,8 +44,8 @@ namespace BLL
             foreach(DataRow r in tb.Rows)
             {
                 Country ct = new Country();
-                ct.CountryID = (int)r[0];
-                ct.CountryName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
+                ct.CountryID = (int)r["CountryID"];
+                ct.CountryName = (string.IsNullOrEmpty(r["CountryName"].ToString())) ? "" : (string)r["CountryName"];
                 lst.Add(ct);
             }
             this.DB.CloseConnection();

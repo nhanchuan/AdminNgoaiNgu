@@ -24,9 +24,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 Province p = new Province();
-                p.ProvinceID = (int)r[0];
-                p.ProvinceName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                p.CountryID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                p.ProvinceID = (int)r["ProvinceID"];
+                p.ProvinceName = (string.IsNullOrEmpty(r["ProvinceName"].ToString())) ? "" : (string)r["ProvinceName"];
+                p.CountryID = (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
                 lst.Add(p);
             }
             this.DB.CloseConnection();
@@ -45,9 +45,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 Province p = new Province();
-                p.ProvinceID = (int)r[0];
-                p.ProvinceName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                p.CountryID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                p.ProvinceID = (int)r["ProvinceID"];
+                p.ProvinceName = (string.IsNullOrEmpty(r["ProvinceName"].ToString())) ? "" : (string)r["ProvinceName"];
+                p.CountryID = (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
                 lst.Add(p);
             }
             this.DB.CloseConnection();
@@ -66,9 +66,9 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 Province p = new Province();
-                p.ProvinceID = (int)r[0];
-                p.ProvinceName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                p.CountryID = (string.IsNullOrEmpty(r[2].ToString())) ? 0 : (int)r[2];
+                p.ProvinceID = (int)r["ProvinceID"];
+                p.ProvinceName = (string.IsNullOrEmpty(r["ProvinceName"].ToString())) ? "" : (string)r["ProvinceName"];
+                p.CountryID = (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
                 lst.Add(p);
             }
             this.DB.CloseConnection();

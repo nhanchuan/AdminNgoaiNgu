@@ -96,9 +96,9 @@ namespace BLL
             this.DB.CloseConnection();
             return tb;
         }
-        public Boolean NewInternationalSchool(string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, string gmap, string phone)
+        public Boolean NewInternationalSchool(string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong)
         {
-            string sql = "insert into InternationalSchool(SchoolName,SchoolAddress,WebSite,SchoolLvl,AboutLink,CountryID,GoogleMap,Phone) values(@SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@gmap,@phone)";
+            string sql = "Exec NewInternationalSchool @SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong";
             if(!this.DB.OpenConnection())
             {
                 return false;
@@ -109,9 +109,17 @@ namespace BLL
             SqlParameter pSchoolLvl = new SqlParameter("SchoolLvl", SchoolLvl);
             SqlParameter pAboutLink = new SqlParameter("AboutLink", AboutLink);
             SqlParameter pCountryID = (CountryID == 0) ? new SqlParameter("CountryID", DBNull.Value) : new SqlParameter("CountryID", CountryID);
-            SqlParameter pgmap = new SqlParameter("gmap", gmap);
-            SqlParameter pPhone = new SqlParameter("phone", phone);
-            this.DB.Updatedata(sql, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pgmap, pPhone);
+            SqlParameter pProvinceID = (ProvinceID == 0) ? new SqlParameter("ProvinceID", DBNull.Value) : new SqlParameter("ProvinceID", ProvinceID);
+            SqlParameter pDistrictID = (DistrictID == 0) ? new SqlParameter("DistrictID", DBNull.Value) : new SqlParameter("DistrictID", DistrictID);
+            SqlParameter pGoogleMap = new SqlParameter("GoogleMap", GoogleMap);
+            SqlParameter pPhone = new SqlParameter("Phone", Phone);
+            SqlParameter pEstablish = new SqlParameter("Establish", Establish);
+            SqlParameter pHocPhi = new SqlParameter("HocPhi", HocPhi);
+            SqlParameter pPhiKhac = new SqlParameter("PhiKhac", PhiKhac);
+            SqlParameter pDatCoc = new SqlParameter("DatCoc", DatCoc);
+            SqlParameter pDieuKienNhapHoc = new SqlParameter("DieuKienNhapHoc", DieuKienNhapHoc);
+            SqlParameter pHocBong = new SqlParameter("HocBong", HocBong);
+            this.DB.Updatedata(sql, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pProvinceID, pDistrictID, pGoogleMap, pPhone, pEstablish, pHocPhi, pPhiKhac, pDatCoc, pDieuKienNhapHoc, pHocBong);
             this.DB.CloseConnection();
             return true;
         }

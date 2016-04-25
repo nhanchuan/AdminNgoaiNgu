@@ -24,8 +24,8 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 EducationLV ed = new EducationLV();
-                ed.ID = (int)r[0];
-                ed.NAME = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
+                ed.ID = (int)r["ID"];
+                ed.NAME = (string.IsNullOrEmpty(r["NAME"].ToString())) ? "" : (string)r["NAME"];
                 lst.Add(ed);
             }
             this.DB.CloseConnection();
@@ -44,8 +44,8 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 EducationLV ed = new EducationLV();
-                ed.ID = (int)r[0];
-                ed.NAME = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
+                ed.ID = (int)r["ID"];
+                ed.NAME = (string.IsNullOrEmpty(r["NAME"].ToString())) ? "" : (string)r["NAME"];
                 lst.Add(ed);
             }
             this.DB.CloseConnection();
