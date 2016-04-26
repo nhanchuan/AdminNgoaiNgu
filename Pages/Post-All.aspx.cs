@@ -14,6 +14,7 @@ public partial class Pages_Post_All : BasePage
     PostBLL post;
     Post_Category_relationshipsBLL post_category_relationships;
     CategoryBLL category;
+    Tags_relationshipsBLL tagsrelationships;
     private int PageSize = 10;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -167,11 +168,13 @@ public partial class Pages_Post_All : BasePage
     protected void gwPostmanager_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         post = new PostBLL();
+        tagsrelationships = new Tags_relationshipsBLL();
         post_category_relationships = new Post_Category_relationshipsBLL();
         int postID = Convert.ToInt32((gwPostmanager.Rows[e.RowIndex].FindControl("lblPostID") as Label).Text);
+        bool delTags = this.tagsrelationships.DeleteWithPostId(postID);
         bool deletepostCT = this.post_category_relationships.DeleteWithPostId(Convert.ToInt32(postID));
         bool delPost = this.post.DeleteWithPostID(Convert.ToInt32(postID));
-        if (!deletepostCT || !delPost)
+        if (!delTags || !deletepostCT || !delPost)
         {
             Response.Write("<script>alert('Xóa Bài Viết thất bại. Lỗi kết nối csdl !')</script>");
         }

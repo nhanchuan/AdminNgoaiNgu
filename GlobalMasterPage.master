@@ -729,8 +729,9 @@
                         </li>
                         <li>
                             <a href="../QuanLyHoSo/CacTruongLienKet.aspx">
-                                <i class="fa fa-graduation-cap"></i>
-                                Các trường liên kết</a>
+                                <i class="fa fa-graduation-cap""></i>
+                                <span class="title">Các trường liên kết</span>
+                            </a>
                         </li>
                         <%-- End Quan Ly Ho So --%>
                         <%-- End System --%>
