@@ -525,6 +525,9 @@
                                                 </div>
                                             </div>
                                         </ContentTemplate>
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="dlECountry" EventName="SelectedIndexChanged" />
+                                        </Triggers>
                                     </asp:UpdatePanel>
                                     <h4><i>More Information</i></h4>
                                     <hr />
