@@ -11,6 +11,7 @@ using BLL;
 
 public partial class QuanLyHoSo_TraCuuHoSo : BasePage
 {
+    BagProfileTypeBLL bagprofiletype;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -29,9 +30,15 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
                 }
                 else
                 {
-                    
+                    this.load_dlLoaiHoSo();   
                 }
             }
         }
+    }
+    private void load_dlLoaiHoSo()
+    {
+        bagprofiletype = new BagProfileTypeBLL();
+        this.load_DropdownList(dlLoaiHoSo, bagprofiletype.getAllBagProfileType(), "TypeName", "BagProfileTypeID");
+        dlLoaiHoSo.Items.Insert(0, new ListItem("-- Chọn loại hồ sơ --", "0"));
     }
 }
