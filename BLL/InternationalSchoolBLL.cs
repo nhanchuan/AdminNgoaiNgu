@@ -49,6 +49,43 @@ namespace BLL
             this.DB.CloseConnection();
             return lst;
         }
+        public List<InternationalSchool> GetInternationalSchoolWithSchoolID(int SchoolID)
+        {
+
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select * from InternationalSchool where SchoolID=@SchoolID";
+            SqlParameter pSchoolID = new SqlParameter("@SchoolID", SchoolID);
+            DataTable tb = DB.DAtable(sql, pSchoolID);
+            List<InternationalSchool> lst = new List<InternationalSchool>();
+            foreach (DataRow r in tb.Rows)
+            {
+                InternationalSchool InS = new InternationalSchool();
+                InS.SchoolID = (int)r["SchoolID"];
+                InS.SchoolName = (string.IsNullOrEmpty(r["SchoolName"].ToString())) ? "" : (string)r["SchoolName"];
+                InS.SchoolAddress = (string.IsNullOrEmpty(r["SchoolAddress"].ToString())) ? "" : (string)r["SchoolAddress"];
+                InS.WebSite = (string.IsNullOrEmpty(r["WebSite"].ToString())) ? "" : (string)r["WebSite"];
+                InS.SchoolLvl = (string.IsNullOrEmpty(r["SchoolLvl"].ToString())) ? "" : (string)r["SchoolLvl"];
+                InS.AboutLink = (string.IsNullOrEmpty(r["AboutLink"].ToString())) ? "" : (string)r["AboutLink"];
+                InS.CountryID = (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
+                InS.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
+                InS.DistrictID = (string.IsNullOrEmpty(r["DistrictID"].ToString())) ? 0 : (int)r["DistrictID"];
+                InS.GoogleMap = (string.IsNullOrEmpty(r["GoogleMap"].ToString())) ? "" : (string)r["GoogleMap"];
+                InS.Phone = (string.IsNullOrEmpty(r["Phone"].ToString())) ? "" : (string)r["Phone"];
+                InS.Establish = (string.IsNullOrEmpty(r["Establish"].ToString())) ? DefaultBirthday : (DateTime)r["Establish"];
+                InS.HocPhi = (string.IsNullOrEmpty(r["HocPhi"].ToString())) ? "" : (string)r["HocPhi"];
+                InS.PhiKhac = (string.IsNullOrEmpty(r["PhiKhac"].ToString())) ? "" : (string)r["PhiKhac"];
+                InS.DatCoc = (string.IsNullOrEmpty(r["DatCoc"].ToString())) ? "" : (string)r["DatCoc"];
+                InS.DieuKienNhapHoc = (string.IsNullOrEmpty(r["DieuKienNhapHoc"].ToString())) ? "" : (string)r["DieuKienNhapHoc"];
+                InS.HocBong = (string.IsNullOrEmpty(r["HocBong"].ToString())) ? "" : (string)r["HocBong"];
+                InS.Images = (string.IsNullOrEmpty(r["Images"].ToString())) ? 0 : (int)r["Images"];
+                lst.Add(InS);
+            }
+            this.DB.CloseConnection();
+            return lst;
+        }
         public List<InternationalSchool> GetAllInternationalSchoolWithName(string SchoolName)
         {
             
@@ -165,7 +202,7 @@ namespace BLL
         //UPDATE
         public Boolean UpdateInternationalSchool(int SchoolID, string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong)
         {
-            string sql = "Exec NewInternationalSchool @SchoolID,@SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong";
+            string sql = "Exec UpdateInternationalSchool @SchoolID,@SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong";
             if (!this.DB.OpenConnection())
             {
                 return false;

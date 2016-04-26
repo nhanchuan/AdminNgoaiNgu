@@ -78,7 +78,7 @@
                                         <div class="form-group">
                                             <label class="control-label bold col-md-4">WebSite Trường</label>
                                             <div class="col-md-8">
-                                                <asp:TextBox ID="txtWebSite" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="txtWebSite" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -258,7 +258,7 @@
                 <div class="actions">
 
                     <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
-                        <i class="fa fa-file-excel-o"></i>
+                        <i class="fa fa-file-image-o"></i>
                     </a>
                     <a href="#modalEditShool" data-toggle="modal" id="btnEditTruong" title="Chỉnh sửa thông tin Trường" runat="server">
                         <i class="icon-wrench"></i>
@@ -436,7 +436,7 @@
                                             <div class="form-group">
                                                 <label class="control-label bold col-md-4">WebSite Trường</label>
                                                 <div class="col-md-8">
-                                                    <asp:TextBox ID="txtEWebsite" TextMode="Number" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <asp:TextBox ID="txtEWebsite" CssClass="form-control" runat="server"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -476,13 +476,7 @@
                                                     <div class="form-group">
                                                         <label class="control-label bold col-md-4">Cấp Độ Trường</label>
                                                         <div class="col-md-8">
-                                                            <asp:DropDownList ID="dlESchoolLvl" AutoPostBack="true" CssClass="form-control" runat="server">
-                                                                <asp:ListItem Value="0">-- Chọn cấp độ trường --</asp:ListItem>
-                                                                <asp:ListItem Value="1">Cấp 2 , 3</asp:ListItem>
-                                                                <asp:ListItem Value="2">Cao Đẳng</asp:ListItem>
-                                                                <asp:ListItem Value="3">Đại Học</asp:ListItem>
-                                                            </asp:DropDownList>
-
+                                                            <asp:TextBox ID="txtESchoolLvl" CssClass="form-control" runat="server"></asp:TextBox>
                                                         </div>
                                                     </div>
                                                 </div>

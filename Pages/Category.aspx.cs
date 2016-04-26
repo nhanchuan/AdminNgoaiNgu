@@ -39,7 +39,6 @@ public partial class Pages_Category : BasePage
                 {
                     btnshowPanelfix.Attributes.Add("class", "btn yellow disabled");
                     this.load_dlPCategory();
-                    
                     this.load_dlDanhMucCha();
 
                     if (Session["pageIndexadmin_Category"] == null)
@@ -59,7 +58,6 @@ public partial class Pages_Category : BasePage
                             gwCategory.SelectedIndex = Convert.ToInt32(Session["SelectedIndex_Category"].ToString());
                         }
                     }
-
                     
                     lblstartindex.Text = ((1 - 1) * PageSize + 1).ToString();
                     lblendindex.Text = ((((1 - 1) * PageSize + 1) + PageSize) - 1).ToString();
