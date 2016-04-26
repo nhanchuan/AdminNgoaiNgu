@@ -125,7 +125,7 @@ namespace BLL
         }
         public DataTable GetTbInternationalSchool()
         {
-            string sql = "select ins.SchoolID,ins.SchoolName,ins.SchoolAddress,ins.WebSite,ins.SchoolLvl,ins.AboutLink,ins.CountryID,ins.GoogleMap,ins.Phone,ins.Establish,ct.CountryName from InternationalSchool ins join CountryAdvisory ct on ins.CountryID=ct.CountryAdvisoryID";
+            string sql = "select * from InternationalSchool ins full outer join Country ct on ins.CountryID=ct.CountryID where ins.SchoolID is not null";
             if (!this.DB.OpenConnection())
             {
                 return null;
@@ -136,7 +136,7 @@ namespace BLL
         }
         public DataTable GetTbInternationalSchoolWithCountry(int countryID)
         {
-            string sql = "select ins.SchoolID,ins.SchoolName,ins.SchoolAddress,ins.WebSite,ins.SchoolLvl,ins.AboutLink,ins.CountryID,ins.GoogleMap,ins.Phone,ins.Establish,ct.CountryName from InternationalSchool ins join CountryAdvisory ct on ins.CountryID=ct.CountryAdvisoryID where ins.CountryID=@countryID";
+            string sql = "select * from InternationalSchool ins full outer join Country ct on ins.CountryID=ct.CountryID where ins.SchoolID is not null and ins.CountryID=@countryID";
             if (!this.DB.OpenConnection())
             {
                 return null;
@@ -148,7 +148,7 @@ namespace BLL
         }
         public DataTable GetTbInternationalSchoolWithSchoolLvl(string SchoolLvl)
         {
-            string sql = "select ins.SchoolID,ins.SchoolName,ins.SchoolAddress,ins.WebSite,ins.SchoolLvl,ins.AboutLink,ins.CountryID,ins.GoogleMap,ins.Phone,ins.Establish,ct.CountryName from InternationalSchool ins join CountryAdvisory ct on ins.CountryID=ct.CountryAdvisoryID where ins.SchoolLvl=@SchoolLvl";
+            string sql = "select * from InternationalSchool ins full outer join Country ct on ins.CountryID=ct.CountryID where ins.SchoolID is not null and ins.SchoolLvl like '%' + @SchoolLvl + '%'";
             if (!this.DB.OpenConnection())
             {
                 return null;

@@ -366,7 +366,7 @@
     </div>
     <%-- End chart --%>
 
-    <%-- Modal Search --%>
+    <%-- Modal Chọn Trường --%>
     <div class="modal fade" id="modalChangeSchool" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-full">
             <div class="modal-content">

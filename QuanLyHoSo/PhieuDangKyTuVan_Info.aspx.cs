@@ -52,7 +52,7 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan_Info : BasePage
                         this.load_dlEducationLV();
                         dlEducationLV.Items.Insert(0, new ListItem("-- Chọn Trình độ học vấn --", "0"));
                         this.load_dlCountryAdvisory();
-                        dlCountryAdvisory.Items.Insert(0, new ListItem("-- Chọn Quốc Gia du học --", "0"));
+                        
                         this.load_form_info(fID);
                     }
                     else
@@ -131,10 +131,9 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan_Info : BasePage
     private void load_dlCountryAdvisory()
     {
         countryAdvisory = new CountryAdvisoryBLL();
-        dlCountryAdvisory.DataSource = countryAdvisory.getallCountryAdvisory();
-        dlCountryAdvisory.DataValueField = "CountryAdvisoryID";
-        dlCountryAdvisory.DataTextField = "CountryName";
-        dlCountryAdvisory.DataBind();
+        country = new CountryBLL();
+        this.load_DropdownList(dlCountryAdvisory, country.getAllCountry(), "CountryName", "CountryID");
+        dlCountryAdvisory.Items.Insert(0, new ListItem("-- Select Country --", "0"));
     }
     public bool IsNumber(string pText)
     {

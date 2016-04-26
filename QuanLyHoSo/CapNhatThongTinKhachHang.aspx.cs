@@ -210,10 +210,10 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
     }
     private string CountryAdvStr(int CountryId)
     {
-        coutryadv = new CountryAdvisoryBLL();
-        List<CountryAdvisory> lst = coutryadv.getallCountryAdvisoryWithId(CountryId);
-        CountryAdvisory cadv = lst.FirstOrDefault();
-        return (cadv == null) ? "" : cadv.CountryName;
+        country = new CountryBLL();
+        List<Country> lst = country.getCountryWithId(CountryId);
+        Country ct = lst.FirstOrDefault();
+        return (ct == null) ? "" : ct.CountryName;
     }
     //===Lay thong tin phieu tu van===
     private void load_FormAdvisory(string FileCode)

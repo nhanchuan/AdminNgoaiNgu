@@ -46,7 +46,6 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan : BasePage
                     this.load_dlEducationLV();
                     dlEducationLV.Items.Insert(0, new ListItem("-- Chọn Trình độ học vấn --", "0"));
                     this.load_dlCountryAdvisory();
-                    dlCountryAdvisory.Items.Insert(0, new ListItem("-- Chọn Quốc Gia du học --", "0"));
                 }
             }
         }
@@ -95,18 +94,14 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan : BasePage
     private void load_dlEducationLV()
     {
         educationlv = new EducationLVBLL();
-        dlEducationLV.DataSource = educationlv.getallEducationLV();
-        dlEducationLV.DataValueField = "ID";
-        dlEducationLV.DataTextField = "NAME";
-        dlEducationLV.DataBind();
+        this.load_DropdownList(dlEducationLV, educationlv.getallEducationLV(), "NAME", "ID");
     }
     private void load_dlCountryAdvisory()
     {
         countryAdvisory = new CountryAdvisoryBLL();
-        dlCountryAdvisory.DataSource = countryAdvisory.getallCountryAdvisory();
-        dlCountryAdvisory.DataValueField = "CountryAdvisoryID";
-        dlCountryAdvisory.DataTextField = "CountryName";
-        dlCountryAdvisory.DataBind();
+        country = new CountryBLL();
+        this.load_DropdownList(dlCountryAdvisory, country.getAllCountry(), "CountryName", "CountryID");
+        dlCountryAdvisory.Items.Insert(0, new ListItem("-- Select Country --", "0"));
     }
 
     private string getday(string str)

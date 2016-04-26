@@ -18,7 +18,8 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     BagProfileBLL bagprofile;
     BagProfileTypeBLL bagprofiletype;
     InternationalSchoolBLL internalSchool;
-    CountryAdvisoryBLL countryadv;
+    //CountryAdvisoryBLL countryadv;
+    CountryBLL country;
     public int PageSize = 10;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -452,13 +453,10 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     }
     private void load_dlFilterCountry()
     {
-        countryadv = new CountryAdvisoryBLL();
+        country = new CountryBLL();
         DropDownList dllcountry = (DropDownList)gwInternationalSchool.HeaderRow.FindControl("dlFilterCountry");
-        dllcountry.DataSource = countryadv.getallCountryAdvisory();
-        dllcountry.DataTextField = "CountryName";
-        dllcountry.DataValueField = "CountryAdvisoryID";
-        dllcountry.DataBind();
-        dllcountry.Items.Insert(0, new ListItem("--Filter Country--", "0"));
+        this.load_DropdownList(dllcountry, country.getAllCountry(), "CountryName", "CountryID");
+        dllcountry.Items.Insert(0, new ListItem("--Select All Country--", "0"));
     }
     private void load_dlSchoolLvl()
     {
@@ -497,11 +495,32 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     {
         internalSchool = new InternationalSchoolBLL();
         DropDownList dllcountry = (DropDownList)gwInternationalSchool.HeaderRow.FindControl("dlFilterCountry");
-        gwInternationalSchool.DataSource = internalSchool.GetTbInternationalSchoolWithCountry(Convert.ToInt32(dllcountry.SelectedValue));
-        gwInternationalSchool.DataBind();
-        this.load_dlFilterCountry();
-        this.load_dlSchoolLvl();
-        this.load_dlSchoolName();
+       
+        if (dllcountry.SelectedValue == "0")
+        {
+            DataTable tb = internalSchool.GetTbInternationalSchool();
+            gwInternationalSchool.DataSource = tb;
+            gwInternationalSchool.DataBind();
+            this.load_dlFilterCountry();
+            this.load_dlSchoolLvl();
+            this.load_dlSchoolName();
+        }
+        else
+        {
+            DataTable tb = internalSchool.GetTbInternationalSchoolWithCountry(Convert.ToInt32(dllcountry.SelectedValue));
+            if (tb.Rows.Count == 0)
+            {
+                return;
+            }
+            else
+            {
+                gwInternationalSchool.DataSource = tb;
+                gwInternationalSchool.DataBind();
+                this.load_dlFilterCountry();
+                this.load_dlSchoolLvl();
+                this.load_dlSchoolName();
+            }
+        }
     }
     protected void dlSchoolLvl_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -565,23 +584,23 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     private void loadHidden()
     {
         customerProPri = new CustomerProfilePrivateBLL();
-        HiddenField1.Value = customerProPri.countProfileinCountry(1).ToString();
-        HiddenField2.Value = customerProPri.countProfileinCountry(2).ToString();
-        HiddenField3.Value = customerProPri.countProfileinCountry(3).ToString();
-        HiddenField4.Value = customerProPri.countProfileinCountry(4).ToString();
-        HiddenField5.Value = customerProPri.countProfileinCountry(5).ToString();
-        HiddenField6.Value = customerProPri.countProfileinCountry(6).ToString();
-        HiddenField7.Value = customerProPri.countProfileinCountry(7).ToString();
-        HiddenField8.Value = customerProPri.countProfileinCountry(8).ToString();
-        HiddenField9.Value = customerProPri.countProfileinCountry(9).ToString();
-        HiddenField10.Value = customerProPri.countProfileinCountry(10).ToString();
-        HiddenField11.Value = customerProPri.countProfileinCountry(11).ToString();
-        HiddenField12.Value = customerProPri.countProfileinCountry(12).ToString();
-        HiddenField13.Value = customerProPri.countProfileinCountry(13).ToString();
-        HiddenField14.Value = customerProPri.countProfileinCountry(14).ToString();
-        HiddenField15.Value = customerProPri.countProfileinCountry(15).ToString();
-        HiddenField16.Value = customerProPri.countProfileinCountry(16).ToString();
-        HiddenField17.Value = customerProPri.countProfileinCountry(17).ToString();
+        HiddenField1.Value = customerProPri.countProfileinCountry(222).ToString();
+        HiddenField2.Value = customerProPri.countProfileinCountry(12).ToString();
+        HiddenField3.Value = customerProPri.countProfileinCountry(37).ToString();
+        HiddenField4.Value = customerProPri.countProfileinCountry(221).ToString();
+        HiddenField5.Value = customerProPri.countProfileinCountry(203).ToString();
+        HiddenField6.Value = customerProPri.countProfileinCountry(187).ToString();
+        HiddenField7.Value = customerProPri.countProfileinCountry(152).ToString();
+        HiddenField8.Value = customerProPri.countProfileinCountry(205).ToString();
+        HiddenField9.Value = customerProPri.countProfileinCountry(149).ToString();
+        HiddenField10.Value = customerProPri.countProfileinCountry(79).ToString();
+        HiddenField11.Value = customerProPri.countProfileinCountry(112).ToString();
+        HiddenField12.Value = customerProPri.countProfileinCountry(96).ToString();
+        HiddenField13.Value = customerProPri.countProfileinCountry(128).ToString();
+        HiddenField14.Value = customerProPri.countProfileinCountry(106).ToString();
+        HiddenField15.Value = customerProPri.countProfileinCountry(72).ToString();
+        HiddenField16.Value = customerProPri.countProfileinCountry(167).ToString();
+        HiddenField17.Value = customerProPri.countProfileinCountry(71).ToString();
     }
 
     protected void gwThuLyHSManager_RowDataBound(object sender, GridViewRowEventArgs e)

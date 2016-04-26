@@ -70,7 +70,7 @@
                 </div>
                 <div class="details">
                     <div class="number">
-                        9999999999999999999999999999
+                        9999
                     </div>
                     <div class="desc">
                         New Orders
