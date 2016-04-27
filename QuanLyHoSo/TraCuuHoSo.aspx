@@ -193,14 +193,21 @@
                                 <asp:Label ID="lblCellPhone" runat="server" Text='<%# Bind("CellPhone") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Làm Hồ Sơ">
+                        <asp:TemplateField HeaderText="Hồ Sơ">
                             <ItemTemplate>
                                 <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
                                     <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":"Định Cư" %>'></asp:Label>
                                 </li>
                             </ItemTemplate>
                         </asp:TemplateField>
-                       
+                        <asp:TemplateField>
+                            <ItemTemplate>
+                                <%--<a class="btn btn-circle btn-icon-only btn-default"><i class="glyphicon glyphicon-folder-open"></i></a>--%>
+                                <a href='<%# Eval("NumBagProfile").ToString()=="0"?"#":"../QuanLyHoSo/HoSoKhachHang.aspx?FileCode="+Eval("BasicInfoCode") %>' class="btn btn-circle btn-icon-only btn-default">
+                                    <i class='<%# Eval("NumBagProfile").ToString()=="0"?"glyphicon glyphicon-folder-close":"glyphicon glyphicon-folder-open" %>'></i></a>
+                            </ItemTemplate>
+                            <ItemStyle Width="30" />
+                        </asp:TemplateField>
                     </Columns>
                     <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                     <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
