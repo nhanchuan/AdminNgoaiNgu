@@ -62,8 +62,8 @@
             <div class="page-header-inner">
                 <!-- BEGIN LOGO -->
                 <div class="page-logo">
-                    <a href="index.html"><i class="fa fa-lock"></i>
-                        <img src="/assets/admin/layout/img/logow.png" alt="logo" class="logo-default" />
+                    <a href="http://kus.edu.vn">
+                        <img src="../images/logo/logo-kus-edu-vn-3.png" alt="logo" style="width:35px; height:auto;" class="logo-default" />
                     </a>
                     <div class="menu-toggler sidebar-toggler hide">
                         <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->

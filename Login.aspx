@@ -24,7 +24,7 @@
     <div class="col-lg-4"></div>
         <div id="panelLogin" class="col-lg-4">
             <div style="text-align:center;">
-                <img src="../images/logo/logo-kus-edu-vn-3.png" style="width:300px; height:200px; " />
+                <img src="../images/logo/logo-kus-edu-vn-3.png" style="width:250px; height:180px; " />
                 <h2><%=Resources.Resource.dashboardlogin %></h2>
             </div>
                 <div id="panelinput" class="panel-default">
