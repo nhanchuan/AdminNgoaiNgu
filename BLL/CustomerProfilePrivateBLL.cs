@@ -26,19 +26,19 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 CustomerProfilePrivate cp = new CustomerProfilePrivate();
-                cp.ProfileID = (int)r[0];
-                cp.ProfileCode = (string)r[1];
-                cp.InfoID = (int)r[2];
-                cp.UnitCopyright = (string.IsNullOrEmpty(r[3].ToString())) ? "" : (string)r[3];
-                cp.StaffWork = (string.IsNullOrEmpty(r[4].ToString())) ? 0 : (int)r[4];
-                cp.NationalityID = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
-                cp.EthnicID = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                cp.ReligionID = (string.IsNullOrEmpty(r[7].ToString())) ? 0 : (int)r[7];
-                cp.CountryID = (string.IsNullOrEmpty(r[8].ToString())) ? 0 : (int)r[8];
-                cp.ProvinceID = (string.IsNullOrEmpty(r[9].ToString())) ? 0 : (int)r[9];
-                cp.DistrictID = (string.IsNullOrEmpty(r[10].ToString())) ? 0 : (int)r[10];
-                cp.Commune_Ward = (string.IsNullOrEmpty(r[11].ToString())) ? "" : (string)r[11];
-                cp.PermanentAddress = (string.IsNullOrEmpty(r[12].ToString())) ? "" : (string)r[12];
+                cp.ProfileID = (int)r["ProfileID"];
+                cp.ProfileCode = (string)r["ProfileCode"];
+                cp.InfoID = (int)r["InfoID"];
+                cp.UnitCopyright = (string.IsNullOrEmpty(r["UnitCopyright"].ToString())) ? "" : (string)r["UnitCopyright"];
+                cp.StaffWork = (string.IsNullOrEmpty(r["StaffWork"].ToString())) ? 0 : (int)r["StaffWork"];
+                cp.NationalityID = (string.IsNullOrEmpty(r["NationalityID"].ToString())) ? 0 : (int)r["NationalityID"];
+                cp.EthnicID = (string.IsNullOrEmpty(r["EthnicID"].ToString())) ? 0 : (int)r["EthnicID"];
+                cp.ReligionID = (string.IsNullOrEmpty(r["ReligionID"].ToString())) ? 0 : (int)r["ReligionID"];
+                cp.CountryID = (string.IsNullOrEmpty(r["CountryID"].ToString())) ? 0 : (int)r["CountryID"];
+                cp.ProvinceID = (string.IsNullOrEmpty(r["ProvinceID"].ToString())) ? 0 : (int)r["ProvinceID"];
+                cp.DistrictID = (string.IsNullOrEmpty(r["DistrictID"].ToString())) ? 0 : (int)r["DistrictID"];
+                cp.Commune_Ward = (string.IsNullOrEmpty(r["Commune_Ward"].ToString())) ? "" : (string)r["Commune_Ward"];
+                cp.PermanentAddress = (string.IsNullOrEmpty(r["PermanentAddress"].ToString())) ? "" : (string)r["PermanentAddress"];
                 cp.AddressPresent = (string.IsNullOrEmpty(r[13].ToString())) ? "" : (string)r[13];
                 cp.CompanyPhone = (string.IsNullOrEmpty(r[14].ToString())) ? "" : (string)r[14];
                 cp.HomePhone = (string.IsNullOrEmpty(r[15].ToString())) ? "" : (string)r[15];
@@ -566,6 +566,46 @@ namespace BLL
             rc = this.DB.GetValues(sql, pcountryId);
             this.DB.CloseConnection();
             return rc;
+        }
+        //TraCuuHoSoPageWise
+        public DataTable TraCuuHoSoPageWise(int PageIndex, int PageSize, string ProfileCode, int BagProfileTypeID, string FullName, string Email, string IdentityCard, string Phone)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "Exec TraCuuHoSoPageWise @PageIndex,@PageSize,@ProfileCode,@BagProfileTypeID,@FullName,@Email,@IdentityCard,@Phone";
+            SqlParameter pPageIndex = new SqlParameter("@PageIndex", PageIndex);
+            SqlParameter pPageSize = new SqlParameter("@PageSize", PageSize);
+            SqlParameter pProfileCode = (ProfileCode == "") ? new SqlParameter("@ProfileCode", DBNull.Value) : new SqlParameter("@ProfileCode", ProfileCode);
+            SqlParameter pBagProfileTypeID = (BagProfileTypeID == 0) ? new SqlParameter("@BagProfileTypeID", DBNull.Value) : new SqlParameter("@BagProfileTypeID", BagProfileTypeID);
+            SqlParameter pFullName = (FullName == "") ? new SqlParameter("@FullName", DBNull.Value) : new SqlParameter("@FullName", FullName);
+            SqlParameter pEmail = (Email == "") ? new SqlParameter("@Email", DBNull.Value) : new SqlParameter("@Email", Email);
+            SqlParameter pIdentityCard = (IdentityCard == "") ? new SqlParameter("@IdentityCard", DBNull.Value) : new SqlParameter("@IdentityCard", IdentityCard);
+            SqlParameter pPhone = (Phone == "") ? new SqlParameter("@Phone", DBNull.Value) : new SqlParameter("@Phone", Phone);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pProfileCode, pBagProfileTypeID, pFullName, pEmail, pIdentityCard, pPhone);
+            this.DB.CloseConnection();
+            return tb;
+        }
+        public int CountTraCuuHoSoPageWise(string ProfileCode, int BagProfileTypeID, string FullName, string Email, string IdentityCard, string Phone)
+        {
+            int count = 0;
+            if (!this.DB.OpenConnection())
+            {
+                return 0;
+            }
+            string sql = "select COUNT(*) from CustomerProfilePrivate cpp full outer join CustomerBasicInfo cbi on cpp.InfoID=cbi.InfoID full outer join BagProfileType bpt on cpp.BagProfileTypeID=bpt.BagProfileTypeID where cpp.ProfileID is not null";
+            sql += " ";
+            sql += "and (cpp.ProfileCode = @ProfileCode or cpp.BagProfileTypeID=@BagProfileTypeID or (cbi.LastName +' ' + cbi.FirstName) like '%'+@FullName+'%' or cpp.Email=@Email or cbi.IdentityCard=@IdentityCard or cpp.CellPhone=@Phone)";
+            SqlParameter pProfileCode = (ProfileCode == "") ? new SqlParameter("@ProfileCode", DBNull.Value) : new SqlParameter("@ProfileCode", ProfileCode);
+            SqlParameter pBagProfileTypeID = (BagProfileTypeID == 0) ? new SqlParameter("@BagProfileTypeID", DBNull.Value) : new SqlParameter("@BagProfileTypeID", BagProfileTypeID);
+            SqlParameter pFullName = (FullName == "") ? new SqlParameter("@FullName", DBNull.Value) : new SqlParameter("@FullName", FullName);
+            SqlParameter pEmail = (Email == "") ? new SqlParameter("@Email", DBNull.Value) : new SqlParameter("@Email", Email);
+            SqlParameter pIdentityCard = (IdentityCard == "") ? new SqlParameter("@IdentityCard", DBNull.Value) : new SqlParameter("@IdentityCard", IdentityCard);
+            SqlParameter pPhone = (Phone == "") ? new SqlParameter("@Phone", DBNull.Value) : new SqlParameter("@Phone", Phone);
+            count = DB.GetValues(sql, pProfileCode, pBagProfileTypeID, pFullName, pEmail, pIdentityCard, pPhone);
+            this.DB.CloseConnection();
+            return count;
         }
     }
 }

@@ -32,7 +32,7 @@
                                     <div class="form-group">
                                         <label class="control-label bold col-md-4">Mã Hồ Sơ : </label>
                                         <div class="col-md-8">
-                                            <asp:TextBox ID="txtProfileCode" CssClass="form-control" Text="160400001004" runat="server"></asp:TextBox>
+                                            <asp:TextBox ID="txtProfileCode" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Họ Tên Khách Hàng : </label>
                                 <div class="col-md-8">
-                                    <asp:TextBox ID="TextBox1" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtFullName" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">CMND Khách Hàng : </label>
                                 <div class="col-md-8">
-                                    <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtCMND" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Địa chỉ Email : </label>
                                 <div class="col-md-8">
-                                    <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txttEmail" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Số điện thoại : </label>
                                 <div class="col-md-8">
-                                    <asp:TextBox ID="TextBox4" CssClass="form-control" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtPhone" CssClass="form-control" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -104,8 +104,8 @@
                         </div>
                         <div class="col-md-6 text-right">
 
-                            <a id="btnRefreshSearch" class="btn btn-default" runat="server"><i class="fa fa-refresh"></i>&nbsp Refresh</a>
-                            <a id="btnSearchHocVien" class="btn btn-default" runat="server"><i class="fa fa-search"></i>&nbsp Tìm</a>
+                            <a id="btnRefreshSearch" class="btn btn-default" onserverclick="btnRefreshSearch_ServerClick" runat="server"><i class="fa fa-refresh"></i>&nbsp Refresh</a>
+                            <a id="btnSearchHocVien" class="btn btn-default" onserverclick="btnSearchHocVien_ServerClick" runat="server"><i class="fa fa-search"></i>&nbsp Tìm</a>
 
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                 </div>
             </div>
             <div class="portlet-body">
-                <asp:GridView ID="gwListHocVien" CssClass="table table-condensed" runat="server"
+                <asp:GridView ID="gwTraCuuHoSo" CssClass="table table-condensed" runat="server"
                     AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
                     HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
                     <Columns>
@@ -141,89 +141,66 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                             </ItemTemplate>
+                            <ItemStyle Width="30px" />
                         </asp:TemplateField>
-                        <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
-                                </ItemTemplate>
-                                <ItemStyle Width="30px" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Mã Hồ Sơ">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label13" runat="server" Text='<%# Eval("ProfileCode") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Họ Tên Khách Hàng">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FullName") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <a style="font-size: 16px;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
-                                        <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
-                                    <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Ngày sinh">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Birthday") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Giới tính">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Sex") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Sex") %>'></asp:Label>
-                                </ItemTemplate>
-                                <ItemStyle Width="80px" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="CMND">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <HeaderTemplate>
-                                    <i class="fa fa-graduation-cap"></i>School
-                               
-                                </HeaderTemplate>
-                                <ItemTemplate>
-                                    <asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Phiếu tư vấn">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("TypeName") %>'></asp:TextBox>
-                                </EditItemTemplate>
-                                <ItemTemplate>
-                                    <span class='<%# Eval("TypeName").ToString() == "Tư Vấn Du Học" ? "label label-primary" : Eval("TypeName").ToString() == "Tư Vấn Thực Tập" ? "label label-default" : Eval("TypeName").ToString() == "Tư Vấn Du Lịch" ? "label label-success" :"label label-warning" %>'>
-                                        <strong><i class="fa fa-pencil-square-o"></i>
-                                            <asp:Label ID="Label5" runat="server" Text='<%# Bind("TypeName") %>'></asp:Label></strong></span>
-                                    <br />
-                                    <div class="form-inline  pull-right">
-                                        <i style="color: #d64d25;" class="icon-user-female"></i><i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
-                                    </div>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Làm Hồ Sơ">
-                                <ItemTemplate>
-                                    <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
-                                        <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":"Định Cư" %>'></asp:Label>
-                                    </li>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        <asp:TemplateField ShowHeader="False">
+                        <asp:TemplateField HeaderText="Mã Hồ Sơ">
                             <ItemTemplate>
-                                <asp:LinkButton ID="lkSelect" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                                <asp:Label ID="Label13" runat="server" Text='<%# Eval("ProfileCode") %>'></asp:Label>
                             </ItemTemplate>
-                            <ItemStyle Width="50px" />
                         </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Họ Tên Khách Hàng">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FullName") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <a style="font-size: 16px;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
+                                    <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
+                                <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Ngày sinh">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Birthday") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Giới tính">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Sex") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("Sex") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle Width="80px" />
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="CMND">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Email">
+                            <ItemTemplate>
+                                <asp:Label ID="lblEmail" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Điện Thoại">
+                            <ItemTemplate>
+                                <asp:Label ID="lblCellPhone" runat="server" Text='<%# Bind("CellPhone") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Làm Hồ Sơ">
+                            <ItemTemplate>
+                                <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
+                                    <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":"Định Cư" %>'></asp:Label>
+                                </li>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                       
                     </Columns>
                     <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                     <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
@@ -236,13 +213,13 @@
                         </div>
                         <div class="col-md-8 col-sm-8">
                             <div class="pagination_lst pull-right">
-                                <%--<asp:Repeater ID="rptPager" runat="server">
+                                <asp:Repeater ID="rptPager" runat="server">
                                     <ItemTemplate>
                                         <asp:LinkButton ID="lnkPage" runat="server" Text='<%#Eval("Text") %>' CommandArgument='<%# Eval("Value") %>'
                                             CssClass='<%# Convert.ToBoolean(Eval("Enabled")) ? "page_enabled" : "page_disabled" %>'
                                             OnClick="Page_Changed" OnClientClick='<%# !Convert.ToBoolean(Eval("Enabled")) ? "return false;" : "" %>'></asp:LinkButton>
                                     </ItemTemplate>
-                                </asp:Repeater>--%>
+                                </asp:Repeater>
                             </div>
                         </div>
                     </div>

@@ -45,7 +45,7 @@
 		<div class="col-md-6 coming-soon-content">
 			<h1>Server Maintenance</h1>
 			<h3>
-				 Dev đang làm ngày đêm không ngủ để hoàn thành hệ thống. Xin đừng làm phiền! Cám ơn !
+				 WebSite đang bảo trì. Xin vui lòng quay lại sau !
 			</h3>
 			<br />
 			<div class="form-inline">
@@ -98,7 +98,7 @@
 	<!--/end row-->
 	<div class="row">
 		<div class="col-md-12 coming-soon-footer">
-			 2016 &copy; Nguyễn Nhân Chuẩn. Developer !.
+			 2016 &copy; Anh Văn Hội Anh Mỹ. Developer !.
 		</div>
 	</div>
 </div>
@@ -150,7 +150,7 @@ Demo.init(); // init demo features
         duration: 10000
    });
 });
-$('#defaultCountdown').countdown({ since: new Date(2016, 0, 0) });
+$('#defaultCountdown').countdown({ since: new Date(2016, 0, 114) });
 </script>
 <!-- END JAVASCRIPTS -->
 </body>

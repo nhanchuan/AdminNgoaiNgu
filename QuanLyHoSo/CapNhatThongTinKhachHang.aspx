@@ -16,7 +16,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="../QuanLyHoSo/QLHoSoDuHoc.aspx">HỒ SƠ DU HỌC</a>
+                <a href="#">QUẢN LÝ HỒ SƠ</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
