@@ -729,8 +729,14 @@
                         </li>
                         <li>
                             <a href="../QuanLyHoSo/CacTruongLienKet.aspx">
-                                <i class="fa fa-graduation-cap""></i>
+                                <i class="fa fa-graduation-cap"></i>
                                 <span class="title">Các trường liên kết</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="../QuanLyHoSo/NhapHoSo.aspx">
+                                <i class="fa fa-pencil-square"></i>
+                                <span class="title">Nhập Hồ Sơ</span>
                             </a>
                         </li>
                         <%-- End Quan Ly Ho So --%>

@@ -69,4 +69,5 @@ public static class FunctionName
     public static string LopHoc = "FC058";
     public static string KhoaHoc = "FC059";
     public static string GhiDanhKhoaHoc = "FC060";
+    public static string NhapHoSo = "FC061";
 }

@@ -323,7 +323,7 @@
             <div class="tools">
                 <a href="javascript:;" class="collapse"></a>
                 <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                <button id="btnreloadmodal" class="btn green" runat="server"><i class="fa fa-refresh"></i></button>
+                <%--<button id="btnreloadmodal" class="btn green" runat="server"><i class="fa fa-refresh"></i></button>--%>
                 <a href="javascript:;" class="remove"></a>
             </div>
         </div>

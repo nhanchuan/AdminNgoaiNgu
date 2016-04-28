@@ -24,8 +24,8 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 BagProfileType bt = new BagProfileType();
-                bt.BagProfileTypeID = (int)r[0];
-                bt.TypeName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
+                bt.BagProfileTypeID = (int)r["BagProfileTypeID"];
+                bt.TypeName = (string.IsNullOrEmpty(r["TypeName"].ToString())) ? "" : (string)r["TypeName"];
                 lst.Add(bt);
             }
             this.DB.CloseConnection();
