@@ -14,6 +14,7 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
     public int PageSize = 10;
     BagProfileTypeBLL bagprofiletype;
     CustomerProfilePrivateBLL customerprofileprivate;
+    BagProfileBLL bagprofile;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -32,7 +33,8 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
                 }
                 else
                 {
-                    this.load_dlLoaiHoSo();   
+                    this.load_dlLoaiHoSo();
+                    btnViewProfile.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                 }
             }
         }
@@ -143,5 +145,19 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
     protected void btnRefreshSearch_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect(Request.Url.AbsoluteUri);
+    }
+    private void load_gwBagProfileManager(int InfoID)
+    {
+        bagprofile = new BagProfileBLL();
+        gwBagProfileManager.DataSource = bagprofile.ViewBagProFile(InfoID);
+        gwBagProfileManager.DataBind();
+    }
+    protected void gwTraCuuHoSo_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        bagprofile = new BagProfileBLL();
+        btnViewProfile.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+        int infoID = Convert.ToInt32((gwTraCuuHoSo.SelectedRow.FindControl("lblInfoID") as Label).Text);
+        this.load_gwBagProfileManager(infoID);
+        lblSumBagFile.Text = bagprofile.SumBAGProFile(infoID).ToString();
     }
 }

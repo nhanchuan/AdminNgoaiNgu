@@ -125,7 +125,9 @@
                         kết quả tìm thấy...)</span>
                 </div>
                 <div class="actions">
-
+                    <a id="btnViewProfile" href="#modalViewBagProfile" data-toggle="modal" title="Xem Hồ Sơ Lưu Trữ" runat="server">
+                        <i class="glyphicon glyphicon-briefcase"></i>
+                    </a>
                     <a id="btnRefreshListHocVien" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" runat="server">
                         <i class="fa fa-refresh"></i>
                     </a>
@@ -135,11 +137,12 @@
             <div class="portlet-body">
                 <asp:GridView ID="gwTraCuuHoSo" CssClass="table table-condensed" runat="server"
                     AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwTraCuuHoSo_SelectedIndexChanged">
                     <Columns>
                         <asp:TemplateField HeaderText="No.">
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
+                                <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle Width="30px" />
                         </asp:TemplateField>
@@ -203,11 +206,12 @@
                         <asp:TemplateField>
                             <ItemTemplate>
                                 <%--<a class="btn btn-circle btn-icon-only btn-default"><i class="glyphicon glyphicon-folder-open"></i></a>--%>
-                                <a href='<%# Eval("NumBagProfile").ToString()=="0"?"#":"../QuanLyHoSo/HoSoKhachHang.aspx?FileCode="+Eval("BasicInfoCode") %>' class="btn btn-circle btn-icon-only btn-default">
+                                <a class="btn btn-circle btn-icon-only btn-default">
                                     <i class='<%# Eval("NumBagProfile").ToString()=="0"?"glyphicon glyphicon-folder-close":"glyphicon glyphicon-folder-open" %>'></i></a>
                             </ItemTemplate>
                             <ItemStyle Width="30" />
                         </asp:TemplateField>
+                        <asp:CommandField ShowSelectButton="True" />
                     </Columns>
                     <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
                     <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
@@ -236,5 +240,64 @@
         </div>
         <!-- END Portlet PORTLET-->
     </div>
+
+
+     <%-- Modal View BagProfile--%>
+    <div class="modal fade" id="modalViewBagProfile" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">
+                        <i class="glyphicon glyphicon-briefcase"></i> Hồ Sơ Lưu Trữ
+                        </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-4"><h3>Tổng số : <asp:Label ID="lblSumBagFile" runat="server" Text="Label"></asp:Label></h3></div>
+                    <%-- Gridview --%>
+                    <asp:GridView ID="gwBagProfileManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                        <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                        <Columns>
+                            <asp:TemplateField HeaderText="Tên giấy tờ / Hồ sơ">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("DocName") %>'></asp:Label>
+                                    <asp:Label ID="lblBagProfileID" CssClass="display-none" runat="server" Text='<%# Eval("BagProfileID") %>'></asp:Label>
+                                    
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Ghi chú">
+                                <ItemTemplate>
+                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("DocNote") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Thời gian lưu">
+                                <ItemTemplate>
+                                    <i class="fa fa-clock-o"></i>&nbsp <asp:Label ID="Label3" runat="server" Text='<%# Bind("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Attachments">
+                                <ItemTemplate>
+                                    <i class='<%# Eval("NumFileAtt").ToString()=="0"?"glyphicon glyphicon-ban-circle":"glyphicon glyphicon-ok" %>'></i>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="FileTranslate">
+                                <ItemTemplate>
+                                    <i class='<%# Eval("NumFileTran").ToString()=="0"?"glyphicon glyphicon-ban-circle":"glyphicon glyphicon-ok" %>'></i>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                        <HeaderStyle BackColor="#3AC0F2" ForeColor="White"></HeaderStyle>
+                        <RowStyle BackColor="#A1DCF2"></RowStyle>
+                    </asp:GridView>
+                        <%-- End gridview --%>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal">Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+     <%--End Modal View BagProfile--%>
 </asp:Content>
 

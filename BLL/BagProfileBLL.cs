@@ -15,14 +15,14 @@ namespace BLL
         public List<BagProfile> GetBagProfileWithInfoID(int InfoID)
         {
             string sql = "select * from BagProfile where InfoID=@InfoID";
-            if(!this.DB.OpenConnection())
+            if (!this.DB.OpenConnection())
             {
                 return null;
             }
-            SqlParameter pInfoID= new SqlParameter("InfoID", InfoID);
+            SqlParameter pInfoID = new SqlParameter("InfoID", InfoID);
             DataTable tb = DB.DAtable(sql, pInfoID);
             List<BagProfile> lst = new List<BagProfile>();
-            foreach(DataRow r in tb.Rows)
+            foreach (DataRow r in tb.Rows)
             {
                 BagProfile bg = new BagProfile();
                 bg.BagProfileID = (int)r[0];
@@ -30,7 +30,7 @@ namespace BLL
                 bg.DocName = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
                 bg.DocNote = (string.IsNullOrEmpty(r[3].ToString())) ? "" : (string)r[3];
                 bg.DateOfCreate = (DateTime)r[4];
-                bg.DocStatucs =(string.IsNullOrEmpty(r[5].ToString()))?0: (int)r[5];
+                bg.DocStatucs = (string.IsNullOrEmpty(r[5].ToString())) ? 0 : (int)r[5];
                 lst.Add(bg);
             }
             this.DB.CloseConnection();
@@ -55,7 +55,7 @@ namespace BLL
         public DataTable GetBagProfilePageWise(int pageindex, int pagesize, int InfoID)
         {
             string sql = "Exec GetBagProfilePageWise @pageindex,@pagesize,@InfoID";
-            if(!this.DB.OpenConnection())
+            if (!this.DB.OpenConnection())
             {
                 return null;
             }
@@ -137,6 +137,37 @@ namespace BLL
             this.DB.Updatedata(sql, pBagProfileID);
             this.DB.CloseConnection();
             return true;
+        }
+        //VIEW BAGProFile for TracuuHoSo
+        public DataTable ViewBagProFile(int InfoID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select *, (select COUNT(*) from BagAttachments where BagProfileID=BagProfile.BagProfileID) as NumFileAtt,";
+            sql += " ";
+            sql += "(select COUNT(*) from BagFileTranslate where BagProfileID=BagProfile.BagProfileID) as NumFileTran";
+            sql += " ";
+            sql += "from BagProfile where InfoID=@InfoID order by DocName asc";
+            SqlParameter pInfoID = new SqlParameter("@InfoID", InfoID);
+            DataTable tb = DB.DAtable(sql, pInfoID);
+            this.DB.CloseConnection();
+            return tb;
+        }
+        //Sum BAGProFile for TracuuHoSo
+        public int SumBAGProFile(int InfoID)
+        {
+            int count = 0;
+            if (!this.DB.OpenConnection())
+            {
+                return 0;
+            }
+            string sql = "select COUNT(*) from BagProfile where InfoID=@InfoID";
+            SqlParameter pInfoID = new SqlParameter("@InfoID", InfoID);
+            count = DB.GetValues(sql, pInfoID);
+            this.DB.CloseConnection();
+            return count;
         }
     }
 }
