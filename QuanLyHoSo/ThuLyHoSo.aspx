@@ -183,9 +183,7 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Họ Tên Khách Hàng">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FullName") %>'></asp:TextBox>
-                                </EditItemTemplate>
+                               
                                 <ItemTemplate>
                                     <a style="font-size: 16px;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
                                         <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
@@ -193,26 +191,17 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Ngày sinh">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Birthday") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Giới tính">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Sex") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label3" runat="server" Text='<%# Bind("Sex") %>'></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle Width="80px" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="CMND">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
                                 </ItemTemplate>
@@ -220,16 +209,12 @@
                             <asp:TemplateField>
                                 <HeaderTemplate>
                                     <i class="fa fa-graduation-cap"></i>School
-                               
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Phiếu tư vấn">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("TypeName") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <span class='<%# Eval("TypeName").ToString() == "Tư Vấn Du Học" ? "label label-primary" : Eval("TypeName").ToString() == "Tư Vấn Thực Tập" ? "label label-default" : Eval("TypeName").ToString() == "Tư Vấn Du Lịch" ? "label label-success" :"label label-warning" %>'>
                                         <strong><i class="fa fa-pencil-square-o"></i>
@@ -245,6 +230,11 @@
                                     <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":"Định Cư" %>'></asp:Label>
                                     </li>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <i class='<%# Eval("NumBagProfile").ToString()=="0"?"glyphicon glyphicon-folder-close":"glyphicon glyphicon-folder-open" %>'></i></a>
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>
