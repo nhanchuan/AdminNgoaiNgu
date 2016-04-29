@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
 {
@@ -63,6 +64,17 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
                         this.load_rpLstImg();
 
                         this.load_FormAdvisory(BaseCode);
+
+                        customerbasicinfo = new CustomerBasicInfoBLL();
+                        customerProPri = new CustomerProfilePrivateBLL();
+                        images = new ImagesBLL();
+                        List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+                        CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+                        List<CustomerProfilePrivate> lstPri = customerProPri.GetCustomerProfilePrivateWithInfoID(bsInfo.InfoID);
+                        CustomerProfilePrivate CusPri = lstPri.FirstOrDefault();
+                        List<Images> lstImg = images.getImagesWithId(CusPri.ProfileImg);
+                        Images img = lstImg.FirstOrDefault();
+                        imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
                     }
                     else
                     {
@@ -477,19 +489,55 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         }
         dlEthnic.Items.Insert(0, new ListItem("-- Dân tộc --", "0"));
     }
+    public bool IsNumber(string pText)
+    {
+        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
+        return regex.IsMatch(pText);
+    }
     private string getday(string str)
     {
-        string day = str.Substring(0, 2);
+        string day = "";
+        if (!IsNumber(str.Substring(0, 2)))
+        {
+            return "";
+        }
+        else
+        {
+            day = str.Substring(0, 2);
+        }
         return day;
     }
     private string getmonth(string str)
     {
-        string month = str.Substring(3, 2);
+        string month = "";
+        if (!IsNumber(str.Substring(3, 2)))
+        {
+            return "";
+        }
+        else
+        {
+            month = str.Substring(3, 2);
+        }
         return month;
     }
     private string getyear(string str)
     {
-        string year = str.Substring(6, 4);
+        string year = "";
+        if (str.Length != 10)
+        {
+            return "";
+        }
+        else
+        {
+            if (!IsNumber(str.Substring(6, 4)))
+            {
+                return "";
+            }
+            else
+            {
+                year = str.Substring(6, 4);
+            }
+        }
         return year;
     }
     private Boolean UpdateCustomerBasicInfo()
@@ -507,24 +555,27 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         {
             sex = (rdformnam.Checked) ? 1 : (rdformnu.Checked) ? 2 : 0;
         }
+        string Bday = txtformBirthday.Value;
         DateTime birthday;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (txtformBirthday.Value == "" || string.IsNullOrWhiteSpace(txtformBirthday.Value) || DateTime.TryParseExact(txtformBirthday.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday))
+        if (string.IsNullOrWhiteSpace(Bday) || DateTime.TryParseExact(Bday, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(Bday) == "" || getmonth(Bday) == "" || getyear(Bday) == "")
         {
             birthday = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            birthday = DateTime.ParseExact(getday(txtformBirthday.Value) + "/" + getmonth(txtformBirthday.Value) + "/" + getyear(txtformBirthday.Value), "dd/MM/yyyy", null);
+            birthday = DateTime.ParseExact(getday(Bday) + "/" + getmonth(Bday) + "/" + getyear(Bday), "dd/MM/yyyy", null);
         }
+
         DateTime dateOfIdentityCard;
-        if (txtformDateOfIdentityCard.Value == "" || string.IsNullOrWhiteSpace(txtformDateOfIdentityCard.Value) || DateTime.TryParseExact(txtformDateOfIdentityCard.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard))
+        string DOIC = txtformDateOfIdentityCard.Value;
+        if (string.IsNullOrWhiteSpace(DOIC) || DateTime.TryParseExact(DOIC, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard) || getday(DOIC) == "" || getmonth(DOIC) == "" || getyear(DOIC) == "")
         {
             dateOfIdentityCard = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            dateOfIdentityCard = DateTime.ParseExact(getday(txtformDateOfIdentityCard.Value) + "/" + getmonth(txtformDateOfIdentityCard.Value) + "/" + getyear(txtformDateOfIdentityCard.Value), "dd/MM/yyyy", null);
+            dateOfIdentityCard = DateTime.ParseExact(getday(DOIC) + "/" + getmonth(DOIC) + "/" + getyear(DOIC), "dd/MM/yyyy", null);
         }
         bool hasUpadte = customerbasicinfo.UpdateCustomerBasicInfo(bsInfo.InfoID, txtformFirstName.Text, txtformLastName.Text, txtformOtherName.Text, birthday, txtformBirthPlace.Text, sex, txtformIdentityCard.Text, dateOfIdentityCard, txtformPlaceOfIdentityCard.Text);
         return (hasUpadte) ? true : false;
@@ -551,14 +602,15 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         int bagPPID = Convert.ToInt32(dlBagProfileType.SelectedValue);
 
         DateTime DateOfBHXH;
+        string DaBHXH = txtDateOfBHXH.Value;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (txtDateOfBHXH.Value == "" || string.IsNullOrWhiteSpace(txtDateOfBHXH.Value) || DateTime.TryParseExact(txtDateOfBHXH.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out DateOfBHXH))
+        if (string.IsNullOrWhiteSpace(DaBHXH) || DateTime.TryParseExact(DaBHXH, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out DateOfBHXH) || getday(DaBHXH) == "" || getmonth(DaBHXH) == "" || getyear(DaBHXH) == "")
         {
             DateOfBHXH = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            DateOfBHXH = DateTime.ParseExact(getday(txtDateOfBHXH.Value) + "/" + getmonth(txtDateOfBHXH.Value) + "/" + getyear(txtDateOfBHXH.Value), "dd/MM/yyyy", null);
+            DateOfBHXH = DateTime.ParseExact(getday(DaBHXH) + "/" + getmonth(DaBHXH) + "/" + getyear(DaBHXH), "dd/MM/yyyy", null);
         }
         bool hasUpdate = customerProPri.UpdateCustomerProfilePrivate(CusPri.ProfileID, txtCompanyCopyright.Text, Nationality, Ethnic, Religion, Country, Province, District, txtCommune_Ward.Text, txtPermanentAddress.Text, txtAddressPresent.Text, txtCompanyPhone.Text, txtHomePhone.Text, txtCellPhone.Text, txtEmail.Text, txtMaritalStatus.Text, txtTPXuatThan.Text, txtUuTienGD.Text, txtUuTienBanThan.Text, txtNangKhieu.Text, txtDisability.Text, txtHealthCondition.Text, Height, Weight, BloodID, DateOfBHXH, txtNumOfBHXH.Text, txtBank.Text, txtAccountNumber.Text, 2, bagPPID);
         return (hasUpdate) ? true : false;

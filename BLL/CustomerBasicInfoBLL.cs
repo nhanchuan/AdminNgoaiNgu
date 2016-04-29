@@ -26,17 +26,17 @@ namespace BLL
             foreach(DataRow r in tb.Rows)
             {
                 CustomerBasicInfo c = new CustomerBasicInfo();
-                c.InfoID = (int)r[0];
-                c.FirstName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                c.LastName = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-                c.OtherName = (string.IsNullOrEmpty(r[3].ToString())) ? "" : (string)r[3];
-                c.Birthday = (string.IsNullOrEmpty(r[4].ToString())) ? DefaultBirthday : (DateTime)r[4];
+                c.InfoID = (int)r["InfoID"];
+                c.FirstName = (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : (string)r["FirstName"];
+                c.LastName = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+                c.OtherName = (string.IsNullOrEmpty(r["OtherName"].ToString())) ? "" : (string)r["OtherName"];
+                c.Birthday = (string.IsNullOrEmpty(r["Birthday"].ToString())) ? DefaultBirthday : (DateTime)r["Birthday"];
                 c.BirthPlace = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                c.Sex = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                c.IdentityCard = (string.IsNullOrEmpty(r[7].ToString())) ? "" : (string)r[7];
-                c.DateOfIdentityCard= (string.IsNullOrEmpty(r[8].ToString())) ? DefaultBirthday : (DateTime)r[8];
-                c.PlaceOfIdentityCard= (string.IsNullOrEmpty(r[9].ToString())) ? "" : (string)r[9];
-                c.BasicInfoCode= (string)r[10];
+                c.Sex = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? 0 : (int)r["BirthPlace"];
+                c.IdentityCard = (string.IsNullOrEmpty(r["IdentityCard"].ToString())) ? "" : (string)r["IdentityCard"];
+                c.DateOfIdentityCard= (string.IsNullOrEmpty(r["DateOfIdentityCard"].ToString())) ? DefaultBirthday : (DateTime)r["DateOfIdentityCard"];
+                c.PlaceOfIdentityCard= (string.IsNullOrEmpty(r["PlaceOfIdentityCard"].ToString())) ? "" : (string)r["PlaceOfIdentityCard"];
+                c.BasicInfoCode= (string)r["BasicInfoCode"];
                 lst.Add(c);
             }
             this.DB.CloseConnection();
@@ -55,17 +55,17 @@ namespace BLL
             foreach (DataRow r in tb.Rows)
             {
                 CustomerBasicInfo c = new CustomerBasicInfo();
-                c.InfoID = (int)r[0];
-                c.FirstName = (string.IsNullOrEmpty(r[1].ToString())) ? "" : (string)r[1];
-                c.LastName = (string.IsNullOrEmpty(r[2].ToString())) ? "" : (string)r[2];
-                c.OtherName = (string.IsNullOrEmpty(r[3].ToString())) ? "" : (string)r[3];
-                c.Birthday = (string.IsNullOrEmpty(r[4].ToString())) ? DefaultBirthday : (DateTime)r[4];
+                c.InfoID = (int)r["InfoID"];
+                c.FirstName = (string.IsNullOrEmpty(r["FirstName"].ToString())) ? "" : (string)r["FirstName"];
+                c.LastName = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
+                c.OtherName = (string.IsNullOrEmpty(r["OtherName"].ToString())) ? "" : (string)r["OtherName"];
+                c.Birthday = (string.IsNullOrEmpty(r["Birthday"].ToString())) ? DefaultBirthday : (DateTime)r["Birthday"];
                 c.BirthPlace = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                c.Sex = (string.IsNullOrEmpty(r[6].ToString())) ? 0 : (int)r[6];
-                c.IdentityCard = (string.IsNullOrEmpty(r[7].ToString())) ? "" : (string)r[7];
-                c.DateOfIdentityCard = (string.IsNullOrEmpty(r[8].ToString())) ? DefaultBirthday : (DateTime)r[8];
-                c.PlaceOfIdentityCard = (string.IsNullOrEmpty(r[9].ToString())) ? "" : (string)r[9];
-                c.BasicInfoCode = (string)r[10];
+                c.Sex = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? 0 : (int)r["BirthPlace"];
+                c.IdentityCard = (string.IsNullOrEmpty(r["IdentityCard"].ToString())) ? "" : (string)r["IdentityCard"];
+                c.DateOfIdentityCard = (string.IsNullOrEmpty(r["DateOfIdentityCard"].ToString())) ? DefaultBirthday : (DateTime)r["DateOfIdentityCard"];
+                c.PlaceOfIdentityCard = (string.IsNullOrEmpty(r["PlaceOfIdentityCard"].ToString())) ? "" : (string)r["PlaceOfIdentityCard"];
+                c.BasicInfoCode = (string)r["BasicInfoCode"];
                 lst.Add(c);
             }
             this.DB.CloseConnection();
