@@ -54,7 +54,12 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
                 else
                 {
                     string BaseCode = Request.QueryString["FileCode"];
-                    if (BaseCode != null && CheckQueryStr(BaseCode))
+
+                    if (string.IsNullOrEmpty(BaseCode) || !CheckQueryStr(BaseCode))
+                    {
+                        Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/TuVanVien.aspx");
+                    }
+                    else
                     {
                         //do something
                         this.getFormInfor(BaseCode);
@@ -76,10 +81,7 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
                         Images img = lstImg.FirstOrDefault();
                         imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
                     }
-                    else
-                    {
-                        Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/TuVanVien.aspx");
-                    }
+                    
                 }
                 
             }
@@ -190,19 +192,11 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
     public Boolean CheckQueryStr(string query)
     {
         customerbasicinfo = new CustomerBasicInfoBLL();
-        customerProPri = new CustomerProfilePrivateBLL();
-        if (query == "")
+        List<CustomerBasicInfo> lsCustBas = customerbasicinfo.GetCusBasicInfoWithCode(query);
+        CustomerBasicInfo bs = lsCustBas.FirstOrDefault();
+        if (bs == null)
         {
             return false;
-        }
-        else
-        {
-            List<CustomerBasicInfo> lsCustBas = customerbasicinfo.GetCusBasicInfoWithCode(query);
-            CustomerBasicInfo bs = lsCustBas.FirstOrDefault();
-            if (bs == null)
-            {
-                return false;
-            }
         }
         return true;
     }
@@ -309,7 +303,8 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
 
         imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
 
-        txtformFirstName.Text = bsInfo.FirstName;
+        //txtformFirstName.Text = bsInfo.FirstName;
+        txtformFirstName.Text = "sdgfgjghzslghlsernjiljdnhlodrifnghlodrjiyn";
         txtformLastName.Text = bsInfo.LastName;
         txtformOtherName.Text = bsInfo.OtherName;
         txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd/MM/yyyy");

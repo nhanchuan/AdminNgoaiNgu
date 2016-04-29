@@ -31,8 +31,8 @@ namespace BLL
                 c.LastName = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
                 c.OtherName = (string.IsNullOrEmpty(r["OtherName"].ToString())) ? "" : (string)r["OtherName"];
                 c.Birthday = (string.IsNullOrEmpty(r["Birthday"].ToString())) ? DefaultBirthday : (DateTime)r["Birthday"];
-                c.BirthPlace = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                c.Sex = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? 0 : (int)r["BirthPlace"];
+                c.BirthPlace = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? "" : (string)r["BirthPlace"];
+                c.Sex = (string.IsNullOrEmpty(r["Sex"].ToString())) ? 0 : (int)r["Sex"];
                 c.IdentityCard = (string.IsNullOrEmpty(r["IdentityCard"].ToString())) ? "" : (string)r["IdentityCard"];
                 c.DateOfIdentityCard= (string.IsNullOrEmpty(r["DateOfIdentityCard"].ToString())) ? DefaultBirthday : (DateTime)r["DateOfIdentityCard"];
                 c.PlaceOfIdentityCard= (string.IsNullOrEmpty(r["PlaceOfIdentityCard"].ToString())) ? "" : (string)r["PlaceOfIdentityCard"];
@@ -60,8 +60,8 @@ namespace BLL
                 c.LastName = (string.IsNullOrEmpty(r["LastName"].ToString())) ? "" : (string)r["LastName"];
                 c.OtherName = (string.IsNullOrEmpty(r["OtherName"].ToString())) ? "" : (string)r["OtherName"];
                 c.Birthday = (string.IsNullOrEmpty(r["Birthday"].ToString())) ? DefaultBirthday : (DateTime)r["Birthday"];
-                c.BirthPlace = (string.IsNullOrEmpty(r[5].ToString())) ? "" : (string)r[5];
-                c.Sex = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? 0 : (int)r["BirthPlace"];
+                c.BirthPlace = (string.IsNullOrEmpty(r["BirthPlace"].ToString())) ? "" : (string)r["BirthPlace"];
+                c.Sex = (string.IsNullOrEmpty(r["Sex"].ToString())) ? 0 : (int)r["Sex"];
                 c.IdentityCard = (string.IsNullOrEmpty(r["IdentityCard"].ToString())) ? "" : (string)r["IdentityCard"];
                 c.DateOfIdentityCard = (string.IsNullOrEmpty(r["DateOfIdentityCard"].ToString())) ? DefaultBirthday : (DateTime)r["DateOfIdentityCard"];
                 c.PlaceOfIdentityCard = (string.IsNullOrEmpty(r["PlaceOfIdentityCard"].ToString())) ? "" : (string)r["PlaceOfIdentityCard"];
