@@ -30,7 +30,10 @@
            <a id="btnCreateBagProFile" class="btn green" onserverclick="btnCreateBagProFile_ServerClick" runat="server"><i class="glyphicon glyphicon-plus"></i> NHẬP MỘT HỒ SƠ MỚI</a>
         </div>
         <div class="clearfix"></div>
-        <div class="col-lg-8">
+        <%-- Panel Body --%>
+        <div id="panel" runat="server">
+
+            <div class="col-lg-8">
             <div class="panel panel-info">
                 <div class="panel-body">
                     <h2>BẢNG KÊ KHAI THÔNG TIN</h2>
@@ -474,6 +477,10 @@
                 </div>
             </div>
         </div>
+
+        </div>
+        <%-- End Panel Body --%>
+        
     </div>
 
     <%-- Modal Post Images --%>
@@ -555,13 +562,13 @@
                 $("#ContentPlaceHolder1_txtPostImgTemp").val("");
             });
         });
-         function showanh(url) {
+        function showanh(url) {
             var filename = url.substring(url.lastIndexOf('/') + 1);
             document.querySelector('#<%=ImagesSelect.ClientID %>').src = url;
             document.getElementById('<%=HiddenimgSelect.ClientID %>').value = url;
-            document.getElementById('<%=txtImgUrl.ClientID %>').value = url;
-            return false;
-        }
+             document.getElementById('<%=txtImgUrl.ClientID %>').value = url;
+             return false;
+         }
     </script>
 </asp:Content>
 

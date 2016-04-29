@@ -193,7 +193,7 @@ namespace BLL
             }
             SqlParameter pInfoID = new SqlParameter("InfoID", InfoID);
             SqlParameter pStaffWork = new SqlParameter("StaffWork", StaffWork);
-            SqlParameter pRegistrationID = new SqlParameter("RegistrationID", RegistrationID);
+            SqlParameter pRegistrationID = (RegistrationID == 0) ? new SqlParameter("RegistrationID", DBNull.Value) : new SqlParameter("RegistrationID", RegistrationID);
             this.DB.Updatedata(sql, pInfoID, pStaffWork, pRegistrationID);
             this.DB.CloseConnection();
             return true;

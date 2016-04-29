@@ -61,6 +61,19 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
                     dlProvince.Items.Insert(0, new ListItem("-- Chọn Tỉnh - Thành --", "0"));
                     dlDistrict.Items.Insert(0, new ListItem("-- Chọn Quận - Huyện --", "0"));
                     load_dlBloodGroup();
+                    panel.Visible = false;
+
+                    string profilecode = Request.QueryString["FileCode"];
+                    if(!string.IsNullOrEmpty(profilecode))
+                    {
+                        panel.Visible = true;
+                        btnCreateBagProFile.Visible = false;
+                        this.getFormInfor(profilecode);
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
             }
         }
@@ -469,7 +482,7 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
         {
             DateOfBHXH = DateTime.ParseExact(getday(txtDateOfBHXH.Value) + "/" + getmonth(txtDateOfBHXH.Value) + "/" + getyear(txtDateOfBHXH.Value), "dd/MM/yyyy", null);
         }
-        bool hasUpdate = customerProPri.UpdateCustomerProfilePrivate(CusPri.ProfileID, txtCompanyCopyright.Text, Nationality, Ethnic, Religion, Country, Province, District, txtCommune_Ward.Text, txtPermanentAddress.Text, txtAddressPresent.Text, txtCompanyPhone.Text, txtHomePhone.Text, txtCellPhone.Text, txtEmail.Text, txtMaritalStatus.Text, txtTPXuatThan.Text, txtUuTienGD.Text, txtUuTienBanThan.Text, txtNangKhieu.Text, txtDisability.Text, txtHealthCondition.Text, Height, Weight, BloodID, DateOfBHXH, txtNumOfBHXH.Text, txtBank.Text, txtAccountNumber.Text, 1, bagPPID);
+        bool hasUpdate = customerProPri.UpdateCustomerProfilePrivate(CusPri.ProfileID, txtCompanyCopyright.Text, Nationality, Ethnic, Religion, Country, Province, District, txtCommune_Ward.Text, txtPermanentAddress.Text, txtAddressPresent.Text, txtCompanyPhone.Text, txtHomePhone.Text, txtCellPhone.Text, txtEmail.Text, txtMaritalStatus.Text, txtTPXuatThan.Text, txtUuTienGD.Text, txtUuTienBanThan.Text, txtNangKhieu.Text, txtDisability.Text, txtHealthCondition.Text, Height, Weight, BloodID, DateOfBHXH, txtNumOfBHXH.Text, txtBank.Text, txtAccountNumber.Text, 2, bagPPID);
         return (hasUpdate) ? true : false;
         
     }
@@ -484,9 +497,49 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
             Response.Redirect(Request.Url.AbsoluteUri);
         }
     }
+    private void getFormInfor(string queryStr)
+    {
+        employees = new EmployeesBLL();
+        DataTable tb = employees.GetEmpNameCode(queryStr);
+        foreach (DataRow r in tb.Rows)
+        {
+            txtEmpAdv.Text = (string)r[12] + " " + (string)r[11] + " - Mã NV: " + (string)r[7];
+            txtprofilePriCode.Text = (string)r[2];
+        }
 
+    }
     protected void btnCreateBagProFile_ServerClick(object sender, EventArgs e)
     {
+        
+        string FileCode = CreateFunction();
+        string QueryString = "http://" + Request.Url.Authority + "/QuanLyHoSo/NhapHoSo.aspx?FileCode=" + FileCode;
+        Response.Redirect(QueryString);
+        //this.getFormInfor(FileCode);
+    }
+    private string CreateFunction()
+    {
+        userprofile = new UserProfileBLL();
+        employees = new EmployeesBLL();
+        customerbasicinfo = new CustomerBasicInfoBLL();
+        customerProPri = new CustomerProfilePrivateBLL();
+        List<UserProfile> lstPR = userprofile.getUserProfileWithID(Session.GetCurrentUser().UserID);
+        UserProfile pr = lstPR.FirstOrDefault();
+        List<Employees> lstemp = employees.getEmpWithProfileId(pr.ProfileID);
+        Employees emp = lstemp.FirstOrDefault();
+        
+        //--Khởi tạo một Thông tin khách hàng với mã code random
+        string FileCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+        this.customerbasicinfo.CreateBasicCodeInfo(FileCode);
+        //--Lấy thông tin khách hàng với Mã Code được khởi tạo
+        List<CustomerBasicInfo> lstC = customerbasicinfo.GetCusBasicInfoWithCode(FileCode);
+        CustomerBasicInfo cb = lstC.FirstOrDefault();
+        //--Tạo một thông tin chi tiết khách hàng với mã Infor
+        this.customerProPri.CreateBasicCustPri(cb.InfoID, emp.EmployeesID, 0);
+        //--Lấy thông tin chi tiết khách hàng vừa tạo
+        List<CustomerProfilePrivate> lstPri = customerProPri.GetCustomerProfilePrivateWithInfoID(cb.InfoID);
+        CustomerProfilePrivate CusPri = lstPri.FirstOrDefault();
+        return FileCode;
+
 
     }
 }
