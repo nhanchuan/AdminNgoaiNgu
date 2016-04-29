@@ -55,6 +55,12 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
                     this.load_rpLstImg();
                     this.load_dlBagProfileType();
                     this.load_dlNationality();
+                    this.load_dlEthnic();
+                    this.load_dlReligionID();
+                    load_dlCountrys();
+                    dlProvince.Items.Insert(0, new ListItem("-- Chọn Tỉnh - Thành --", "0"));
+                    dlDistrict.Items.Insert(0, new ListItem("-- Chọn Quận - Huyện --", "0"));
+                    load_dlBloodGroup();
                 }
             }
         }
@@ -98,10 +104,8 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
     private void load_dlEthnic()
     {
         ethniclist = new EthnicListBLL();
-        dlEthnic.DataSource = ethniclist.GetallEthnicList();
-        dlEthnic.DataValueField = "EthnicID";
-        dlEthnic.DataTextField = "EthnicName";
-        dlEthnic.DataBind();
+        this.load_DropdownList(dlEthnic, ethniclist.GetallEthnicList(), "EthnicName", "EthnicID");
+        dlEthnic.Items.Insert(0, new ListItem("-- Chọn Dân Tộc --", "0"));
     }
     private void load_dlEthnic(int NaID)
     {
@@ -114,52 +118,33 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
     private void load_dlReligionID()
     {
         lstOfReligoin = new ListOfReligionBLL();
-        dlReligion.DataSource = lstOfReligoin.getAllListOfReligion();
-        dlReligion.DataTextField = "ReligionName";
-        dlReligion.DataValueField = "ReligionID";
-        dlReligion.DataBind();
+        this.load_DropdownList(dlReligion, lstOfReligoin.getAllListOfReligion(), "ReligionName", "ReligionID");
+        dlReligion.Items.Insert(0, new ListItem("-- Chọn Tôn Giáo --", "0"));
     }
     private void load_dlCountrys()
     {
         country = new CountryBLL();
-        dlCountry.DataSource = country.getAllCountry();
-        dlCountry.DataTextField = "CountryName";
-        dlCountry.DataValueField = "CountryID";
-        dlCountry.DataBind();
+        this.load_DropdownList(dlCountry, country.getAllCountry(), "CountryName", "CountryID");
+        dlCountry.Items.Insert(0, new ListItem("-- Chọn Quốc Gia --", "0"));
     }
     private void load_dlBloodGroup()
     {
         bloodgroup = new BloodGroupBLL();
-        dlBloodGroup.DataSource = bloodgroup.GetAllBloodGroup();
-        dlBloodGroup.DataTextField = "BloodName";
-        dlBloodGroup.DataValueField = "BloodID";
-        dlBloodGroup.DataBind();
+        this.load_DropdownList(dlBloodGroup, bloodgroup.GetAllBloodGroup(), "BloodName", "BloodID");
+        dlBloodGroup.Items.Insert(0, new ListItem("-- Chọn Nhóm Máu", "0"));
     }
     
     protected void dlCountry_SelectedIndexChanged(object sender, EventArgs e)
     {
         province = new ProvinceBLL();
-        dlProvince.DataSource = province.getProvinceWithCid(int.Parse(dlCountry.SelectedValue));
-        dlProvince.DataTextField = "ProvinceName";
-        dlProvince.DataValueField = "ProvinceID";
-        dlProvince.DataBind();
-        dlProvince.Items.Insert(0, new ListItem("-- Select Province --", "0"));
-        dlDistrict.DataSource = null;
-        district = new DistrictBLL();
-        dlDistrict.DataSource = district.getDistrictwithProid(0);
-        dlDistrict.DataTextField = "DistrictName";
-        dlDistrict.DataValueField = "DistrictID";
-        dlDistrict.DataBind();
-        dlDistrict.Items.Insert(0, new ListItem("-- Select District --", "0"));
+        this.load_DropdownList(dlProvince, province.getProvinceWithCid(Convert.ToInt32(dlCountry.SelectedValue)), "ProvinceName", "ProvinceID");
+        dlProvince.Items.Insert(0, new ListItem("-- Chọn Tỉnh - Thành --", "0"));
     }
     protected void dlProvince_SelectedIndexChanged(object sender, EventArgs e)
     {
         district = new DistrictBLL();
-        dlDistrict.DataSource = district.getDistrictwithProid(int.Parse(dlProvince.SelectedValue));
-        dlDistrict.DataTextField = "DistrictName";
-        dlDistrict.DataValueField = "DistrictID";
-        dlDistrict.DataBind();
-        dlDistrict.Items.Insert(0, new ListItem("-- Select District --", "0"));
+        this.load_DropdownList(dlDistrict, district.getDistrictwithProid(Convert.ToInt32(dlProvince.SelectedValue)), "DistrictName", "DistrictID");
+        dlDistrict.Items.Insert(0, new ListItem("-- Chọn Quận - Huyện --", "0"));
     }
     
     private string RegisFormTypeStr(int typeId)
@@ -401,18 +386,6 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
             return;
         }
     }
-    protected void dlNationality_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        ethniclist = new EthnicListBLL();
-        this.load_dlEthnic(Convert.ToInt32(dlNationality.SelectedValue));
-        dlEthnic.Items.Add(new ListItem("_____________________Dân tộc khác________________________", "0"));
-        List<EthnicList> lste = ethniclist.GetallEthnicListWithoutNationID(Convert.ToInt32(dlNationality.SelectedValue));
-        foreach (EthnicList itm in lste)
-        {
-            dlEthnic.Items.Add(new ListItem(itm.EthnicName, itm.EthnicID.ToString()));
-        }
-        dlEthnic.Items.Insert(0, new ListItem("-- Dân tộc --", "0"));
-    }
     private string getday(string str)
     {
         string day = str.Substring(0, 2);
@@ -510,5 +483,10 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
         {
             Response.Redirect(Request.Url.AbsoluteUri);
         }
+    }
+
+    protected void btnCreateBagProFile_ServerClick(object sender, EventArgs e)
+    {
+
     }
 }

@@ -26,9 +26,10 @@
     </div>
     <!-- END PAGE HEADER-->
     <div class="row">
-        <div class="col-lg-4">
-           
+        <div class="col-lg-12">
+           <a id="btnCreateBagProFile" class="btn green" onserverclick="btnCreateBagProFile_ServerClick" runat="server"><i class="glyphicon glyphicon-plus"></i> NHẬP MỘT HỒ SƠ MỚI</a>
         </div>
+        <div class="clearfix"></div>
         <div class="col-lg-8">
             <div class="panel panel-info">
                 <div class="panel-body">
@@ -234,7 +235,7 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label class="control-label">Quốc tịch :</label><br />
-                                            <asp:DropDownList ID="dlNationality" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlNationality_SelectedIndexChanged" runat="server"></asp:DropDownList>
+                                            <asp:DropDownList ID="dlNationality" CssClass="form-control" AutoPostBack="true" runat="server"></asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
@@ -464,8 +465,9 @@
                         </div>
                         <%-- End row 11 --%>
                         <div class="row">
-                            <div class="col-lg-12">
-                                <asp:Button ID="btnSavePrivateProfile" CssClass="btn btn-primary pull-right" ValidationGroup="validFormPrivateProfile" OnClick="btnSavePrivateProfile_Click" runat="server" Text="Lưu Thông Tin" />
+                            <div class="col-lg-12 text-right">
+                                <asp:Label ID="lblCacel" CssClass="btn btn-warning" runat="server" Text="Hủy"></asp:Label>
+                                <asp:Button ID="btnSavePrivateProfile" CssClass="btn btn-primary" ValidationGroup="validFormPrivateProfile" OnClick="btnSavePrivateProfile_Click" runat="server" Text="Lưu Thông Tin" />
                             </div>
                         </div>
                     </div>
