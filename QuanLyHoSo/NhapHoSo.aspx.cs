@@ -69,6 +69,16 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
                         panel.Visible = true;
                         btnCreateBagProFile.Visible = false;
                         this.getFormInfor(profilecode);
+                        customerbasicinfo = new CustomerBasicInfoBLL();
+                        customerProPri = new CustomerProfilePrivateBLL();
+                        images = new ImagesBLL();
+                        List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(profilecode);
+                        CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+                        List<CustomerProfilePrivate> lstPri = customerProPri.GetCustomerProfilePrivateWithInfoID(bsInfo.InfoID);
+                        CustomerProfilePrivate CusPri = lstPri.FirstOrDefault();
+                        List<Images> lstImg = images.getImagesWithId(CusPri.ProfileImg);
+                        Images img = lstImg.FirstOrDefault();
+                        imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
                     }
                     else
                     {
@@ -538,6 +548,8 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
         //--Lấy thông tin chi tiết khách hàng vừa tạo
         List<CustomerProfilePrivate> lstPri = customerProPri.GetCustomerProfilePrivateWithInfoID(cb.InfoID);
         CustomerProfilePrivate CusPri = lstPri.FirstOrDefault();
+        //Cập nhật Nhân Viên thụ lý Hồ Sơ
+        this.customerProPri.UpdateEmpFile(CusPri.ProfileID, 2, emp.EmployeesID);
         return FileCode;
 
 

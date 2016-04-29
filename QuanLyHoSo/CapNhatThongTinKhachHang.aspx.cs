@@ -260,33 +260,41 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         dlDistrict.DataBind();
         dlDistrict.Items.Insert(0, new ListItem("-- Select District --", "0"));
 
-        lblAdvFullName.Text = regForm.FullName;
-        lbladvAddress.Text = regForm.Address_form + ", " + DistrictStr(regForm.DistrictID) + ", " + ProvinceStr(regForm.ProvinceID) + ", " + CountryStr(regForm.CountryID);
-        lblAdvEmail.Text = regForm.Email;
-        lblAdvPhone.Text = regForm.Phone;
-        lblAdvSex.Text = (regForm.Sex == 1) ? "Nam" : (regForm.Sex == 2) ? "Nữ" : " - - -";
-
-        switch (regForm.TypeID)
+        if (regForm != null)
         {
-            case 1:
-                lblAdvType.Text = RegisFormTypeStr(1);
-                spanTagsAdv.Attributes.Add("class", "label label-primary");
-                break;
-            case 2:
-                lblAdvType.Text = RegisFormTypeStr(2);
-                spanTagsAdv.Attributes.Add("class", "label label-default");
-                break;
-            case 3:
-                lblAdvType.Text = RegisFormTypeStr(3);
-                spanTagsAdv.Attributes.Add("class", "label label-success");
-                break;
-            case 4:
-                lblAdvType.Text = RegisFormTypeStr(4);
-                spanTagsAdv.Attributes.Add("class", "label label-warning");
-                break;
+            lblAdvFullName.Text = regForm.FullName;
+            lbladvAddress.Text = regForm.Address_form + ", " + DistrictStr(regForm.DistrictID) + ", " + ProvinceStr(regForm.ProvinceID) + ", " + CountryStr(regForm.CountryID);
+            lblAdvEmail.Text = regForm.Email;
+            lblAdvPhone.Text = regForm.Phone;
+            lblAdvSex.Text = (regForm.Sex == 1) ? "Nam" : (regForm.Sex == 2) ? "Nữ" : " - - -";
+
+            switch (regForm.TypeID)
+            {
+                case 1:
+                    lblAdvType.Text = RegisFormTypeStr(1);
+                    spanTagsAdv.Attributes.Add("class", "label label-primary");
+                    break;
+                case 2:
+                    lblAdvType.Text = RegisFormTypeStr(2);
+                    spanTagsAdv.Attributes.Add("class", "label label-default");
+                    break;
+                case 3:
+                    lblAdvType.Text = RegisFormTypeStr(3);
+                    spanTagsAdv.Attributes.Add("class", "label label-success");
+                    break;
+                case 4:
+                    lblAdvType.Text = RegisFormTypeStr(4);
+                    spanTagsAdv.Attributes.Add("class", "label label-warning");
+                    break;
+            }
+            lblAdvEdulvl.Text = EducationSrt(regForm.StudyLV);
+            lblAdvcoutry.Text = CountryAdvStr(regForm.CountryAdvisoryID);
         }
-        lblAdvEdulvl.Text = EducationSrt(regForm.StudyLV);
-        lblAdvcoutry.Text = CountryAdvStr(regForm.CountryAdvisoryID);
+        else
+        {
+            return;
+        }
+
         imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
 
         txtformFirstName.Text = bsInfo.FirstName;
