@@ -81,7 +81,7 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
                         Images img = lstImg.FirstOrDefault();
                         imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
                     }
-                    
+
                 }
                 
             }
@@ -298,13 +298,19 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         }
         else
         {
-            return;
+            lblAdvFullName.Text = "";
+            lbladvAddress.Text = "";
+            lblAdvEmail.Text = "";
+            lblAdvPhone.Text = "";
+            lblAdvSex.Text = "";
+            lblAdvEdulvl.Text = "";
+            lblAdvcoutry.Text = "";
         }
 
         imgCusprofile.Src = (img == null) ? "../images/default_images.jpg" : "../" + img.ImagesUrl;
 
-        //txtformFirstName.Text = bsInfo.FirstName;
-        txtformFirstName.Text = "sdgfgjghzslghlsernjiljdnhlodrifnghlodrjiyn";
+        txtformFirstName.Text = bsInfo.FirstName;
+        //txtformFirstName.Text = "sdgfgjghzslghlsernjiljdnhlodrifnghlodrjiyn";
         txtformLastName.Text = bsInfo.LastName;
         txtformOtherName.Text = bsInfo.OtherName;
         txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd/MM/yyyy");

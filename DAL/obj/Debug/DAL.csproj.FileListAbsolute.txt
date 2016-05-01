@@ -81,3 +81,8 @@ E:\DEVELOPER\Website\GitHub\ManagerCenter\AdminNgoaiNgu\DAL\bin\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\ManagerCenter\AdminNgoaiNgu\DAL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\ManagerCenter\AdminNgoaiNgu\DAL\obj\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\ManagerCenter\AdminNgoaiNgu\DAL\obj\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitHub\GH\DAL\bin\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitHub\GH\DAL\bin\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitHub\GH\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\DEVELOPER\WEBSITE\GitHub\GH\DAL\obj\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitHub\GH\DAL\obj\Debug\DAL.pdb
