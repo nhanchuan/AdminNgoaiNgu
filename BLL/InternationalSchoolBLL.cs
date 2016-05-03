@@ -282,5 +282,20 @@ namespace BLL
             this.DB.CloseConnection();
             return count;
         }
+        //Update Images
+        public Boolean UpdateImages(int Images, int SchoolID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "Update InternationalSchool set Images=@Images where SchoolID=@SchoolID";
+            SqlParameter pImages = new SqlParameter("@Images", Images);
+            SqlParameter pSchoolID = new SqlParameter("@SchoolID", SchoolID);
+            this.DB.Updatedata(sql, pImages, pSchoolID);
+            this.DB.CloseConnection();
+            return true;
+        }
+
     }
 }

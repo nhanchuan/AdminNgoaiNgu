@@ -512,7 +512,6 @@
                 <div class="modal-body">
                     <asp:UpdatePanel runat="server">
                         <ContentTemplate>
-
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="form-group">

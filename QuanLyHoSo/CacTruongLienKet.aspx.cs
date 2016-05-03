@@ -19,6 +19,7 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
     DistrictBLL district;
     EducationLVBLL educatuionlvl;
     InternationalSchoolBLL internationalSchool;
+    ImagesBLL images;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -45,6 +46,14 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
                     if (Session["pageIndex_InternationalSchool"] == null)
                     {
                         this.InternationalSchoolPageWise(1);
+                        if (Session["SelectedIndex_InternationalSchool"] == null)
+                        {
+                            gwInternationalSchool.SelectedIndex = -1;
+                        }
+                        else
+                        {
+                            gwInternationalSchool.SelectedIndex = Convert.ToInt32(Session["SelectedIndex_InternationalSchool"].ToString());
+                        }
                     }
                     else
                     {
@@ -67,9 +76,16 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
                     
                     dlEProvince.Items.Insert(0, new ListItem("-- Chọn Tiểu Bang - Tỉnh / Thành Phố --", "0"));
                     dlEDistrict.Items.Insert(0, new ListItem("-- Chọn Quận Huyện --", "0"));
+                    this.load_rpLstImg();
                 }
             }
         }
+    }
+    public void load_rpLstImg()
+    {
+        images = new ImagesBLL();
+        rpLstImg.DataSource = images.getImagesWithType(1010);
+        rpLstImg.DataBind();
     }
     private void load_dlCountry()
     {
@@ -426,5 +442,40 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
         {
             lblExeptionEditSchool.Text = ex.ToString();
         }
+    }
+    protected int ImagesID(string filename)
+    {
+        int ImID = 0;
+        images = new ImagesBLL();
+
+        if (string.IsNullOrWhiteSpace(filename))
+        {
+            ImID = 0;
+        }
+        else
+        {
+            ImID = images.ImagesIDUrl(filename);
+        }
+        return ImID;
+    }
+    protected void btnselectimages_Click(object sender, EventArgs e)
+    {
+        internationalSchool = new InternationalSchoolBLL();
+        string http = "http://" + Request.Url.Authority + "/";
+        string ImgURL = HiddenimgSelect.Value.Remove(0, http.Length);
+        int SchoolID = Convert.ToInt32((gwInternationalSchool.SelectedRow.FindControl("lblSchoolID") as Label).Text);
+        try
+        {
+            if (this.internationalSchool.UpdateImages(ImagesID(ImgURL), SchoolID))
+            {
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+        }
+        catch (Exception ex)
+        {
+            lblExeptionEditSchool.Text = ex.ToString();
+        }
+        //UpdateImages(CusPri.ProfileID, ImagesID(txtPostImgTemp.Text));
+
     }
 }

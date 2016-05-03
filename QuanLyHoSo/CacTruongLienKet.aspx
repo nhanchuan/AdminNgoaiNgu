@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <link href="../App_Themes/admin/category.css" rel="stylesheet" />
     <!-- BEGIN PAGE HEADER-->
     <h1 class="page-title">Các Trường Liên Kết
     </h1>
@@ -256,12 +257,12 @@
                     </div>
                 </div>
                 <div class="actions">
-                    <a id="btnchangeImg" title="Thay đổi ảnh đại diện" href="#" runat="server">
+                    <a id="btnchangeImg" title="Thay đổi ảnh đại diện" href="#modalselectimages" data-toggle="modal" runat="server">
                         <i class="fa fa-file-image-o"></i>
                     </a>
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
+                    <%--<a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
                         <i class="fa fa-file-excel-o"></i>
-                    </a>
+                    </a>--%>
                     <a href="#modalEditShool" data-toggle="modal" id="btnEditTruong" title="Chỉnh sửa thông tin Trường" runat="server">
                         <i class="icon-wrench"></i>
                     </a>
@@ -595,6 +596,71 @@
     <%-- End Modal --%>
 
 
+    <%-- Modal Select Category Images --%>
+    <div class="modal fade" id="modalselectimages" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-full">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">
+                        <img src="../images/icon/add-icon.png" width="28" height="28" />
+                        Ảnh chức năng cho chuyên mục</h4>
+                </div>
+                <div class="modal-body">
+        <div class="panel-default">
+            <div class="panel-body">
+                <div class="col-lg-9">
+                    <div class="col-lg-12">
+                        <div style="height: 700px; overflow: auto;">
+                            <div class="grid-container">
+                                <ul class="rig columns-5">
+                                    <asp:Repeater ID="rpLstImg" runat="server">
+                                        <ItemTemplate>
+                                            <li>
+                                                <a href='<%#"../"+Eval("ImagesUrl") %>' onclick="return showanh(this.href)"">
+                                                                        <img src='<%#"../"+Eval("ImagesUrl") %>' />
+                                                                        <h4>Upload by <i style="color: red;"><%# Eval("UserName") %></i></h4>
+                                                                        <p><i class="fa fa-clock-o"></i><%# Eval("DateOfStart") %></p>
+                                                  </a>
+                                              </li>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <%-- info --%>
+                    <asp:ValidationSummary ID="ValidationSummary2" ValidationGroup="vlidSelectImage" DisplayMode="BulletList" ShowSummary="true" ForeColor="Red" runat="server" />
+                    <asp:Image ID="ImagesSelect" CssClass="img-responsive" runat="server" />
+                    <br />
+                    <asp:HiddenField ID="HiddenimgSelect" runat="server" />
+                    <label>Url Image:</label>
+                    <asp:TextBox ID="txtImgUrl" CssClass="form-control" runat="server"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtImgUrl" ValidationGroup="vlidSelectImage" ErrorMessage="No Image Selected !" Display="None"></asp:RequiredFieldValidator>
+                    <%-- end info --%>
+                </div>
+            </div>
+        </div>
 
+    </div>
+                <div class="modal-footer">
+                    <a class="btn btn-warning" data-dismiss="modal"> Cancel</a>
+                    <asp:Button ID="btnselectimages" CssClass="btn btn-primary pull-right" ValidationGroup="vlidSelectImage" OnClick="btnselectimages_Click" runat="server" Text="Chọn ảnh tiêu biểu" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <%-- End Modal Select Category Images --%>
+    <script type="text/javascript">
+        function showanh(url) {
+            var filename = url.substring(url.lastIndexOf('/') + 1);
+            document.querySelector('#<%=ImagesSelect.ClientID %>').src = url;
+            document.getElementById('<%=HiddenimgSelect.ClientID %>').value = url;
+            document.getElementById('<%=txtImgUrl.ClientID %>').value = url;
+            return false;
+        }
+    </script>
 </asp:Content>
 
