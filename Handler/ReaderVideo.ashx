@@ -44,7 +44,6 @@ public class ReaderVideo : IHttpHandler {
         buf.Close();
         //fs.Close();
         br.Close();
-
     }
 
     public bool IsReusable {

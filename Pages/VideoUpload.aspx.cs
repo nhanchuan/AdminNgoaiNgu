@@ -33,19 +33,20 @@ public partial class Pages_VideoUpload : BasePage
                 }
                 else
                 {
-                    this.load_dlVideoType();
+                    //this.load_dlVideoType();
                 }
             }
         }
     }
-    protected void load_dlVideoType()
-    {
-        videotype = new VideoTypeBLL();
-        dlVideoType.DataSource = videotype.getallVideoType();
-        dlVideoType.DataTextField = "TypeName";
-        dlVideoType.DataValueField = "VideotypeID";
-        dlVideoType.DataBind();
-    }
+    //protected void load_dlVideoType()
+    //{
+    //    videotype = new VideoTypeBLL();
+    //    dlVideoType.DataSource = videotype.getallVideoType();
+    //    dlVideoType.DataTextField = "TypeName";
+    //    dlVideoType.DataValueField = "VideotypeID";
+    //    dlVideoType.DataBind();
+    //    dlVideoType.Items.Insert(0, new ListItem("-- Chọn danh mục Videos --", "0"));
+    //}
 
     protected void UploaderVideo_UploadComplete(object sender, AjaxControlToolkit.AjaxFileUploadEventArgs e)
     {
@@ -55,9 +56,9 @@ public partial class Pages_VideoUpload : BasePage
         string fileExtension = Path.GetExtension(e.FileName).ToLower();
         string fileName = Path.GetFileNameWithoutExtension(e.FileName);
 
-        string nameRandom = "Hollywood-english" + "-" + dateString + "-" + fileName + "-" + RandomName;
+        string nameRandom = "kus-edu-vn" + "-" + dateString + "-" + XoaKyTuDacBiet(fileName) + "-" + RandomName;
         string contentType = "";
-        switch(fileExtension)
+        switch (fileExtension)
         {
             case ".mp4":
                 contentType = "video/mp4";
@@ -75,7 +76,7 @@ public partial class Pages_VideoUpload : BasePage
                 contentType = "video/x-ms-wmv";
                 break;
         }
-        if (this.video.UploadVideos(fileName, "videos/uploads/" + nameRandom + fileExtension, contentType, int.Parse(dlVideoType.SelectedValue), txtShortDesciption.Text, ad.UserID))
+        if (this.video.UploadVideos(fileName, "videos/uploads/" + nameRandom + fileExtension, contentType, 0, "", ad.UserID))
         {
             UploaderVideo.SaveAs(Server.MapPath("../videos/uploads/" + nameRandom + fileExtension));
         }

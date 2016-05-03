@@ -86,6 +86,7 @@ public partial class Pages_VideoEditInfo : BasePage
         dlvideoType.DataTextField = "TypeName";
         dlvideoType.DataValueField = "VideotypeID";
         dlvideoType.DataBind();
+        dlvideoType.Items.Insert(0, new ListItem("-- Chọn danh mục Videos --", "0"));
     }
     protected void getVideoInfo(string videoid)
     {
@@ -96,7 +97,7 @@ public partial class Pages_VideoEditInfo : BasePage
         Videos vi = lst.FirstOrDefault();
         txtvideoname.Text = vi.VideoName;
         txtshortdescription.Text = vi.ShortDecsription;
-        dlvideoType.Items.FindByValue(vi.VideotypeID.ToString()).Selected = true;
+        dlvideoType.Items.FindByValue((vi.VideotypeID == 0) ? "0" : vi.VideotypeID.ToString()).Selected = true;
         videoplayer.HRef = "../Handler/ReaderVideo.ashx?videoId=" + videoid;
         btndownload.HRef = "../Handler/DownloadVideo.ashx?videoId=" + videoid;
         lbldateupload.Text = vi.DateOfCreate.ToString();
@@ -110,7 +111,7 @@ public partial class Pages_VideoEditInfo : BasePage
         FileInfo file = new FileInfo(path);
         float filesize = file.Length / 1024;
         lblfilesize.Text = filesize.ToString() + " kB";
-        txtlinkFileVideo.Text = "http://www/hollywood.edu.vn/" + vi.VideoUrl;
+        txtlinkFileVideo.Text = "http://" + Request.Url.Authority + "/" + vi.VideoUrl;
     }
 
     protected void btnUpdate_Click(object sender, EventArgs e)
@@ -126,5 +127,33 @@ public partial class Pages_VideoEditInfo : BasePage
             Response.Write("<script>alert('Update false ! Error Connected Database !')</script>");
             return;
         }
+    }
+
+    protected void btndeleteVideo_ServerClick(object sender, EventArgs e)
+    {
+        video = new VideosBLL();
+        try {
+            int videoID = Convert.ToInt32(Request.QueryString["VideoID"].ToString());
+            List<Videos> lst = video.getVideoWithId(videoID);
+            Videos vd = lst.FirstOrDefault();
+            string filename = Server.MapPath("../" + vd.VideoUrl);
+            if (video.DeleteVideo(videoID))
+            {
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    if ((System.IO.File.Exists(filename)))
+                    {
+                        System.IO.File.Delete(filename);
+                        
+                    }
+                }
+            }
+            Response.Redirect("http://" + Request.Url.Authority + "/Pages/VideoManager.aspx");
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+        }
+        
     }
 }

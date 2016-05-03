@@ -13,7 +13,7 @@ using System.Globalization;
 
 public partial class QuanLyHoSo_CacTruongLienKet : BasePage
 {
-    public int PageSize = 10;
+    public int PageSize = 20;
     CountryBLL country;
     ProvinceBLL province;
     DistrictBLL district;
@@ -41,7 +41,7 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
                     dlProvinces.Items.Insert(0, new ListItem("-- Chọn Tiểu Bang - Tỉnh / Thành Phố --", "0"));
                     dlDistrict.Items.Insert(0, new ListItem("-- Chọn Quận Huyện --", "0"));
                     btnEditTruong.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
-
+                    btnchangeImg.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                     if (Session["pageIndex_InternationalSchool"] == null)
                     {
                         this.InternationalSchoolPageWise(1);
@@ -284,6 +284,7 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
         province = new ProvinceBLL();
         district = new DistrictBLL();
         btnEditTruong.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+        btnchangeImg.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
         int SchoolID = Convert.ToInt32((gwInternationalSchool.SelectedRow.FindControl("lblSchoolID") as Label).Text);
         List<InternationalSchool> lst = internationalSchool.GetInternationalSchoolWithSchoolID(SchoolID);
         InternationalSchool ins = lst.FirstOrDefault();

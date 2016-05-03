@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="VideoManager.aspx.cs" Inherits="Pages_VideoManager" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <style>
@@ -99,28 +99,22 @@
                     </div>
                     <br />
                     <asp:GridView ID="gwvideomanager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwvideomanager_SelectedIndexChanged">
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+                        OnSelectedIndexChanged="gwvideomanager_SelectedIndexChanged" OnRowDataBound="gwvideomanager_RowDataBound" OnRowDeleting="gwvideomanager_RowDeleting">
                         <Columns>
-                            <asp:TemplateField HeaderText="ID">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("VideoID") %>'></asp:TextBox>
-                                </EditItemTemplate>
+                            <asp:TemplateField HeaderText="No.">
                                 <ItemTemplate>
-                                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("VideoID") %>'></asp:Label>
+                                    <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
+                                    <asp:Label ID="lblVideoID" CssClass="display-none" runat="server" Text='<%# Bind("VideoID") %>'></asp:Label>
                                 </ItemTemplate>
+                                <ItemStyle Width="30px" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Category">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("TypeName") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("TypeName") %>'></asp:Label><a class="popovers pull-right" data-trigger="hover" data-container="body" data-placement="top" data-content="<%# Eval("TypeDescription") %>"><i class="fa fa-question"></i></a>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Video Name">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("VideoName") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <a style="font-size: 16px;" href='<%# "../Pages/VideoEditInfo.aspx?VideoID=" + Eval("VideoID") %>'>
                                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("VideoName") %>'></asp:Label></a>
@@ -131,25 +125,16 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="File Type">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("ContentType") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label5" runat="server" Text='<%# Bind("ContentType") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Mô tả ngắn">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("ShortDecsription") %>'></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("ShortDecsription") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Copy Link">
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
-                                </EditItemTemplate>
                                 <ItemTemplate>
                                     <div class="btn-group dropup">
                                         <button class="btn green dropdown-toggle" type="button" data-toggle="dropdown">
@@ -157,7 +142,7 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
                                             <li>
-                                                <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server" Text='<%# "http://www.hollywood.edu.vn/"+ Eval("VideoUrl") %>'></asp:TextBox>
+                                                <asp:TextBox ID="TextBox2" CssClass="form-control" runat="server" Text='<%# "http://inside.kus.edu.vn/"+ Eval("VideoUrl") %>'></asp:TextBox>
                                             </li>
                                         </ul>
                                     </div>
@@ -167,11 +152,17 @@
                                         </button>
                                         <ul class="dropdown-menu pull-right" role="menu">
                                             <li>
-                                                <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server" Text='<%# "http://www.hollywood.edu.vn/"+ Eval("VideoUrl") %>'></asp:TextBox>
+                                                <asp:TextBox ID="TextBox3" CssClass="form-control" runat="server" Text='<%# "http://inside.kus.edu.vn/"+ Eval("VideoUrl") %>'></asp:TextBox>
                                             </li>
                                         </ul>
                                     </div>
                                 </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="30px" />
                             </asp:TemplateField>
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>

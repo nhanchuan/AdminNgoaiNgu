@@ -39,17 +39,17 @@
             <div class="col-lg-5">
 
                 <div class="clearfix"></div>
-                <div class="form-group">
+                <%--<div class="form-group">
                     <label class="control-label">Chọn mục loại Video</label>
                     <asp:DropDownList ID="dlVideoType" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
                 <div class="form-group">
                     <label class="control-label">Mô tả ngắn</label>
-                    <asp:TextBox ID="txtShortDesciption" CssClass="form-control" TextMode="MultiLine" Rows="4" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtShortDesciption" CssClass="form-control" runat="server"></asp:TextBox>
                     <i>Mô tả ngắn cho đoạn Video (Không quá 200 ký tự)</i>
                     <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtShortDesciption" Display="Dynamic" ForeColor="Red" ValidationGroup="validFileVideoUpload" ValidationExpression="(.){0,200}" runat="server" ErrorMessage="Mô tả ngắn không quá 200 ký tự !"></asp:RegularExpressionValidator>
                 </div>
-                <br />
+                <br />--%>
                 <h3>Chọn Video upload</h3>
                 <br />
                 <i>Chỉ hổ trợ Upload file MP4, FLV, Dung lượng Tải lên tối đa <strong>2 GB</strong></i>

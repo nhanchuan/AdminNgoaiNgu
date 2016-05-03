@@ -13,7 +13,7 @@ public partial class Pages_VideoManager : BasePage
 {
     VideosBLL video;
     VideoTypeBLL videotype;
-    private int PageSize = 5;
+    private int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -287,5 +287,48 @@ public partial class Pages_VideoManager : BasePage
         lblsearchend.Text = ((((1 - 1) * PageSize + 1) + PageSize) - 1).ToString();
 
 
+    }
+
+    protected void gwvideomanager_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwvideomanager_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        video = new VideosBLL();
+        try
+        {
+            int VideoID = Convert.ToInt32((gwvideomanager.Rows[e.RowIndex].FindControl("lblVideoID") as Label).Text);
+            List<Videos> lst = video.getVideoWithId(VideoID);
+            Videos vi = lst.FirstOrDefault();
+            string filename = Server.MapPath("../" + vi.VideoUrl);
+            if (video.DeleteVideo(VideoID))
+            {
+                if (!string.IsNullOrEmpty(filename))
+                {
+                    if ((System.IO.File.Exists(filename)))
+                    {
+                        System.IO.File.Delete(filename);
+                    }
+                }
+            }
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+        catch(Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+        }
     }
 }

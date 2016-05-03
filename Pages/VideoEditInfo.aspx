@@ -20,7 +20,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">Media Library</a>
+                <a href="../Pages/VideoManager.aspx">Videos Library</a>
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
@@ -93,7 +93,7 @@
                     </div>
                     <div class="panel-footer">
                         <div class="row">
-                            <a style="margin-left: 5%;" id="btndownload" runat="server"><i class="fa fa-download"></i> Download video</a> | <a style="color:red;">Xóa vĩnh viễn</a>
+                            <a style="margin-left: 5%;" id="btndownload" runat="server"><i class="fa fa-download"></i> Download video</a> | <a style="color:red;" id="btndeleteVideo" onserverclick="btndeleteVideo_ServerClick" runat="server">Xóa vĩnh viễn</a>
                             <asp:Button ID="btnUpdate" ValidationGroup="validFilevideoEdit"  CssClass="btn btn-primary pull-right btn-primaryright" OnClick="btnUpdate_Click" runat="server" Text="Cập nhật" />
                         </div>
                     </div>

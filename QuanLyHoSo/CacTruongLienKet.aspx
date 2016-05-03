@@ -256,9 +256,11 @@
                     </div>
                 </div>
                 <div class="actions">
-
-                    <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
+                    <a id="btnchangeImg" title="Thay đổi ảnh đại diện" href="#" runat="server">
                         <i class="fa fa-file-image-o"></i>
+                    </a>
+                    <a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
+                        <i class="fa fa-file-excel-o"></i>
                     </a>
                     <a href="#modalEditShool" data-toggle="modal" id="btnEditTruong" title="Chỉnh sửa thông tin Trường" runat="server">
                         <i class="icon-wrench"></i>
@@ -591,5 +593,8 @@
         </div>
     </div>
     <%-- End Modal --%>
+
+
+
 </asp:Content>
 

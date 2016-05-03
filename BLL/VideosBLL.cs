@@ -39,11 +39,11 @@ namespace BLL
         }
         public List<Videos> getVideoWithId(int videoId)
         {
-            string sql = "select * from Videos where VideoID=@videoId";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
+            string sql = "select * from Videos where VideoID=@videoId";
             SqlParameter pVideoId = new SqlParameter("videoId", videoId);
             DataTable tb = DB.DAtable(sql, pVideoId);
             List<Videos> lst = new List<Videos>();
@@ -64,20 +64,20 @@ namespace BLL
             return lst;
         }
 
-        public Boolean UploadVideos(string name, string url, string contentype, int videptype, string shortDC, int uid)
+        public Boolean UploadVideos(string VideoName, string VideoUrl, string ContentType, int VideotypeID, string ShortDecsription, int UserUpload)
         {
-            string sql = "Exec UploadVideos @name,@url,@contentype,@videptype,@shortDC,@uid";
             if (!this.DB.OpenConnection())
             {
                 return false;
             }
-            SqlParameter pname = new SqlParameter("name", name);
-            SqlParameter purl = new SqlParameter("url", url);
-            SqlParameter pcontentypel = new SqlParameter("contentype", contentype);
-            SqlParameter pvideptype = new SqlParameter("videptype", videptype);
-            SqlParameter pshortDC = new SqlParameter("shortDC", shortDC);
-            SqlParameter puid = new SqlParameter("uid", uid);
-            this.DB.Updatedata(sql, pname, purl, pcontentypel, pvideptype, pshortDC, puid);
+            string sql = "Exec UploadVideos @VideoName,@VideoUrl,@ContentType,@VideotypeID,@ShortDecsription,@UserUpload";
+            SqlParameter pVideoName = new SqlParameter("@VideoName", VideoName);
+            SqlParameter pVideoUrl = new SqlParameter("@VideoUrl", VideoUrl);
+            SqlParameter pContentType = new SqlParameter("@ContentType", ContentType);
+            SqlParameter pVideotypeID = (VideotypeID == 0) ? new SqlParameter("@VideotypeID", DBNull.Value) : new SqlParameter("@VideotypeID", VideotypeID);
+            SqlParameter pShortDecsription = (ShortDecsription == "") ? new SqlParameter("@ShortDecsription", DBNull.Value) : new SqlParameter("@ShortDecsription", ShortDecsription);
+            SqlParameter pUserUpload = new SqlParameter("@UserUpload", UserUpload);
+            this.DB.Updatedata(sql, pVideoName, pVideoUrl, pContentType, pVideotypeID, pShortDecsription, pUserUpload);
             this.DB.CloseConnection();
             return true;
         }
@@ -168,11 +168,24 @@ namespace BLL
             {
                 return false;
             }
-            SqlParameter pvideoid = new SqlParameter("videoid", videoid);
-            SqlParameter pvideoname = new SqlParameter("videoname", videoname);
-            SqlParameter pvideoType = new SqlParameter("videoType", videoType);
-            SqlParameter pshortDC = new SqlParameter("shortDC", shortDC);
+            SqlParameter pvideoid = new SqlParameter("@videoid", videoid);
+            SqlParameter pvideoname = new SqlParameter("@videoname", videoname);
+            SqlParameter pvideoType = new SqlParameter("@videoType", videoType);
+            SqlParameter pshortDC = new SqlParameter("@shortDC", shortDC);
             this.DB.Updatedata(sql, pvideoid, pvideoname, pvideoType, pshortDC);
+            this.DB.CloseConnection();
+            return true;
+        }
+        //Delete Video
+        public Boolean DeleteVideo(int VideoID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from Videos where VideoID=@VideoID";
+            SqlParameter pVideoID = new SqlParameter("@VideoID", VideoID);
+            this.DB.Updatedata(sql, pVideoID);
             this.DB.CloseConnection();
             return true;
         }
