@@ -17,6 +17,8 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     EmployeesBLL employees;
     BagProfileBLL bagprofile;
     BagProfileTypeBLL bagprofiletype;
+    BagAttachmentsBLL bagAttachment;
+    BagFileTranslateBLL bagFileTranslate;
     InternationalSchoolBLL internalSchool;
     //CountryAdvisoryBLL countryadv;
     CountryBLL country;
@@ -618,9 +620,120 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
 
         }
     }
-
+    //DELETE
+    private Boolean deleteBagAttachment(int bagprofileID)
+    {
+        bagAttachment = new BagAttachmentsBLL();
+        if (!this.bagAttachment.DeleteBagProfileID(bagprofileID))
+        {
+            return false;
+        }
+        return true;
+    }
+    private Boolean deleteBagFileTranslate(int bagprofileID)
+    {
+        bagFileTranslate = new BagFileTranslateBLL();
+        if (!this.bagFileTranslate.DeleteBagProfileID(bagprofileID))
+        {
+            return false;
+        }
+        return true;
+    }
+    private Boolean deleteBagProfile(int inforID)
+    {
+        bagprofile = new BagProfileBLL();
+        if (!this.bagprofile.DeleteBagProfileInfoID(inforID))
+        {
+            return false;
+        }
+        return true;
+    }
+    private Boolean deleteCustomerProfilePrivate(int inforID)
+    {
+        customerProPri = new CustomerProfilePrivateBLL();
+        if (!this.customerProPri.deleteCustomerProfilePrivate(inforID))
+        {
+            return false;
+        }
+        return true;
+    }
+    private Boolean deleteCustomerBasicInfo(int inforID)
+    {
+        customerBsInfo = new CustomerBasicInfoBLL();
+        if (!this.customerBsInfo.deleteCustomerBasicInfo(inforID))
+        {
+            return false;
+        }
+        return true;
+    }
     protected void gwThuLyHSManager_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        Response.Write("<script>alert('This Process is Building ! !')</script>");
+        bagprofile = new BagProfileBLL();
+        bagAttachment = new BagAttachmentsBLL();
+        bagFileTranslate = new BagFileTranslateBLL();
+        //Response.Write("<script>alert('This Process is Building ! !')</script>");
+        try
+        {
+            int InfoID = Convert.ToInt32((gwThuLyHSManager.Rows[e.RowIndex].FindControl("lblInfoID") as Label).Text);
+            List<BagProfile> lstBagProfile = bagprofile.GetBagProfileWithInfoID(InfoID);
+            foreach (BagProfile itm in lstBagProfile)
+            {
+                List<BagAttachments> lstATT = bagAttachment.getListWithBagProfileID(itm.BagProfileID);
+                foreach (BagAttachments itmatt in lstATT)
+                {
+                    string filename = Server.MapPath("../" + itmatt.AttachmentURL);
+                    if (this.bagAttachment.DeleteBagAttachments(itmatt.AttachmentID))
+                    {
+
+                        if (filename != null || filename != string.Empty)
+                        {
+                            if ((System.IO.File.Exists(filename)))
+                            {
+                                System.IO.File.Delete(filename);
+                                Response.Redirect(Request.Url.AbsoluteUri);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                List<BagFileTranslate> lstBFT = bagFileTranslate.getListWithBagProfileID(itm.BagProfileID);
+                foreach (BagFileTranslate itmbft in lstBFT)
+                {
+                    string filename = Server.MapPath("../" + itmbft.FileTranslateURL);
+                    if (this.bagFileTranslate.DeleteBagFileTranslate(itmbft.FileTranslateID))
+                    {
+                        if (filename != null || filename != string.Empty)
+                        {
+                            if ((System.IO.File.Exists(filename)))
+                            {
+                                System.IO.File.Delete(filename);
+                                Response.Redirect(Request.Url.AbsoluteUri);
+                            }
+                            else
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
+
+                this.deleteBagAttachment(itm.BagProfileID);
+                this.deleteBagFileTranslate(itm.BagProfileID);
+            }
+            
+            this.deleteBagProfile(InfoID);
+            this.deleteCustomerProfilePrivate(InfoID);
+            this.deleteCustomerBasicInfo(InfoID);
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+        catch (Exception ex)
+        {
+            Response.Redirect("<script>alert('" + ex.ToString() + "')</script>");
+        }
+        
     }
 }

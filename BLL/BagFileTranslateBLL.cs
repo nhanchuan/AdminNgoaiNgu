@@ -114,6 +114,7 @@ namespace BLL
             this.DB.CloseConnection();
             return tb;
         }
+        //DELETE
         public Boolean DeleteBagFileTranslate(int transId)
         {
             string sql = "delete from BagFileTranslate where FileTranslateID=@transId";
@@ -123,6 +124,18 @@ namespace BLL
             }
             SqlParameter ptransId = new SqlParameter("transId", transId);
             this.DB.Updatedata(sql, ptransId);
+            this.DB.CloseConnection();
+            return true;
+        }
+        public Boolean DeleteBagProfileID(int BagProfileID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from BagFileTranslate where BagProfileID=@BagProfileID";
+            SqlParameter pBagProfileID = new SqlParameter("@BagProfileID", BagProfileID);
+            this.DB.Updatedata(sql, pBagProfileID);
             this.DB.CloseConnection();
             return true;
         }

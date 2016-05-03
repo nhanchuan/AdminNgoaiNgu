@@ -607,5 +607,19 @@ namespace BLL
             this.DB.CloseConnection();
             return count;
         }
+        //DELETE
+        public Boolean deleteCustomerProfilePrivate(int InfoID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from CustomerProfilePrivate where InfoID=@InfoID";
+            SqlParameter pInfoID = new SqlParameter("@InfoID", InfoID);
+            this.DB.Updatedata(sql, pInfoID);
+            this.DB.CloseConnection();
+            return true;
+        }
+
     }
 }

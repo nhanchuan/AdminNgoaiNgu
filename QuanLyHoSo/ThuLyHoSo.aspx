@@ -168,6 +168,7 @@
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                                    <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle Width="50px" />
                             </asp:TemplateField>

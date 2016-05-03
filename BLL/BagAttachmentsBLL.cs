@@ -127,5 +127,17 @@ namespace BLL
             this.DB.CloseConnection();
             return true;
         }
+        public Boolean DeleteBagProfileID(int BagProfileID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from BagAttachments where BagProfileID=@BagProfileID";
+            SqlParameter pBagProfileID = new SqlParameter("@BagProfileID", BagProfileID);
+            this.DB.Updatedata(sql, pBagProfileID);
+            this.DB.CloseConnection();
+            return true;
+        }
     }
 }

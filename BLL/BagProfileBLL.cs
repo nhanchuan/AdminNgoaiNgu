@@ -138,6 +138,18 @@ namespace BLL
             this.DB.CloseConnection();
             return true;
         }
+        public Boolean DeleteBagProfileInfoID(int InfoID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from BagProfile where InfoID=@InfoID";
+            SqlParameter pInfoID = new SqlParameter("@InfoID", InfoID);
+            this.DB.Updatedata(sql, pInfoID);
+            this.DB.CloseConnection();
+            return true;
+        }
         //VIEW BAGProFile for TracuuHoSo
         public DataTable ViewBagProFile(int InfoID)
         {

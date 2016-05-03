@@ -105,5 +105,18 @@ namespace BLL
             this.DB.Updatedata(sql, pInfoID, pFirstName, pLastName, pOtherName, pBirthday, pBirthPlace, psex, pIdentityCard, pDateOfIdentityCard, pPlaceOfIdentityCard);
             return true;
         }
+        //DELETE
+        public Boolean deleteCustomerBasicInfo(int InfoID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from CustomerBasicInfo where InfoID=@InfoID";
+            SqlParameter pInfoID = new SqlParameter("@InfoID", InfoID);
+            this.DB.Updatedata(sql, pInfoID);
+            this.DB.CloseConnection();
+            return true;
+        }
     }
 }
