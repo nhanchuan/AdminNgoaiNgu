@@ -22,7 +22,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     InternationalSchoolBLL internalSchool;
     //CountryAdvisoryBLL countryadv;
     CountryBLL country;
-    public int PageSize = 10;
+    public int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -690,11 +690,6 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                             if ((System.IO.File.Exists(filename)))
                             {
                                 System.IO.File.Delete(filename);
-                                Response.Redirect(Request.Url.AbsoluteUri);
-                            }
-                            else
-                            {
-                                return;
                             }
                         }
                     }
@@ -711,18 +706,13 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                             if ((System.IO.File.Exists(filename)))
                             {
                                 System.IO.File.Delete(filename);
-                                Response.Redirect(Request.Url.AbsoluteUri);
-                            }
-                            else
-                            {
-                                return;
                             }
                         }
                     }
                 }
 
-                this.deleteBagAttachment(itm.BagProfileID);
-                this.deleteBagFileTranslate(itm.BagProfileID);
+                //this.deleteBagAttachment(itm.BagProfileID);
+                //this.deleteBagFileTranslate(itm.BagProfileID);
             }
             
             this.deleteBagProfile(InfoID);

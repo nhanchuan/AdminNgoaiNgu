@@ -53,8 +53,22 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <a id="btnEditChuongTrinhDaoTao" href="#modalEditChuongTrinhDaoTao" data-toggle="modal" runat="server"><i class="fa fa-edit"></i> Sửa Thông tin chương trình đào tạo</a>
-            <asp:GridView ID="gwChuongTrinhDaoTao" CssClass="table table-condensed" runat="server"
+
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="glyphicon glyphicon-list-alt font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách Chương trình đào tạo </span>
+                        <span class="caption-helper"></span>
+                    </div>
+                    <div class="actions">
+                        <a id="btnEditChuongTrinhDaoTao" href="#modalEditChuongTrinhDaoTao" data-toggle="modal" runat="server"><i class="fa fa-edit"></i>&nbsp Sửa Thông tin chương trình đào tạo</a>
+                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <asp:GridView ID="gwChuongTrinhDaoTao" CssClass="table table-condensed" runat="server"
                 AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
                 HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnRowDataBound="gwChuongTrinhDaoTao_RowDataBound" OnRowDeleting="gwChuongTrinhDaoTao_RowDeleting" OnSelectedIndexChanged="gwChuongTrinhDaoTao_SelectedIndexChanged">
                 <Columns>
@@ -103,6 +117,13 @@
                 <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
                 <RowStyle BackColor="#FAF3DF"></RowStyle>
             </asp:GridView>
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
+
+
+            
+            
         </div>
     </div>
     <%-- Modal Edit Loại hình đào tạo --%>

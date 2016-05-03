@@ -15,7 +15,7 @@ public partial class Pages_Post_All : BasePage
     Post_Category_relationshipsBLL post_category_relationships;
     CategoryBLL category;
     Tags_relationshipsBLL tagsrelationships;
-    private int PageSize = 10;
+    private int PageSize = 20;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();

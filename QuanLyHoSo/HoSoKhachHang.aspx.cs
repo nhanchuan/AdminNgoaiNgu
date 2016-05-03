@@ -107,7 +107,7 @@ public partial class QuanLyHoSo_HoSoKhachHang : BasePage
 
             List<BagProfileType> lstbptype = bagprofiletype.getBagProfileTypeWithId((string.IsNullOrEmpty(r[17].ToString())) ? 0 : (int)r[17]);
             BagProfileType bgtype = lstbptype.FirstOrDefault();
-            lblBagProfileType.Text = bgtype.TypeName;
+            lblBagProfileType.Text = (bgtype == null) ? "" : bgtype.TypeName;
             switch ((string.IsNullOrEmpty(r[17].ToString())) ? 0 : (int)r[17])
             {
                 case 1:

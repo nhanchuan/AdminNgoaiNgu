@@ -49,55 +49,72 @@
             </div>
         </div>
         <div class="col-lg-8">
-            <a id="btnEditLoaiChuongTrinhDT" href="#modalEditLoaiCTDaoTao" data-toggle="modal" runat="server"><i class="fa fa-edit"></i> Sửa Thông tin Loại Chương trình đào tạo</a>
-            <asp:GridView ID="gwLoaiCTDaoTao" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwLoaiCTDaoTao_SelectedIndexChanged" OnRowDataBound="gwLoaiCTDaoTao_RowDataBound" OnRowDeleting="gwLoaiCTDaoTao_RowDeleting">
-                <Columns>
-                    <asp:TemplateField HeaderText="No.">
-                        <ItemTemplate>
-                            <%# Container.DataItemIndex + 1 %>
-                            <asp:Label ID="lblID" CssClass="display-none" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Mã chương trình">
-                        <ItemTemplate>
-                            <asp:Label ID="lblMaChuongTrinh" runat="server" Text='<%# Eval("MaChuongTrinh") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Tên chương trình">
-                        <ItemTemplate>
-                            <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Loại hình đào tạo">
-                        <ItemTemplate>
-                            <asp:Label ID="lblTenLoaiHinh" runat="server" Text='<%# Eval("TenLoaiHinh") %>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lkbtnUp" CommandArgument='<%# Eval("ID") %>' OnClick="lkbtnUp_Click" runat="server"><i class="fa fa-caret-square-o-up" style="font-size:20px;"></i></asp:LinkButton>
-                            <asp:LinkButton ID="lkbtnDown" CommandArgument='<%# Eval("ID") %>' OnClick="lkbtnDown_Click" runat="server"><i class="fa fa-caret-square-o-down" style="font-size:20px;"></i></asp:LinkButton>
-                        </ItemTemplate>
-                        <ItemStyle Width="60px" />
-                    </asp:TemplateField>
-                    <asp:TemplateField>
-                        <ItemTemplate>
-                            <asp:LinkButton ID="linkBtnDel" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><img src="../images/icon/Actions-edit-delete-icon.png" width="20" height="20" /></asp:LinkButton>
-                        </ItemTemplate>
-                        <ItemStyle Width="30px" />
-                    </asp:TemplateField>
-                    <asp:TemplateField ShowHeader="False">
-                        <ItemTemplate>
-                            <asp:LinkButton ID="lkSelect" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
-                        </ItemTemplate>
-                        <ItemStyle Width="50px" />
-                    </asp:TemplateField>
-                </Columns>
-                <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
-                <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
-                <RowStyle BackColor="#FAF3DF"></RowStyle>
-            </asp:GridView>
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="glyphicon glyphicon-list-alt font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách Loại Chương Trình Đào Tạo </span>
+                        <span class="caption-helper"></span>
+                    </div>
+                    <div class="actions">
+                        <a id="btnEditLoaiChuongTrinhDT" href="#modalEditLoaiCTDaoTao" data-toggle="modal" runat="server"><i class="fa fa-edit"></i>Sửa Thông tin Loại Chương trình đào tạo</a>
+                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <asp:GridView ID="gwLoaiCTDaoTao" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwLoaiCTDaoTao_SelectedIndexChanged" OnRowDataBound="gwLoaiCTDaoTao_RowDataBound" OnRowDeleting="gwLoaiCTDaoTao_RowDeleting">
+                        <Columns>
+                            <asp:TemplateField HeaderText="No.">
+                                <ItemTemplate>
+                                    <%# Container.DataItemIndex + 1 %>
+                                    <asp:Label ID="lblID" CssClass="display-none" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Mã chương trình">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblMaChuongTrinh" runat="server" Text='<%# Eval("MaChuongTrinh") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Tên chương trình">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Loại hình đào tạo">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblTenLoaiHinh" runat="server" Text='<%# Eval("TenLoaiHinh") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lkbtnUp" CommandArgument='<%# Eval("ID") %>' OnClick="lkbtnUp_Click" runat="server"><i class="fa fa-caret-square-o-up" style="font-size:20px;"></i></asp:LinkButton>
+                                    <asp:LinkButton ID="lkbtnDown" CommandArgument='<%# Eval("ID") %>' OnClick="lkbtnDown_Click" runat="server"><i class="fa fa-caret-square-o-down" style="font-size:20px;"></i></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="60px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="linkBtnDel" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><img src="../images/icon/Actions-edit-delete-icon.png" width="20" height="20" /></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="30px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField ShowHeader="False">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lkSelect" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="50px" />
+                            </asp:TemplateField>
+                        </Columns>
+                        <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                        <HeaderStyle BackColor="#FFB848" ForeColor="White"></HeaderStyle>
+                        <RowStyle BackColor="#FAF3DF"></RowStyle>
+                    </asp:GridView>
+
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
         </div>
     </div>
     <%-- Modal Edit Loại hình đào tạo --%>

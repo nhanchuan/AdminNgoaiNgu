@@ -177,7 +177,7 @@
         <div class="portlet light">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-paper-plane font-yellow-casablanca"></i>
+                    <i class="glyphicon glyphicon-list-alt font-yellow-casablanca"></i>
                     <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách khóa học </span>
                     <span class="caption-helper">more samples...</span>
                 </div>
