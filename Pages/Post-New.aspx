@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="Post-New.aspx.cs" Inherits="Pages_Post_New" %>
-
+<%--<%@ Page ValidateRequest="false" %>--%>
 <%@ Register Assembly="CKFinder" Namespace="CKFinder" TagPrefix="CKFinder" %>
 <%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">

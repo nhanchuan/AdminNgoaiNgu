@@ -48,7 +48,7 @@ public static class FunctionName
     public static string ThongTinHocVien= "FC038";
     public static string GhiDanhHocVien= "FC039";
     //public static string SuaThongTinLop= "FC040";
-    //public static string ThemLopHoc= "FC041";
+    //public static string DiemDanh= "FC041";
     public static string PhieuGhiDanh= "FC042";
     public static string ThongTinHoSoKhachHang= "FC043";
     public static string UpdateThongTinHoSoKhachHang = "FC044";
@@ -70,4 +70,5 @@ public static class FunctionName
     public static string KhoaHoc = "FC059";
     public static string GhiDanhKhoaHoc = "FC060";
     public static string NhapHoSo = "FC061";
+
 }

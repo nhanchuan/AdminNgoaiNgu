@@ -15,10 +15,6 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="#">Trung tâm anh ngữ</a>
-                <i class="fa fa-angle-right"></i>
-            </li>
-            <li>
                 <a href="../ChuongTrinhHoc/CacTruongLienKet.aspx">Các Trường Liên Kết</a>
             </li>
         </ul>
