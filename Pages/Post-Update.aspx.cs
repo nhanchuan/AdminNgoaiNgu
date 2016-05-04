@@ -318,48 +318,55 @@ public partial class Pages_Post_Update : BasePage
     protected void btnuploadImg_ServerClick(object sender, EventArgs e)
     {
         //ImgEditPC.Src = txtuploadImgTemp.Text;
-        UserAccounts ac = Session.GetCurrentUser();
+        try
+        {
+            UserAccounts ac = Session.GetCurrentUser();
 
-        images = new ImagesBLL();
-        string dateString = DateTime.Now.ToString("MM-dd-yyyy");
-        string fileName = Path.GetFileName(fileUploadImgPost.PostedFile.FileName);
-        ImageCodecInfo jgpEncoder = null;
-        string str_image = "";
-        string fileExtension = "";
-        if (!string.IsNullOrEmpty(fileName))
-        {
-            fileExtension = Path.GetExtension(fileName);
-            str_image = "Hollywood-" + dateString + "-" + RandomName + fileExtension;
-            string pathToSave = Server.MapPath("../images/Upload/ImagesForPost/") + str_image;
-            //file.SaveAs(pathToSave);
-            System.Drawing.Image image = System.Drawing.Image.FromStream(fileUploadImgPost.FileContent);
-            if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid)
-                jgpEncoder = GetEncoder(ImageFormat.Gif);
-            else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Jpeg.Guid)
-                jgpEncoder = GetEncoder(ImageFormat.Jpeg);
-            else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Bmp.Guid)
-                jgpEncoder = GetEncoder(ImageFormat.Bmp);
-            else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Png.Guid)
-                jgpEncoder = GetEncoder(ImageFormat.Png);
+            images = new ImagesBLL();
+            string dateString = DateTime.Now.ToString("MM-dd-yyyy");
+            string fileName = Path.GetFileName(fileUploadImgPost.PostedFile.FileName);
+            ImageCodecInfo jgpEncoder = null;
+            string str_image = "";
+            string fileExtension = "";
+            if (!string.IsNullOrEmpty(fileName))
+            {
+                fileExtension = Path.GetExtension(fileName);
+                str_image = "Hollywood-" + dateString + "-" + RandomName + fileExtension;
+                string pathToSave = Server.MapPath("../images/Upload/ImagesForPost/") + str_image;
+                //file.SaveAs(pathToSave);
+                System.Drawing.Image image = System.Drawing.Image.FromStream(fileUploadImgPost.FileContent);
+                if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Gif.Guid)
+                    jgpEncoder = GetEncoder(ImageFormat.Gif);
+                else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Jpeg.Guid)
+                    jgpEncoder = GetEncoder(ImageFormat.Jpeg);
+                else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Bmp.Guid)
+                    jgpEncoder = GetEncoder(ImageFormat.Bmp);
+                else if (image.RawFormat.Guid == System.Drawing.Imaging.ImageFormat.Png.Guid)
+                    jgpEncoder = GetEncoder(ImageFormat.Png);
+                else
+                    throw new System.ArgumentException("Invalid File Type");
+                Bitmap bmp1 = new Bitmap(fileUploadImgPost.FileContent);
+                Encoder myEncoder = Encoder.Quality;
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                bmp1.Save(pathToSave, jgpEncoder, myEncoderParameters);
+                this.images.InsertImages(str_image, "images/Upload/ImagesForPost/" + str_image, 5, ac.UserID);
+                txtPostImgTemp.Text = "images/Upload/ImagesForPost/" + str_image;
+                imgpost.Src = "../images/Upload/ImagesForPost/" + str_image;
+            }
             else
-                throw new System.ArgumentException("Invalid File Type");
-            Bitmap bmp1 = new Bitmap(fileUploadImgPost.FileContent);
-            Encoder myEncoder = Encoder.Quality;
-            EncoderParameters myEncoderParameters = new EncoderParameters(1);
-            EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, 50L);
-            myEncoderParameters.Param[0] = myEncoderParameter;
-            bmp1.Save(pathToSave, jgpEncoder, myEncoderParameters);
-            this.images.InsertImages(str_image, "images/Upload/ImagesForPost/" + str_image, 5, ac.UserID);
-            txtPostImgTemp.Text = "images/Upload/ImagesForPost/" + str_image;
-            imgpost.Src = "../images/Upload/ImagesForPost/" + str_image;
+            {
+                Response.Write("<script>alert('Upload Image False !')</script>");
+                return;
+            }
+            string script = "window.onload = function() { callImagesPanelClickEvent(); };";
+            ClientScript.RegisterStartupScript(this.GetType(), "callImagesPanelClickEvent", script, true);
         }
-        else
-        {
-            Response.Write("<script>alert('Upload Image False !')</script>");
-            return;
+        catch(Exception ex) {
+            Response.Write("<script>alert('" + ex.ToString() + " !')</script>");
         }
-        string script = "window.onload = function() { callImagesPanelClickEvent(); };";
-        ClientScript.RegisterStartupScript(this.GetType(), "callImagesPanelClickEvent", script, true);
+
     }
     protected void load_rpLstImg()
     {

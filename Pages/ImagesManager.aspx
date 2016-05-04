@@ -190,7 +190,7 @@
                                             <a id="markup-copy"><i class="fa fa-copy"></i>Copy link</a>
                                         </div>
                                         <asp:HiddenField ID="HiddenImages" runat="server" />
-                                        <a href="#" runat="server"><i class="fa fa-remove">Delete Images</i></a>
+                                        <a href="#" style="color:red;" id="btndelete" onserverclick="btndelete_ServerClick" runat="server"><i class="fa fa-remove">Delete Images</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -200,6 +200,7 @@
             </div>
         </div>
     </div>
+
     <script src="../libs/Clipboard_jsmaster/clipboard.min.js"></script>
     <!-- /.end modal view Images -->
     <script type="text/javascript">
@@ -242,5 +243,6 @@
             });
         });
     </script>
+
 </asp:Content>
 

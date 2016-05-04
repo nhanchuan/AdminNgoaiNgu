@@ -292,5 +292,18 @@ namespace BLL
             this.DB.CloseConnection();
             return tb;
         }
+        //DELETE IMAGES
+        public Boolean DeleteImages(string ImagesName)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from Images where ImagesName=@ImagesName";
+            SqlParameter pImagesName = new SqlParameter("@ImagesName", ImagesName);
+            this.DB.Updatedata(sql, pImagesName);
+            this.DB.CloseConnection();
+            return true;
+        }
     }
 }

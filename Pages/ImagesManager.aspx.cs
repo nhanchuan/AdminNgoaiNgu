@@ -272,4 +272,18 @@ public partial class Pages_ImagesManager : BasePage
     {
         Response.Redirect(Request.Url.AbsoluteUri);
     }
+    
+    protected void btndelete_ServerClick(object sender, EventArgs e)
+    {
+        images = new ImagesBLL();
+        try
+        {
+            this.images.DeleteImages(HiddenImages.Value);
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+        }
+    }
 }
