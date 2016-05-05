@@ -504,7 +504,7 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
         }
         else
         {
-            Response.Redirect(Request.Url.AbsoluteUri);
+            Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/ThuLyHoSo.aspx");
         }
     }
     private void getFormInfor(string queryStr)

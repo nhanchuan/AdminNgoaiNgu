@@ -481,7 +481,7 @@
                 while (match = search.exec(query))
                     urlParams[decode(match[1])] = decode(match[2]);
             })();
-            var url = "../QuanLyHoSo/ThongTinKhachHang.aspx?FileCode=" + urlParams["FileCode"];
+            var url = "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + urlParams["FileCode"];
             window.open(url, "myWindow", "width=1366, height=768,resizable=yes");
         }
 </script>
