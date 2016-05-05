@@ -301,6 +301,18 @@ namespace BLL
             this.DB.CloseConnection();
             return true;
         }
-
+        //Delete School
+        public Boolean DeleteInternationalSchool(int SchoolID)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from InternationalSchool where SchoolID=@SchoolID";
+            SqlParameter pSchoolID = new SqlParameter("@SchoolID", SchoolID);
+            this.DB.Updatedata(sql, pSchoolID);
+            this.DB.CloseConnection();
+            return true;
+        }
     }
 }

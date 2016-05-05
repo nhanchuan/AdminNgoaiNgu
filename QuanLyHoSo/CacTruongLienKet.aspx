@@ -277,7 +277,8 @@
             <div class="portlet-body">
                 <asp:GridView ID="gwInternationalSchool" CssClass="table table-condensed" runat="server"
                     AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwInternationalSchool_SelectedIndexChanged">
+                    HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                    OnSelectedIndexChanged="gwInternationalSchool_SelectedIndexChanged" OnRowDataBound="gwInternationalSchool_RowDataBound" OnRowDeleting="gwInternationalSchool_RowDeleting">
                     <Columns>
                         <asp:TemplateField HeaderText="No.">
                             <ItemTemplate>

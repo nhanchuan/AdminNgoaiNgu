@@ -106,7 +106,7 @@
                                             <asp:Label ID="lblRegistrationID" CssClass="display-none" runat="server" Text='<%# Bind("RegistrationID") %>'></asp:Label>
                                             <br />
                                             <div class="form-inline  pull-right">
-                                                <i style="color: #d64d25;" class="fa fa-qq"></i> <i><%# Eval("EmpFullName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
+                                                <i style="color: #d64d25;" class="glyphicon glyphicon-user"></i> <i><%# Eval("EmpFullName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
                                             </div>
                                         </ItemTemplate>
                                     </asp:TemplateField>

@@ -481,4 +481,41 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
         //UpdateImages(CusPri.ProfileID, ImagesID(txtPostImgTemp.Text));
 
     }
+
+    protected void gwInternationalSchool_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwInternationalSchool_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        internationalSchool = new InternationalSchoolBLL();
+        int SchoolID = Convert.ToInt32((gwInternationalSchool.Rows[e.RowIndex].FindControl("lblSchoolID") as Label).Text);
+        try
+        {
+            if (this.internationalSchool.DeleteInternationalSchool(SchoolID))
+            {
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            else
+            {
+                Response.Write("<script>alert('Xóa Danh mục thất bại. Lỗi kết nối csdl !')</script>");
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "')</script>");
+        }
+    }
 }

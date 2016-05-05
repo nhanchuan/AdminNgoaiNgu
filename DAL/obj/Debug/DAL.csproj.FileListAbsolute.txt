@@ -90,4 +90,3 @@ E:\DEVELOPER\Website\GitHub\GIT\DAL\bin\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\GIT\DAL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\GIT\DAL\obj\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\GIT\DAL\obj\Debug\DAL.pdb
-E:\DEVELOPER\Website\GitHub\GIT\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
