@@ -26,6 +26,7 @@ namespace DAL
         private string dieuKienNhapHoc;
         private string hocBong;
         private int images;
+        private string chuyenNganhNoiBat;
         public int SchoolID
         {
             get
@@ -255,6 +256,19 @@ namespace DAL
             set
             {
                 images = value;
+            }
+        }
+
+        public string ChuyenNganhNoiBat
+        {
+            get
+            {
+                return chuyenNganhNoiBat;
+            }
+
+            set
+            {
+                chuyenNganhNoiBat = value;
             }
         }
     }

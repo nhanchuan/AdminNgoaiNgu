@@ -241,7 +241,8 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
             string DatCoc = txtDatCoc.Text;
             string DieuKienNhapHoc = txtDieuKiennhaphoc.Text;
             string HocBong = txtHocBong.Text;
-            if (internationalSchool.NewInternationalSchool(SchoolName, SchoolAddress, WebSite, SchoolLvl, AboutLink, CountryID, ProvinceID, DistrictID, GoogleMap, Phone, Establish, HocPhi, PhiKhac, DatCoc, DieuKienNhapHoc, HocBong))
+            string chuyennganh = txtChuyenNganh.Text;
+            if (internationalSchool.NewInternationalSchool(SchoolName, SchoolAddress, WebSite, SchoolLvl, AboutLink, CountryID, ProvinceID, DistrictID, GoogleMap, Phone, Establish, HocPhi, PhiKhac, DatCoc, DieuKienNhapHoc, HocBong, chuyennganh))
             {
                 Response.Redirect(Request.Url.AbsoluteUri);
             }
@@ -318,6 +319,7 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
         txtEPhikhac.Text = ins.PhiKhac;
         txtEHocBong.Text = ins.HocBong;
         txtESchoolLvl.Text = ins.SchoolLvl;
+        txtEChuyennganh.Text = ins.ChuyenNganhNoiBat;
         if(ins.CountryID>=0)
         {
             this.load_dlECountry();
@@ -428,8 +430,9 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
             string DatCoc = txtEDatCoc.Text;
             string DieuKienNhapHoc = txtEdiuKienHocTap.Text;
             string HocBong = txtEHocBong.Text;
+            string chuyennganh = txtEChuyennganh.Text;
             //Update function
-            if (this.internationalSchool.UpdateInternationalSchool(SchoolID, SchoolName, SchoolAddress, WebSite, SchoolLvl, AboutLink, CountryID, ProvinceID, DistrictID, GoogleMap, Phone, Establish, HocPhi, PhiKhac, DatCoc, DieuKienNhapHoc, HocBong))
+            if (this.internationalSchool.UpdateInternationalSchool(SchoolID, SchoolName, SchoolAddress, WebSite, SchoolLvl, AboutLink, CountryID, ProvinceID, DistrictID, GoogleMap, Phone, Establish, HocPhi, PhiKhac, DatCoc, DieuKienNhapHoc, HocBong, chuyennganh))
             {
                 Response.Redirect(Request.Url.AbsoluteUri);
             }

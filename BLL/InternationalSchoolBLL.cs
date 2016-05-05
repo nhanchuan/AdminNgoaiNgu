@@ -44,6 +44,7 @@ namespace BLL
                 InS.DieuKienNhapHoc = (string.IsNullOrEmpty(r["DieuKienNhapHoc"].ToString())) ? "" : (string)r["DieuKienNhapHoc"];
                 InS.HocBong = (string.IsNullOrEmpty(r["HocBong"].ToString())) ? "" : (string)r["HocBong"];
                 InS.Images = (string.IsNullOrEmpty(r["Images"].ToString())) ? 0 : (int)r["Images"];
+                InS.ChuyenNganhNoiBat = (string.IsNullOrEmpty(r["ChuyenNganhNoiBat"].ToString())) ? "" : (string)r["ChuyenNganhNoiBat"];
                 lst.Add(InS);
             }
             this.DB.CloseConnection();
@@ -81,6 +82,7 @@ namespace BLL
                 InS.DieuKienNhapHoc = (string.IsNullOrEmpty(r["DieuKienNhapHoc"].ToString())) ? "" : (string)r["DieuKienNhapHoc"];
                 InS.HocBong = (string.IsNullOrEmpty(r["HocBong"].ToString())) ? "" : (string)r["HocBong"];
                 InS.Images = (string.IsNullOrEmpty(r["Images"].ToString())) ? 0 : (int)r["Images"];
+                InS.ChuyenNganhNoiBat = (string.IsNullOrEmpty(r["ChuyenNganhNoiBat"].ToString())) ? "" : (string)r["ChuyenNganhNoiBat"];
                 lst.Add(InS);
             }
             this.DB.CloseConnection();
@@ -118,6 +120,7 @@ namespace BLL
                 InS.DieuKienNhapHoc = (string.IsNullOrEmpty(r["DieuKienNhapHoc"].ToString())) ? "" : (string)r["DieuKienNhapHoc"];
                 InS.HocBong = (string.IsNullOrEmpty(r["HocBong"].ToString())) ? "" : (string)r["HocBong"];
                 InS.Images = (string.IsNullOrEmpty(r["Images"].ToString())) ? 0 : (int)r["Images"];
+                InS.ChuyenNganhNoiBat = (string.IsNullOrEmpty(r["ChuyenNganhNoiBat"].ToString())) ? "" : (string)r["ChuyenNganhNoiBat"];
                 lst.Add(InS);
             }
             this.DB.CloseConnection();
@@ -172,37 +175,38 @@ namespace BLL
         }
 
         // New 
-        public Boolean NewInternationalSchool(string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong)
+        public Boolean NewInternationalSchool(string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong, string ChuyenNganhNoiBat)
         {
-            string sql = "Exec NewInternationalSchool @SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong";
+            string sql = "Exec NewInternationalSchool @SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong,@ChuyenNganhNoiBat";
             if(!this.DB.OpenConnection())
             {
                 return false;
             }
-            SqlParameter pSchoolName = new SqlParameter("SchoolName", SchoolName);
-            SqlParameter pSchoolAddress = (SchoolAddress == "") ? new SqlParameter("SchoolAddress", DBNull.Value) : new SqlParameter("SchoolAddress", SchoolAddress);
-            SqlParameter pWebSite = (WebSite == "") ? new SqlParameter("WebSite", DBNull.Value) : new SqlParameter("WebSite", WebSite);
-            SqlParameter pSchoolLvl = new SqlParameter("SchoolLvl", SchoolLvl);
-            SqlParameter pAboutLink = (AboutLink == "") ? new SqlParameter("AboutLink", DBNull.Value) : new SqlParameter("AboutLink", AboutLink);
-            SqlParameter pCountryID = (CountryID == 0) ? new SqlParameter("CountryID", DBNull.Value) : new SqlParameter("CountryID", CountryID);
-            SqlParameter pProvinceID = (ProvinceID == 0) ? new SqlParameter("ProvinceID", DBNull.Value) : new SqlParameter("ProvinceID", ProvinceID);
-            SqlParameter pDistrictID = (DistrictID == 0) ? new SqlParameter("DistrictID", DBNull.Value) : new SqlParameter("DistrictID", DistrictID);
-            SqlParameter pGoogleMap = (GoogleMap == "") ? new SqlParameter("GoogleMap", DBNull.Value) : new SqlParameter("GoogleMap", GoogleMap);
-            SqlParameter pPhone = (Phone == "") ? new SqlParameter("Phone", DBNull.Value) : new SqlParameter("Phone", Phone);
-            SqlParameter pEstablish = (Establish.Year <= 1900) ? new SqlParameter("Establish", DBNull.Value) : new SqlParameter("Establish", Establish);
-            SqlParameter pHocPhi = (HocPhi == "") ? new SqlParameter("HocPhi", DBNull.Value) : new SqlParameter("HocPhi", HocPhi);
-            SqlParameter pPhiKhac = (PhiKhac == "") ? new SqlParameter("PhiKhac", DBNull.Value) : new SqlParameter("PhiKhac", PhiKhac);
-            SqlParameter pDatCoc = (DatCoc == "") ? new SqlParameter("DatCoc", DBNull.Value) : new SqlParameter("DatCoc", DatCoc);
-            SqlParameter pDieuKienNhapHoc = new SqlParameter("DieuKienNhapHoc", DieuKienNhapHoc);
-            SqlParameter pHocBong = (HocBong == "") ? new SqlParameter("HocBong", DBNull.Value) : new SqlParameter("HocBong", HocBong);
-            this.DB.Updatedata(sql, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pProvinceID, pDistrictID, pGoogleMap, pPhone, pEstablish, pHocPhi, pPhiKhac, pDatCoc, pDieuKienNhapHoc, pHocBong);
+            SqlParameter pSchoolName = new SqlParameter("@SchoolName", SchoolName);
+            SqlParameter pSchoolAddress = (SchoolAddress == "") ? new SqlParameter("@SchoolAddress", DBNull.Value) : new SqlParameter("@SchoolAddress", SchoolAddress);
+            SqlParameter pWebSite = (WebSite == "") ? new SqlParameter("@WebSite", DBNull.Value) : new SqlParameter("@WebSite", WebSite);
+            SqlParameter pSchoolLvl = new SqlParameter("@SchoolLvl", SchoolLvl);
+            SqlParameter pAboutLink = (AboutLink == "") ? new SqlParameter("@AboutLink", DBNull.Value) : new SqlParameter("@AboutLink", AboutLink);
+            SqlParameter pCountryID = (CountryID == 0) ? new SqlParameter("@CountryID", DBNull.Value) : new SqlParameter("@CountryID", CountryID);
+            SqlParameter pProvinceID = (ProvinceID == 0) ? new SqlParameter("@ProvinceID", DBNull.Value) : new SqlParameter("@ProvinceID", ProvinceID);
+            SqlParameter pDistrictID = (DistrictID == 0) ? new SqlParameter("@DistrictID", DBNull.Value) : new SqlParameter("@DistrictID", DistrictID);
+            SqlParameter pGoogleMap = (GoogleMap == "") ? new SqlParameter("@GoogleMap", DBNull.Value) : new SqlParameter("@GoogleMap", GoogleMap);
+            SqlParameter pPhone = (Phone == "") ? new SqlParameter("@Phone", DBNull.Value) : new SqlParameter("@Phone", Phone);
+            SqlParameter pEstablish = (Establish.Year <= 1900) ? new SqlParameter("@Establish", DBNull.Value) : new SqlParameter("@Establish", Establish);
+            SqlParameter pHocPhi = (HocPhi == "") ? new SqlParameter("@HocPhi", DBNull.Value) : new SqlParameter("@HocPhi", HocPhi);
+            SqlParameter pPhiKhac = (PhiKhac == "") ? new SqlParameter("@PhiKhac", DBNull.Value) : new SqlParameter("@PhiKhac", PhiKhac);
+            SqlParameter pDatCoc = (DatCoc == "") ? new SqlParameter("@DatCoc", DBNull.Value) : new SqlParameter("@DatCoc", DatCoc);
+            SqlParameter pDieuKienNhapHoc = new SqlParameter("@DieuKienNhapHoc", DieuKienNhapHoc);
+            SqlParameter pHocBong = (HocBong == "") ? new SqlParameter("@HocBong", DBNull.Value) : new SqlParameter("@HocBong", HocBong);
+            SqlParameter pChuyenNganhNoiBat = (ChuyenNganhNoiBat == "") ? new SqlParameter("@ChuyenNganhNoiBat", DBNull.Value) : new SqlParameter("@ChuyenNganhNoiBat", ChuyenNganhNoiBat);
+            this.DB.Updatedata(sql, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pProvinceID, pDistrictID, pGoogleMap, pPhone, pEstablish, pHocPhi, pPhiKhac, pDatCoc, pDieuKienNhapHoc, pHocBong, pChuyenNganhNoiBat);
             this.DB.CloseConnection();
             return true;
         }
         //UPDATE
-        public Boolean UpdateInternationalSchool(int SchoolID, string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong)
+        public Boolean UpdateInternationalSchool(int SchoolID, string SchoolName, string SchoolAddress, string WebSite, string SchoolLvl, string AboutLink, int CountryID, int ProvinceID, int DistrictID, string GoogleMap, string Phone, DateTime Establish, string HocPhi, string PhiKhac, string DatCoc, string DieuKienNhapHoc, string HocBong, string ChuyenNganhNoiBat)
         {
-            string sql = "Exec UpdateInternationalSchool @SchoolID,@SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong";
+            string sql = "Exec UpdateInternationalSchool @SchoolID,@SchoolName,@SchoolAddress,@WebSite,@SchoolLvl,@AboutLink,@CountryID,@ProvinceID,@DistrictID,@GoogleMap,@Phone,@Establish,@HocPhi,@PhiKhac,@DatCoc,@DieuKienNhapHoc,@HocBong,@ChuyenNganhNoiBat";
             if (!this.DB.OpenConnection())
             {
                 return false;
@@ -224,7 +228,8 @@ namespace BLL
             SqlParameter pDatCoc = (DatCoc == "") ? new SqlParameter("@DatCoc", DBNull.Value) : new SqlParameter("@DatCoc", DatCoc);
             SqlParameter pDieuKienNhapHoc = new SqlParameter("@DieuKienNhapHoc", DieuKienNhapHoc);
             SqlParameter pHocBong = (HocBong == "") ? new SqlParameter("@HocBong", DBNull.Value) : new SqlParameter("@HocBong", HocBong);
-            this.DB.Updatedata(sql, pSchoolID, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pProvinceID, pDistrictID, pGoogleMap, pPhone, pEstablish, pHocPhi, pPhiKhac, pDatCoc, pDieuKienNhapHoc, pHocBong);
+            SqlParameter pChuyenNganhNoiBat = (ChuyenNganhNoiBat == "") ? new SqlParameter("@ChuyenNganhNoiBat", DBNull.Value) : new SqlParameter("@ChuyenNganhNoiBat", ChuyenNganhNoiBat);
+            this.DB.Updatedata(sql, pSchoolID, pSchoolName, pSchoolAddress, pWebSite, pSchoolLvl, pAboutLink, pCountryID, pProvinceID, pDistrictID, pGoogleMap, pPhone, pEstablish, pHocPhi, pPhiKhac, pDatCoc, pDieuKienNhapHoc, pHocBong, pChuyenNganhNoiBat);
             this.DB.CloseConnection();
             return true;
         }

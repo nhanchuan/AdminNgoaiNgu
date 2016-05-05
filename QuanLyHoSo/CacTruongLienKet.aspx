@@ -216,6 +216,12 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label bold col-md-4">Chuyên ngành nổi bật</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="txtChuyenNganh" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </ContentTemplate>
@@ -573,6 +579,12 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
+                                            <div class="form-group">
+                                            <label class="control-label bold col-md-4">Chuyên ngành nổi bật</label>
+                                            <div class="col-md-8">
+                                                <asp:TextBox ID="txtEChuyennganh" CssClass="form-control" runat="server"></asp:TextBox>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
                                 </ContentTemplate>
