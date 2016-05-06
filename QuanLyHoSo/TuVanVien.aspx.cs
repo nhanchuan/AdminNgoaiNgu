@@ -577,7 +577,7 @@ public partial class QuanLyHoSo_TuVanVien : BasePage
                 case 2:
                     List<CustomerBasicInfo> lstCCode = customerbasicinfo.GetCusBasicInfoWithInfoId(cuspri.InfoID);
                     CustomerBasicInfo cbCode = lstCCode.FirstOrDefault();
-                    Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/ThongTinKhachHang.aspx?FileCode=" + cbCode.BasicInfoCode);
+                    Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + cbCode.BasicInfoCode);
                     break;
             }
             

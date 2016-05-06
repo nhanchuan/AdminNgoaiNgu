@@ -34,6 +34,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
     ListOfReligionBLL lstOfReligoin;
     BloodGroupBLL bloodgroup;
     BagProfileTypeBLL bagprofiletype;
+    ThongTinPhuHuynhBLL thongtinphuhuynh;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -569,6 +570,18 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         //    "  ___AccountNumber" + AccountNumber
         //    + " !')</script>");
     }
+    //private Boolean NewThongTinPhuHuynh()
+    //{
+    //    thongtinphuhuynh = new ThongTinPhuHuynhBLL();
+    //    customerbasicinfo = new CustomerBasicInfoBLL();
+    //    string BaseCode = Request.QueryString["FileCode"];
+    //    List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+    //    CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+    //    string fname = txtpFirstName.Text;
+    //    string lname = txtpLastName.Text;
+    //    string ngaysinh = txtpNgaySinh.Text;
+
+    //}
     protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
     {
         if (!UpdateCustomerBasicInfo()||!UpdateCustomerProfilePrivate())

@@ -95,6 +95,7 @@
     <Compile Include="Registration_Type.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="Tags_relationships.cs" />
+    <Compile Include="ThongTinPhuHuynh.cs" />
     <Compile Include="UserAccounts.cs" />
     <Compile Include="UserPermiss.cs" />
     <Compile Include="UserProfile.cs" />
