@@ -89,65 +89,6 @@ public partial class kus_admin_QLHocVien : BasePage
             btnExporttoExcel.Visible = true;
         }
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (string.IsNullOrEmpty(str) || string.IsNullOrWhiteSpace(str))
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(0, 2)))
-            {
-                return "";
-            }
-            else
-            {
-                day = str.Substring(0, 2);
-            }
-        }
-
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     private void Getkus_HVGhiDanhPageWise(int pageIndex, DateTime startdate, DateTime enddate)
     {
         kus_ghidanh = new kus_GhiDanhBLL();

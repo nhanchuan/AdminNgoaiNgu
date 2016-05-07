@@ -72,57 +72,6 @@ public partial class kus_admin_QLGhiDanh : BasePage
             formHT_CoSO.Visible = true;
         }
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (!IsNumber(str.Substring(0, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            day = str.Substring(0, 2);
-        }
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     private void Getkus_HVGhiDanhPageWise(int pageIndex, DateTime startdate, DateTime enddate)
     {
         kus_ghidanh = new kus_GhiDanhBLL();
@@ -204,7 +153,7 @@ public partial class kus_admin_QLGhiDanh : BasePage
     {
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
         DateTime startdate;
-        if (DateTime.TryParseExact(txtStartdate.Text, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out startdate) || getday(txtStartdate.Text) == "" || getmonth(txtStartdate.Text) == "" || getyear(txtStartdate.Text) == "")
+        if (string.IsNullOrWhiteSpace(txtStartdate.Text) || DateTime.TryParseExact(txtStartdate.Text, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out startdate) || getday(txtStartdate.Text) == "" || getmonth(txtStartdate.Text) == "" || getyear(txtStartdate.Text) == "")
         {
             lblstartdateFalse.Text = "Ngày bắt đầu không chính xác !";
             return;
@@ -215,7 +164,7 @@ public partial class kus_admin_QLGhiDanh : BasePage
             startdate = DateTime.ParseExact(getday(txtStartdate.Text) + "/" + getmonth(txtStartdate.Text) + "/" + getyear(txtStartdate.Text), "dd/MM/yyyy", null);
         }
         DateTime enddate;
-        if (DateTime.TryParseExact(txtEnddate.Text, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out enddate) || getday(txtEnddate.Text) == "" || getmonth(txtEnddate.Text) == "" || getyear(txtEnddate.Text) == "")
+        if (string.IsNullOrWhiteSpace(txtEnddate.Text) || DateTime.TryParseExact(txtEnddate.Text, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out enddate) || getday(txtEnddate.Text) == "" || getmonth(txtEnddate.Text) == "" || getyear(txtEnddate.Text) == "")
         {
             lblEnddatefalse.Text = "Ngày kết thúc không chính xác !";
             return;

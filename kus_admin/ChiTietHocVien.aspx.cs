@@ -218,57 +218,6 @@ public partial class kus_admin_ChiTietHocVien : BasePage
             }
         }
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (!IsNumber(str.Substring(0, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            day = str.Substring(0, 2);
-        }
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     private Boolean NewHocVienMore(int HocVienID)
     {
         hocvienmoreinfo = new kus_HocVienMoreInFoBLL();
@@ -333,7 +282,7 @@ public partial class kus_admin_ChiTietHocVien : BasePage
         string ngaysinh = txtNgaySinh.Text;
         DateTime birthday;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (ngaysinh == "" || string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
+        if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
         {
             birthday = Convert.ToDateTime("01/01/1900");
         }
@@ -345,7 +294,7 @@ public partial class kus_admin_ChiTietHocVien : BasePage
         string socmnd = txtSoCMNDHV.Text;
         string ngaycapcmnd = txtNgayCapCMND.Text;
         DateTime NgayCapCMND;
-        if (ngaycapcmnd == "" || string.IsNullOrWhiteSpace(ngaycapcmnd) || DateTime.TryParseExact(ngaycapcmnd, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCapCMND) || getday(ngaycapcmnd) == "" || getmonth(ngaycapcmnd) == "" || getyear(ngaycapcmnd) == "")
+        if (string.IsNullOrWhiteSpace(ngaycapcmnd) || DateTime.TryParseExact(ngaycapcmnd, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCapCMND) || getday(ngaycapcmnd) == "" || getmonth(ngaycapcmnd) == "" || getyear(ngaycapcmnd) == "")
         {
             NgayCapCMND = Convert.ToDateTime("01/01/1900");
         }

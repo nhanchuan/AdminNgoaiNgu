@@ -188,7 +188,7 @@ public class BasePage : System.Web.UI.Page
         rptPager.DataBind();
     }
     //========================================================================
-    private string getday(string str)
+    public string getday(string str)
     {
         string day = "";
         if (!IsNumber(str.Substring(0, 2)))
@@ -201,7 +201,7 @@ public class BasePage : System.Web.UI.Page
         }
         return day;
     }
-    private string getmonth(string str)
+    public string getmonth(string str)
     {
         string month = "";
         if (!IsNumber(str.Substring(3, 2)))
@@ -214,7 +214,7 @@ public class BasePage : System.Web.UI.Page
         }
         return month;
     }
-    private string getyear(string str)
+    public string getyear(string str)
     {
         string year = "";
         if (str.Length != 10)

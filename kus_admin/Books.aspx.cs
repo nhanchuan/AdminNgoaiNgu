@@ -116,57 +116,6 @@ public partial class kus_admin_Books : BasePage
 
         }
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (!IsNumber(str.Substring(0, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            day = str.Substring(0, 2);
-        }
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     protected void btnAddNew_Click(object sender, EventArgs e)
     {
         kus_books = new kus_BooksBLL();
@@ -179,7 +128,7 @@ public partial class kus_admin_Books : BasePage
         string languages = (gvBook.FooterRow.FindControl("txtAddLanguage") as TextBox).Text;
         DateTime ngayxb;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (nxb == "" || string.IsNullOrWhiteSpace(nxb) || DateTime.TryParseExact(nxb, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out ngayxb) || getday(nxb) == "" || getmonth(nxb) == "" || getyear(nxb) == "")
+        if (string.IsNullOrWhiteSpace(nxb) || DateTime.TryParseExact(nxb, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out ngayxb) || getday(nxb) == "" || getmonth(nxb) == "" || getyear(nxb) == "")
         {
             ngayxb = Convert.ToDateTime("01/01/1900");
         }

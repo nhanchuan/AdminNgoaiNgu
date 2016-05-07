@@ -453,21 +453,6 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         }
         dlEthnic.Items.Insert(0, new ListItem("-- Dân tộc --", "0"));
     }
-    private string getday(string str)
-    {
-        string day = str.Substring(0, 2);
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = str.Substring(3, 2);
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = str.Substring(6, 4);
-        return year;
-    }
     private Boolean UpdateCustomerBasicInfo()
     {
         customerbasicinfo = new CustomerBasicInfoBLL();
@@ -485,7 +470,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         }
         DateTime birthday;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (txtformBirthday.Value == "" || string.IsNullOrWhiteSpace(txtformBirthday.Value) || DateTime.TryParseExact(txtformBirthday.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday))
+        if (string.IsNullOrWhiteSpace(txtformBirthday.Value) || DateTime.TryParseExact(txtformBirthday.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(txtformBirthday.Value) == "" || getmonth(txtformBirthday.Value) == "" || getyear(txtformBirthday.Value) == "")
         {
             birthday = Convert.ToDateTime("01/01/1900");
         }
@@ -494,7 +479,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
             birthday = DateTime.ParseExact(getday(txtformBirthday.Value) + "/" + getmonth(txtformBirthday.Value) + "/" + getyear(txtformBirthday.Value), "dd/MM/yyyy", null);
         }
         DateTime dateOfIdentityCard;
-        if (txtformDateOfIdentityCard.Value == "" || string.IsNullOrWhiteSpace(txtformDateOfIdentityCard.Value) || DateTime.TryParseExact(txtformDateOfIdentityCard.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard))
+        if (string.IsNullOrWhiteSpace(txtformDateOfIdentityCard.Value) || DateTime.TryParseExact(txtformDateOfIdentityCard.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard) || getday(txtformDateOfIdentityCard.Value) == "" || getmonth(txtformDateOfIdentityCard.Value) == "" || getyear(txtformDateOfIdentityCard.Value) == "")
         {
             dateOfIdentityCard = Convert.ToDateTime("10/10/1900");
         }
@@ -570,27 +555,59 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         //    "  ___AccountNumber" + AccountNumber
         //    + " !')</script>");
     }
-    //private Boolean NewThongTinPhuHuynh()
-    //{
-    //    thongtinphuhuynh = new ThongTinPhuHuynhBLL();
-    //    customerbasicinfo = new CustomerBasicInfoBLL();
-    //    string BaseCode = Request.QueryString["FileCode"];
-    //    List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
-    //    CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
-    //    string fname = txtpFirstName.Text;
-    //    string lname = txtpLastName.Text;
-    //    string ngaysinh = txtpNgaySinh.Text;
-
-    //}
-    protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
+    private Boolean NewThongTinPhuHuynh()
     {
-        if (!UpdateCustomerBasicInfo()||!UpdateCustomerProfilePrivate())
+        thongtinphuhuynh = new ThongTinPhuHuynhBLL();
+        customerbasicinfo = new CustomerBasicInfoBLL();
+        string BaseCode = Request.QueryString["FileCode"];
+        List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+        CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+        string fname = txtpFirstName.Text;
+        string lname = txtpLastName.Text;
+        string ngaysinh = txtpNgaySinh.Text;
+        DateTime NgSinh;
+        string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
+        if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgSinh) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
         {
-            Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
+            NgSinh = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            Response.Redirect(Request.Url.AbsoluteUri);
+            NgSinh = DateTime.ParseExact(getday(ngaysinh) + "/" + getmonth(ngaysinh) + "/" + getyear(ngaysinh), "dd/MM/yyyy", null);
+        }
+        string noisinh = txtpNoiSinh.Text;
+        string socmnd = txtpSoCmnd.Text;
+        string noicap = txtpNoiCap.Text;
+        string ngaycap = txtpNgayCap.Text;
+        DateTime NgayCap;
+        if (string.IsNullOrWhiteSpace(ngaycap) || DateTime.TryParseExact(ngaycap, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCap) || getday(ngaycap) == "" || getmonth(ngaycap) == "" || getyear(ngaycap) == "")
+        {
+            NgayCap = Convert.ToDateTime("01/01/1900");
+        }
+        else
+        {
+            NgayCap = DateTime.ParseExact(getday(ngaycap) + "/" + getmonth(ngaycap) + "/" + getyear(ngaycap), "dd/MM/yyyy", null);
+        }
+        string sodienthoai = txtpSoDienthoai.Text;
+        bool HasNewThongTin = thongtinphuhuynh.NewThongTinPhuHuynh(bsInfo.InfoID, fname, lname, NgSinh, noisinh, socmnd, noicap, NgayCap, sodienthoai);
+        return (HasNewThongTin) ? true : false;
+    }
+    protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || NewThongTinPhuHuynh())
+            {
+                Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
+            }
+            else
+            {
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "!')</script>");
         }
     }
 }

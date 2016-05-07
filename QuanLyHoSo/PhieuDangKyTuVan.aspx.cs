@@ -8,6 +8,7 @@ using System.Data;
 using System.Data.SqlClient;
 using DAL;
 using BLL;
+using System.Globalization;
 
 public partial class QuanLyHoSo_PhieuDangKyTuVan : BasePage
 {
@@ -103,22 +104,6 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan : BasePage
         this.load_DropdownList(dlCountryAdvisory, country.getAllCountry(), "CountryName", "CountryID");
         dlCountryAdvisory.Items.Insert(0, new ListItem("-- Select Country --", "0"));
     }
-
-    private string getday(string str)
-    {
-        string day = str.Substring(0, 2);
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = str.Substring(3, 2);
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = str.Substring(6, 4);
-        return year;
-    }
     protected void btnSunmit_Click(object sender, EventArgs e)
     {
         registrationForm = new REGISTRATION_FORM_ADVISORY_BLL();
@@ -134,20 +119,22 @@ public partial class QuanLyHoSo_PhieuDangKyTuVan : BasePage
         {
             sex = (rdnam.Checked) ? 1 : (rdnu.Checked) ? 2 : 0;
         }
-        DateTime bitrhday;
-        if (txtbirthday.Value=="")
+        string bitrhday = txtbirthday.Value;
+        DateTime Bitrhday;
+        string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
+        if (string.IsNullOrWhiteSpace(bitrhday) || DateTime.TryParseExact(bitrhday, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out Bitrhday) || getday(bitrhday) == "" || getmonth(bitrhday) == "" || getyear(bitrhday) == "")
         {
-            bitrhday = Convert.ToDateTime("01/01/1900");
+            Bitrhday = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            bitrhday = DateTime.ParseExact(getday(txtbirthday.Value) + "/" + getmonth(txtbirthday.Value) + "/" + getyear(txtbirthday.Value), "dd/MM/yyyy", null);
+            Bitrhday = DateTime.ParseExact(getday(bitrhday) + "/" + getmonth(bitrhday) + "/" + getyear(bitrhday), "dd/MM/yyyy", null);
         }
         int typeAdvisory =int.Parse(dlRegistration_Type.SelectedValue);
         int studylv = int.Parse(dlEducationLV.SelectedValue);
         int countryadv = int.Parse(dlCountryAdvisory.SelectedValue);
         string contentAdv = CKContentAdvisory.Text;
-        if (registrationForm.NewCustomerAdvisory(txtFullName.Text, countryid, provinceid, districtid, txtAddress.Text, bitrhday, sex, txtPhone.Text, txtEmail.Text, typeAdvisory, studylv, countryadv, contentAdv, 0,0,0))
+        if (registrationForm.NewCustomerAdvisory(txtFullName.Text, countryid, provinceid, districtid, txtAddress.Text, Bitrhday, sex, txtPhone.Text, txtEmail.Text, typeAdvisory, studylv, countryadv, contentAdv, 0,0,0))
         {
             //Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/QLDangKyTuVan.aspx");
             this.Clear_Form();

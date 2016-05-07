@@ -150,7 +150,7 @@ public partial class kus_admin_HTCoSo : BasePage
         int chinhanh = Convert.ToInt32((row.FindControl("dlHTChiNhanh") as DropDownList).SelectedValue);
         int qlcoso = Convert.ToInt32((row.FindControl("dlQLCoSo") as DropDownList).SelectedValue);
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (nthanhlap == "" || string.IsNullOrWhiteSpace(nthanhlap) || DateTime.TryParseExact(nthanhlap, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out ngaythanhlap))
+        if (string.IsNullOrWhiteSpace(nthanhlap) || DateTime.TryParseExact(nthanhlap, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out ngaythanhlap) || getday(nthanhlap) == "" || getmonth(nthanhlap) == "" || getyear(nthanhlap) == "")
         {
             ngaythanhlap = Convert.ToDateTime("01/01/1900");
         }
@@ -170,57 +170,6 @@ public partial class kus_admin_HTCoSo : BasePage
             Response.Write("<script>alert('Cập nhật Cơ sở thất bại. Lỗi kết nối csdl !')</script>");
         }
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (!IsNumber(str.Substring(0, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            day = str.Substring(0, 2);
-        }
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     protected void btnAddNew_Click(object sender, EventArgs e)
     {
         kus_htchinhanh = new kus_HTChiNhanhBLL();
@@ -236,7 +185,7 @@ public partial class kus_admin_HTCoSo : BasePage
         int chinhanh = Convert.ToInt32((gvCoSo.FooterRow.FindControl("dlAddHTChiNhanh") as DropDownList).SelectedValue);
         int qlcoso = Convert.ToInt32((gvCoSo.FooterRow.FindControl("dlAddQLCoSo") as DropDownList).SelectedValue);
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (nthanhlap == "" || string.IsNullOrWhiteSpace(nthanhlap) || DateTime.TryParseExact(nthanhlap,formats, new CultureInfo("vi-VN"),DateTimeStyles.None, out ngaythanhlap) || getday(nthanhlap) == "" || getmonth(nthanhlap) == "" || getyear(nthanhlap) == "")
+        if (string.IsNullOrWhiteSpace(nthanhlap) || DateTime.TryParseExact(nthanhlap,formats, new CultureInfo("vi-VN"),DateTimeStyles.None, out ngaythanhlap) || getday(nthanhlap) == "" || getmonth(nthanhlap) == "" || getyear(nthanhlap) == "")
         {
             ngaythanhlap = Convert.ToDateTime("01/01/1900");
         }

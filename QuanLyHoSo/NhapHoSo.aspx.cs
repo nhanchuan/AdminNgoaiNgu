@@ -409,21 +409,6 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
             return;
         }
     }
-    private string getday(string str)
-    {
-        string day = str.Substring(0, 2);
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = str.Substring(3, 2);
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = str.Substring(6, 4);
-        return year;
-    }
     private Boolean UpdateCustomerBasicInfo()
     {
         customerbasicinfo = new CustomerBasicInfoBLL();
@@ -441,7 +426,7 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
         }
         DateTime birthday;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (txtformBirthday.Value == "" || string.IsNullOrWhiteSpace(txtformBirthday.Value) || DateTime.TryParseExact(txtformBirthday.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday))
+        if (string.IsNullOrWhiteSpace(txtformBirthday.Value) || DateTime.TryParseExact(txtformBirthday.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(txtformBirthday.Value) == "" || getmonth(txtformBirthday.Value) == "" || getyear(txtformBirthday.Value) == "")
         {
             birthday = Convert.ToDateTime("01/01/1900");
         }
@@ -450,7 +435,7 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
             birthday = DateTime.ParseExact(getday(txtformBirthday.Value) + "/" + getmonth(txtformBirthday.Value) + "/" + getyear(txtformBirthday.Value), "dd/MM/yyyy", null);
         }
         DateTime dateOfIdentityCard;
-        if (txtformDateOfIdentityCard.Value == "" || string.IsNullOrWhiteSpace(txtformDateOfIdentityCard.Value) || DateTime.TryParseExact(txtformDateOfIdentityCard.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard))
+        if (string.IsNullOrWhiteSpace(txtformDateOfIdentityCard.Value) || DateTime.TryParseExact(txtformDateOfIdentityCard.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out dateOfIdentityCard) || getday(txtformDateOfIdentityCard.Value) == "" || getmonth(txtformDateOfIdentityCard.Value) == "" || getyear(txtformDateOfIdentityCard.Value) == "")
         {
             dateOfIdentityCard = Convert.ToDateTime("10/10/1900");
         }
@@ -484,7 +469,7 @@ public partial class QuanLyHoSo_NhapHoSo : BasePage
 
         DateTime DateOfBHXH;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (txtDateOfBHXH.Value == "" || string.IsNullOrWhiteSpace(txtDateOfBHXH.Value) || DateTime.TryParseExact(txtDateOfBHXH.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out DateOfBHXH))
+        if (string.IsNullOrWhiteSpace(txtDateOfBHXH.Value) || DateTime.TryParseExact(txtDateOfBHXH.Value, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out DateOfBHXH) || getday(txtDateOfBHXH.Value) == "" || getmonth(txtDateOfBHXH.Value) == "" || getyear(txtDateOfBHXH.Value) == "")
         {
             DateOfBHXH = Convert.ToDateTime("01/01/1900");
         }

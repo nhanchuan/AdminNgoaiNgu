@@ -157,57 +157,6 @@ public partial class QuanLyHoSo_CacTruongLienKet : BasePage
         dllschoolname.DataValueField = "Id";
         dllschoolname.DataBind();
     }
-    public bool IsNumber(string pText)
-    {
-        Regex regex = new Regex(@"^[-+]?[0-9]*\.?[0-9]+$");
-        return regex.IsMatch(pText);
-    }
-    private string getday(string str)
-    {
-        string day = "";
-        if (!IsNumber(str.Substring(0, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            day = str.Substring(0, 2);
-        }
-        return day;
-    }
-    private string getmonth(string str)
-    {
-        string month = "";
-        if (!IsNumber(str.Substring(3, 2)))
-        {
-            return "";
-        }
-        else
-        {
-            month = str.Substring(3, 2);
-        }
-        return month;
-    }
-    private string getyear(string str)
-    {
-        string year = "";
-        if (str.Length != 10)
-        {
-            return "";
-        }
-        else
-        {
-            if (!IsNumber(str.Substring(6, 4)))
-            {
-                return "";
-            }
-            else
-            {
-                year = str.Substring(6, 4);
-            }
-        }
-        return year;
-    }
     protected void btnSaveNew_Click(object sender, EventArgs e)
     {
         try
