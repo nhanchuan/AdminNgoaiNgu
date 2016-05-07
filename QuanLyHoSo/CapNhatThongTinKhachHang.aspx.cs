@@ -35,6 +35,7 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
     ListOfReligionBLL lstOfReligoin;
     BloodGroupBLL bloodgroup;
     BagProfileTypeBLL bagprofiletype;
+    ThongTinPhuHuynhBLL thongtinphuhuynh;
     protected void Page_Load(object sender, EventArgs e)
     {
         this.setcurenturl();
@@ -313,12 +314,12 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         //txtformFirstName.Text = "sdgfgjghzslghlsernjiljdnhlodrifnghlodrjiyn";
         txtformLastName.Text = bsInfo.LastName;
         txtformOtherName.Text = bsInfo.OtherName;
-        txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd/MM/yyyy");
+        txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd-MM-yyyy");
         txtformBirthPlace.Text = bsInfo.BirthPlace;
         rdformnam.Checked = (bsInfo.Sex == 1) ? true : false;
         rdformnu.Checked = (bsInfo.Sex == 2) ? true : false;
         txtformIdentityCard.Text = bsInfo.IdentityCard;
-        txtformDateOfIdentityCard.Value = (bsInfo.DateOfIdentityCard.Year <= 1900) ? "" : bsInfo.DateOfIdentityCard.ToString("dd/MM/yyyy");
+        txtformDateOfIdentityCard.Value = (bsInfo.DateOfIdentityCard.Year <= 1900) ? "" : bsInfo.DateOfIdentityCard.ToString("dd-MM-yyyy");
         txtformPlaceOfIdentityCard.Text = bsInfo.PlaceOfIdentityCard;
 
         dlNationality.Items.FindByValue(CusPri.NationalityID.ToString()).Selected = true;
@@ -346,10 +347,12 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         txtHealthCondition.Text = CusPri.HealthCondition;
         txtHeight.Text = CusPri.Height.ToString();
         txtWeight.Text = CusPri.Weight.ToString();
-        txtDateOfBHXH.Value = CusPri.DateOfBHXH.ToString("dd/MM/yyyy");
+        txtDateOfBHXH.Value = CusPri.DateOfBHXH.ToString("dd-MM-yyyy");
         txtNumOfBHXH.Text = CusPri.NumOfBHXH;
         txtBank.Text = CusPri.Bank;
         txtAccountNumber.Text = CusPri.AccountNumber;
+
+        this.load_ThongTinPhuHuynh(bsInfo.InfoID);
     }
     private void getFormInfor(string queryStr)
     {
@@ -565,15 +568,89 @@ public partial class QuanLyHoSo_CapNhatThongTinKhachHang : BasePage
         bool hasUpdate = customerProPri.UpdateCustomerProfilePrivate(CusPri.ProfileID, txtCompanyCopyright.Text, Nationality, Ethnic, Religion, Country, Province, District, txtCommune_Ward.Text, txtPermanentAddress.Text, txtAddressPresent.Text, txtCompanyPhone.Text, txtHomePhone.Text, txtCellPhone.Text, txtEmail.Text, txtMaritalStatus.Text, txtTPXuatThan.Text, txtUuTienGD.Text, txtUuTienBanThan.Text, txtNangKhieu.Text, txtDisability.Text, txtHealthCondition.Text, Height, Weight, BloodID, DateOfBHXH, txtNumOfBHXH.Text, txtBank.Text, txtAccountNumber.Text, 2, bagPPID);
         return (hasUpdate) ? true : false;
     }
-    protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
+    private void load_ThongTinPhuHuynh(int InfoID)
     {
-        if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate())
+        thongtinphuhuynh = new ThongTinPhuHuynhBLL();
+        List<ThongTinPhuHuynh> lst = thongtinphuhuynh.getAllListWithInfoID(InfoID);
+        ThongTinPhuHuynh infor = lst.FirstOrDefault();
+        if (infor != null)
         {
-            Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
+            txtpFirstName.Text = infor.FirstName;
+            txtpLastName.Text = infor.LastName;
+            txtpNgaySinh.Text = (infor.NgaySinh.Year <= 1900) ? "" : infor.NgaySinh.ToString("dd-MM-yyyy");
+            txtpNoiSinh.Text = infor.NoiSinh;
+            txtpSoCmnd.Text = infor.SoCmnd;
+            txtpNoiCap.Text = infor.NoiCap;
+            txtpNgayCap.Text = (infor.NgayCap.Year <= 1900) ? "" : infor.NgayCap.ToString("dd-MM-yyyy");
+            txtpSoDienthoai.Text = infor.SoDienThoai;
+        }
+    }
+    private Boolean UpdateThongTinPhuHuynh()
+    {
+        thongtinphuhuynh = new ThongTinPhuHuynhBLL();
+        customerbasicinfo = new CustomerBasicInfoBLL();
+        string BaseCode = Request.QueryString["FileCode"];
+        List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+        CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+        string fname = txtpFirstName.Text;
+        string lname = txtpLastName.Text;
+        string ngaysinh = txtpNgaySinh.Text;
+        DateTime NgSinh;
+        string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
+        if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgSinh) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
+        {
+            NgSinh = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            Response.Redirect(Request.Url.AbsoluteUri);
+            NgSinh = DateTime.ParseExact(getday(ngaysinh) + "/" + getmonth(ngaysinh) + "/" + getyear(ngaysinh), "dd/MM/yyyy", null);
+        }
+        string noisinh = txtpNoiSinh.Text;
+        string socmnd = txtpSoCmnd.Text;
+        string noicap = txtpNoiCap.Text;
+        string ngaycap = txtpNgayCap.Text;
+        DateTime NgayCap;
+        if (string.IsNullOrWhiteSpace(ngaycap) || DateTime.TryParseExact(ngaycap, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCap) || getday(ngaycap) == "" || getmonth(ngaycap) == "" || getyear(ngaycap) == "")
+        {
+            NgayCap = Convert.ToDateTime("01/01/1900");
+        }
+        else
+        {
+            NgayCap = DateTime.ParseExact(getday(ngaycap) + "/" + getmonth(ngaycap) + "/" + getyear(ngaycap), "dd/MM/yyyy", null);
+        }
+        string sodienthoai = txtpSoDienthoai.Text;
+        List<ThongTinPhuHuynh> lst = thongtinphuhuynh.getAllListWithInfoID(bsInfo.InfoID);
+        ThongTinPhuHuynh infor = lst.FirstOrDefault();
+        bool hasInfor = (infor == null) ? false : true;
+        bool HasNewThongTin = true;
+        switch (hasInfor)
+        {
+            case true:
+                HasNewThongTin = thongtinphuhuynh.UpdateThongTinPhuHuynh(bsInfo.InfoID, fname, lname, NgSinh, noisinh, socmnd, noicap, NgayCap, sodienthoai);
+                break;
+            case false:
+                HasNewThongTin = thongtinphuhuynh.NewThongTinPhuHuynh(bsInfo.InfoID, fname, lname, NgSinh, noisinh, socmnd, noicap, NgayCap, sodienthoai);
+                break;
+        }
+        return (HasNewThongTin) ? true : false;
+    }
+    protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || !UpdateThongTinPhuHuynh())
+            {
+                Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
+            }
+            else
+            {
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+        }
+        catch (Exception ex)
+        {
+            Response.Write("<script>alert('" + ex.ToString() + "!')</script>");
         }
     }
+
 }

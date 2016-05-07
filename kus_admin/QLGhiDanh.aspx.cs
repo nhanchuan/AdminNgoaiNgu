@@ -39,6 +39,7 @@ public partial class kus_admin_QLGhiDanh : BasePage
                     formHT_CoSO.Visible = false;
                     dlLoaiThongKe.Items.FindByValue("0").Selected = true;
                     dlCoSo.Items.Insert(0, new ListItem("------ Chọn Cơ Sở thuộc Hệ Thống Chi Nhánh -------", "0"));
+                    btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                 }
             }
         }
@@ -344,5 +345,10 @@ public partial class kus_admin_QLGhiDanh : BasePage
             Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/PhieuGhiDanh.aspx?MaGhiDanh="+ MaGhiDanh);
 
         }
+    }
+
+    protected void gwGhiDanhHocVien_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        btnEditKhoaHoc.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
     }
 }

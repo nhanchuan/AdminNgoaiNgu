@@ -96,8 +96,9 @@ public partial class ChuongTrinhHoc_LopHoc : BasePage
             txtEBangCap.Text = lophoc.BangCap;
             this.load_dlELoaiChuongTrinh();
             this.load_dlEChuongTrinh(lophoc.LoaiChuongTrinh);
-            dlELoaiChuongTrinh.Items.FindByValue(lophoc.LoaiChuongTrinh.ToString()).Selected = true;
-            dlEChuongTrinh.Items.FindByValue(lophoc.ChuongTrinh.ToString()).Selected = true;
+            //this.load_dlELoaiChuongTrinh();
+            dlELoaiChuongTrinh.Items.FindByValue((lophoc.LoaiChuongTrinh == 0) ? "0" : lophoc.LoaiChuongTrinh.ToString()).Selected = true;
+            dlEChuongTrinh.Items.FindByValue((lophoc.ChuongTrinh == 0) ? "0" : lophoc.ChuongTrinh.ToString()).Selected = true;
             txtEMoTa.Text = lophoc.MoTa;
             txtEMucHocPhi.Text = lophoc.MucHocPhi.ToString();
         }

@@ -107,183 +107,307 @@
                 <div class="panel-body">
                     <h2>BẢNG KÊ KHAI THÔNG TIN</h2>
                     <hr />
-                    <div class="col-sm-3">
-                        <div class="row">
-                            <asp:TextBox ID="txtPostImgTemp" CssClass="form-control display-none" runat="server"></asp:TextBox>
-                            <img src="../images/default_images.jpg" id="imgCusprofile" class="img-responsive"  runat="server"/>
-                            <br />
-                            <a href="#" id="clearImg" class="btn red"><i class="fa fa-remove"></i></a>
-                            <a class="btn green" href="#coluploadEditImges" data-toggle="collapse"><i class="fa fa-upload"></i></a>
-                            <a class="btn blue" href="#modalPostImages" data-toggle="modal"><i class="fa fa-folder-open"></i></a>
-                        </div>
-                        <div class="clearfix"></div><br />
-                        <div class="row">
-                            <%-- Collapse Upload Images --%>
-                            <div id="coluploadEditImges" class="panel-collapse collapse">
-                                
-                                    <div class="form-group">
-                                        <div class="input-group">
-                                            <div class="input-icon">
-                                                <i class="fa fa-file"></i>
-                                                <asp:FileUpload ID="fileUploadImgPost" CssClass="form-control" runat="server" />
+                    <%-- tabbable --%>
+                    <div class="tabbable-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tab_hocsinh_info" data-toggle="tab">Thông tin học sinh </a>
+                            </li>
+                            <li>
+                                <a href="#tab_phuhuynh_info" data-toggle="tab">Thông tin phụ huynh </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab_hocsinh_info">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-sm-3">
+                                        <div class="row">
+                                            <asp:TextBox ID="txtPostImgTemp" CssClass="form-control display-none" runat="server"></asp:TextBox>
+                                            <img src="../images/default_images.jpg" id="imgCusprofile" class="img-responsive" runat="server" />
+                                            <br />
+                                            <a href="#" id="clearImg" class="btn red"><i class="fa fa-remove"></i></a>
+                                            <a class="btn green" href="#coluploadEditImges" data-toggle="collapse"><i class="fa fa-upload"></i></a>
+                                            <a class="btn blue" href="#modalPostImages" data-toggle="modal"><i class="fa fa-folder-open"></i></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <br />
+                                        <div class="row">
+                                            <%-- Collapse Upload Images --%>
+                                            <div id="coluploadEditImges" class="panel-collapse collapse">
+
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-icon">
+                                                            <i class="fa fa-file"></i>
+                                                            <asp:FileUpload ID="fileUploadImgPost" CssClass="form-control" runat="server" />
+                                                        </div>
+                                                        <span class="input-group-btn">
+                                                            <button id="btnuploadImg" class="btn btn-success" type="button" validationgroup="validfileUploadImgPost" onserverclick="btnuploadImg_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>OK</button>
+                                                        </span>
+                                                    </div>
+                                                    <asp:RequiredFieldValidator ErrorMessage="Required"
+                                                        ControlToValidate="fileUploadImgPost" ValidationGroup="validfileUploadImgPost"
+                                                        runat="server" Display="Dynamic" ForeColor="Red" />
+                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ValidationExpression="(.)+(.jpg|.gif|.png|.JPG|.PNG|.GIF)$"
+                                                        ControlToValidate="fileUploadImgPost"
+                                                        ValidationGroup="validfileUploadImgPost"
+                                                        runat="server" ForeColor="Red"
+                                                        ErrorMessage="Please select a valid Images file !"
+                                                        Display="Dynamic" />
+                                                </div>
+                                                <label>You can upload JPG, GIF, or PNG file. Maximum file size is 4MB.</label>
+
                                             </div>
-                                            <span class="input-group-btn">
-                                                <button id="btnuploadImg" class="btn btn-success" type="button" validationgroup="validfileUploadImgPost" onserverclick="btnuploadImg_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>OK</button>
-                                            </span>
+                                            <%-- End Collapse Upload Images --%>
                                         </div>
-                                        <asp:RequiredFieldValidator ErrorMessage="Required"
-                                            ControlToValidate="fileUploadImgPost" ValidationGroup="validfileUploadImgPost"
-                                            runat="server" Display="Dynamic" ForeColor="Red" />
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" ValidationExpression="([a-zA-Z0-9\s_\\.\-:])+(.jpg|.gif|.png)$"
-                                            ControlToValidate="fileUploadImgPost"
-                                            ValidationGroup="validfileUploadImgPost"
-                                            runat="server" ForeColor="Red"
-                                            ErrorMessage="Please select a valid Images file !"
-                                            Display="Dynamic" />
                                     </div>
-                                    <label>You can upload JPG, GIF, or PNG file. Maximum file size is 4MB.</label>
-                              
+                                        <div class="col-sm-9">
+                                            <div class="col-sm-12">
+                                                <%-- Start row 1 --%>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Đơn vị</label>
+                                                        <asp:TextBox ID="txtCompanyCopyright" CssClass="form-control" Text="Công Ty Cổ Phần Đỉnh Cao Châu Mỹ ®" ReadOnly="true" runat="server"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 1 --%>
+                                                <%-- Start row 2 --%>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Nhân viên tư vấn</label>
+                                                        <asp:TextBox ID="txtEmpAdv" CssClass="form-control" ReadOnly="true" runat="server"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 2 --%>
+                                                <div class="row">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Mã Hồ Sơ</label>
+                                                        <asp:TextBox ID="txtprofilePriCode" CssClass="form-control" ReadOnly="true" runat="server"></asp:TextBox>
+                                                    </div>
+                                                </div>
+                                                <%-- Start row 3 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Họ</label>
+                                                            <asp:TextBox ID="txtformLastName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="txtformLastName" ForeColor="Red" Display="Dynamic" ValidationGroup="validFormPrivateProfile" ValidationExpression="(.){0,200}$" runat="server" ErrorMessage="Họ từ 1-200 ký tự !"></asp:RegularExpressionValidator>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Tên</label>
+                                                            <asp:TextBox ID="txtformFirstName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtformFirstName" ValidationGroup="validFormPrivateProfile" runat="server" ErrorMessage="Required" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
+                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtformFirstName" ForeColor="Red" Display="Dynamic" ValidationGroup="validFormPrivateProfile" ValidationExpression="(.){0,200}$" runat="server" ErrorMessage="Tên từ 1-200 ký tự !"></asp:RegularExpressionValidator>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 3 --%>
+                                                <%-- Start row 4 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Tên khác</label>
+                                                            <asp:TextBox ID="txtformOtherName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 4 --%>
+                                                <%-- Start row 5 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Ngày Sinh</label>
+                                                            <%-- Date picker --%>
+                                                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                <input type="text" class="form-control" id="txtformBirthday" runat="server" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                </span>
+                                                            </div>
+                                                            <%-- Date picker --%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Nơi sinh</label>
+                                                            <asp:TextBox ID="txtformBirthPlace" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- Start row 5 --%>
+                                                <%-- Start row 6 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Số CMND</label>
+                                                            <asp:TextBox ID="txtformIdentityCard" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Nơi Cấp</label>
+                                                            <asp:TextBox ID="txtformPlaceOfIdentityCard" CssClass="form-control" runat="server"></asp:TextBox>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 6 --%>
+                                                <%-- Start row 7 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Ngày Cấp</label>
+                                                            <%-- Datepicker --%>
+                                                            <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                <input type="text" class="form-control" id="txtformDateOfIdentityCard" runat="server" />
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                </span>
+                                                            </div>
+                                                            <%-- end date picker --%>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Giới tình</label>
+                                                            <div class="radio-list">
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="optionsRadios" id="rdformnam" value="option1" runat="server" />
+                                                                    Nam
+                                                                </label>
+                                                                <label class="radio-inline">
+                                                                    <input type="radio" name="optionsRadios" id="rdformnu" value="option2" runat="server" />
+                                                                    Nữ
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 7 --%>
+                                                <%-- Start row 8 --%>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Làm Hồ Sơ :</label>
+                                                            <asp:DropDownList ID="dlBagProfileType" CssClass="form-control background" runat="server"></asp:DropDownList>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- End row 8 --%>
+                                                <%--  --%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <%-- End Collapse Upload Images --%>
+                            <div class="tab-pane" id="tab_phuhuynh_info">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="form-horizontal">
+                                            <div class="form-body">
+                                                <%-- /Row --%>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Họ : </label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpLastName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Tên : </label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpFirstName" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- /Row --%>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Ngày sinh : </label>
+                                                            <div class="col-md-8">
+                                                                <%-- Date picker --%>
+                                                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                    <asp:TextBox ID="txtpNgaySinh" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                    </span>
+                                                                </div>
+                                                                <%-- Date picker --%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Nơi sinh : </label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpNoiSinh" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <%-- /Row --%>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Số CMND : </label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpSoCmnd" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Nới cấp : </label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpNoiCap" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <%-- /Row --%>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Ngày cấp CMND : </label>
+                                                            <div class="col-md-8">
+                                                                <%-- Date picker --%>
+                                                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                    <asp:TextBox ID="txtpNgayCap" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                    <span class="input-group-btn">
+                                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                    </span>
+                                                                </div>
+                                                                <%-- Date picker --%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label class="control-label bold col-md-4">Số ĐT (DĐ - Bàn)  :</label>
+                                                            <div class="col-md-8">
+                                                                <asp:TextBox ID="txtpSoDienthoai" CssClass="form-control" runat="server"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-9">
-                        <div class="col-sm-12">
-                            <%-- Start row 1 --%>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="control-label">Đơn vị</label>
-                                    <asp:TextBox ID="txtCompanyCopyright" CssClass="form-control" Text="Công Ty Cổ Phần Đỉnh Cao Châu Mỹ ®" ReadOnly="true" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                            <%-- End row 1 --%>
-                            <%-- Start row 2 --%>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="control-label">Nhân viên tư vấn</label>
-                                    <asp:TextBox ID="txtEmpAdv" CssClass="form-control" ReadOnly="true" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                            <%-- End row 2 --%>
-                            <div class="row">
-                                <div class="form-group">
-                                    <label class="control-label">Mã Hồ Sơ</label>
-                                    <asp:TextBox ID="txtprofilePriCode" CssClass="form-control" ReadOnly="true" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
-                            <%-- Start row 3 --%>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Họ</label>
-                                        <asp:TextBox ID="txtformLastName" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" ControlToValidate="txtformLastName" ForeColor="Red" Display="Dynamic" ValidationGroup="validFormPrivateProfile" ValidationExpression="(.){0,200}$" runat="server" ErrorMessage="Họ từ 1-200 ký tự !"></asp:RegularExpressionValidator>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Tên</label>
-                                        <asp:TextBox ID="txtformFirstName" CssClass="form-control" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtformFirstName" ValidationGroup="validFormPrivateProfile" runat="server" ErrorMessage="Required" ForeColor="Red" Display="Dynamic"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtformFirstName" ForeColor="Red" Display="Dynamic" ValidationGroup="validFormPrivateProfile" ValidationExpression="(.){0,200}$" runat="server" ErrorMessage="Tên từ 1-200 ký tự !"></asp:RegularExpressionValidator>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- End row 3 --%>
-                            <%-- Start row 4 --%>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="control-label">Tên khác</label>
-                                        <asp:TextBox ID="txtformOtherName" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- End row 4 --%>
-                            <%-- Start row 5 --%>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Ngày Sinh</label>
-                                        <%-- Date picker --%>
-                                        <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control" id="txtformBirthday" runat="server" />
-                                            <span class="input-group-btn">
-                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                            </span>
-                                        </div>
-                                        <%-- Date picker --%>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Nơi sinh</label>
-                                        <asp:TextBox ID="txtformBirthPlace" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- Start row 5 --%>
-                            <%-- Start row 6 --%>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Số CMND</label>
-                                        <asp:TextBox ID="txtformIdentityCard" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Nơi Cấp</label>
-                                        <asp:TextBox ID="txtformPlaceOfIdentityCard" CssClass="form-control" runat="server"></asp:TextBox>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- End row 6 --%>
-                            <%-- Start row 7 --%>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Ngày Cấp</label>
-                                        <%-- Datepicker --%>
-                                        <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                            <input type="text" class="form-control" id="txtformDateOfIdentityCard" runat="server" />
-                                            <span class="input-group-btn">
-                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                            </span>
-                                        </div>
-                                        <%-- end date picker --%>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Giới tình</label>
-                                        <div class="radio-list">
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="rdformnam" value="option1" runat="server" />
-                                                Nam
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadios" id="rdformnu" value="option2" runat="server" />
-                                                Nữ
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- End row 7 --%>
-                            <%-- Start row 8 --%>
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">Làm Hồ Sơ :</label>
-                                        <asp:DropDownList ID="dlBagProfileType" CssClass="form-control background" runat="server"></asp:DropDownList>
-                                    </div>
-                                </div>
-                            </div>
-                            <%-- End row 8 --%>
-                            <%--  --%>
-                        </div>
-                    </div>
+                    <%-- End tabbable --%>
+
+                    
+                    
                 </div>
             </div>
         </div>

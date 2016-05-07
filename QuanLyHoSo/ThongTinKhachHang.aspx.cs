@@ -290,12 +290,12 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         txtformFirstName.Text = bsInfo.FirstName;
         txtformLastName.Text = bsInfo.LastName;
         txtformOtherName.Text = bsInfo.OtherName;
-        txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd/MM/yyyy");
+        txtformBirthday.Value = (bsInfo.Birthday.Year <= 1900) ? "" : bsInfo.Birthday.ToString("dd-MM-yyyy");
         txtformBirthPlace.Text = bsInfo.BirthPlace;
         rdformnam.Checked = (bsInfo.Sex == 1) ? true : false;
         rdformnu.Checked = (bsInfo.Sex == 2) ? true : false;
         txtformIdentityCard.Text = bsInfo.IdentityCard;
-        txtformDateOfIdentityCard.Value = (bsInfo.DateOfIdentityCard.Year <= 1900) ? "" : bsInfo.DateOfIdentityCard.ToString("dd/MM/yyyy");
+        txtformDateOfIdentityCard.Value = (bsInfo.DateOfIdentityCard.Year <= 1900) ? "" : bsInfo.DateOfIdentityCard.ToString("dd-MM-yyyy");
         txtformPlaceOfIdentityCard.Text = bsInfo.PlaceOfIdentityCard;
 
         dlNationality.Items.FindByValue(CusPri.NationalityID.ToString()).Selected = true;
@@ -323,7 +323,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         txtHealthCondition.Text = CusPri.HealthCondition;
         txtHeight.Text = CusPri.Height.ToString();
         txtWeight.Text = CusPri.Weight.ToString();
-        txtDateOfBHXH.Value = CusPri.DateOfBHXH.ToString("dd/MM/yyyy");
+        txtDateOfBHXH.Value = CusPri.DateOfBHXH.ToString("dd-MM-yyyy");
         txtNumOfBHXH.Text = CusPri.NumOfBHXH;
         txtBank.Text = CusPri.Bank;
         txtAccountNumber.Text = CusPri.AccountNumber;
@@ -596,13 +596,14 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
     {
         try
         {
-            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || NewThongTinPhuHuynh())
+            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || !NewThongTinPhuHuynh())
             {
                 Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
             }
             else
             {
-                Response.Redirect(Request.Url.AbsoluteUri);
+                string BaseCode = Request.QueryString["FileCode"];
+                Response.Redirect("http://" + Request.Url.Authority + "/QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + BaseCode);
             }
         }
         catch (Exception ex)

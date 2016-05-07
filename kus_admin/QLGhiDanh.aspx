@@ -108,26 +108,29 @@
                         <i class="fa fa-list font-yellow-casablanca"></i>
                         <span class="caption-subject bold font-yellow-casablanca uppercase">Danh sách học viên ghi danh </span>
                     </div>
-                    
-                    <div class="tools">
-                        <a href="javascript:;" class="collapse"></a>
-                        <a href="#portlet-config" data-toggle="modal" class="config"></a>
-                        <a id="btnRefreshLstKhoaHoc" title="Làm mới danh sách" runat="server" href="#">
+                    <div class="actions">
+                        <%--<a class="btn btn-circle btn-icon-only btn-default" title="Xuất danh sách Excel" href="#">
+                        <i class="fa fa-file-excel-o"></i>
+                    </a>--%>
+                        <a href="#modalEditGhiDanh" data-toggle="modal" id="btnEditKhoaHoc" title="Chỉnh sửa thông tin ghi danh" runat="server">
+                            <i class="icon-wrench"></i>
+                        </a>
+                        <a id="btnRefreshLstKhoaHoc" class="btn btn-circle btn-icon-only btn-default" title="Làm mới danh sách" runat="server" href="#">
                             <i class="fa fa-refresh"></i>
                         </a>
-                        <a href="javascript:;" class="remove"></a>
+                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="#"></a>
                     </div>
                 </div>
                 <div class="portlet-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <a id="btnPhieuGD" class="btn btn-default" onserverclick="btnPhieuGD_ServerClick" runat="server"><i class="fa fa-ticket"></i> Phiếu Ghi Danh Học Viên</a>
+                            <a id="btnPhieuGD" class="btn btn-default" onserverclick="btnPhieuGD_ServerClick" runat="server"><i class="fa fa-ticket"></i>Phiếu Ghi Danh Học Viên</a>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
                             <asp:GridView ID="gwGhiDanhHocVien" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White">
+                                HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwGhiDanhHocVien_SelectedIndexChanged">
                                 <Columns>
                                     <asp:TemplateField HeaderText="Mã Ghi Danh">
                                         <ItemTemplate>
@@ -143,7 +146,11 @@
                                     <asp:TemplateField HeaderText="Khóa Học Đăng Ký">
                                         <ItemTemplate>
                                             <%--<asp:Label ID="Label2" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") +" | " + Eval("TenLopHoc") + " | " + Eval("TenChuongTrinh")%>'></asp:Label>--%>
-                                            <asp:Label ID="lblMaKhoaHoc" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") %>'></asp:Label> <i class="fa fa-chevron-left"></i> <asp:Label ID="lblTenLopHoc" runat="server" Text='<%# Eval("TenLopHoc") %>'></asp:Label> <i class="fa fa-chevron-left"></i> <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
+                                            <asp:Label ID="lblMaKhoaHoc" runat="server" Text='<%# Eval("MaKhoaHoc")+" - "+ Eval("TenKhoaHoc") %>'></asp:Label>
+                                            <i class="fa fa-chevron-left"></i>
+                                            <asp:Label ID="lblTenLopHoc" runat="server" Text='<%# Eval("TenLopHoc") %>'></asp:Label>
+                                            <i class="fa fa-chevron-left"></i>
+                                            <asp:Label ID="lblTenChuongTrinh" runat="server" Text='<%# Eval("TenChuongTrinh") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Ngày Đăng Ký">
@@ -218,5 +225,18 @@
             </div>
         </div>
     </div>
+    <%-- Modal Edit ghi danh --%>
+    <div id="modalEditGhiDanh" class="modal fade modal-scroll" tabindex="-1" data-replace="true" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <i class="fa fa-sliders"></i>Chỉnh sửa thông tin Ghi Danh
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--End Modal Edit ghi danh --%>
 </asp:Content>
-

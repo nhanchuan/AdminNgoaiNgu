@@ -312,10 +312,10 @@ public partial class ChuongTrinhHoc_KhoaHoc : BasePage
             txtENgayKhaiGiang.Text = (khoahoc.NgayKhaiGiang.Year <= 1900) ? "" : khoahoc.NgayKhaiGiang.ToString("dd-MM-yyyy");
             txtENgayKetThuc.Text = (khoahoc.NgayKetThuc.Year <= 1900) ? "" : khoahoc.NgayKetThuc.ToString("dd-MM-yyyy");
             txtEThoiLuong.Text = khoahoc.ThoiLuong.ToString();
-            dlELoaiChuongTrinh.Items.FindByValue(khoahoc.LoaiChuongTrinh.ToString()).Selected = true;
-            dlEChuongTrinh.Items.FindByValue(khoahoc.ChuongTrinh.ToString()).Selected = true;
-            dlELopHoc.Items.FindByValue(khoahoc.LopHoc.ToString()).Selected = true;
-            dlECoSo.Items.FindByValue(khoahoc.CoSoID.ToString()).Selected = true;
+            dlELoaiChuongTrinh.Items.FindByValue((khoahoc.LoaiChuongTrinh == 0) ? "0" : khoahoc.LoaiChuongTrinh.ToString()).Selected = true;
+            dlEChuongTrinh.Items.FindByValue((khoahoc.ChuongTrinh == 0) ? "0" : khoahoc.ChuongTrinh.ToString()).Selected = true;
+            dlELopHoc.Items.FindByValue((khoahoc.LopHoc == 0) ? "0" : khoahoc.LopHoc.ToString()).Selected = true;
+            dlECoSo.Items.FindByValue((khoahoc.CoSoID == 0) ? "0" : khoahoc.CoSoID.ToString()).Selected = true;
 
             List<kus_CoSo> lstCoSo = kus_coso.getLSTCoSoWithID(khoahoc.CoSoID);
             kus_CoSo coso = lstCoSo.FirstOrDefault();

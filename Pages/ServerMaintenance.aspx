@@ -37,7 +37,7 @@
 	<div class="row">
 		<div class="col-md-12 coming-soon-header">
 			<a class="brand" href="https://www.facebook.com">
-			<img src="../images/logo/logoCoke.png" alt="logo"/>
+			<img src="../images/logo/Tai-sao-ban-chua-gioi-tieng-anh.png" alt="logo"/>
 			</a>
 		</div>
 	</div>
