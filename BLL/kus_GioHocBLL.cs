@@ -124,9 +124,9 @@ namespace BLL
             return true;
         }
         //Update
-        public Boolean GioHoc_Update(string GioHoc_ID, string TietHoc, string StartTime, string EndTime)
+        public Boolean GioHoc_Update(string GioHoc_ID, string TietHoc, string StartTime, string EndTime, int BuoiHocID)
         {
-            string query = "update kus_GioHoc set TietHoc = @tiethoc, StartTime = @StartTime, EndTime=@EndTime where GioHocID=@giohoc_id";
+            string query = "update kus_GioHoc set TietHoc = @tiethoc, StartTime = @StartTime, EndTime=@EndTime, BuoiHocID=@BuoiHocID where GioHocID=@giohoc_id";
             if (!this.DB.OpenConnection())
             {
                 return false;
@@ -135,7 +135,8 @@ namespace BLL
             SqlParameter pTietHoc = new SqlParameter("@tiethoc", TietHoc);
             SqlParameter pStartTime = new SqlParameter("@StartTime", StartTime);
             SqlParameter pEndTime = new SqlParameter("@EndTime", EndTime);
-            this.DB.Updatedata(query, pgiohoc_id, pTietHoc, pStartTime, pEndTime);
+            SqlParameter pBuoiHocID = (BuoiHocID == 0) ? new SqlParameter("@BuoiHocID", DBNull.Value) : new SqlParameter("@BuoiHocID", BuoiHocID);
+            this.DB.Updatedata(query, pgiohoc_id, pTietHoc, pStartTime, pEndTime, pBuoiHocID);
             this.DB.CloseConnection();
             return true;
         }

@@ -27,7 +27,13 @@
         <div class="col-lg-12">
             <p class="font-blue bold" style="font-size: 18px;">1. Giờ học lý thuyết và thực hành các kĩ năng</p>
             
-            <asp:GridView ID="gvGioHoc" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="gvGioHoc_RowCancelingEdit" OnRowEditing="gvGioHoc_RowEditing" OnRowUpdating="gvGioHoc_RowUpdating" OnRowDataBound="gvGioHoc_RowDataBound" OnRowDeleting="gvGioHoc_RowDeleting" ShowFooter="True">
+            <asp:GridView ID="gvGioHoc" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" 
+                OnRowCancelingEdit="gvGioHoc_RowCancelingEdit" 
+                OnRowEditing="gvGioHoc_RowEditing" 
+                OnRowUpdating="gvGioHoc_RowUpdating" 
+                OnRowDataBound="gvGioHoc_RowDataBound" 
+                OnRowDeleting="gvGioHoc_RowDeleting" 
+                ShowFooter="True">
                 <Columns>
                     <asp:TemplateField HeaderText="Tiết Học">
                         <EditItemTemplate>
@@ -94,6 +100,14 @@
                         </FooterTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Buổi Học">
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="dlEitBuoiHoc" CssClass="form-control" runat="server">
+                                <asp:ListItem Value="0">------</asp:ListItem>
+                                <asp:ListItem Value="1">Sáng</asp:ListItem>
+                                <asp:ListItem Value="2">Chiều</asp:ListItem>
+                                <asp:ListItem Value="3">Tối</asp:ListItem>
+                            </asp:DropDownList>
+                        </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="lblDelGioHoc_ID" CssClass="display-none" runat="server" Text='<%# Bind("GioHocID") %>'></asp:Label>
                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("BuoiHocID").ToString()=="1"?"Sáng": Eval("BuoiHocID").ToString()=="2"?"Chiều": Eval("BuoiHocID").ToString()=="3"?"Tối":"" %>'></asp:Label>

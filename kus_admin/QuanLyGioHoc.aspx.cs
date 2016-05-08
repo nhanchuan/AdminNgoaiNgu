@@ -138,14 +138,14 @@ public partial class kus_admin_QuanLyGioHoc : BasePage
         tiethoc = ((Label)(row.FindControl("lblETietHoc"))).Text;
         starttime = ((TextBox)(row.FindControl("txtEditStartTime"))).Text;
         endtime = ((TextBox)(row.FindControl("txtEditEndTime"))).Text;
-
+        int buoihoc = Convert.ToInt32(((DropDownList)(row.FindControl("dlEitBuoiHoc"))).SelectedValue);
         //DateTime StartTime;
         //DateTime EndTime;
         try
         {
             //StartTime=(string.IsNullOrWhiteSpace(starttime))? Convert.ToDateTime("01/01/1900"): Convert.ToDateTime(getmonth(starttime) + "/" + getday(starttime) + "/" + getyear(starttime) + " " + gethours(starttime) + ":" + getminutes(starttime) + ":00" + " " + gettimeRefix(starttime));
             //EndTime= (string.IsNullOrWhiteSpace(endtime)) ? Convert.ToDateTime("01/01/1900") : Convert.ToDateTime(getmonth(endtime) + "/" + getday(endtime) + "/" + getyear(endtime) + " " + gethours(endtime) + ":" + getminutes(endtime) + ":00" + " " + gettimeRefix(endtime));
-            this.kus_giohoc.GioHoc_Update(id, tiethoc, starttime, endtime);
+            this.kus_giohoc.GioHoc_Update(id, tiethoc, starttime, endtime, buoihoc);
         }
         catch
         {
