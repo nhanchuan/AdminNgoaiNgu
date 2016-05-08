@@ -175,7 +175,7 @@
     <div class="row">
         <div class="col-lg-3">
             <div class="form-group">
-                <label class="control-label"><i class="fa fa-graduation-cap"></i> Thông tin học viên</label>
+                <label class="control-label"><i class="fa fa-graduation-cap"></i>Thông tin học viên</label>
                 <asp:DropDownList ID="dlChoseLoaiGD" AutoPostBack="true" OnSelectedIndexChanged="dlChoseLoaiGD_SelectedIndexChanged" CssClass="form-control" runat="server">
                     <asp:ListItem Value="0">Học Viên chưa đăng ký</asp:ListItem>
                     <asp:ListItem Value="1">Học Viên đã học</asp:ListItem>
@@ -453,11 +453,19 @@
                 <%-- End More Info --%>
             </div>
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="control-label bold"><span class="required">Số tiền Đặt cọc trước (VND): </span></label>
-                    <asp:TextBox ID="txtDatCoc" CssClass="form-control bold" ForeColor="Red" runat="server"></asp:TextBox>
-                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtDatCoc" ValidationGroup="validGhiDanhHV" ValidationExpression="^\d+$" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chỉ được nhập số !"></asp:RegularExpressionValidator>
-                </div>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="form-group">
+                            <label class="control-label bold"><span class="required">Số tiền Đặt cọc trước (VND): </span></label>
+                            <asp:TextBox ID="txtDatCoc" CssClass="form-control bold" AutoPostBack="true" OnTextChanged="txtDatCoc_TextChanged" ForeColor="Red" runat="server"></asp:TextBox>
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtDatCoc" ValidationGroup="validGhiDanhHV" ValidationExpression="^\d+$" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chỉ được nhập số !"></asp:RegularExpressionValidator>
+                            <asp:Label ID="lblValidDatCoc" ForeColor="Red" runat="server"></asp:Label>
+                        </div>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="txtDatCoc" EventName="TextChanged" />
+                    </Triggers>
+                </asp:UpdatePanel>
             </div>
             <div class="clearfix"></div>
             <div class="form-group">

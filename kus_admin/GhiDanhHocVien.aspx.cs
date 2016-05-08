@@ -407,4 +407,29 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
             }
         }
     }
+    protected void txtDatCoc_TextChanged(object sender, EventArgs e)
+    {
+        nc_lophoc = new nc_LopHocBLL();
+        int datcoc = Convert.ToInt32(txtDatCoc.Text);
+        if (datcoc < 0)
+        {
+            lblValidDatCoc.Text = "Số tiền đặt cọc không được nhỏ hơn 0 ";
+            return;
+        }
+        else
+        {
+            string MaKhoaHoc = Request.QueryString["makhoahoc"];
+            List<nc_LopHoc> lstLop = nc_lophoc.getListLopHocWithMaKhoaHoc(MaKhoaHoc);
+            nc_LopHoc lop = lstLop.FirstOrDefault();
+            if (datcoc > lop.MucHocPhi)
+            {
+                lblValidDatCoc.Text = "Số tiền đặt cọc vượt quá Mức học phí khóa học .";
+                return;
+            }
+            else
+            {
+                lblValidDatCoc.Text = "";            }
+
+        }
+    }
 }

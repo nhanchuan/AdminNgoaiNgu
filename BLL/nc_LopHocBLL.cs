@@ -96,6 +96,38 @@ namespace BLL
             this.dt.CloseConnection();
             return lst;
         }
+        public List<nc_LopHoc> getListLopHocWithMaKhoaHoc(string MaKhoaHoc)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select lop.ID,lop.LopHocCode,lop.TenLopHoc,lop.ThoiLuong,lop.BangCap,lop.MucHocPhi,lop.LoaiChuongTrinh,lop.ChuongTrinh,lop.MoTa,lop.SapXep";
+            sql += " ";
+            sql += "from nc_KhoaHoc khoahoc full outer join nc_LopHoc lop on khoahoc.LopHoc=lop.ID";
+            sql += " ";
+            sql += "where khoahoc.ID is not null and khoahoc.MaKhoaHoc=@MaKhoaHoc";
+            SqlParameter pMaKhoaHoc = new SqlParameter("@MaKhoaHoc", MaKhoaHoc);
+            DataTable tb = dt.DAtable(sql, pMaKhoaHoc);
+            List<nc_LopHoc> lst = new List<nc_LopHoc>();
+            foreach (DataRow r in tb.Rows)
+            {
+                nc_LopHoc lh = new nc_LopHoc();
+                lh.ID = (int)r["ID"];
+                lh.LopHocCode = (string.IsNullOrEmpty(r["LopHocCode"].ToString())) ? "" : (string)r["LopHocCode"];
+                lh.TenLopHoc = (string.IsNullOrEmpty(r["TenLopHoc"].ToString())) ? "" : (string)r["TenLopHoc"];
+                lh.ThoiLuong = (string.IsNullOrEmpty(r["ThoiLuong"].ToString())) ? 0 : (int)r["ThoiLuong"];
+                lh.BangCap = (string.IsNullOrEmpty(r["BangCap"].ToString())) ? "" : (string)r["BangCap"];
+                lh.MucHocPhi = (string.IsNullOrEmpty(r["MucHocPhi"].ToString())) ? 0 : (int)r["MucHocPhi"];
+                lh.LoaiChuongTrinh = (string.IsNullOrEmpty(r["LoaiChuongTrinh"].ToString())) ? 0 : (int)r["LoaiChuongTrinh"];
+                lh.ChuongTrinh = (string.IsNullOrEmpty(r["ChuongTrinh"].ToString())) ? 0 : (int)r["ChuongTrinh"];
+                lh.MoTa = (string.IsNullOrEmpty(r["MoTa"].ToString())) ? "" : (string)r["MoTa"];
+                lh.SapXep = (string.IsNullOrEmpty(r["SapXep"].ToString())) ? 0 : (int)r["SapXep"];
+                lst.Add(lh);
+            }
+            this.dt.CloseConnection();
+            return lst;
+        }
         public DataTable getTBLopHoc()
         {
             if(!this.dt.OpenConnection())
