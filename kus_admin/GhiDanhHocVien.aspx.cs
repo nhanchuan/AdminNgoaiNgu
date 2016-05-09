@@ -168,104 +168,121 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
     }
     protected void btnAddNewHV_Click(object sender, EventArgs e)
     {
-        customerbasicinfo = new CustomerBasicInfoBLL();
-        kus_hocvien = new kus_HocVienBLL();
-        userprofile = new UserProfileBLL();
-        employees = new EmployeesBLL();
-        kus_ghidanh = new kus_GhiDanhBLL();
-        nc_khoahoc = new nc_KhoaHocBLL();
-        //kus_lophoc = new kus_LopHocBLL();
-        string FileCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+        try
+        {
+            customerbasicinfo = new CustomerBasicInfoBLL();
+            kus_hocvien = new kus_HocVienBLL();
+            userprofile = new UserProfileBLL();
+            employees = new EmployeesBLL();
+            kus_ghidanh = new kus_GhiDanhBLL();
+            nc_khoahoc = new nc_KhoaHocBLL();
+            nc_lophoc = new nc_LopHocBLL();
+            //kus_lophoc = new kus_LopHocBLL();
+            string FileCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
 
-        string firstname = txtFirstNameHV.Text;
-        string lastname = txtLastNameHV.Text;
-        string ngaysinh = txtNgaySinh.Text;
-        DateTime birthday;
-        string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
-        {
-            birthday = Convert.ToDateTime("01/01/1900");
-        }
-        else
-        {
-            birthday = DateTime.ParseExact(getday(ngaysinh) + "/" + getmonth(ngaysinh) + "/" + getyear(ngaysinh), "dd/MM/yyyy", null);
-        }
-        string noisinh = txtNoiSinhHV.Text;
-        string socmnd = txtSoCMNDHV.Text;
-        string ngaycapcmnd = txtNgayCapCMND.Text;
-        DateTime NgayCapCMND;
-        if (string.IsNullOrWhiteSpace(ngaycapcmnd) || DateTime.TryParseExact(ngaycapcmnd, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCapCMND) || getday(ngaycapcmnd) == "" || getmonth(ngaycapcmnd) == "" || getyear(ngaycapcmnd) == "")
-        {
-            NgayCapCMND = Convert.ToDateTime("01/01/1900");
-        }
-        else
-        {
-            NgayCapCMND = DateTime.ParseExact(getday(ngaycapcmnd) + "/" + getmonth(ngaycapcmnd) + "/" + getyear(ngaycapcmnd), "dd/MM/yyyy", null);
-        }
-        string noicap = txtNoiCapCMND.Text;
-        int sex;
-        if (!rdformnam.Checked && !rdformnu.Checked)
-        {
-            sex = 0;
-        }
-        else
-        {
-            sex = (rdformnam.Checked) ? 1 : (rdformnu.Checked) ? 2 : 0;
-        }
-
-        this.customerbasicinfo.CreateBasicCodeInfo(FileCode);
-
-        List<CustomerBasicInfo> lstBS = customerbasicinfo.GetCusBasicInfoWithCode(FileCode);
-        CustomerBasicInfo basicinfo = lstBS.FirstOrDefault();
-        this.customerbasicinfo.UpdateCustomerBasicInfo(basicinfo.InfoID, firstname, lastname, "", birthday, noisinh, sex, socmnd, NgayCapCMND, noicap);
-        string HocvienCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
-        this.kus_hocvien.CreateCodeHocVien(HocvienCode);
-
-        string diachithuongtru = txtDCThuongTru.Text;
-        string diachitamtru = txtDCTamTru.Text;
-        string email = txtEmail.Text;
-        string dienthoai = txtPhoneHV.Text;
-        string hotenPH = txtHoTenPH.Text;
-        string nghenghiep = txtNgheNghiepPH.Text;
-        string phonePH = txtDienThoaiPH.Text;
-        //int NVGioiThieu=
-        List<UserProfile> lstprofile = userprofile.getUserProfileWithID(Session.GetCurrentUser().UserID);
-        UserProfile userpro = lstprofile.FirstOrDefault();
-        List<Employees> lstemployee = employees.getEmpWithProfileId(userpro.ProfileID);
-        Employees emp = lstemployee.FirstOrDefault();
-        int NVGhiDanh = emp.EmployeesID;
-        List<kus_HocVien> lstHV = kus_hocvien.getHVWithCode(HocvienCode);
-        kus_HocVien hocvien = lstHV.FirstOrDefault();
-        if(this.kus_hocvien.kus_UpdateHocVen(hocvien.HocVienID, basicinfo.InfoID, diachithuongtru, diachitamtru, email, dienthoai, hotenPH, nghenghiep, phonePH, 1))
-        {
-            if (NewHocVienMore(hocvien.HocVienID))
+            string firstname = txtFirstNameHV.Text;
+            string lastname = txtLastNameHV.Text;
+            string ngaysinh = txtNgaySinh.Text;
+            DateTime birthday;
+            string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
+            if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out birthday) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
             {
+                birthday = Convert.ToDateTime("01/01/1900");
+            }
+            else
+            {
+                birthday = DateTime.ParseExact(getday(ngaysinh) + "/" + getmonth(ngaysinh) + "/" + getyear(ngaysinh), "dd/MM/yyyy", null);
+            }
+            string noisinh = txtNoiSinhHV.Text;
+            string socmnd = txtSoCMNDHV.Text;
+            string ngaycapcmnd = txtNgayCapCMND.Text;
+            DateTime NgayCapCMND;
+            if (string.IsNullOrWhiteSpace(ngaycapcmnd) || DateTime.TryParseExact(ngaycapcmnd, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCapCMND) || getday(ngaycapcmnd) == "" || getmonth(ngaycapcmnd) == "" || getyear(ngaycapcmnd) == "")
+            {
+                NgayCapCMND = Convert.ToDateTime("01/01/1900");
+            }
+            else
+            {
+                NgayCapCMND = DateTime.ParseExact(getday(ngaycapcmnd) + "/" + getmonth(ngaycapcmnd) + "/" + getyear(ngaycapcmnd), "dd/MM/yyyy", null);
+            }
+            string noicap = txtNoiCapCMND.Text;
+            int sex;
+            if (!rdformnam.Checked && !rdformnu.Checked)
+            {
+                sex = 0;
+            }
+            else
+            {
+                sex = (rdformnam.Checked) ? 1 : (rdformnu.Checked) ? 2 : 0;
+            }
 
-                string MaKhoaHoc = Request.QueryString["makhoahoc"];
-                List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(MaKhoaHoc);
-                nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
-                //Kiem tra ghi danh
-                List<kus_GhiDanh> lstCheckGD = kus_ghidanh.LstCheckHV_GhiDanh(hocvien.HocVienID, khoahoc.ID);
-                kus_GhiDanh check_ghidanh = lstCheckGD.FirstOrDefault();
-                if (check_ghidanh != null)
+            this.customerbasicinfo.CreateBasicCodeInfo(FileCode);
+
+            List<CustomerBasicInfo> lstBS = customerbasicinfo.GetCusBasicInfoWithCode(FileCode);
+            CustomerBasicInfo basicinfo = lstBS.FirstOrDefault();
+            this.customerbasicinfo.UpdateCustomerBasicInfo(basicinfo.InfoID, firstname, lastname, "", birthday, noisinh, sex, socmnd, NgayCapCMND, noicap);
+            string HocvienCode = RandomName + DateTime.Now.Day.ToString() + DateTime.Now.Month.ToString() + DateTime.Now.Year.ToString();
+            this.kus_hocvien.CreateCodeHocVien(HocvienCode);
+
+            string diachithuongtru = txtDCThuongTru.Text;
+            string diachitamtru = txtDCTamTru.Text;
+            string email = txtEmail.Text;
+            string dienthoai = txtPhoneHV.Text;
+            string hotenPH = txtHoTenPH.Text;
+            string nghenghiep = txtNgheNghiepPH.Text;
+            string phonePH = txtDienThoaiPH.Text;
+            //int NVGioiThieu=
+            List<UserProfile> lstprofile = userprofile.getUserProfileWithID(Session.GetCurrentUser().UserID);
+            UserProfile userpro = lstprofile.FirstOrDefault();
+            List<Employees> lstemployee = employees.getEmpWithProfileId(userpro.ProfileID);
+            Employees emp = lstemployee.FirstOrDefault();
+            int NVGhiDanh = emp.EmployeesID;
+            List<kus_HocVien> lstHV = kus_hocvien.getHVWithCode(HocvienCode);
+            kus_HocVien hocvien = lstHV.FirstOrDefault();
+            int datcoc = (txtDatCoc.Text == "") ? 0 : Convert.ToInt32(txtDatCoc.Text);
+            string MaKhoaHoc = Request.QueryString["makhoahoc"];
+            List<nc_LopHoc> lstLop = nc_lophoc.getListLopHocWithMaKhoaHoc(MaKhoaHoc);
+            nc_LopHoc lop = lstLop.FirstOrDefault();
+            if (datcoc > lop.MucHocPhi)
+            {
+                lblValidDatCoc.Text = "Số tiền đặt cọc vượt quá Mức học phí khóa học .";
+            }
+            else
+            {
+                if (this.kus_hocvien.kus_UpdateHocVen(hocvien.HocVienID, basicinfo.InfoID, diachithuongtru, diachitamtru, email, dienthoai, hotenPH, nghenghiep, phonePH, 1))
                 {
-                    Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh khóa " + MaKhoaHoc + " - " + khoahoc.TenKhoaHoc + " !')</script>");
-                }
-                else
-                {
-                    string ghichu = txtGhiChu.Text;
-                    int datcoc = (string.IsNullOrEmpty(txtDatCoc.Text) || string.IsNullOrWhiteSpace(txtDatCoc.Text)) ? 0 : Convert.ToInt32(txtDatCoc.Text);
-                    if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID,khoahoc.ID, NVGhiDanh, ghichu, datcoc))
+                    if (NewHocVienMore(hocvien.HocVienID))
                     {
-                        Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/QLGhiDanh.aspx");
-                    }
-                    else
-                    {
-                        Response.Write("<script>alert('Ghi danh thất bại ! Lỗi kết nối CSDL !')</script>");
+
+                        List<nc_KhoaHoc> lstkh = nc_khoahoc.getListKhoaHocWithMaKhoaHoc(MaKhoaHoc);
+                        nc_KhoaHoc khoahoc = lstkh.FirstOrDefault();
+                        //Kiem tra ghi danh
+                        List<kus_GhiDanh> lstCheckGD = kus_ghidanh.LstCheckHV_GhiDanh(hocvien.HocVienID, khoahoc.ID);
+                        kus_GhiDanh check_ghidanh = lstCheckGD.FirstOrDefault();
+                        if (check_ghidanh != null)
+                        {
+                            Response.Write("<script>alert('Học Viên " + hocvien.HocVienCode + " Đã Ghi Danh khóa " + MaKhoaHoc + " - " + khoahoc.TenKhoaHoc + " !')</script>");
+                        }
+                        else
+                        {
+                            string ghichu = txtGhiChu.Text;
+
+                            if (this.kus_ghidanh.GhiDanhMoi(hocvien.HocVienID, khoahoc.ID, NVGhiDanh, ghichu, datcoc))
+                            {
+                                Response.Redirect("http://" + Request.Url.Authority + "/kus_admin/QLGhiDanh.aspx");
+                            }
+                            else
+                            {
+                                Response.Write("<script>alert('Ghi danh thất bại ! Lỗi kết nối CSDL !')</script>");
+                            }
+                        }
                     }
                 }
             }
-            
+        }
+        catch (Exception ex)
+        {
+            lblPageIsValid.Text = ex.ToString();
         }
     }
     private Boolean NewHocVienMore(int HocVienID)
@@ -405,31 +422,6 @@ public partial class kus_admin_GhiDanhHocVien : BasePage
                     Response.Write("<script>alert('Ghi danh thất bại ! Lỗi kết nối CSDL !')</script>");
                 }
             }
-        }
-    }
-    protected void txtDatCoc_TextChanged(object sender, EventArgs e)
-    {
-        nc_lophoc = new nc_LopHocBLL();
-        int datcoc = Convert.ToInt32(txtDatCoc.Text);
-        if (datcoc < 0)
-        {
-            lblValidDatCoc.Text = "Số tiền đặt cọc không được nhỏ hơn 0 ";
-            return;
-        }
-        else
-        {
-            string MaKhoaHoc = Request.QueryString["makhoahoc"];
-            List<nc_LopHoc> lstLop = nc_lophoc.getListLopHocWithMaKhoaHoc(MaKhoaHoc);
-            nc_LopHoc lop = lstLop.FirstOrDefault();
-            if (datcoc > lop.MucHocPhi)
-            {
-                lblValidDatCoc.Text = "Số tiền đặt cọc vượt quá Mức học phí khóa học .";
-                return;
-            }
-            else
-            {
-                lblValidDatCoc.Text = "";            }
-
         }
     }
 }

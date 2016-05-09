@@ -192,7 +192,7 @@
                                             <ItemTemplate>
                                                 <asp:Label ID="lblPermissFuncID" CssClass="display-none" runat="server" Text='<%# Eval("PermissFuncID") %>'></asp:Label>
                                                 <asp:Label ID="lblFunctionName" runat="server" Text='<%# Eval("FunctionName") %>'></asp:Label>
-                                                <asp:Label ID="lblPermisstionNumber" runat="server" Text='<%# Eval("PermisstionNumber") %>'></asp:Label>
+                                                <asp:Label ID="lblPermisstionNumber" CssClass="display-none" runat="server" Text='<%# Eval("PermisstionNumber") %>'></asp:Label>
                                             </ItemTemplate>
                                         </asp:TemplateField>
                                         <asp:TemplateField>

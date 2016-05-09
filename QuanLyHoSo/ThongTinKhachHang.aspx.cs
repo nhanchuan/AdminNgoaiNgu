@@ -17,6 +17,7 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
 {
     CustomerBasicInfoBLL customerbasicinfo;
     CustomerProfilePrivateBLL customerProPri;
+    CustomerProfileMoreInforBLL customerProfileMoreInfor;
     REGISTRATION_FORM_ADVISORY_BLL registrationForm;
     CountryBLL country;
     ProvinceBLL province;
@@ -562,41 +563,69 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         string BaseCode = Request.QueryString["FileCode"];
         List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
         CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
-        string fname = txtpFirstName.Text;
-        string lname = txtpLastName.Text;
-        string ngaysinh = txtpNgaySinh.Text;
-        DateTime NgSinh;
+        //Dad
+        string fname_Dad = txtpFirstName_Dad.Text;
+        string lname_Dad = txtpLastName_Dad.Text;
+        string ngaysinh_Dad = txtpNgaySinh_Dad.Text;
+        DateTime NgSinh_Dad;
         string[] formats = { "dd/MM/yyyy", "d/M/yyyy", "dd/M/yyyy", "d/MM/yyyy" };
-        if (string.IsNullOrWhiteSpace(ngaysinh) || DateTime.TryParseExact(ngaysinh, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgSinh) || getday(ngaysinh) == "" || getmonth(ngaysinh) == "" || getyear(ngaysinh) == "")
+        if (string.IsNullOrWhiteSpace(ngaysinh_Dad) || DateTime.TryParseExact(ngaysinh_Dad, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgSinh_Dad) || getday(ngaysinh_Dad) == "" || getmonth(ngaysinh_Dad) == "" || getyear(ngaysinh_Dad) == "")
         {
-            NgSinh = Convert.ToDateTime("01/01/1900");
+            NgSinh_Dad = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            NgSinh = DateTime.ParseExact(getday(ngaysinh) + "/" + getmonth(ngaysinh) + "/" + getyear(ngaysinh), "dd/MM/yyyy", null);
+            NgSinh_Dad = DateTime.ParseExact(getday(ngaysinh_Dad) + "/" + getmonth(ngaysinh_Dad) + "/" + getyear(ngaysinh_Dad), "dd/MM/yyyy", null);
         }
-        string noisinh = txtpNoiSinh.Text;
-        string socmnd = txtpSoCmnd.Text;
-        string noicap = txtpNoiCap.Text;
-        string ngaycap = txtpNgayCap.Text;
-        DateTime NgayCap;
-        if (string.IsNullOrWhiteSpace(ngaycap) || DateTime.TryParseExact(ngaycap, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCap) || getday(ngaycap) == "" || getmonth(ngaycap) == "" || getyear(ngaycap) == "")
+        string noisinh_Dad = txtpNoiSinh_Dad.Text;
+        string socmnd_Dad = txtpSoCmnd_Dad.Text;
+        string noicap_Dad = txtpNoiCap_Dad.Text;
+        string ngaycap_Dad = txtpNgayCap_Dad.Text;
+        DateTime NgayCap_Dad;
+        if (string.IsNullOrWhiteSpace(ngaycap_Dad) || DateTime.TryParseExact(ngaycap_Dad, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCap_Dad) || getday(ngaycap_Dad) == "" || getmonth(ngaycap_Dad) == "" || getyear(ngaycap_Dad) == "")
         {
-            NgayCap = Convert.ToDateTime("01/01/1900");
+            NgayCap_Dad = Convert.ToDateTime("01/01/1900");
         }
         else
         {
-            NgayCap = DateTime.ParseExact(getday(ngaycap) + "/" + getmonth(ngaycap) + "/" + getyear(ngaycap), "dd/MM/yyyy", null);
+            NgayCap_Dad = DateTime.ParseExact(getday(ngaycap_Dad) + "/" + getmonth(ngaycap_Dad) + "/" + getyear(ngaycap_Dad), "dd/MM/yyyy", null);
         }
-        string sodienthoai = txtpSoDienthoai.Text;
-        bool HasNewThongTin = thongtinphuhuynh.NewThongTinPhuHuynh(bsInfo.InfoID, fname, lname, NgSinh, noisinh, socmnd, noicap, NgayCap, sodienthoai);
+        string sodienthoai_Dad = txtpSoDienthoai_Dad.Text;
+        //Mom
+        string fname_Mom = txtpFirstName_Mom.Text;
+        string lname_Mom = txtpLastName_Mom.Text;
+        string ngaysinh_Mom = txtpNgaySinh_Mom.Text;
+        DateTime NgSinh_Mom;
+        if (string.IsNullOrWhiteSpace(ngaysinh_Mom) || DateTime.TryParseExact(ngaysinh_Mom, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgSinh_Mom) || getday(ngaysinh_Mom) == "" || getmonth(ngaysinh_Mom) == "" || getyear(ngaysinh_Mom) == "")
+        {
+            NgSinh_Mom = Convert.ToDateTime("01/01/1900");
+        }
+        else
+        {
+            NgSinh_Mom = DateTime.ParseExact(getday(ngaysinh_Mom) + "/" + getmonth(ngaysinh_Mom) + "/" + getyear(ngaysinh_Mom), "dd/MM/yyyy", null);
+        }
+        string noisinh_Mom = txtpNoiSinh_Mom.Text;
+        string socmnd_Mom = txtpSoCmnd_Mom.Text;
+        string noicap_Mom = txtpNoiCap_Mom.Text;
+        string ngaycap_Mom = txtpNgayCap_Mom.Text;
+        DateTime NgayCap_Mom;
+        if (string.IsNullOrWhiteSpace(ngaycap_Mom) || DateTime.TryParseExact(ngaycap_Mom, formats, new CultureInfo("vi-VN"), DateTimeStyles.None, out NgayCap_Mom) || getday(ngaycap_Mom) == "" || getmonth(ngaycap_Mom) == "" || getyear(ngaycap_Mom) == "")
+        {
+            NgayCap_Mom = Convert.ToDateTime("01/01/1900");
+        }
+        else
+        {
+            NgayCap_Mom = DateTime.ParseExact(getday(ngaycap_Mom) + "/" + getmonth(ngaycap_Mom) + "/" + getyear(ngaycap_Mom), "dd/MM/yyyy", null);
+        }
+        string sodienthoai_Mom = txtpSoDienthoai_Mom.Text;
+        bool HasNewThongTin = thongtinphuhuynh.NewThongTinPhuHuynh(bsInfo.InfoID, fname_Dad, lname_Dad, NgSinh_Dad, noisinh_Dad, socmnd_Dad, noicap_Dad, NgayCap_Dad, sodienthoai_Dad, fname_Mom, lname_Mom, NgSinh_Mom, noisinh_Mom, socmnd_Mom, noicap_Mom, NgayCap_Mom, sodienthoai_Mom);
         return (HasNewThongTin) ? true : false;
     }
     protected void btnSavePrivateProfile_Click(object sender, EventArgs e)
     {
         try
         {
-            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || !NewThongTinPhuHuynh())
+            if (!UpdateCustomerBasicInfo() || !UpdateCustomerProfilePrivate() || !NewThongTinPhuHuynh() || !NewCustomerProfileMoreInfor())
             {
                 Response.Write("<script>alert('Cập nhật thông tin [1] không thành công - lỗi kết nối CSDL !')</script>");
             }
@@ -610,5 +639,73 @@ public partial class QuanLyHoSo_ThongTinKhachHang : BasePage
         {
             Response.Write("<script>alert('" + ex.ToString() + "!')</script>");
         }
+    }
+    private Boolean NewCustomerProfileMoreInfor()
+    {
+        customerProfileMoreInfor = new CustomerProfileMoreInforBLL();
+        customerbasicinfo = new CustomerBasicInfoBLL();
+        string BaseCode = Request.QueryString["FileCode"];
+        List<CustomerBasicInfo> lstBsInfo = customerbasicinfo.GetCusBasicInfoWithCode(BaseCode);
+        CustomerBasicInfo bsInfo = lstBsInfo.FirstOrDefault();
+        List<CustomerProfileMoreInfor> lstmore = customerProfileMoreInfor.GetListWithInfoID(bsInfo.InfoID);
+        CustomerProfileMoreInfor moreinfor = lstmore.FirstOrDefault();
+
+        string HVGioiThieu = txtHVGioiThieu.Text;
+        string TDHocVAn = "";
+        if (chkMauGiao.Checked == true)
+            TDHocVAn = "Mẫu giáo";
+        else if (chkTieuHoc.Checked == true)
+            TDHocVAn = "Tiểu học";
+        else if (chkTHCS.Checked == true)
+            TDHocVAn = "Trung học cơ sở";
+        else if (chkTHPT.Checked == true)
+            TDHocVAn = "Trung học phổ thông";
+        else
+            TDHocVAn = "Đại Học - Cao Đẳng";
+
+        string tentruong = txtTenTruong.Text;
+        string CCTA = txtCCKHac.Text;
+        if (chkCC1.Checked == true)
+            CCTA += ";" + "Starters";
+        if (chkCC2.Checked == true)
+            CCTA += ";" + "Movers";
+        if (chkCC3.Checked == true)
+            CCTA += ";" + "Flyers";
+        if (chkCC4.Checked == true)
+            CCTA += ";" + "KET";
+        if (chkCC5.Checked == true)
+            CCTA += ";" + "PET";
+        if (chkCC6.Checked == true)
+            CCTA += ";" + "FCE";
+
+        string BTT = txtBTTKHac.Text;
+        if (chkBTT1.Checked == true)
+            BTT += ";" + "Báo chí";
+        if (chkBTT2.Checked == true)
+            BTT += ";" + "Internet";
+        if (chkBTT3.Checked == true)
+            BTT += ";" + "Bạn bè";
+        if (chkBTT4.Checked == true)
+            BTT += ";" + "Website";
+        if (chkBTT5.Checked == true)
+            BTT += ";" + "Trực tiếp tại trung tâm";
+
+        string GhiChu = CKDocNote.Text;
+
+        bool hasInfor = (moreinfor == null) ? false : true;
+        bool HasNewThongTin = true;
+        switch (hasInfor)
+        {
+            case true:
+                HasNewThongTin = customerProfileMoreInfor.UpdateCustomerProfileMoreInfor(bsInfo.InfoID, HVGioiThieu, TDHocVAn, tentruong, CCTA, BTT, GhiChu);
+                break;
+            case false:
+                HasNewThongTin = customerProfileMoreInfor.NewCustomerProfileMoreInfor(bsInfo.InfoID, HVGioiThieu, TDHocVAn, tentruong, CCTA, BTT, GhiChu);
+                break;
+        }
+        return (HasNewThongTin) ? true : false;
+
+        //return this.hocvienmoreinfo.kus_NewHocVienMoreInFo(HocVienID, HVGioiThieu, TDHocVAn, tentruong, CCTA, BTT);
+
     }
 }

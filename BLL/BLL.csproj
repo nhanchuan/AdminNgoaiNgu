@@ -51,6 +51,7 @@
     <Compile Include="CountryAdvisoryBLL.cs" />
     <Compile Include="CountryBLL.cs" />
     <Compile Include="CustomerBasicInfoBLL.cs" />
+    <Compile Include="CustomerProfileMoreInforBLL.cs" />
     <Compile Include="CustomerProfilePrivateBLL.cs" />
     <Compile Include="DepartmentsBLL.cs" />
     <Compile Include="DistrictBLL.cs" />

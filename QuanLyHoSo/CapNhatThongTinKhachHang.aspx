@@ -116,6 +116,9 @@
                             <li>
                                 <a href="#tab_phuhuynh_info" data-toggle="tab">Thông tin phụ huynh </a>
                             </li>
+                            <li>
+                                <a href="#tab_thongtin_them" data-toggle="tab">Thông tin Thêm </a>
+                            </li>
                         </ul>
                         <div class="tab-content">
                             <div class="tab-pane active" id="tab_hocsinh_info">
@@ -307,99 +310,317 @@
                                     <div class="col-lg-12">
                                         <div class="form-horizontal">
                                             <div class="form-body">
-                                                <%-- /Row --%>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Họ : </label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpLastName" CssClass="form-control" runat="server"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Tên : </label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpFirstName" CssClass="form-control" runat="server"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <%-- /Row --%>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Ngày sinh : </label>
-                                                            <div class="col-md-8">
-                                                                <%-- Date picker --%>
-                                                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                                                    <asp:TextBox ID="txtpNgaySinh" CssClass="form-control" runat="server"></asp:TextBox>
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                                                    </span>
+                                                <h3><i>Thông tin Cha</i></h3>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Họ : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpLastName_Dad" CssClass="form-control" runat="server"></asp:TextBox>
                                                                 </div>
-                                                                <%-- Date picker --%>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Nơi sinh : </label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpNoiSinh" CssClass="form-control" runat="server"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                 <%-- /Row --%>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Số CMND : </label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpSoCmnd" CssClass="form-control" runat="server"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Nới cấp : </label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpNoiCap" CssClass="form-control" runat="server"></asp:TextBox>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <%-- /Row --%>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Ngày cấp CMND : </label>
-                                                            <div class="col-md-8">
-                                                                <%-- Date picker --%>
-                                                                <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
-                                                                    <asp:TextBox ID="txtpNgayCap" CssClass="form-control" runat="server"></asp:TextBox>
-                                                                    <span class="input-group-btn">
-                                                                        <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
-                                                                    </span>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Tên : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpFirstName_Dad" CssClass="form-control" runat="server"></asp:TextBox>
                                                                 </div>
-                                                                <%-- Date picker --%>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="form-group">
-                                                            <label class="control-label bold col-md-4">Số ĐT (DĐ - Bàn)  :</label>
-                                                            <div class="col-md-8">
-                                                                <asp:TextBox ID="txtpSoDienthoai" CssClass="form-control" runat="server"></asp:TextBox>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Ngày sinh : </label>
+                                                                <div class="col-md-8">
+                                                                    <%-- Date picker --%>
+                                                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                        <asp:TextBox ID="txtpNgaySinh_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                    <%-- Date picker --%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Nơi sinh : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpNoiSinh_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Số CMND : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpSoCmnd_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Nới cấp : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpNoiCap_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Ngày cấp CMND : </label>
+                                                                <div class="col-md-8">
+                                                                    <%-- Date picker --%>
+                                                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                        <asp:TextBox ID="txtpNgayCap_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                    <%-- Date picker --%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Số ĐT (DĐ - Bàn)  :</label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpSoDienthoai_Dad" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                    <br />
+                                                    <h3><i>Thông tin Mẹ</i></h3>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Họ : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpLastName_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Tên : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpFirstName_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Ngày sinh : </label>
+                                                                <div class="col-md-8">
+                                                                    <%-- Date picker --%>
+                                                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                        <asp:TextBox ID="txtpNgaySinh_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                    <%-- Date picker --%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Nơi sinh : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpNoiSinh_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Số CMND : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpSoCmnd_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Nới cấp : </label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpNoiCap_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <%-- /Row --%>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Ngày cấp CMND : </label>
+                                                                <div class="col-md-8">
+                                                                    <%-- Date picker --%>
+                                                                    <div class="input-group date date-picker" data-date-format="dd-mm-yyyy">
+                                                                        <asp:TextBox ID="txtpNgayCap_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                        </span>
+                                                                    </div>
+                                                                    <%-- Date picker --%>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="control-label bold col-md-4">Số ĐT (DĐ - Bàn)  :</label>
+                                                                <div class="col-md-8">
+                                                                    <asp:TextBox ID="txtpSoDienthoai_Mom" CssClass="form-control" runat="server"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="tab_thongtin_them">
+                                <div class="row">
+                                    <%-- More Info --%>
+                                    <div class="col-lg-12">
+                                        <h3>Thông tin thêm</h3>
+                                        <div class="form-group">
+                                            <label class="control-label">Học viên giới thiệu</label>
+                                            <asp:TextBox ID="txtHVGioiThieu" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Trình độ học vấn</label>
+                                            <div class="radio-list">
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="chkMauGiao" runat="server" />
+                                                    Mẫu giáo
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="chkTieuHoc" runat="server" />
+                                                    Tiểu học
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="chkTHCS" runat="server" />
+                                                    Trung học cơ sở
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="chkTHPT" runat="server" />
+                                                    Trung học phổ thông
+                                                </label>
+                                                <label class="radio-inline">
+                                                    <input type="radio" id="chkDH" runat="server" />
+                                                    Đại Học - Cao Đẳng
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Tên trường</label>
+                                            <asp:TextBox ID="txtTenTruong" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Chứng chỉ Tiếng Anh</label>
+                                            <div class="checkbox-list">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC1" runat="server" />
+                                                    Starters
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC2" runat="server" />
+                                                    Movers
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC3" runat="server" />
+                                                    Flyers
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC4" runat="server" />
+                                                    KET
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC5" runat="server" />
+                                                    PET
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkCC6" runat="server" />
+                                                    FCE
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <%--<input type="checkbox" id="chk7" runat="server" />--%>
+                                                    <%--<asp:CheckBox ID="chk7" runat="server" />--%>
+                                                    <a href="#collapCCKHac" data-toggle="collapse">
+                                                        <i class="fa fa-file-o"></i>
+                                                        Khác
+                                                    </a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group panel-collapse collapse" id="collapCCKHac">
+                                            <label class="control-label">Tên C/C khác</label>
+                                            <asp:TextBox ID="txtCCKHac" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">Biết trung tâm qua</label>
+                                            <div class="checkbox-list">
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkBTT1" runat="server" />
+                                                    Báo chí
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkBTT2" runat="server" />
+                                                    Internet
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkBTT3" runat="server" />
+                                                    Bạn bè
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkBTT4" runat="server" />
+                                                    Website
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <input type="checkbox" id="chkBTT5" runat="server" />
+                                                    Trực tiếp tại trung tâm
+                                                </label>
+                                                <label class="checkbox-inline">
+                                                    <a href="#collapBTTKHac" data-toggle="collapse">
+                                                        <i class="fa fa-file-o"></i>
+                                                        Khác
+                                                    </a>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group panel-collapse collapse" id="collapBTTKHac">
+                                            <label class="control-label">Ngồn khác</label>
+                                            <asp:TextBox ID="txtBTTKHac" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Ghi chú - Hồ Sơ</label>
+                                            <%--<asp:TextBox ID="txtGhiChu" CssClass="form-control" TextMode="MultiLine" Rows="5" runat="server"></asp:TextBox>--%>
+                                            <CKEditor:CKEditorControl ID="CKDocNote" Toolbar="Basic" runat="server"></CKEditor:CKEditorControl>
+                                        </div>
+                                    </div>
+                                    <%-- End More Info --%>
                                 </div>
                             </div>
                         </div>

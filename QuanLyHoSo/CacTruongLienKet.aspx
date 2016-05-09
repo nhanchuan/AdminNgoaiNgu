@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="control-label bold col-md-4">WebSite Trường</label>
+                                            <label class="control-label bold col-md-4">WebSite Trường (http://www.schoool.edu.com)</label>
                                             <div class="col-md-8">
                                                 <asp:TextBox ID="txtWebSite" CssClass="form-control" runat="server"></asp:TextBox>
                                             </div>
@@ -130,7 +130,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label bold col-md-4">Tỉnh / Thành  - Tểu Bang</label>
+                                                    <label class="control-label bold col-md-4">Tỉnh / Thành  - Tiểu Bang</label>
                                                     <div class="col-md-8">
                                                         <asp:DropDownList ID="dlProvinces" AutoPostBack="true" OnSelectedIndexChanged="dlProvinces_SelectedIndexChanged" CssClass="form-control" runat="server"></asp:DropDownList>
                                                     </div>
@@ -148,7 +148,7 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="control-label bold col-md-4">Quận  - Huyện</label>
+                                                    <label class="control-label bold col-md-4">Quận  - Huyện / (* TP Thuộc Tiểu Bang)</label>
                                                     <div class="col-md-8">
                                                         <asp:DropDownList ID="dlDistrict" CssClass="form-control" runat="server"></asp:DropDownList>
                                                     </div>

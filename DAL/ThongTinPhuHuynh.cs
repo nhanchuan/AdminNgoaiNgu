@@ -10,14 +10,23 @@ namespace DAL
     {
         private int iD;
         private int infoID;
-        private string firstName;
-        private string lastName;
-        private DateTime ngaySinh;
-        private string noiSinh;
-        private string soCmnd;
-        private string noiCap;
-        private DateTime ngayCap;
-        private string soDienThoai;
+        private string firstName_Dad;
+        private string lastName_Dad;
+        private DateTime ngaySinh_Dad;
+        private string noiSinh_Dad;
+        private string soCmnd_Dad;
+        private string noiCap_Dad;
+        private DateTime ngayCap_Dad;
+        private string soDienThoai_Dad;
+        private string firstName_Mom;
+        private string lastName_Mom;
+        private DateTime ngaySinh_Mom;
+        private string noiSinh_Mom;
+        private string soCmnd_Mom;
+        private string noiCap_Mom;
+        private DateTime ngayCap_Mom;
+        private string soDienThoai_Mom;
+
         public int ID
         {
             get
@@ -44,109 +53,212 @@ namespace DAL
             }
         }
 
-        public string FirstName
+        public string FirstName_Dad
         {
             get
             {
-                return firstName;
+                return firstName_Dad;
             }
 
             set
             {
-                firstName = value;
+                firstName_Dad = value;
             }
         }
 
-        public string LastName
+        public string LastName_Dad
         {
             get
             {
-                return lastName;
+                return lastName_Dad;
             }
 
             set
             {
-                lastName = value;
+                lastName_Dad = value;
             }
         }
-        public DateTime NgaySinh
+
+        public DateTime NgaySinh_Dad
         {
             get
             {
-                return ngaySinh;
+                return ngaySinh_Dad;
             }
 
             set
             {
-                ngaySinh = value;
+                ngaySinh_Dad = value;
             }
         }
 
-        public string NoiSinh
+        public string NoiSinh_Dad
         {
             get
             {
-                return noiSinh;
+                return noiSinh_Dad;
             }
 
             set
             {
-                noiSinh = value;
+                noiSinh_Dad = value;
             }
         }
 
-        public string SoCmnd
+        public string SoCmnd_Dad
         {
             get
             {
-                return soCmnd;
+                return soCmnd_Dad;
             }
 
             set
             {
-                soCmnd = value;
+                soCmnd_Dad = value;
             }
         }
 
-        public string NoiCap
+        public string NoiCap_Dad
         {
             get
             {
-                return noiCap;
+                return noiCap_Dad;
             }
 
             set
             {
-                noiCap = value;
+                noiCap_Dad = value;
             }
         }
 
-        public DateTime NgayCap
+        public DateTime NgayCap_Dad
         {
             get
             {
-                return ngayCap;
+                return ngayCap_Dad;
             }
 
             set
             {
-                ngayCap = value;
+                ngayCap_Dad = value;
             }
         }
 
-        public string SoDienThoai
+        public string SoDienThoai_Dad
         {
             get
             {
-                return soDienThoai;
+                return soDienThoai_Dad;
             }
 
             set
             {
-                soDienThoai = value;
+                soDienThoai_Dad = value;
             }
         }
 
-        
+        public string FirstName_Mom
+        {
+            get
+            {
+                return firstName_Mom;
+            }
+
+            set
+            {
+                firstName_Mom = value;
+            }
+        }
+
+        public string LastName_Mom
+        {
+            get
+            {
+                return lastName_Mom;
+            }
+
+            set
+            {
+                lastName_Mom = value;
+            }
+        }
+
+        public DateTime NgaySinh_Mom
+        {
+            get
+            {
+                return ngaySinh_Mom;
+            }
+
+            set
+            {
+                ngaySinh_Mom = value;
+            }
+        }
+
+        public string NoiSinh_Mom
+        {
+            get
+            {
+                return noiSinh_Mom;
+            }
+
+            set
+            {
+                noiSinh_Mom = value;
+            }
+        }
+
+        public string SoCmnd_Mom
+        {
+            get
+            {
+                return soCmnd_Mom;
+            }
+
+            set
+            {
+                soCmnd_Mom = value;
+            }
+        }
+
+        public string NoiCap_Mom
+        {
+            get
+            {
+                return noiCap_Mom;
+            }
+
+            set
+            {
+                noiCap_Mom = value;
+            }
+        }
+
+        public DateTime NgayCap_Mom
+        {
+            get
+            {
+                return ngayCap_Mom;
+            }
+
+            set
+            {
+                ngayCap_Mom = value;
+            }
+        }
+
+        public string SoDienThoai_Mom
+        {
+            get
+            {
+                return soDienThoai_Mom;
+            }
+
+            set
+            {
+                soDienThoai_Mom = value;
+            }
+        }
     }
 }

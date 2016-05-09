@@ -14,7 +14,7 @@
                 <i class="fa fa-angle-right"></i>
             </li>
             <li>
-                <a href="../kus_admin/TraCuuHoSo.aspx">Tra cứu hồ sơ</a>
+                <a href="../QuanLyHoSo/TraCuuHoSo.aspx">Tra cứu hồ sơ</a>
             </li>
         </ul>
     </div>
@@ -125,6 +125,9 @@
                         kết quả tìm thấy...)</span>
                 </div>
                 <div class="actions">
+                    <a id="btnViewInfor" title="Xem trong cửa sổ mới" onserverclick="btnViewInfor_ServerClick" runat="server">
+                        <i class="icon-screen-tablet"></i>
+                    </a>
                     <a id="btnViewProfile" href="#modalViewBagProfile" data-toggle="modal" title="Xem Hồ Sơ Lưu Trữ" runat="server">
                         <i class="glyphicon glyphicon-briefcase"></i>
                     </a>
@@ -143,12 +146,13 @@
                             <ItemTemplate>
                                 <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                                 <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
+                                <asp:Label ID="LBLBasicInfoCode" CssClass="display-none" runat="server" Text='<%# Eval("BasicInfoCode") %>'></asp:Label>
                             </ItemTemplate>
                             <ItemStyle Width="30px" />
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Mã Hồ Sơ">
                             <ItemTemplate>
-                                <asp:Label ID="Label13" runat="server" Text='<%# Eval("ProfileCode") %>'></asp:Label>
+                                <asp:Label ID="LBLProfileCode" runat="server" Text='<%# Eval("ProfileCode") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Họ Tên Khách Hàng">

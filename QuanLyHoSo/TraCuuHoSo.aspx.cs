@@ -35,6 +35,7 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
                 {
                     this.load_dlLoaiHoSo();
                     btnViewProfile.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
+                    btnViewInfor.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default disabled");
                 }
             }
         }
@@ -156,8 +157,18 @@ public partial class QuanLyHoSo_TraCuuHoSo : BasePage
     {
         bagprofile = new BagProfileBLL();
         btnViewProfile.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
+        btnViewInfor.Attributes.Add("class", "btn btn-circle btn-icon-only btn-default");
         int infoID = Convert.ToInt32((gwTraCuuHoSo.SelectedRow.FindControl("lblInfoID") as Label).Text);
         this.load_gwBagProfileManager(infoID);
         lblSumBagFile.Text = bagprofile.SumBAGProFile(infoID).ToString();
+    }
+
+    protected void btnViewInfor_ServerClick(object sender, EventArgs e)
+    {
+        string BasicInfoCode = (gwTraCuuHoSo.SelectedRow.FindControl("LBLBasicInfoCode") as Label).Text;
+        string url = "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + BasicInfoCode;
+        string s = "window.open('" + url + "', 'popup_window', 'width=1366,height=768,left=0,top=0,resizable=yes');";
+        //string s = "window.open(" + url + ", 'myWindow', 'width=1366, height=768,resizable=yes');";
+        ClientScript.RegisterStartupScript(this.GetType(), "script", s, true);
     }
 }

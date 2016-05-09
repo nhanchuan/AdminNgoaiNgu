@@ -453,25 +453,18 @@
                 <%-- End More Info --%>
             </div>
             <div class="col-lg-12">
-                <asp:UpdatePanel runat="server">
-                    <ContentTemplate>
-                        <div class="form-group">
-                            <label class="control-label bold"><span class="required">Số tiền Đặt cọc trước (VND): </span></label>
-                            <asp:TextBox ID="txtDatCoc" CssClass="form-control bold" AutoPostBack="true" OnTextChanged="txtDatCoc_TextChanged" ForeColor="Red" runat="server"></asp:TextBox>
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtDatCoc" ValidationGroup="validGhiDanhHV" ValidationExpression="^\d+$" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chỉ được nhập số !"></asp:RegularExpressionValidator>
-                            <asp:Label ID="lblValidDatCoc" ForeColor="Red" runat="server"></asp:Label>
-                        </div>
-                    </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="txtDatCoc" EventName="TextChanged" />
-                    </Triggers>
-                </asp:UpdatePanel>
+                <div class="form-group">
+                    <label class="control-label bold"><span class="required">Số tiền Đặt cọc trước (VND): </span></label>
+                    <asp:TextBox ID="txtDatCoc" CssClass="form-control bold" ForeColor="Red" runat="server"></asp:TextBox>
+                    <asp:RegularExpressionValidator ID="RegularExpressionValidator1" ControlToValidate="txtDatCoc" ValidationGroup="validGhiDanhHV" ValidationExpression="^\d+$" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chỉ được nhập số lớn hơn 0 !"></asp:RegularExpressionValidator>
+                    <asp:RangeValidator ID="RangeValidator1" ControlToValidate="txtDatCoc" ValidationGroup="validGhiDanhHV" MinimumValue="0" MaximumValue="100000000" Type="Integer" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Số tiền không được vượt quá 100.000.000"></asp:RangeValidator>
+                    <asp:Label ID="lblValidDatCoc" ForeColor="Red" runat="server"></asp:Label>
+                </div>
             </div>
             <div class="clearfix"></div>
             <div class="form-group">
                 <asp:Button ID="btnAddNewHV" CssClass="btn btn-primary" ValidationGroup="validGhiDanhHV" OnClick="btnAddNewHV_Click" runat="server" Text="LƯU THÔNG TIN" />
             </div>
-
         </div>
     </div>
     <div class="row" id="panelDaGhiDanh" runat="server">
@@ -507,5 +500,6 @@
             <asp:Button ID="btnGhiDanhAvailalble" CssClass="btn btn-primary" ValidationGroup="validGDHVAvailable" OnClick="btnGhiDanhAvailalble_Click" runat="server" Text="GHI DANH LỚP HỌC" />
         </div>
     </div>
+    <asp:Label ID="lblPageIsValid" ForeColor="Red" runat="server"></asp:Label>
 </asp:Content>
 
