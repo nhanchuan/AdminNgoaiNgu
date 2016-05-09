@@ -169,6 +169,7 @@
                                 <ItemTemplate>
                                     <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
                                     <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
+                                    <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
                                 </ItemTemplate>
                                 <ItemStyle Width="50px" />
                             </asp:TemplateField>
@@ -184,28 +185,25 @@
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Họ Tên Khách Hàng">
-                               
                                 <ItemTemplate>
-                                    <a style="font-size: 16px;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
-                                        <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
-                                    <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <a style="font-size: 16px; color:black;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
+                                                <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
+                                            <div class="clearfix"></div>
+                                            <%--<div class="col-md-2"></div>--%>
+                                            <div class="col-md-10" style="margin-left:30px;">
+                                            <i class="fa fa-clock-o"></i> Ngày sinh:
+                                            <asp:Label ID="lblBirthday" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label><br />
+                                            <i class="fa fa-star-o"></i> Giới tính:
+                                            <asp:Label ID="lblSex" runat="server" Text='<%# Bind("Sex") %>'></asp:Label><br />
+                                            <i class="fa fa-credit-card"></i> CMND:
+                                            <asp:Label ID="lblIdentityCard" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
+                                        </div>
+                                        </div>
+                                    </div>
                                 </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Ngày sinh">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Giới tính">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("Sex") %>'></asp:Label>
-                                </ItemTemplate>
-                                <ItemStyle Width="80px" />
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="CMND">
-                                <ItemTemplate>
-                                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
-                                </ItemTemplate>
+                                <ItemStyle Width="300px" />
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <HeaderTemplate>
@@ -224,6 +222,11 @@
                                     <div class="form-inline  pull-right">
                                         <i style="color: #d64d25;" class="icon-user-female"></i><i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
                                     </div>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Ghi chú hồ sơ">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblGhiChu" runat="server" Text='<%# Eval("GhiChu") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Làm Hồ Sơ">
