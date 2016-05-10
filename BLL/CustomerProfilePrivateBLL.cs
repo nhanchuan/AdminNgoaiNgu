@@ -411,89 +411,85 @@ namespace BLL
             return RC;
         }
         //=====GET GetThuLyHoSoPageWise===========================================================================================================================================
-        public DataTable GetThuLyHoSoPageWise(int PageIndex, int PageSize, int EmpId)
+        public DataTable GetThuLyHoSoPageWise(int PageIndex, int PageSize)
         {
-            string sql = "Exec GetThuLyHoSoPageWise @PageIndex,@PageSize,@EmpId";
+            string sql = "Exec GetThuLyHoSoPageWise @PageIndex,@PageSize";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
             SqlParameter pPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter pPageSize = new SqlParameter("PageSize", PageSize);
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
-            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pEmpId);
+            //SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize);
             this.DB.CloseConnection();
             return tb;
         }
-        public int CounThuLyHoSoPageWise(int EmpId)
+        public int CounThuLyHoSoPageWise()
         {
             int RC = 0;
-            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2 and cr.EmpFile=@EmpId";
+            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2";
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
-            RC = DB.GetValues(sql, pEmpId);
+            //SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
+            RC = DB.GetValues(sql);
             this.DB.CloseConnection();
             return RC;
         }
         //=======  GET GetThuLyHoSoTypePageWise=======================================================================================================
-        public DataTable GetThuLyHoSoTypePageWise(int PageIndex, int PageSize, int EmpId, int bagtype)
+        public DataTable GetThuLyHoSoTypePageWise(int PageIndex, int PageSize, int bagtype)
         {
-            string sql = "Exec GetThuLyHoSoTypePageWise @PageIndex,@PageSize,@EmpId,@bagtype";
+            string sql = "Exec GetThuLyHoSoTypePageWise @PageIndex,@PageSize,@bagtype";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
             SqlParameter pPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter pPageSize = new SqlParameter("PageSize", PageSize);
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
             SqlParameter pbagtype = new SqlParameter("bagtype", bagtype);
-            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pEmpId, pbagtype);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pbagtype);
             this.DB.CloseConnection();
             return tb;
         }
-        public int CounGetThuLyHoSoTypePageWise(int EmpId, int bagtype)
+        public int CounGetThuLyHoSoTypePageWise(int bagtype)
         {
             int RC = 0;
-            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2 and cr.EmpFile=@EmpId and cr.BagProfileTypeID=@bagtype";
+            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2 and cr.BagProfileTypeID=@bagtype";
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
             SqlParameter pbagtype = new SqlParameter("bagtype", bagtype);
-            RC = DB.GetValues(sql, pEmpId, pbagtype);
+            RC = DB.GetValues(sql, pbagtype);
             this.DB.CloseConnection();
             return RC;
         }
         //=======  GET GetSearchkeyThuLyHoSoPageWise=======================================================================================================
-        public DataTable GetSearchkeyThuLyHoSoPageWise(int PageIndex, int PageSize, int EmpId, string keysearch)
+        public DataTable GetSearchkeyThuLyHoSoPageWise(int PageIndex, int PageSize, string keysearch)
         {
-            string sql = "Exec GetSearchkeyThuLyHoSoPageWise @PageIndex,@PageSize,@EmpId,N'" + keysearch + "'";
+            string sql = "Exec GetSearchkeyThuLyHoSoPageWise @PageIndex,@PageSize,N'" + keysearch + "'";
             if (!this.DB.OpenConnection())
             {
                 return null;
             }
             SqlParameter pPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter pPageSize = new SqlParameter("PageSize", PageSize);
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
-            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pEmpId);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize);
             this.DB.CloseConnection();
             return tb;
         }
-        public int CounGetSearchkeyThuLyHoSoPageWise(int EmpId, string keysearch)
+        public int CounGetSearchkeyThuLyHoSoPageWise(string keysearch)
         {
             int RC = 0;
-            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2 and cr.EmpFile=@EmpId and (cb.LastName +' ' + cb.FirstName) like '%'+@keysearch+'%'";
+            string sql = "select COUNT(*) from CustomerBasicInfo cb join CustomerProfilePrivate cr on cb.InfoID=cr.InfoID where cr.ProfileStatus=2 and (cb.LastName +' ' + cb.FirstName) like '%'+@keysearch+'%'";
             if (!this.DB.OpenConnection())
             {
                 return 0;
             }
-            SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
             SqlParameter pkeysearch = new SqlParameter("keysearch", keysearch);
-            RC = DB.GetValues(sql, pEmpId, pkeysearch);
+            RC = DB.GetValues(sql, pkeysearch);
             this.DB.CloseConnection();
             return RC;
         }

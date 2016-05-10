@@ -46,7 +46,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                     this.Summary();
                     this.load_dlLoaiHoSo();
                     dlLoaiHoSo.Items.Insert(0, new ListItem("--  Loại hồ sơ --", "0"));
-                    this.GetCheckProfile_AdvisoryPageWise(1, EmployeeID(ac.UserID));
+                    this.GetCheckProfile_AdvisoryPageWise(1);
                     this.load_userprofile(ac.UserID);
                     rptPager.Visible = true;
                     RepeaterBagType.Visible = false;
@@ -99,12 +99,12 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         empId = (emp == null) ? 0 : emp.EmployeesID;
         return empId;
     }
-    private void GetCheckProfile_AdvisoryPageWise(int pageIndex, int EmpId)
+    private void GetCheckProfile_AdvisoryPageWise(int pageIndex)
     {
         customerProPri = new CustomerProfilePrivateBLL();
         int recordCount = 0;
-        gwThuLyHSManager.DataSource = customerProPri.GetThuLyHoSoPageWise(pageIndex, PageSize, EmpId);
-        recordCount = customerProPri.CounThuLyHoSoPageWise(EmpId);
+        gwThuLyHSManager.DataSource = customerProPri.GetThuLyHoSoPageWise(pageIndex, PageSize);
+        recordCount = customerProPri.CounThuLyHoSoPageWise();
         gwThuLyHSManager.DataBind();
         this.PopulatePager(recordCount, pageIndex);
     }
@@ -181,14 +181,14 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
         UserAccounts ac = Session.GetCurrentUser();
-        this.GetCheckProfile_AdvisoryPageWise(pageIndex, EmployeeID(ac.UserID));
+        this.GetCheckProfile_AdvisoryPageWise(pageIndex);
     }
-    private void GetThuLyHoSoTypePageWise(int pageIndex, int EmpId, int bagtype)
+    private void GetThuLyHoSoTypePageWise(int pageIndex, int bagtype)
     {
         customerProPri = new CustomerProfilePrivateBLL();
         int recordCount = 0;
-        gwThuLyHSManager.DataSource = customerProPri.GetThuLyHoSoTypePageWise(pageIndex, PageSize, EmpId, bagtype);
-        recordCount = customerProPri.CounGetThuLyHoSoTypePageWise(EmpId, bagtype);
+        gwThuLyHSManager.DataSource = customerProPri.GetThuLyHoSoTypePageWise(pageIndex, PageSize, bagtype);
+        recordCount = customerProPri.CounGetThuLyHoSoTypePageWise(bagtype);
         gwThuLyHSManager.DataBind();
         this.BagTypePopulatePager(recordCount, pageIndex);
     }
@@ -265,21 +265,21 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
         UserAccounts ac = Session.GetCurrentUser();
-        this.GetThuLyHoSoTypePageWise(pageIndex, EmployeeID(ac.UserID), Convert.ToInt32(dlLoaiHoSo.SelectedValue));
+        this.GetThuLyHoSoTypePageWise(pageIndex, Convert.ToInt32(dlLoaiHoSo.SelectedValue));
     }
     protected void dlLoaiHoSo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        this.GetThuLyHoSoTypePageWise(1, EmployeeID(Session.GetCurrentUser().UserID), Convert.ToInt32(dlLoaiHoSo.SelectedValue));
+        this.GetThuLyHoSoTypePageWise(1, Convert.ToInt32(dlLoaiHoSo.SelectedValue));
         rptPager.Visible = false;
         RepeaterKeySearch.Visible = false;
         RepeaterBagType.Visible = true;
     }
-    private void GetSearchkeyThuLyHoSoPageWise(int pageIndex, int EmpId, string keysearch)
+    private void GetSearchkeyThuLyHoSoPageWise(int pageIndex, string keysearch)
     {
         customerProPri = new CustomerProfilePrivateBLL();
         int recordCount = 0;
-        gwThuLyHSManager.DataSource = customerProPri.GetSearchkeyThuLyHoSoPageWise(pageIndex, PageSize, EmpId, keysearch);
-        recordCount = customerProPri.CounGetSearchkeyThuLyHoSoPageWise(EmpId, keysearch);
+        gwThuLyHSManager.DataSource = customerProPri.GetSearchkeyThuLyHoSoPageWise(pageIndex, PageSize, keysearch);
+        recordCount = customerProPri.CounGetSearchkeyThuLyHoSoPageWise(keysearch);
         gwThuLyHSManager.DataBind();
         this.KeyPopulatePager(recordCount, pageIndex);
     }
@@ -356,18 +356,18 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     {
         int pageIndex = int.Parse((sender as LinkButton).CommandArgument);
         UserAccounts ac = Session.GetCurrentUser();
-        this.GetSearchkeyThuLyHoSoPageWise(pageIndex, EmployeeID(ac.UserID), txtsearchAdv.Value);
+        this.GetSearchkeyThuLyHoSoPageWise(pageIndex, txtsearchAdv.Value);
     }
     protected void btnSearchKey_ServerClick(object sender, EventArgs e)
     {
-        this.GetSearchkeyThuLyHoSoPageWise(1, EmployeeID(Session.GetCurrentUser().UserID), txtsearchAdv.Value);
+        this.GetSearchkeyThuLyHoSoPageWise(1, txtsearchAdv.Value);
         rptPager.Visible = false;
         RepeaterBagType.Visible = false;
         RepeaterKeySearch.Visible = true;
     }
     protected void btnreload_Click(object sender, EventArgs e)
     {
-        this.GetCheckProfile_AdvisoryPageWise(1, EmployeeID(Session.GetCurrentUser().UserID));
+        this.GetCheckProfile_AdvisoryPageWise(1);
     }
     //======SUM============================================
     private string getday(string str)
@@ -384,7 +384,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     {
         customerProPri = new CustomerProfilePrivateBLL();
         UserAccounts ac = Session.GetCurrentUser();
-        lblTotalSum.Text = customerProPri.CounThuLyHoSoPageWise(EmployeeID(Session.GetCurrentUser().UserID)).ToString();
+        lblTotalSum.Text = customerProPri.CounThuLyHoSoPageWise().ToString();
         string date = DateTime.Now.ToString("dd/MM/yyyy");
         lblDaySum.Text = customerProPri.SumBagAsDAY(EmployeeID(Session.GetCurrentUser().UserID), getday(date)).ToString();
         lblMonthSum.Text = customerProPri.SumBagAsMONTH(EmployeeID(Session.GetCurrentUser().UserID), getmonth(date)).ToString();

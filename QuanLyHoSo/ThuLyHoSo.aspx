@@ -172,19 +172,10 @@
                         OnRowDataBound="gwThuLyHSManager_RowDataBound" 
                         OnRowDeleting="gwThuLyHSManager_RowDeleting">
                         <Columns>
-                            <asp:TemplateField ShowHeader="False">
+                            <asp:TemplateField HeaderText="No.">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
-                                    <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
-                                    <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
+                                    <asp:Label ID="lblRowNumber" runat="server" Text='<%# Eval("RowNumber") %>'></asp:Label>
                                 </ItemTemplate>
-                                <ItemStyle Width="50px" />
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
-                                </ItemTemplate>
-                                <ItemStyle Width="30px" />
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Mã Hồ Sơ">
                                 <ItemTemplate>
@@ -215,6 +206,7 @@
                             <asp:TemplateField>
                                 <HeaderTemplate>
                                     <i class="fa fa-graduation-cap"></i>School
+                               
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <%--<asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>--%>
@@ -229,12 +221,18 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Ghi Chú Tiến Trình">
                                 <ItemTemplate>
-
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Thông Tin Thêm (Ghi chú)">
                                 <ItemTemplate>
                                     <asp:Label ID="lblGhiChu" runat="server" Text='<%# Eval("GhiChu") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Thụ lý hồ sơ">
+                                <ItemTemplate>
+                                    <div class="form-inline  pull-right">
+                                        <i style="color: #d64d25;" class="fa fa-user"></i>&nbsp<i><%# Eval("TenNVHoSo")+" - Mã NV: "+ Eval("MaNVHoSo") %></i>
+                                    </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Phiếu tư vấn">
@@ -244,11 +242,11 @@
                                             <asp:Label ID="Label5" runat="server" Text='<%# Bind("TypeName") %>'></asp:Label></strong></span>
                                     <br />
                                     <div class="form-inline  pull-right">
-                                        <i style="color: #d64d25;" class="icon-user-female"></i><i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
+                                        <i style="color: #d64d25;" class="icon-user-female"></i>&nbsp<i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Làm Hồ Sơ">
+                            <asp:TemplateField HeaderText="Loại Hồ Sơ">
                                 <ItemTemplate>
                                     <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":Eval("BagProfileTypeID").ToString()=="4"?"Định Cư":"" %>'></asp:Label>
@@ -259,6 +257,20 @@
                                 <ItemTemplate>
                                     <i class='<%# Eval("NumBagProfile").ToString()=="0"?"glyphicon glyphicon-folder-close":"glyphicon glyphicon-folder-open" %>'></i></a>
                                 </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                </ItemTemplate>
+                                <ItemStyle Width="30px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField ShowHeader="False">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
+                                    <asp:Label ID="lblInfoID" CssClass="display-none" runat="server" Text='<%# Eval("InfoID") %>'></asp:Label>
+                                    <asp:Label ID="lblProfileID" CssClass="display-none" runat="server" Text='<%# Bind("ProfileID") %>'></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="50px" />
                             </asp:TemplateField>
                         </Columns>
                         <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
@@ -644,6 +656,3 @@
             });
         </script>
 </asp:Content>
-
-
-

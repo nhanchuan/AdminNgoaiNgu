@@ -105,3 +105,4 @@ E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\DAL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\DAL\obj\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\DAL\obj\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+D:\DEVELOPER\WEBSITE\GitHub\GitHub\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
