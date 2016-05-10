@@ -145,3 +145,10 @@ E:\DEVELOPER\Website\GitHub\GitMain\AdminNgoaiNgu\BLL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\GitMain\AdminNgoaiNgu\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
 E:\DEVELOPER\Website\GitHub\GitMain\AdminNgoaiNgu\BLL\obj\Debug\BLL.dll
 E:\DEVELOPER\Website\GitHub\GitMain\AdminNgoaiNgu\BLL\obj\Debug\BLL.pdb
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\bin\Debug\BLL.dll
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\bin\Debug\BLL.pdb
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\bin\Debug\DAL.dll
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\bin\Debug\DAL.pdb
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\obj\Debug\BLL.dll
+E:\DEVELOPER\Website\GitHub\GG\AdminNgoaiNgu\BLL\obj\Debug\BLL.pdb

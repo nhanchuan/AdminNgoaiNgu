@@ -147,7 +147,8 @@
                                     <input id="txtsearchAdv" class="form-control" type="text" placeholder="Tìm kiếm hồ sơ" runat="server" />
                                 </div>
                                 <span class="input-group-btn">
-                                    <button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Search</button>
+                                    <%--<button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Search</button>--%>
+                                    <asp:Button ID="btnSearchKey" CssClass="btn btn-success" runat="server" OnClick="btnSearchKey_ServerClick" Text="Search" />
                                     <%--<a style="margin-left: 5px;" class="btn btn-info" data-toggle="modal" href="#modalSeaarch">Search more</a>--%>
                                 </span>
                             </div>
@@ -188,18 +189,18 @@
                                 <ItemTemplate>
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <a style="font-size: 16px; color:black;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
+                                            <a style="font-size: 16px; color: black;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
                                                 <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
                                             <div class="clearfix"></div>
                                             <%--<div class="col-md-2"></div>--%>
-                                            <div class="col-md-10" style="margin-left:30px;">
-                                            <i class="fa fa-clock-o"></i> Ngày sinh:
+                                            <div class="col-md-10" style="margin-left: 10px;">
+                                                <i class="fa fa-clock-o"></i>Ngày sinh:
                                             <asp:Label ID="lblBirthday" runat="server" Text='<%# Bind("Birthday","{0:dd/MM/yyyy}") %>'></asp:Label><br />
-                                            <i class="fa fa-star-o"></i> Giới tính:
+                                                <i class="fa fa-star-o"></i>Giới tính:
                                             <asp:Label ID="lblSex" runat="server" Text='<%# Bind("Sex") %>'></asp:Label><br />
-                                            <i class="fa fa-credit-card"></i> CMND:
+                                                <i class="fa fa-credit-card"></i>CMND:
                                             <asp:Label ID="lblIdentityCard" runat="server" Text='<%# Bind("IdentityCard") %>'></asp:Label>
-                                        </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </ItemTemplate>
@@ -210,7 +211,14 @@
                                     <i class="fa fa-graduation-cap"></i>School
                                 </HeaderTemplate>
                                 <ItemTemplate>
-                                    <asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>
+                                    <%--<asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>--%>
+                                    <asp:Label ID="lblSchoolName" CssClass="bold uppercase" runat="server" Text='<%# Bind("SchoolName") %>'></asp:Label>
+                                    <div class="col-md-12">
+                                        <i class="fa fa-building"></i>
+                                        <asp:Label ID="lblSchoolAddress" runat="server" Text='<%# Bind("SchoolAddress") %>'></asp:Label><br />
+                                        <i class="fa fa-phone"></i>
+                                        <asp:Label ID="lblSchoolPhone" runat="server" Text='<%# Bind("SchoolPhone") %>'></asp:Label>
+                                    </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Phiếu tư vấn">
@@ -232,7 +240,7 @@
                             <asp:TemplateField HeaderText="Làm Hồ Sơ">
                                 <ItemTemplate>
                                     <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
-                                        <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":"Định Cư" %>'></asp:Label>
+                                        <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":Eval("BagProfileTypeID").ToString()=="4"?"Định Cư":"" %>'></asp:Label>
                                     </li>
                                 </ItemTemplate>
                             </asp:TemplateField>

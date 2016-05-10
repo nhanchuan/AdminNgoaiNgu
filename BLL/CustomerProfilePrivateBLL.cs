@@ -471,7 +471,7 @@ namespace BLL
         //=======  GET GetSearchkeyThuLyHoSoPageWise=======================================================================================================
         public DataTable GetSearchkeyThuLyHoSoPageWise(int PageIndex, int PageSize, int EmpId, string keysearch)
         {
-            string sql = "Exec GetSearchkeyThuLyHoSoPageWise @PageIndex,@PageSize,@EmpId,@keysearch";
+            string sql = "Exec GetSearchkeyThuLyHoSoPageWise @PageIndex,@PageSize,@EmpId,N'" + keysearch + "'";
             if (!this.DB.OpenConnection())
             {
                 return null;
@@ -479,8 +479,7 @@ namespace BLL
             SqlParameter pPageIndex = new SqlParameter("PageIndex", PageIndex);
             SqlParameter pPageSize = new SqlParameter("PageSize", PageSize);
             SqlParameter pEmpId = new SqlParameter("EmpId", EmpId);
-            SqlParameter pkeysearch = new SqlParameter("keysearch", keysearch);
-            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pEmpId, pkeysearch);
+            DataTable tb = DB.DAtable(sql, pPageIndex, pPageSize, pEmpId);
             this.DB.CloseConnection();
             return tb;
         }
