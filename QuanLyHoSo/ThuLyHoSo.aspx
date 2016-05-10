@@ -160,7 +160,8 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks"> Ghi Chú Tiến Trình Hồ Sơ</i></a>
+                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks"> Ghi Chú Tiến Trình</i></a>
+                                <a class="btn btn-danger" href="#modalWriteNote" data-toggle="modal"><i class="fa fa-edit  "></i></a>
                             </div>
                         </div>
                     </div>
@@ -500,7 +501,23 @@
         </div>
     </div>
     <%--End Modal Tiến Trình Hồ Sơ --%>
-
+    <%-- Modal Tiến Trình Hồ Sơ --%>
+    <div class="modal fade" id="modalWriteNote" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title uppercase">
+                        <i class="fa fa-edit"></i>
+                        Ghi Chú Hồ Sơ
+                    </h4>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--End Modal Tiến Trình Hồ Sơ --%>
 
     <script>
         function reloadclick() {
