@@ -140,31 +140,37 @@
                             </div>
                             <asp:Label ID="lblActionsMessage" ForeColor="Red" runat="server"></asp:Label>
                         </div>
-                        <div class="col-lg-5">
+                        <div class="col-lg-4">
                             <div class="input-group">
                                 <div class="input-icon">
                                     <i class="fa fa-search"></i>
                                     <input id="txtsearchAdv" class="form-control" type="text" placeholder="Tìm kiếm hồ sơ" runat="server" />
                                 </div>
                                 <span class="input-group-btn">
-                                    <%--<button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Search</button>--%>
-                                    <asp:Button ID="btnSearchKey" CssClass="btn btn-success" runat="server" OnClick="btnSearchKey_ServerClick" Text="Search" />
-                                    <%--<a style="margin-left: 5px;" class="btn btn-info" data-toggle="modal" href="#modalSeaarch">Search more</a>--%>
+                                    <button id="btnSearchKey" class="btn btn-success" type="button" onserverclick="btnSearchKey_ServerClick" runat="server"><i class="fa fa-arrow-left fa-fw"></i>Search</button>
                                 </span>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-2">
                             <div class="input-icon">
                                 <i class="fa fa-filter"></i>
                                 <asp:DropDownList ID="dlLoaiHoSo" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="dlLoaiHoSo_SelectedIndexChanged" runat="server">
                                 </asp:DropDownList>
                             </div>
                         </div>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks"> Ghi Chú Tiến Trình Hồ Sơ</i></a>
+                            </div>
+                        </div>
                     </div>
                     <br />
                     <%-- Begin content --%>
                     <asp:GridView ID="gwThuLyHSManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged" OnRowDataBound="gwThuLyHSManager_RowDataBound" OnRowDeleting="gwThuLyHSManager_RowDeleting">
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
+                        OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged" 
+                        OnRowDataBound="gwThuLyHSManager_RowDataBound" 
+                        OnRowDeleting="gwThuLyHSManager_RowDeleting">
                         <Columns>
                             <asp:TemplateField ShowHeader="False">
                                 <ItemTemplate>
@@ -221,6 +227,16 @@
                                     </div>
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Ghi Chú Tiến Trình">
+                                <ItemTemplate>
+
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Thông Tin Thêm (Ghi chú)">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblGhiChu" runat="server" Text='<%# Eval("GhiChu") %>'></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="Phiếu tư vấn">
                                 <ItemTemplate>
                                     <span class='<%# Eval("TypeName").ToString() == "Tư Vấn Du Học" ? "label label-primary" : Eval("TypeName").ToString() == "Tư Vấn Thực Tập" ? "label label-default" : Eval("TypeName").ToString() == "Tư Vấn Du Lịch" ? "label label-success" :"label label-warning" %>'>
@@ -230,11 +246,6 @@
                                     <div class="form-inline  pull-right">
                                         <i style="color: #d64d25;" class="icon-user-female"></i><i><%# Eval("EmpName")+" - Mã NV: "+ Eval("EmployeesCode") %></i>
                                     </div>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Ghi chú hồ sơ">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblGhiChu" runat="server" Text='<%# Eval("GhiChu") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Làm Hồ Sơ">
@@ -460,6 +471,25 @@
         </div>
     </div>
     <%--End Modal Search --%>
+    <%-- Modal Tiến Trình Hồ Sơ --%>
+    <div class="modal fade" id="modalTienTrinhHoSo" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title uppercase">
+                        <i class="fa fa-tasks"></i>
+                        Chọn Tiến Trình Hồ Sơ
+                    </h4>
+                </div>
+                <div class="modal-body background">
+                </div>
+            </div>
+        </div>
+    </div>
+    <%--End Modal Tiến Trình Hồ Sơ --%>
+
+
     <script>
         function reloadclick() {
             window.location.reload();

@@ -20,7 +20,7 @@ using System.Text;
 public class BasePage : System.Web.UI.Page
 {
     SecuriryServices services;
-    
+    UserPermissBLL userpermiss;
     public BasePage()
     {
         //
@@ -98,6 +98,15 @@ public class BasePage : System.Web.UI.Page
         services = new SecuriryServices();
         bool checkp = services.Check_PermissionFunct(uid, FCode);
         return checkp;
+    }
+    //Kiểm tra quyền
+    public bool HasPermission(int uid, string Fcode, TypeAudit audit)
+    {
+        services = new SecuriryServices();
+        userpermiss = new UserPermissBLL();
+        List<UserPermiss> lstP = userpermiss.lstPermissWithCode(uid, Fcode);
+        UserPermiss up = lstP.FirstOrDefault();
+        return services.HasPermission(audit, up.PermisstionNumber);
     }
     // LOAD DROPDOWNLIST()
     public void load_DropdownList(DropDownList dl, Object obj, string textfield, string valuefield)

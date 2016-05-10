@@ -86,27 +86,42 @@ public partial class Pages_NewUser : BasePage
     }
     protected void btnNewUser_Click(object sender, EventArgs e)
     {
-        useraccount = new UserAccountsBLL();
-        userprofile = new UserProfileBLL();
-        employees = new EmployeesBLL();
-        string username = txtUsername.Text;
-        string email = txtEmail.Text;
-        string Fname = txtFirstname.Text;
-        string Lname = txtLastname.Text;
-        int Dep = Convert.ToInt32(dlDepartments.SelectedValue);
-        string passwords = txtPrePassword.Text;
-
-        bool bol1 = this.useraccount.NewAccount(username, email, CreateSHAHash(passwords, SaltPassword()));
-        bool bol2 = this.userprofile.CreateUserProfile(useraccount.GetUIDWithName(username), Fname, Lname, 1);
-        bool bol3 = this.employees.createEmployee(userprofile.getProfileID(useraccount.GetUIDWithName(username)), Dep);
-
-        if (bol1 || bol2 || bol3)
+        try
         {
-            Response.Redirect("http://" + Request.Url.Authority + "/Pages/Users.aspx");
+            bool result = HasPermission(Session.GetCurrentUser().UserID, FunctionName.NewUser, TypeAudit.AddNew);
+            if (result == false)
+            {
+                lblPageValid.Text = "Bạn không có quyền thực hiện chức năng này !";
+            }
+            else
+            {
+                useraccount = new UserAccountsBLL();
+                userprofile = new UserProfileBLL();
+                employees = new EmployeesBLL();
+                string username = txtUsername.Text;
+                string email = txtEmail.Text;
+                string Fname = txtFirstname.Text;
+                string Lname = txtLastname.Text;
+                int Dep = Convert.ToInt32(dlDepartments.SelectedValue);
+                string passwords = txtPrePassword.Text;
+
+                bool bol1 = this.useraccount.NewAccount(username, email, CreateSHAHash(passwords, SaltPassword()));
+                bool bol2 = this.userprofile.CreateUserProfile(useraccount.GetUIDWithName(username), Fname, Lname, 1);
+                bool bol3 = this.employees.createEmployee(userprofile.getProfileID(useraccount.GetUIDWithName(username)), Dep);
+
+                if (bol1 || bol2 || bol3)
+                {
+                    Response.Redirect("http://" + Request.Url.Authority + "/Pages/Users.aspx");
+                }
+                else
+                {
+                    Response.Write("<script>alert('Thêm người dùng thất bại. Lỗi kết nối CSDL !')</script>");
+                }
+            }
         }
-        else
+        catch(Exception ex)
         {
-            Response.Write("<script>alert('Thêm người dùng thất bại. Lỗi kết nối CSDL !')</script>");
+            lblPageValid.Text = ex.ToString();
         }
     }
 }

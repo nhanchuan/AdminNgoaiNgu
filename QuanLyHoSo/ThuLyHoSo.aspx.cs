@@ -42,6 +42,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                 }
                 else
                 {
+                    btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning disabled");
                     this.Summary();
                     this.load_dlLoaiHoSo();
                     dlLoaiHoSo.Items.Insert(0, new ListItem("--  Loại hồ sơ --", "0"));
@@ -395,6 +396,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         List<CustomerProfilePrivate> lstPr = customerProPri.GetCustomerProfilePrivateWithProfileID(profileId);
         CustomerProfilePrivate cuspro = lstPr.FirstOrDefault();
         btnHSChonTruong.Attributes.Add("class", (cuspro.BagProfileTypeID == 1) ? "btn btn-success": "btn btn-success disabled");
+        btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning");
     }
     protected void btnAction_ServerClick(object sender, EventArgs e)
     {

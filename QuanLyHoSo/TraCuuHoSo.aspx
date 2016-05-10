@@ -200,7 +200,7 @@
                                 <asp:Label ID="lblCellPhone" runat="server" Text='<%# Bind("CellPhone") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Ghi Chú Hồ Sơ">
+                        <asp:TemplateField HeaderText="Thông Tin Thêm (Ghi chú)">
                             <ItemTemplate>
                                 <asp:Label ID="lblGhiChu" runat="server" Text='<%# Bind("GhiChu") %>'></asp:Label>
                             </ItemTemplate>

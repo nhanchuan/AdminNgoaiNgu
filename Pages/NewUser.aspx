@@ -134,6 +134,7 @@
                     <div class="form-group">
                         <asp:Button ID="btnNewUser" CssClass="btn btn-primary" ValidationGroup="validNewUser" OnClick="btnNewUser_Click" runat="server" Text="Thêm Người Dùng Mới" />
                     </div>
+                    <asp:Label ID="lblPageValid" ForeColor="Red" runat="server"></asp:Label>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="txtUsername" EventName="TextChanged" />
@@ -143,5 +144,6 @@
         </div>
         <div class="col-lg-7"></div>
     </div>
+    
 </asp:Content>
 
