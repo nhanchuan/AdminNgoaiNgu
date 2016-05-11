@@ -13,6 +13,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
 {
     CustomerProfilePrivateBLL customerProPri;
     CustomerBasicInfoBLL customerBsInfo;
+    CustomerProfileWriteNoteBLL customerProfileWriteNote;
     UserProfileBLL userprofile;
     EmployeesBLL employees;
     BagProfileBLL bagprofile;
@@ -43,6 +44,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
                 else
                 {
                     btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning disabled");
+                    btnWriteNote.Attributes.Add("class", "btn btn-danger disabled");
                     this.Summary();
                     this.load_dlLoaiHoSo();
                     dlLoaiHoSo.Items.Insert(0, new ListItem("--  Loại hồ sơ --", "0"));
@@ -396,6 +398,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         List<CustomerProfilePrivate> lstPr = customerProPri.GetCustomerProfilePrivateWithProfileID(profileId);
         CustomerProfilePrivate cuspro = lstPr.FirstOrDefault();
         btnHSChonTruong.Attributes.Add("class", (cuspro.BagProfileTypeID == 1) ? "btn btn-success": "btn btn-success disabled");
+        btnWriteNote.Attributes.Add("class", "btn btn-danger");
         btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning");
     }
     protected void btnAction_ServerClick(object sender, EventArgs e)
@@ -727,5 +730,29 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
             Response.Redirect("<script>alert('" + ex.ToString() + "')</script>");
         }
         
+    }
+
+    protected void btnSaveWriteNote_ServerClick(object sender, EventArgs e)
+    {
+
+        try
+        {
+            customerProfileWriteNote = new CustomerProfileWriteNoteBLL();
+            int profileId = Convert.ToInt32((gwThuLyHSManager.SelectedRow.FindControl("lblProfileID") as Label).Text);
+            string title = txtWriteNoteTitle.Text;
+            string notecontent = EditorWriteNote.Content;
+            if (customerProfileWriteNote.NewCPWriteNote(Session.GetCurrentUser().UserID, profileId, title, notecontent))
+            {
+                Response.Redirect(Request.Url.AbsoluteUri);
+            }
+            else
+            {
+                lblWriteNoteValid.Text = "Update fales !";
+            }
+        }
+        catch (Exception ex)
+        {
+            lblWriteNoteValid.Text = ex.ToString();
+        }
     }
 }

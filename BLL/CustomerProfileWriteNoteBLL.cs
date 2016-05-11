@@ -37,5 +37,21 @@ namespace BLL
             this.dt.CloseConnection();
             return lst;
         }
+        //New
+        public Boolean NewCPWriteNote(int UserID, int ProfileID, string NoteTitle, string NoteContents)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "Exec NewCPWriteNote @UserID,@ProfileID,@NoteTitle,@NoteContents";
+            SqlParameter pUserID =(UserID==0)? new SqlParameter("@UserID", DBNull.Value):new SqlParameter("@UserID", UserID);
+            SqlParameter pProfileID =(ProfileID==0)? new SqlParameter("@ProfileID", DBNull.Value):new SqlParameter("@ProfileID", ProfileID);
+            SqlParameter pNoteTitle =(NoteTitle=="")? new SqlParameter("@NoteTitle", DBNull.Value):new SqlParameter("@NoteTitle", NoteTitle);
+            SqlParameter pNoteContents = (NoteContents == "") ? new SqlParameter("@NoteContents", DBNull.Value) : new SqlParameter("@NoteContents", NoteContents);
+            this.dt.Updatedata(sql, pUserID, pProfileID, pNoteTitle, pNoteContents);
+            this.dt.CloseConnection();
+            return true;
+        }
     }
 }
