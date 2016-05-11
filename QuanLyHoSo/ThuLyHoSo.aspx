@@ -162,7 +162,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks"> Ghi Chú Tiến Trình</i></a>
+                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks">Ghi Chú Tiến Trình</i></a>
                                 <a href="#modalWriteNote" data-toggle="modal" id="btnWriteNote" runat="server"><i class="fa fa-edit  "></i></a>
                             </div>
                         </div>
@@ -170,9 +170,9 @@
                     <br />
                     <%-- Begin content --%>
                     <asp:GridView ID="gwThuLyHSManager" CssClass="table table-condensed" runat="server" AutoGenerateColumns="False" RowStyle-BackColor="#A1DCF2" Font-Names="Arial" Font-Size="10pt"
-                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White" 
-                        OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged" 
-                        OnRowDataBound="gwThuLyHSManager_RowDataBound" 
+                        HeaderStyle-BackColor="#3AC0F2" HeaderStyle-ForeColor="White"
+                        OnSelectedIndexChanged="gwThuLyHSManager_SelectedIndexChanged"
+                        OnRowDataBound="gwThuLyHSManager_RowDataBound"
                         OnRowDeleting="gwThuLyHSManager_RowDeleting">
                         <Columns>
                             <asp:TemplateField HeaderText="No.">
@@ -334,7 +334,7 @@
     <a id="btnHSChonTruong" class="btn btn-success disabled" href="#modalChangeSchool" data-toggle="modal" runat="server">
         <img src="../images/icon/Categories-applications-education-university-icon.png" width="30" height="30" />
         CHỌN TRƯỜNG CHO HỒ SƠ DU HỌC</a>
-   <%-- <a class="btn btn-success disabled">
+    <%-- <a class="btn btn-success disabled">
         <img src="../images/icon/Other-Power-Switch-User-Metro-icon.png" width="30" height="30" />
         CHUYỂN TRƯỜNG CHO HỒ SƠ DU HỌC</a>--%>
     <div class="clearfix"></div>
@@ -432,6 +432,7 @@
                                             <asp:TemplateField HeaderText="Cấp bậc">
                                                 <HeaderTemplate>
                                                     Cấp bậc:
+                                                   
                                                     <asp:DropDownList ID="dlSchoolLvl" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlSchoolLvl_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
@@ -447,6 +448,7 @@
                                             <asp:TemplateField HeaderText="Quốc Gia">
                                                 <HeaderTemplate>
                                                     Quốc Gia:
+                                                   
                                                     <asp:DropDownList ID="dlFilterCountry" CssClass="text-info" AppendDataBoundItems="true" AutoPostBack="true" OnSelectedIndexChanged="dlFilterCountry_SelectedIndexChanged" runat="server">
                                                     </asp:DropDownList>
                                                 </HeaderTemplate>
@@ -503,7 +505,7 @@
         </div>
     </div>
     <%--End Modal Tiến Trình Hồ Sơ --%>
-    <%-- Modal Tiến Trình Hồ Sơ --%>
+    <%-- Modal Ghi chú Hồ Sơ --%>
     <div class="modal fade" id="modalWriteNote" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -515,33 +517,58 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <asp:Label ID="lblWriteNoteValid" ForeColor="Red" runat="server"></asp:Label>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <asp:GridView ID="gwThu2Sang" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server">
-                                <Columns>
-                                    <asp:TemplateField ShowHeader="False">
-                                        <ItemTemplate>
-                                            <asp:LinkButton ID="lkSelect" runat="server" CausesValidation="False" CommandName="Select" Text="Select"></asp:LinkButton>
-                                        </ItemTemplate>
-                                        <ItemStyle Width="50px" />
-                                    </asp:TemplateField>
-                                </Columns>
-                                <RowStyle BackColor="#FAF3DF"></RowStyle>
-                            </asp:GridView>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="form-group">
-                                <label class="control-label">Tiêu đề</label>
-                                <asp:TextBox ID="txtWriteNoteTitle" CssClass="form-control" runat="server"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtWriteNoteTitle" ValidationGroup="validNewWriteNote" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chưa nhập tiêu đề !"></asp:RequiredFieldValidator>
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="lblWriteNoteValid" ForeColor="Red" runat="server"></asp:Label>
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <asp:GridView ID="gwWriteNote" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server" 
+                                        OnRowDataBound="gwWriteNote_RowDataBound" OnRowDeleting="gwWriteNote_RowDeleting">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="linkBtnDel" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                                    <asp:Label ID="lblWriteNoteID" CssClass="display-none" runat="server" Text='<%# Eval("WriteNoteID") %>'></asp:Label>
+                                                </ItemTemplate>
+                                                <ItemStyle Width="30px" />
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <div class="row">
+                                                        <asp:Label ID="lblNoteTitle" CssClass="uppercase bold" runat="server" Text='<%# Eval("NoteTitle") %>'></asp:Label>
+                                                        <div class="col-lg-12">
+                                                            <asp:Label ID="lblNoteContents" runat="server" Text='<%# Eval("NoteContents") %>'></asp:Label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-10">
+                                                            <i class="fa fa-user"></i>
+                                                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("LastName")+" "+Eval("FirstName")+" - "+Eval("EmployeesCode") %>'></asp:Label><br />
+                                                            <i class="fa fa-clock-o"></i>
+                                                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("DateOfCreate") %>'></asp:Label>
+                                                        </div>
+                                                    </div>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <RowStyle BackColor="#FAF3DF"></RowStyle>
+                                    </asp:GridView>
+                                </div>
+                                <div class="col-md-7">
+                                    <div class="form-group">
+                                        <label class="control-label">Tiêu đề</label>
+                                        <asp:TextBox ID="txtWriteNoteTitle" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" ControlToValidate="txtWriteNoteTitle" ValidationGroup="validNewWriteNote" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Chưa nhập tiêu đề !"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn green" id="btnSaveWriteNote" onserverclick="btnSaveWriteNote_ServerClick" validationgroup="validNewWriteNote" runat="server"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp Lưu ghi chép</a>
+                                    </div>
+                                    <cc1:Editor ID="EditorWriteNote" runat="server" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <a class="btn green" id="btnSaveWriteNote" onserverclick="btnSaveWriteNote_ServerClick" ValidationGroup="validNewWriteNote" runat="server"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp Lưu ghi chép</a>
-                            </div>
-                            <cc1:Editor ID="EditorWriteNote" runat="server" />
-                        </div>
-                    </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>
@@ -609,14 +636,14 @@
             }, {
                 "country": "Thụy Sỹ",
                 "visits": document.getElementById('<%=HiddenField5.ClientID %>').value,
-                    "color": "#FF6600"
-                }, {
-                    "country": "Singapore",
-                    "visits": document.getElementById('<%=HiddenField6.ClientID %>').value,
-                    "color": "#0D8ECF"
-                }, {
-                    "country": "New Zealand",
-                    "visits": document.getElementById('<%=HiddenField7.ClientID %>').value,
+                "color": "#FF6600"
+            }, {
+                "country": "Singapore",
+                "visits": document.getElementById('<%=HiddenField6.ClientID %>').value,
+                "color": "#0D8ECF"
+            }, {
+                "country": "New Zealand",
+                "visits": document.getElementById('<%=HiddenField7.ClientID %>').value,
                     "color": "#04D215"
                 }, {
                     "country": "Taiwan",

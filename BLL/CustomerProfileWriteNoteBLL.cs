@@ -37,6 +37,26 @@ namespace BLL
             this.dt.CloseConnection();
             return lst;
         }
+        public DataTable TBWriteNote(int ProfileID)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return null;
+            }
+            string sql = "select note.WriteNoteID, note.UserID, note.ProfileID, note.NoteTitle, note.NoteContents, note.DateOfCreate, pro.LastName, pro.FirstName, emp.EmployeesCode";
+            sql += " ";
+            sql += "from CustomerProfileWriteNote note full outer join UserAccounts acc on note.UserID=acc.UserID";
+            sql += " ";
+            sql += "full outer join UserProfile pro on acc.UserID=pro.UserID";
+            sql += " ";
+            sql += "full outer join Employees emp on pro.ProfileID=emp.ProfileID";
+            sql += " ";
+            sql += "where WriteNoteID is not null and note.ProfileID=@ProfileID";
+            SqlParameter pProfileID = new SqlParameter("@ProfileID", ProfileID);
+            DataTable tb = dt.DAtable(sql, pProfileID);
+            this.dt.CloseConnection();
+            return tb;
+        }
         //New
         public Boolean NewCPWriteNote(int UserID, int ProfileID, string NoteTitle, string NoteContents)
         {
@@ -50,6 +70,19 @@ namespace BLL
             SqlParameter pNoteTitle =(NoteTitle=="")? new SqlParameter("@NoteTitle", DBNull.Value):new SqlParameter("@NoteTitle", NoteTitle);
             SqlParameter pNoteContents = (NoteContents == "") ? new SqlParameter("@NoteContents", DBNull.Value) : new SqlParameter("@NoteContents", NoteContents);
             this.dt.Updatedata(sql, pUserID, pProfileID, pNoteTitle, pNoteContents);
+            this.dt.CloseConnection();
+            return true;
+        }
+        //Delete 
+        public Boolean DeleteProfileWriteNote(int WriteNoteID)
+        {
+            if (!this.dt.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "delete from CustomerProfileWriteNote where WriteNoteID=@WriteNoteID";
+            SqlParameter pWriteNoteID = new SqlParameter("@WriteNoteID", WriteNoteID);
+            this.dt.Updatedata(sql, pWriteNoteID);
             this.dt.CloseConnection();
             return true;
         }

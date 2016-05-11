@@ -400,6 +400,9 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         btnHSChonTruong.Attributes.Add("class", (cuspro.BagProfileTypeID == 1) ? "btn btn-success": "btn btn-success disabled");
         btnWriteNote.Attributes.Add("class", "btn btn-danger");
         btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning");
+        this.load_gwWriteNote(profileId);
+        txtWriteNoteTitle.Text = "";
+        EditorWriteNote.Content = "";
     }
     protected void btnAction_ServerClick(object sender, EventArgs e)
     {
@@ -731,7 +734,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         }
         
     }
-
+    //WRITE NOTE PROFILE 
     protected void btnSaveWriteNote_ServerClick(object sender, EventArgs e)
     {
 
@@ -743,7 +746,8 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
             string notecontent = EditorWriteNote.Content;
             if (customerProfileWriteNote.NewCPWriteNote(Session.GetCurrentUser().UserID, profileId, title, notecontent))
             {
-                Response.Redirect(Request.Url.AbsoluteUri);
+                //Response.Redirect(Request.Url.AbsoluteUri);
+                this.load_gwWriteNote(profileId);
             }
             else
             {
@@ -751,6 +755,51 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
             }
         }
         catch (Exception ex)
+        {
+            lblWriteNoteValid.Text = ex.ToString();
+        }
+    }
+    private void load_gwWriteNote(int profileId)
+    {
+        customerProfileWriteNote = new CustomerProfileWriteNoteBLL();
+        gwWriteNote.DataSource = customerProfileWriteNote.TBWriteNote(profileId);
+        gwWriteNote.DataBind();
+    }
+
+    protected void gwWriteNote_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDel") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwWriteNote_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        
+        try
+        {
+            customerProfileWriteNote = new CustomerProfileWriteNoteBLL();
+            int WriteNoteID = Convert.ToInt32((gwWriteNote.Rows[e.RowIndex].FindControl("lblWriteNoteID") as Label).Text);
+            if (customerProfileWriteNote.DeleteProfileWriteNote(WriteNoteID))
+            {
+                int profileId = Convert.ToInt32((gwThuLyHSManager.SelectedRow.FindControl("lblProfileID") as Label).Text);
+                this.load_gwWriteNote(profileId);
+            }
+            else
+            {
+                lblWriteNoteValid.Text = "Delete fales !";
+            }
+        }
+        catch(Exception ex)
         {
             lblWriteNoteValid.Text = ex.ToString();
         }

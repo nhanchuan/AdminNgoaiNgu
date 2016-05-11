@@ -110,3 +110,7 @@ E:\DEVELOPER\Website\GitHub\GTAV\DAL\bin\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\GTAV\DAL\bin\Debug\DAL.pdb
 E:\DEVELOPER\Website\GitHub\GTAV\DAL\obj\Debug\DAL.dll
 E:\DEVELOPER\Website\GitHub\GTAV\DAL\obj\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitMain\DAL\bin\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitMain\DAL\bin\Debug\DAL.pdb
+D:\DEVELOPER\WEBSITE\GitMain\DAL\obj\Debug\DAL.dll
+D:\DEVELOPER\WEBSITE\GitMain\DAL\obj\Debug\DAL.pdb
