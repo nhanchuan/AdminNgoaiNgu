@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/GlobalMasterPage.master" AutoEventWireup="true" CodeFile="ThuLyHoSo.aspx.cs" Inherits="QuanLyHoSo_ThuLyHoSo" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit.HTMLEditor" TagPrefix="cc1" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -513,6 +515,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
+                    <cc1:Editor ID="Editor1" runat="server" />
                 </div>
             </div>
         </div>
