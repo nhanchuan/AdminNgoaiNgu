@@ -53,6 +53,7 @@
     <Compile Include="CustomerBasicInfo.cs" />
     <Compile Include="CustomerProfileMoreInfor.cs" />
     <Compile Include="CustomerProfilePrivate.cs" />
+    <Compile Include="CustomerProfileWriteNote.cs" />
     <Compile Include="DataServices.cs" />
     <Compile Include="Departments.cs" />
     <Compile Include="District.cs" />

@@ -53,6 +53,7 @@
     <Compile Include="CustomerBasicInfoBLL.cs" />
     <Compile Include="CustomerProfileMoreInforBLL.cs" />
     <Compile Include="CustomerProfilePrivateBLL.cs" />
+    <Compile Include="CustomerProfileWriteNoteBLL.cs" />
     <Compile Include="DepartmentsBLL.cs" />
     <Compile Include="DistrictBLL.cs" />
     <Compile Include="EducationLVBLL.cs" />
