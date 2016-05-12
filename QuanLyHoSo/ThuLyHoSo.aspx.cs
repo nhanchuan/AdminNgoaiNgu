@@ -874,4 +874,29 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
             lblProcessTypeValid.Text = ex.ToString();
         }
     }
+
+    protected void btnSavetienTrinh_ServerClick(object sender, EventArgs e)
+    {
+        try
+        {
+            customerProPri = new CustomerProfilePrivateBLL();
+            if(gwProfileProcessType.SelectedRow==null)
+            {
+                lblProcessTypeValid.Text = "No Item selected !";
+            }
+            else
+            {
+                int ProcessID = Convert.ToInt32((gwProfileProcessType.SelectedRow.FindControl("lblProcessID") as Label).Text);
+                int ProfileID = Convert.ToInt32((gwThuLyHSManager.SelectedRow.FindControl("lblProfileID") as Label).Text);
+                if (customerProPri.UpdateProcessType(ProfileID, ProcessID))
+                {
+                    Response.Redirect(Request.Url.AbsoluteUri);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            lblProcessTypeValid.Text = ex.ToString();
+        }
+    }
 }

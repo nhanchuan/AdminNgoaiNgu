@@ -618,6 +618,19 @@ namespace BLL
             this.DB.CloseConnection();
             return true;
         }
-
+        //Update ProcessType
+        public Boolean UpdateProcessType(int ProfileID, int ProcessType)
+        {
+            if (!this.DB.OpenConnection())
+            {
+                return false;
+            }
+            string sql = "update CustomerProfilePrivate set ProcessType=@ProcessType where ProfileID=@ProfileID";
+            SqlParameter pProcessType = new SqlParameter("@ProcessType", ProcessType);
+            SqlParameter pProfileID = new SqlParameter("@ProfileID", ProfileID);
+            this.DB.Updatedata(sql, pProcessType, pProfileID);
+            this.DB.CloseConnection();
+            return true;
+        }
     }
 }

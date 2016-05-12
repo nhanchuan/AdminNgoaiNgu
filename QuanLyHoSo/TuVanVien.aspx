@@ -183,9 +183,6 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Họ và Tên">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FullName") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <a style="font-size: 16px;" href='<%# "../QuanLyHoSo/PhieuDangKyTuVan_Info.aspx?FormID=" + Eval("RegistrationID") %>'>
                                                 <asp:Label ID="lblFullName" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
@@ -193,25 +190,16 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Số điện thoại">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Phone") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label1" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Email">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Email") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label3" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Phiếu Đăng Ký">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("TypeName") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <span class='<%# Eval("TypeName").ToString() == "Tư Vấn Du Học" ? "label label-primary" : Eval("TypeName").ToString() == "Tư Vấn Thực Tập" ? "label label-default" : Eval("TypeName").ToString() == "Tư Vấn Du Lịch" ? "label label-success" :"label label-warning" %>'>
                                                 <strong><i class="fa fa-pencil-square-o"></i>
@@ -219,41 +207,26 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Trình độ học vấn">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("NAME") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label6" runat="server" Text='<%# Bind("NAME") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Tư vấn du học">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("CountryName") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label7" runat="server" Text='<%# Bind("CountryName") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Ngày đăng ký">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("DateOfCreate") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="Label8" runat="server" Text='<%# Bind("DateOfCreate","{0:dd/MM/yyyy hh:mm:ss tt}") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="From">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="txtFFStatus" runat="server" Text='<%# Bind("FFStatus") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <asp:Label ID="lblFFStatus" runat="server" Text='<%# Bind("FFStatus") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:TemplateField HeaderText="Tình trạng">
-                                        <EditItemTemplate>
-                                            <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ProgressForm") %>'></asp:TextBox>
-                                        </EditItemTemplate>
                                         <ItemTemplate>
                                             <span class='<%# Eval("ProgressForm").ToString()=="0"?"btn default btn-xs red-stripe": Eval("ProgressForm").ToString()=="1"?"btn default btn-xs blue-stripe": Eval("ProgressForm").ToString()=="2"?"btn default btn-xs yellow-stripe":"btn default btn-xs green-stripe" %>'>
                                                 <asp:Label ID="Label2" runat="server" Text='<%# Eval("ProgressForm").ToString()=="0"?"Chờ xử lý": Eval("ProgressForm").ToString()=="1"?"Đang tư vấn": Eval("ProgressForm").ToString()=="2"?"Đang làm hồ sơ":"Hoàn thành hồ sơ" %>'></asp:Label>

@@ -224,6 +224,7 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Ghi Chú Tiến Trình">
                                 <ItemTemplate>
+                                    <asp:Label ID="lblProcessName" runat="server" Text='<%# Bind("ProcessName") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Thông Tin Thêm (Ghi chú)">
@@ -492,16 +493,17 @@
     <div class="modal fade" id="modalTienTrinhHoSo" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title uppercase">
-                        <i class="fa fa-tasks"></i>
-                        Chọn Tiến Trình Hồ Sơ
-                    </h4>
-                </div>
-                <div class="modal-body background">
-                    <asp:UpdatePanel runat="server">
-                        <ContentTemplate>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                            <h4 class="modal-title uppercase">
+                                <i class="fa fa-tasks"></i>
+                                Chọn Tiến Trình Hồ Sơ
+                            </h4>
+                        </div>
+                        <div class="modal-body background">
+
                             <asp:Label ID="lblProcessTypeValid" ForeColor="Red" runat="server"></asp:Label>
                             <div class="row">
                                 <div class="col-md-6">
@@ -520,7 +522,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <asp:GridView ID="gwProfileProcessType" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server" 
+                                    <asp:GridView ID="gwProfileProcessType" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server"
                                         OnRowDataBound="gwProfileProcessType_RowDataBound" OnRowDeleting="gwProfileProcessType_RowDeleting">
                                         <Columns>
                                             <asp:TemplateField>
@@ -552,9 +554,14 @@
                                     </asp:GridView>
                                 </div>
                             </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-warning" data-dismiss="modal">Hủy</a>
+                            <a id="btnSavetienTrinh" class="btn btn-primary" onserverclick="btnSavetienTrinh_ServerClick" runat="server"><i class="fa fa-check"></i>&nbsp Lưu Tiến Trình Hồ Sơ</a>
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>
@@ -576,7 +583,7 @@
                             <asp:Label ID="lblWriteNoteValid" ForeColor="Red" runat="server"></asp:Label>
                             <div class="row">
                                 <div class="col-md-5">
-                                    <asp:GridView ID="gwWriteNote" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server" 
+                                    <asp:GridView ID="gwWriteNote" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server"
                                         OnRowDataBound="gwWriteNote_RowDataBound" OnRowDeleting="gwWriteNote_RowDeleting">
                                         <Columns>
                                             <asp:TemplateField>
@@ -698,10 +705,10 @@
             }, {
                 "country": "New Zealand",
                 "visits": document.getElementById('<%=HiddenField7.ClientID %>').value,
-                    "color": "#04D215"
-                }, {
-                    "country": "Taiwan",
-                    "visits": document.getElementById('<%=HiddenField8.ClientID %>').value,
+                "color": "#04D215"
+            }, {
+                "country": "Taiwan",
+                "visits": document.getElementById('<%=HiddenField8.ClientID %>').value,
                     "color": "#008000"
                 }, {
                     "country": "Netherlands",
