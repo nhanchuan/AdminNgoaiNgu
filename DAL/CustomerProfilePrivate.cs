@@ -47,6 +47,7 @@ namespace DAL
         private int empFile;
         private int bagProfileTypeID;
         private int internationalSchool;
+        private int processType;
         public int ProfileID
         {
             get
@@ -551,6 +552,19 @@ namespace DAL
             set
             {
                 internationalSchool = value;
+            }
+        }
+
+        public int ProcessType
+        {
+            get
+            {
+                return processType;
+            }
+
+            set
+            {
+                processType = value;
             }
         }
     }

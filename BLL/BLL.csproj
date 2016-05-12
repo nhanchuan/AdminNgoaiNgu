@@ -90,6 +90,7 @@
     <Compile Include="PermissFuncBLL.cs" />
     <Compile Include="PostBLL.cs" />
     <Compile Include="Post_Category_relationshipsBLL.cs" />
+    <Compile Include="ProfileProcessTypeBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProvinceBLL.cs" />
     <Compile Include="REGISTRATION_FORM_ADVISORY_BLL.cs" />

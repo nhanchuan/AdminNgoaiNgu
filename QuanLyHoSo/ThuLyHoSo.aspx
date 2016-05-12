@@ -162,7 +162,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks">Ghi Chú Tiến Trình</i></a>
+                                <a id="btnGhiChuTienTrinh" href="#modalTienTrinhHoSo" data-toggle="modal" runat="server"><i class="fa fa-tasks">&nbsp Ghi Chú Tiến Trình</i></a>
                                 <a href="#modalWriteNote" data-toggle="modal" id="btnWriteNote" runat="server"><i class="fa fa-edit  "></i></a>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <a style="font-size: 16px; color: black;" href='<%# "../QuanLyHoSo/CapNhatThongTinKhachHang.aspx?FileCode=" + Eval("BasicInfoCode") %>'>
-                                                <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>
+                                                <asp:Label ID="Label1" CssClass="bold" runat="server" Text='<%# Bind("FullName") %>'></asp:Label></a>&nbsp<strong><i class='<%# Eval("NumWriteNote").ToString()=="0"?"fa-square-o":"fa fa-pencil-square-o" %>'></i></strong>
                                             <div class="clearfix"></div>
                                             <%--<div class="col-md-2"></div>--%>
                                             <div class="col-md-10" style="margin-left: 10px;">
@@ -500,6 +500,60 @@
                     </h4>
                 </div>
                 <div class="modal-body background">
+                    <asp:UpdatePanel runat="server">
+                        <ContentTemplate>
+                            <asp:Label ID="lblProcessTypeValid" ForeColor="Red" runat="server"></asp:Label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Mã tiến trình</label>
+                                        <asp:TextBox ID="txtMaTienTrinh" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" ControlToValidate="txtMaTienTrinh" ValidationGroup="validNewProcessType" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Mã tiến trình không được trống !"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Tên tiến trình</label>
+                                        <asp:TextBox ID="txtTenTienTrinh" CssClass="form-control" runat="server"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" ControlToValidate="txtTenTienTrinh" ValidationGroup="validNewProcessType" ForeColor="Red" Display="Dynamic" runat="server" ErrorMessage="Tên tiến trình không được trống !"></asp:RequiredFieldValidator>
+                                    </div>
+                                    <div class="form-group">
+                                        <a class="btn green" id="btnSaveProcess" validationgroup="validNewProcessType" onserverclick="btnSaveProcess_ServerClick" runat="server"><i class="glyphicon glyphicon-ok-circle"></i>&nbsp Thêm tiến trình</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <asp:GridView ID="gwProfileProcessType" CssClass="table table-bordered" AutoGenerateColumns="False" ShowHeader="False" runat="server" 
+                                        OnRowDataBound="gwProfileProcessType_RowDataBound" OnRowDeleting="gwProfileProcessType_RowDeleting">
+                                        <Columns>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblProcessCode" runat="server" Text='<%# Eval("ProcessCode") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:Label ID="lblProcessName" runat="server" Text='<%# Eval("ProcessName") %>'></asp:Label>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                            <asp:TemplateField>
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="linkBtnDelprocess" CssClass="btn btn-circle btn-icon-only btn-default" runat="server" CausesValidation="False" CommandName="Delete" ToolTip="Delete" Text="Delete"><i class="glyphicon glyphicon-trash"></i></asp:LinkButton>
+                                                    <asp:Label ID="lblProcessID" CssClass="display-none" runat="server" Text='<%# Eval("ProcessID") %>'></asp:Label>
+                                                </ItemTemplate>
+                                                <ItemStyle Width="30px" />
+                                            </asp:TemplateField>
+                                            <asp:TemplateField ShowHeader="False">
+                                                <ItemTemplate>
+                                                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" Text="Select"><i class="btn btn-circle btn-icon-only btn-default"><i class="fa fa-check"></i></i></asp:LinkButton>
+                                                </ItemTemplate>
+                                                <ItemStyle Width="50px" />
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <RowStyle BackColor="#FAF3DF"></RowStyle>
+                                        <SelectedRowStyle BackColor="#79B782" ForeColor="Black" />
+                                    </asp:GridView>
+                                </div>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
         </div>

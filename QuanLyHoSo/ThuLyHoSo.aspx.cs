@@ -21,6 +21,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
     BagAttachmentsBLL bagAttachment;
     BagFileTranslateBLL bagFileTranslate;
     InternationalSchoolBLL internalSchool;
+    ProfileProcessTypeBLL profileProcessType;
     //CountryAdvisoryBLL countryadv;
     CountryBLL country;
     public int PageSize = 20;
@@ -401,6 +402,7 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         btnWriteNote.Attributes.Add("class", "btn btn-danger");
         btnGhiChuTienTrinh.Attributes.Add("class", "btn btn-warning");
         this.load_gwWriteNote(profileId);
+        this.load_gwProfileProcessType();
         txtWriteNoteTitle.Text = "";
         EditorWriteNote.Content = "";
     }
@@ -802,6 +804,74 @@ public partial class QuanLyHoSo_ThuLyHoSo : BasePage
         catch(Exception ex)
         {
             lblWriteNoteValid.Text = ex.ToString();
+        }
+    }
+
+    //ProfileProcessType
+    private void load_gwProfileProcessType()
+    {
+        profileProcessType = new ProfileProcessTypeBLL();
+        gwProfileProcessType.DataSource = profileProcessType.getList();
+        gwProfileProcessType.DataBind();
+    }
+
+
+    protected void btnSaveProcess_ServerClick(object sender, EventArgs e)
+    {
+        try
+        {
+            profileProcessType = new ProfileProcessTypeBLL();
+            string procode = txtMaTienTrinh.Text;
+            string name = txtTenTienTrinh.Text;
+            if (profileProcessType.NewProfileProcessType(procode, name))
+            {
+                this.load_gwProfileProcessType();
+            }
+            else
+            {
+                lblProcessTypeValid.Text = "Add New False !";
+            }
+        }
+        catch(Exception ex)
+        {
+            lblProcessTypeValid.Text = ex.ToString();
+        }
+    }
+
+    protected void gwProfileProcessType_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        try
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                LinkButton del = e.Row.FindControl("linkBtnDelprocess") as LinkButton;
+                del.Attributes.Add("onclick", "return confirm('Bạn chắc chắn muốn xóa ?')");
+            }
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+
+    protected void gwProfileProcessType_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        try
+        {
+            profileProcessType = new ProfileProcessTypeBLL();
+            int ProcessID = Convert.ToInt32((gwProfileProcessType.Rows[e.RowIndex].FindControl("lblProcessID") as Label).Text);
+            if (profileProcessType.DeleteProfileProcessType(ProcessID))
+            {
+                this.load_gwProfileProcessType();
+            }
+            else
+            {
+                lblProcessTypeValid.Text = "Delete fales !";
+            }
+        }
+        catch (Exception ex)
+        {
+            lblProcessTypeValid.Text = ex.ToString();
         }
     }
 }

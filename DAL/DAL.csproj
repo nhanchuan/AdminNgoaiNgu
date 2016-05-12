@@ -91,6 +91,7 @@
     <Compile Include="PermissFunc.cs" />
     <Compile Include="POST.cs" />
     <Compile Include="Post_Category_relationships.cs" />
+    <Compile Include="ProfileProcessType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Province.cs" />
     <Compile Include="REGISTRATION_FORM_ADVISORY.cs" />
