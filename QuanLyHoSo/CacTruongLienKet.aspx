@@ -312,12 +312,12 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Học Phí">
                             <ItemTemplate>
-                                <asp:Label ID="lblHocPhi" ForeColor="Red" runat="server" Text='<%# "$"+ Eval("HocPhi") %>'></asp:Label>
+                                <asp:Label ID="lblHocPhi" ForeColor="Red" runat="server" Text='<%# Eval("HocPhi") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Phí khác">
                             <ItemTemplate>
-                                <asp:Label ID="lblPhiKhac" runat="server" Text='<%# "$"+ Eval("PhiKhac","{0:0,0.0}") %>'></asp:Label>
+                                <asp:Label ID="lblPhiKhac" runat="server" Text='<%# Eval("PhiKhac","{0:0,0.0}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Điều kiện nhập học">

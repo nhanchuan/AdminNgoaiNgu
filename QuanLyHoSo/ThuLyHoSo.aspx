@@ -209,7 +209,6 @@
                             <asp:TemplateField>
                                 <HeaderTemplate>
                                     <i class="fa fa-graduation-cap"></i>School
-                               
                                 </HeaderTemplate>
                                 <ItemTemplate>
                                     <%--<asp:Label ID="Label12" runat="server" Text='<%# Eval("SchoolName") %>'></asp:Label>--%>
@@ -220,11 +219,6 @@
                                         <i class="fa fa-phone"></i>
                                         <asp:Label ID="lblSchoolPhone" runat="server" Text='<%# Bind("SchoolPhone") %>'></asp:Label>
                                     </div>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField HeaderText="Ghi Chú Tiến Trình">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblProcessName" runat="server" Text='<%# Bind("ProcessName") %>'></asp:Label>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Thông Tin Thêm (Ghi chú)">
@@ -242,7 +236,7 @@
                             <asp:TemplateField HeaderText="Phiếu tư vấn">
                                 <ItemTemplate>
                                     <span class='<%# Eval("TypeName").ToString() == "Tư Vấn Du Học" ? "label label-primary" : Eval("TypeName").ToString() == "Tư Vấn Thực Tập" ? "label label-default" : Eval("TypeName").ToString() == "Tư Vấn Du Lịch" ? "label label-success" :"label label-warning" %>'>
-                                        <strong><i class="fa fa-pencil-square-o"></i>
+                                        <strong><i class="icon-earphones-alt"></i>
                                             <asp:Label ID="Label5" runat="server" Text='<%# Bind("TypeName") %>'></asp:Label></strong></span>
                                     <br />
                                     <div class="form-inline  pull-right">
@@ -255,6 +249,11 @@
                                     <li class='<%# Eval("BagProfileTypeID").ToString() == "1" ? "list-group-item bg-blue" : Eval("BagProfileTypeID").ToString() == "2" ? "list-group-item bg-danger" : Eval("BagProfileTypeID").ToString() == "3" ? "list-group-item bg-green" :"list-group-item bg-yellow" %>'>
                                         <asp:Label ID="Label6" runat="server" Text='<%# Eval("BagProfileTypeID").ToString()=="1"?"Du Học": Eval("BagProfileTypeID").ToString()=="2"?"Thực Tập": Eval("BagProfileTypeID").ToString()=="3"?"Du Lịch":Eval("BagProfileTypeID").ToString()=="4"?"Định Cư":"" %>'></asp:Label>
                                     </li>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField HeaderText="Ghi Chú Tiến Trình">
+                                <ItemTemplate>
+                                    <a class="btn default btn-xs blue-stripe" href="#"><asp:Label ID="lblProcessCode" runat="server" Text='<%# Bind("ProcessCode") %>'></asp:Label> </a>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField>
@@ -341,13 +340,13 @@
     <div class="clearfix"></div>
     <br />
     <div class="col-lg-12 text-right">
-        <span class="label label-primary"><strong><i class="fa fa-pencil-square-o"></i>
+        <span class="label label-primary"><strong><i class="icon-earphones-alt"></i>
             <label>Tư Vấn Du Học</label></strong></span>
-        <span class="label label-default"><strong><i class="fa fa-pencil-square-o"></i>
+        <span class="label label-default"><strong><i class="icon-earphones-alt"></i>
             <label>Tư Vấn Thực Tập</label></strong></span>
-        <span class="label label-success"><strong><i class="fa fa-pencil-square-o"></i>
+        <span class="label label-success"><strong><i class="icon-earphones-alt"></i>
             <label>Tư Vấn Du Lịch</label></strong></span>
-        <span class="label label-warning"><strong><i class="fa fa-pencil-square-o"></i>
+        <span class="label label-warning"><strong><i class="icon-earphones-alt"></i>
             <label>Tư Vấn Định Cư</label></strong></span>
     </div>
     <div class="row"></div>
